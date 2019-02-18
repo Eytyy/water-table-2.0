@@ -1,0 +1,42 @@
+.map-console {
+	display: flex;
+	&__controls,
+	&__mini-map {
+		flex: 0 0 50%;
+	}
+	h1 {
+		margin-bottom: 80px;
+	}
+}
+
+.map-console__controls{
+	&__main {
+		display: flex;
+		flex-wrap: wrap;
+	}
+	.btn-group {
+		flex: 0 0 120px;
+		text-align: center;
+		margin: 0px 80px 40px  0px;
+	}
+}
+
+.btn-group {
+	cursor: pointer;
+	opacity: 0.2;
+}
+
+.btn-icon {
+	width: 94px;
+	height: 94px;
+	display: block;
+	border: 2px solid #FFF;
+	border-radius: 10px;
+	margin: 0px auto;
+}
+
+.btn-label {
+	display: block;
+	margin-top: 10px;
+	font-size: 14px;
+}

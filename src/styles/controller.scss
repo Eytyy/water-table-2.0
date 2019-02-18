@@ -1,0 +1,89 @@
+@font-face {
+	font-family: 'ZeitungMonoPro-Bold';
+	src: url('../fonts/ZeitungMonoPro-Bold.eot?#iefix') format('embedded-opentype'),
+		 url('../fonts/ZeitungMonoPro-Bold.woff2') format('woff2'),
+		 url('../fonts/ZeitungMonoPro-Bold.woff') format('woff'),
+		 url('../fonts/ZeitungMonoPro-Bold.ttf') format('truetype'),
+		 url('../fonts/ZeitungMonoPro-Bold.svg#ZeitungMonoPro-Bold') format('svg');
+}
+
+ 
+@font-face {
+	font-family: 'ZeitungMonoPro-Reg';
+	src: url('../fonts/ZeitungMonoPro-Regular.eot?#iefix') format('embedded-opentype'),
+		 url('../fonts/ZeitungMonoPro-Regular.woff2') format('woff2'),
+		 url('../fonts/ZeitungMonoPro-Regular.woff') format('woff'),
+		 url('../fonts/ZeitungMonoPro-Regular.ttf') format('truetype'),
+		 url('../fonts/ZeitungMonoPro-Regular.svg#ZeitungMonoPro-Regular') format('svg');
+}
+
+%bold-font  {
+	font-family: 'ZeitungMonoPro-Bold';
+	font-weight: normal;
+    font-style: normal;
+}
+
+
+%regular-font {
+	font-family: 'ZeitungMonoPro-Reg';
+	font-weight: normal;
+    font-style: normal;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  @extend %regular-font;
+  background: #000;
+  color: #FFF;
+  margin: 0;
+	padding: 60px;
+}
+
+h1 {
+  font-size: 16px;
+  margin-bottom: 20px;
+}
+
+a {
+	color: #FFF;
+	text-decoration: none;
+}
+
+.language {
+	position: absolute;
+	bottom: 60px;
+	left: 60px;
+}
+
+.back-btn,
+.lang-btn {
+	opacity: 0.4;
+	@extend %bold-font;
+	font-size: 18px;
+	text-transform: uppercase;
+}
+
+.lang-btn {
+	margin-right: 80px;
+	&.active {
+		opacity: 1;
+	}
+}
+
+.intro {
+	display: flex;
+	flex-wrap: wrap;
+	&__section {
+		display: flex;
+		justify-content: center;
+		flex: 0 0 50%;
+		&--left {
+		}
+		&--right {
+		}
+	}
+}
+@import 'map';
