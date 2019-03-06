@@ -10,6 +10,7 @@
 }
 
 .map-console__controls{
+	padding: 60px 0 0 60px;
 	&__main {
 		display: flex;
 		flex-wrap: wrap;
@@ -39,4 +40,13 @@
 	display: block;
 	margin-top: 10px;
 	font-size: 14px;
+}
+
+.map-console__mini-map {
+	height: 100vh;
+	.resources-layer,
+	svg {
+		height: 100%;
+		width: 100%;
+	}
 }

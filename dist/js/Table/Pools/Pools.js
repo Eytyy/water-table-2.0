@@ -9,7 +9,7 @@ var _react = _interopRequireWildcard(require("react"));
 
 var _Pool = _interopRequireDefault(require("./Pool"));
 
-var _config = require("./config");
+var _config = _interopRequireDefault(require("./config"));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -57,21 +57,22 @@ function (_Component) {
 
     _defineProperty(_assertThisInitialized(_assertThisInitialized(_this)), "ctx", null);
 
-    _defineProperty(_assertThisInitialized(_assertThisInitialized(_this)), "pools", {});
+    _defineProperty(_assertThisInitialized(_assertThisInitialized(_this)), "pools", []);
 
     _defineProperty(_assertThisInitialized(_assertThisInitialized(_this)), "width", "1080");
 
     _defineProperty(_assertThisInitialized(_assertThisInitialized(_this)), "height", "1920");
 
     _defineProperty(_assertThisInitialized(_assertThisInitialized(_this)), "setupPools", function (ctx, au) {
-      _this.pools.DeadSeaTop = new _Pool.default(_config.DeadSeaTopConfig);
-      _this.pools.DeadSeaBottom = new _Pool.default(_config.DeadSeaBottomConfig);
-      _this.pools.Azraq = new _Pool.default(_config.AzraqConfig);
-      _this.pools.Jafar = new _Pool.default(_config.JafarConfig);
-      _this.pools.Aqaba = new _Pool.default(_config.AqabaConfig);
-      _this.pools.Tabariah = new _Pool.default(_config.TabariahConfig);
-      Object.keys(_this.pools).map(function (pool) {
-        _this.pools[pool].init({
+      _this.pools = _config.default.entries.map(function (config) {
+        return {
+          id: config.id,
+          instance: new _Pool.default(config)
+        };
+      });
+
+      _this.pools.map(function (pool) {
+        pool.instance.init({
           ctx: ctx,
           au: au
         });
@@ -80,8 +81,9 @@ function (_Component) {
 
     _defineProperty(_assertThisInitialized(_assertThisInitialized(_this)), "updatePools", function (ctx, au) {
       ctx.clearRect(0, 0, _this.width, _this.height);
-      Object.keys(_this.pools).map(function (pool) {
-        _this.pools[pool].update({
+
+      _this.pools.map(function (pool) {
+        pool.update({
           ctx: ctx,
           au: au
         });
@@ -89,8 +91,8 @@ function (_Component) {
     });
 
     _defineProperty(_assertThisInitialized(_assertThisInitialized(_this)), "updateCurrentStop", function (ctx, au) {
-      Object.keys(_this.pools).map(function (pool) {
-        _this.pools[pool].updateCurrentStop();
+      _this.pools.map(function (pool) {
+        pool.updateCurrentStop();
       });
     });
 

@@ -117,15 +117,12 @@ function (_Component) {
 
   _createClass(Map, [{
     key: "componentDidMount",
-    value: function componentDidMount() {
-      this.map.addEvent;
-    }
+    value: function componentDidMount() {}
   }, {
     key: "render",
     value: function render() {
       return _react.default.createElement("div", {
-        ref: this.map,
-        onClick: this.toggleAnimation
+        ref: this.map
       }, _react.default.createElement(_Pools.default, {
         au: this.state.animationCurrentUnit
       }));

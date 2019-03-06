@@ -9,9 +9,9 @@ var _socket = _interopRequireDefault(require("socket.io-client"));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-var ip = '192.168.1.82'; // strada
-// const ip = '192.168.86.214';
-
+// const ip = '192.168.1.110' // strada
+// const ip = '192.168.14.40' // syntax
+var ip = '192.168.86.229';
 var port = '8080';
 
 var socket = _socket.default.connect("http://".concat(ip, ":").concat(port));

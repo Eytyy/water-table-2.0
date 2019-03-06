@@ -4,6 +4,7 @@ import { socket } from '../api';
 import Intro from './Intro';
 import MapControls from './MapControls';
 import VisualizationControls from './VisualizationControls';
+import { broadcastEvent } from '../api';
 
 class Controller extends Component {
 	state = {
@@ -18,6 +19,14 @@ class Controller extends Component {
 					console.log('whatever');
 					break;
 			}
+		});
+	}
+
+	onLinkClick = (to) => {
+		broadcastEvent({
+			source: 'controller',
+			event: 'navigate',
+			payload: to,
 		});
 	}
 	
@@ -38,7 +47,9 @@ class Controller extends Component {
 	render() {
 		return (
 			<>
-				{ !this.state.front && <Link className="back-btn" to="/controller"> &lt; Back</Link> }
+				{ !this.state.front &&
+					<Link onClick={() => { this.onLinkClick('')}} className="back-btn" to="/controller"> &lt; Back</Link> 
+				}
 				<Route path="/controller" exact component={Intro} />
 				<Route path="/controller/map" exact component={MapControls} />
 				<Route path="/controller/viz" exact component={VisualizationControls} />

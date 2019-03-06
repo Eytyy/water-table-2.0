@@ -65,6 +65,9 @@ function (_Component) {
             payload = message.payload;
 
         switch (event) {
+          case 'poolClicked':
+            break;
+
           case 'navigate':
             _this.navigate(payload);
 
@@ -82,7 +85,7 @@ function (_Component) {
 
     _defineProperty(_assertThisInitialized(_assertThisInitialized(_this)), "navigate", function (to) {
       var history = _this.props.history;
-      history.push(to);
+      history.push("/table/".concat(to));
     });
 
     return _this;

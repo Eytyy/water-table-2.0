@@ -10,6 +10,8 @@ class Table extends Component {
 		socket.on('controller', message => {
 			const { event, payload } = message;
 			switch(event) {
+				case 'poolClicked':
+					break;
 				case 'navigate':
 					this.navigate(payload);
 					break;
@@ -24,7 +26,7 @@ class Table extends Component {
 
 	navigate = (to) => {
 		const { history } = this.props;
-    history.push(to);
+    history.push(`/table/${to}`);
 	};
 	
 	componentDidMount() {

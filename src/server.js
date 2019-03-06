@@ -52,7 +52,7 @@ function controllerTemplate({
 			<title>${title}</title>
 			<meta property="og:title" content="${title}" />
 			<meta property="og:url" content="${ogURL}" />
-			<link rel="stylesheet" href="style.css"/>
+			<link rel="stylesheet" href="/controller.css"/>
 		</head>
 		<body>
 			<div id="controller"></div>
@@ -74,7 +74,7 @@ function template({
 			<title>${title}</title>
 			<meta property="og:title" content="${title}" />
 			<meta property="og:url" content="${ogURL}" />
-			<link rel="stylesheet" href="style.css"/>
+			<link rel="stylesheet" href="/table.css"/>
 		</head>
 		<body>
 			<div id="table"></div>

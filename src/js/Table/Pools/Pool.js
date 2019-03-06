@@ -14,7 +14,6 @@ const stopBColor = [
 
 ];
 
-
 const stopCColor = [
 	{ 'r':'230', 'g':'230', 'b':'230', a: '1' }, //blue
 	{ 'r':'255', 'g':'255', 'b':'255', a: '0.8' }, //blue

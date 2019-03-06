@@ -1,3 +1,5 @@
+@import 'map';
+
 @font-face {
 	font-family: 'ZeitungMonoPro-Bold';
 	src: url('../fonts/ZeitungMonoPro-Bold.eot?#iefix') format('embedded-opentype'),
@@ -39,7 +41,6 @@ body {
   background: #000;
   color: #FFF;
   margin: 0;
-	padding: 60px;
 }
 
 h1 {
@@ -55,6 +56,12 @@ a {
 .language {
 	position: absolute;
 	bottom: 60px;
+	left: 60px;
+}
+
+.back-btn {
+	position: absolute;
+	top: 40px;
 	left: 60px;
 }
 
@@ -86,4 +93,3 @@ a {
 		}
 	}
 }
-@import 'map';

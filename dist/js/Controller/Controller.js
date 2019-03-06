@@ -76,6 +76,14 @@ function (_Component) {
       });
     });
 
+    _defineProperty(_assertThisInitialized(_assertThisInitialized(_this)), "onLinkClick", function (to) {
+      (0, _api.broadcastEvent)({
+        source: 'controller',
+        event: 'navigate',
+        payload: to
+      });
+    });
+
     return _this;
   }
 
@@ -99,6 +107,9 @@ function (_Component) {
       var _this2 = this;
 
       return _react.default.createElement(_react.default.Fragment, null, !this.state.front && _react.default.createElement(_reactRouterDom.Link, {
+        onClick: function onClick() {
+          _this2.onLinkClick('');
+        },
         className: "back-btn",
         to: "/controller"
       }, " < Back"), _react.default.createElement(_reactRouterDom.Route, {

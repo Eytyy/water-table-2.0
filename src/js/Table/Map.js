@@ -5,7 +5,6 @@ import Pools from './Pools/Pools';
 import Textures from './Pools/Textures';
 // import Particles from './research/particles';
 
-
 class Map extends Component {
 	map = React.createRef()
 
@@ -63,13 +62,12 @@ class Map extends Component {
 	}
 
 	componentDidMount() {
-		this.map.addEvent
 	}
 	
 
 	render() {
 		return (
-			<div ref={this.map} onClick={this.toggleAnimation}>
+			<div ref={this.map}>
 				<Pools au={this.state.animationCurrentUnit} />
 			</div>
 		);
