@@ -30,8 +30,40 @@ export const drawPolyline =  ({ctx, points}) => {
 	ctx.fill();
 	ctx.closePath();
 }
+
 // linear interpolation
 export const lerp = (a, b, t) => {
 	const r = (1 - t) * a + t * b;
 	return r;
+}
+
+
+export const setMinMax = (points) => {
+	return points.reduce((curr, next) => {
+		let { x: xNext, y: yNext } = next;
+		let { x: xCurr, y: yCurr } = curr;
+		if (typeof xCurr === 'undefined') {
+			return {
+				x: {
+					min: xNext,
+					max: xNext
+				}, 
+				y: {
+					min: yNext,
+					max: yNext,	
+				}
+			}
+		}
+	
+		return {
+			x: {
+				min: xNext < xCurr.min ? xNext : xCurr.min,
+				max: xNext > xCurr.max ? xNext : xCurr.max,
+			}, 
+			y: {
+				min: yNext < yCurr.min ? yNext : yCurr.min,
+				max: yNext > yCurr.max ? yNext : yCurr.max,	
+			}
+		}
+	}, {});
 }

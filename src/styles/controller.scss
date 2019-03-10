@@ -93,3 +93,20 @@ a {
 		}
 	}
 }
+
+.pool {
+	fill: #FFF;
+	opacity: 0.5;
+	transform: scale(1, 1);
+	transform-origin: 50% 50%;
+	transform-box: fill-box;
+	transition: transform 200ms ease-in-out, opacity 200ms linear;
+	&.is-initial {
+		opacity: 1;
+	}
+	
+	&.is-active {
+		opacity: 1;
+		// transform: scale(1.5,1.5);
+	}
+}

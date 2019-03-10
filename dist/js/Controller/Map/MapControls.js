@@ -7,11 +7,15 @@ exports.default = void 0;
 
 var _react = _interopRequireWildcard(require("react"));
 
-var _api = require("../api");
+var _api = require("../../api");
 
 var _PoolsSVG = _interopRequireDefault(require("./PoolsSVG"));
 
-var _config = _interopRequireDefault(require("../config"));
+var _poolsConfig = _interopRequireDefault(require("../../poolsConfig"));
+
+var _WasteWaterSvg = _interopRequireDefault(require("./WasteWaterSvg"));
+
+var _wastewaterConfig = _interopRequireDefault(require("../../wastewaterConfig"));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -56,10 +60,22 @@ function (_Component) {
     _this = _possibleConstructorReturn(this, (_getPrototypeOf2 = _getPrototypeOf(MapControls)).call.apply(_getPrototypeOf2, [this].concat(args)));
 
     _defineProperty(_assertThisInitialized(_assertThisInitialized(_this)), "state", {
-      activePool: undefined
+      activeLayer: 'natural',
+      activePool: undefined,
+      activePlant: undefined
     });
 
-    _defineProperty(_assertThisInitialized(_assertThisInitialized(_this)), "onClick", function (view) {
+    _defineProperty(_assertThisInitialized(_assertThisInitialized(_this)), "setActiveLayer", function (layer) {
+      _this.setState({
+        activeLayer: layer,
+        activePool: undefined,
+        activePlant: undefined
+      });
+    });
+
+    _defineProperty(_assertThisInitialized(_assertThisInitialized(_this)), "onClickLayer", function (view) {
+      _this.setActiveLayer(view);
+
       (0, _api.broadcastEvent)({
         source: 'controller',
         event: 'switchMapView',
@@ -68,15 +84,37 @@ function (_Component) {
     });
 
     _defineProperty(_assertThisInitialized(_assertThisInitialized(_this)), "onPoolClick", function (e) {
-      var target = e.target.id;
+      var id;
+      var target = e.target;
+      var parent = target.parentNode;
+
+      if (parent.classList.contains('svg-group')) {
+        id = parent.id;
+      } else {
+        id = target.id;
+      }
 
       _this.setState({
-        activePool: target
+        activePool: id
       });
 
       (0, _api.broadcastEvent)({
         source: 'controller',
         event: 'poolClicked',
+        payload: id
+      });
+    });
+
+    _defineProperty(_assertThisInitialized(_assertThisInitialized(_this)), "onPlantClick", function (e) {
+      var target = e.target.id;
+
+      _this.setState({
+        activePlant: target
+      });
+
+      (0, _api.broadcastEvent)({
+        source: 'controller',
+        event: 'plantClicked',
         payload: target
       });
     });
@@ -98,7 +136,7 @@ function (_Component) {
       }, _react.default.createElement("div", {
         className: "btn-group",
         onClick: function onClick() {
-          _this2.onClick('natural');
+          _this2.onClickLayer('natural');
         }
       }, _react.default.createElement("i", {
         className: "btn-icon icon--natural"
@@ -107,7 +145,7 @@ function (_Component) {
       }, "Natural Water Resources")), _react.default.createElement("div", {
         className: "btn-group",
         onClick: function onClick() {
-          _this2.onClick('utilities');
+          _this2.onClickLayer('utilities');
         }
       }, _react.default.createElement("i", {
         className: "btn-icon icon--projects"
@@ -116,7 +154,7 @@ function (_Component) {
       }, "Utilities & Water Supply Projects")), _react.default.createElement("div", {
         className: "btn-group",
         onClick: function onClick() {
-          _this2.onClick('waste');
+          _this2.onClickLayer('waste');
         }
       }, _react.default.createElement("i", {
         className: "btn-icon icon--waste"
@@ -125,7 +163,7 @@ function (_Component) {
       }, "Wastewater Treatment Plants")), _react.default.createElement("div", {
         className: "btn-group",
         onClick: function onClick() {
-          _this2.onClick('conveyors');
+          _this2.onClickLayer('conveyors');
         }
       }, _react.default.createElement("i", {
         className: "btn-icon icon--conveyors"
@@ -134,17 +172,25 @@ function (_Component) {
       }, "Water Conveyors")), _react.default.createElement("div", {
         className: "btn-group",
         onClick: function onClick() {
-          _this2.onClick('dams');
+          _this2.onClickLayer('dams');
         }
       }, _react.default.createElement("i", {
         className: "btn-icon icon--dams"
       }), _react.default.createElement("span", {
         className: "btn-label"
-      }, "Dams")))), _react.default.createElement(_PoolsSVG.default, {
-        PoolsConfig: _config.default,
+      }, "Dams")))), _react.default.createElement("div", {
+        className: "map-console__mini-map"
+      }, _react.default.createElement(_PoolsSVG.default, {
+        activeLayer: this.state.activeLayer,
+        PoolsConfig: _poolsConfig.default,
         activePool: this.state.activePool,
         onPoolClick: this.onPoolClick
-      }));
+      }), _react.default.createElement(_WasteWaterSvg.default, {
+        activeLayer: this.state.activeLayer,
+        config: _wastewaterConfig.default,
+        activePlant: this.state.activePlant,
+        onPlantClick: this.onPlantClick
+      })));
     }
   }]);
 

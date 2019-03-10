@@ -7,18 +7,6 @@ exports.default = void 0;
 
 var _react = _interopRequireWildcard(require("react"));
 
-var _reactRouterDom = require("react-router-dom");
-
-var _api = require("../api");
-
-var _Intro = _interopRequireDefault(require("./Intro"));
-
-var _MapControls = _interopRequireDefault(require("./Map/MapControls"));
-
-var _VisualizationControls = _interopRequireDefault(require("./Visualization/VisualizationControls"));
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
 function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) { var desc = Object.defineProperty && Object.getOwnPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : {}; if (desc.get || desc.set) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } } newObj.default = obj; return newObj; } }
 
 function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
@@ -41,107 +29,44 @@ function _assertThisInitialized(self) { if (self === void 0) { throw new Referen
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
-var Controller =
+var Textures =
 /*#__PURE__*/
 function (_Component) {
-  _inherits(Controller, _Component);
+  _inherits(Textures, _Component);
 
-  function Controller() {
+  function Textures() {
     var _getPrototypeOf2;
 
     var _this;
 
-    _classCallCheck(this, Controller);
+    _classCallCheck(this, Textures);
 
     for (var _len = arguments.length, args = new Array(_len), _key = 0; _key < _len; _key++) {
       args[_key] = arguments[_key];
     }
 
-    _this = _possibleConstructorReturn(this, (_getPrototypeOf2 = _getPrototypeOf(Controller)).call.apply(_getPrototypeOf2, [this].concat(args)));
+    _this = _possibleConstructorReturn(this, (_getPrototypeOf2 = _getPrototypeOf(Textures)).call.apply(_getPrototypeOf2, [this].concat(args)));
 
-    _defineProperty(_assertThisInitialized(_assertThisInitialized(_this)), "state", {
-      front: typeof _this.props.location.pathname.split('/')[2] === 'undefined',
-      language: 'english'
-    });
+    _defineProperty(_assertThisInitialized(_assertThisInitialized(_this)), "textures", _react.default.createRef());
 
-    _defineProperty(_assertThisInitialized(_assertThisInitialized(_this)), "listenToIncomingEvents", function () {
-      _api.socket.on('from-table', function (_ref) {
-        var event = _ref.event;
-
-        switch (event) {
-          default:
-            break;
-        }
-      });
-    });
-
-    _defineProperty(_assertThisInitialized(_assertThisInitialized(_this)), "onLinkClick", function (to) {
-      (0, _api.broadcastEvent)({
-        source: 'controller',
-        event: 'navigate',
-        payload: to
-      });
-    });
+    _defineProperty(_assertThisInitialized(_assertThisInitialized(_this)), "ctx", _this.texture.getContext('2d'));
 
     return _this;
   }
 
-  _createClass(Controller, [{
-    key: "componentDidMount",
-    value: function componentDidMount() {
-      this.listenToIncomingEvents();
-    }
-  }, {
-    key: "componentDidUpdate",
-    value: function componentDidUpdate(prevProps) {
-      if (prevProps.location.pathname !== this.props.location.pathname) {
-        this.setState({
-          front: typeof this.props.location.pathname.split('/')[2] === 'undefined'
-        });
-      }
-    }
-  }, {
+  _createClass(Textures, [{
     key: "render",
     value: function render() {
-      var _this2 = this;
-
-      return _react.default.createElement(_react.default.Fragment, null, !this.state.front && _react.default.createElement(_reactRouterDom.Link, {
-        onClick: function onClick() {
-          _this2.onLinkClick('');
-        },
-        className: "back-btn",
-        to: "/controller"
-      }, " < Back"), _react.default.createElement(_reactRouterDom.Route, {
-        path: "/controller",
-        exact: true,
-        component: _Intro.default
-      }), _react.default.createElement(_reactRouterDom.Route, {
-        path: "/controller/map",
-        exact: true,
-        component: _MapControls.default
-      }), _react.default.createElement(_reactRouterDom.Route, {
-        path: "/controller/viz",
-        exact: true,
-        component: _VisualizationControls.default
-      }), _react.default.createElement("div", {
-        className: "language"
-      }, _react.default.createElement("span", {
-        className: "lang-btn ".concat(this.state.language === 'english' ? 'active' : ''),
-        onClick: function onClick() {
-          return _this2.switchLang('english');
-        }
-      }, "English"), _react.default.createElement("span", {
-        className: "lang-btn ".concat(this.state.language === 'arabic' ? 'active' : ''),
-        onClick: function onClick() {
-          return _this2.switchLang('arabic');
-        }
-      }, "Arabic")));
+      return _react.default.createElement("canvas", {
+        width: "1080",
+        height: "1920",
+        ref: this.textures
+      });
     }
   }]);
 
-  return Controller;
+  return Textures;
 }(_react.Component);
 
-var _default = (0, _reactRouterDom.withRouter)(Controller);
-
+var _default = Textures;
 exports.default = _default;

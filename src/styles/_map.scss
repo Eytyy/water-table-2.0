@@ -44,9 +44,39 @@
 
 .map-console__mini-map {
 	height: 100vh;
-	.resources-layer,
+	position: relative;
 	svg {
+		position: absolute;
+		top: 0;
+		left: 0;
 		height: 100%;
 		width: 100%;
 	}
+}
+
+.resources {
+	opacity: 0;
+	visibility: hidden;
+	transition: opacity 200ms linear;
+}
+
+.resources.is-active {
+	opacity: 1;
+	visibility: visible;
+}
+
+.resources---pools {
+	opacity: 0.2;
+	visibility: visible;
+}
+
+.waste {
+	transition: transform 200ms linear;
+	transform-origin: center;
+	transform-box: fill-box;
+}
+
+.waste-inner {
+	transform-box: fill-box;
+	transform-origin: center;
 }

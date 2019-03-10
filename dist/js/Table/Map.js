@@ -7,9 +7,15 @@ exports.default = void 0;
 
 var _react = _interopRequireWildcard(require("react"));
 
+var _api = require("../api");
+
 var _Pools = _interopRequireDefault(require("./Pools/Pools"));
 
-var _Textures = _interopRequireDefault(require("./Pools/Textures"));
+var _poolsConfig = _interopRequireDefault(require("../poolsConfig"));
+
+var _WasteWater = _interopRequireDefault(require("./WasteWater/WasteWater"));
+
+var _wastewaterConfig = _interopRequireDefault(require("../wastewaterConfig"));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -35,7 +41,6 @@ function _assertThisInitialized(self) { if (self === void 0) { throw new Referen
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
-// import Particles from './research/particles';
 var Map =
 /*#__PURE__*/
 function (_Component) {
@@ -57,6 +62,7 @@ function (_Component) {
     _defineProperty(_assertThisInitialized(_assertThisInitialized(_this)), "map", _react.default.createRef());
 
     _defineProperty(_assertThisInitialized(_assertThisInitialized(_this)), "state", {
+      activeLayer: 'natural',
       playing: false,
       animationCurrentUnit: 0.0 //animation settings
 
@@ -70,6 +76,23 @@ function (_Component) {
     });
 
     _defineProperty(_assertThisInitialized(_assertThisInitialized(_this)), "raf", void 0);
+
+    _defineProperty(_assertThisInitialized(_assertThisInitialized(_this)), "listenToIncomingEvents", function () {
+      _api.socket.on('controller', function (message) {
+        var event = message.event,
+            payload = message.payload;
+
+        switch (event) {
+          case 'switchMapView':
+            _this.setActiveLayer(payload);
+
+            break;
+
+          default:
+            return;
+        }
+      });
+    });
 
     _defineProperty(_assertThisInitialized(_assertThisInitialized(_this)), "toggleAnimation", function () {
       if (!_this.state.playing) {
@@ -93,7 +116,6 @@ function (_Component) {
       var steps = _this.Anim.duration / _this.Anim.interval; // 300
 
       var step_u = _this.Anim.stepUnit / steps; // 1.0/300
-      // updatePools({au: this.Anim.currUnit});
 
       _this.setState({
         animationCurrentUnit: _this.Anim.currUnit
@@ -104,12 +126,34 @@ function (_Component) {
 
         _this.setState({
           animationCurrentUnit: 0
-        }); // updateCurrentStop();
-
+        });
       }
 
       _this.Anim.currUnit += step_u;
       _this.raf = requestAnimationFrame(_this.animate);
+    });
+
+    _defineProperty(_assertThisInitialized(_assertThisInitialized(_this)), "updateTextBox", function () {
+      switch (_this.state.activeLayer) {
+        default:
+          break;
+      }
+    });
+
+    _defineProperty(_assertThisInitialized(_assertThisInitialized(_this)), "getTextBoxContent", function () {
+      switch (_this.state.activeLayer) {
+        case 'waste':
+          return _wastewaterConfig.default;
+
+        default:
+          return _poolsConfig.default;
+      }
+    });
+
+    _defineProperty(_assertThisInitialized(_assertThisInitialized(_this)), "setActiveLayer", function (layer) {
+      _this.setState({
+        activeLayer: layer
+      });
     });
 
     return _this;
@@ -117,15 +161,41 @@ function (_Component) {
 
   _createClass(Map, [{
     key: "componentDidMount",
-    value: function componentDidMount() {}
+    value: function componentDidMount() {
+      // this.startAnimation();
+      this.listenToIncomingEvents();
+      this.map.current.addEventListener('click', this.stopAnimation);
+      this.updateTextBox();
+    }
   }, {
     key: "render",
     value: function render() {
+      var _this$getTextBoxConte = this.getTextBoxContent(),
+          title = _this$getTextBoxConte.title,
+          description = _this$getTextBoxConte.description,
+          icon = _this$getTextBoxConte.icon;
+
       return _react.default.createElement("div", {
         ref: this.map
       }, _react.default.createElement(_Pools.default, {
+        activeLayer: this.state.activeLayer,
         au: this.state.animationCurrentUnit
-      }));
+      }), _react.default.createElement(_WasteWater.default, {
+        activeLayer: this.state.activeLayer
+      }), _react.default.createElement("div", {
+        className: "text-box"
+      }, _react.default.createElement("div", {
+        className: "text-box__header"
+      }, _react.default.createElement("i", {
+        className: "text-box__icon"
+      }, _react.default.createElement("img", {
+        src: icon,
+        alt: ""
+      })), _react.default.createElement("span", {
+        className: "text-box__title"
+      }, title)), _react.default.createElement("div", {
+        className: "body"
+      }, description)));
     }
   }]);
 

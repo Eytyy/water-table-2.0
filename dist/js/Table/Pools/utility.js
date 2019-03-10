@@ -3,7 +3,7 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.lerp = exports.drawPolyline = exports.getRandomInt = void 0;
+exports.setMinMax = exports.lerp = exports.drawPolyline = exports.getRandomInt = void 0;
 
 // utility functions
 var getRandomInt = function getRandomInt(min, max) {
@@ -50,3 +50,38 @@ var lerp = function lerp(a, b, t) {
 };
 
 exports.lerp = lerp;
+
+var setMinMax = function setMinMax(points) {
+  return points.reduce(function (curr, next) {
+    var xNext = next.x,
+        yNext = next.y;
+    var xCurr = curr.x,
+        yCurr = curr.y;
+
+    if (typeof xCurr === 'undefined') {
+      return {
+        x: {
+          min: xNext,
+          max: xNext
+        },
+        y: {
+          min: yNext,
+          max: yNext
+        }
+      };
+    }
+
+    return {
+      x: {
+        min: xNext < xCurr.min ? xNext : xCurr.min,
+        max: xNext > xCurr.max ? xNext : xCurr.max
+      },
+      y: {
+        min: yNext < yCurr.min ? yNext : yCurr.min,
+        max: yNext > yCurr.max ? yNext : yCurr.max
+      }
+    };
+  }, {});
+};
+
+exports.setMinMax = setMinMax;

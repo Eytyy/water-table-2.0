@@ -32,63 +32,50 @@ export default {
 			]
 		},
 		{
-			id: 'deadsea-1',
-			pool: {
-				points: [
-					{x: 296, y: 584 }, {x: 302, y: 582}, 
-					{x: 310, y: 582}, {x: 314, y:  584}, 
-					{x:  336, y:  606}, {x: 338, y:  612}, 
-					{x: 338, y: 632}, {x: 336, y: 636}, 
-					{x: 300, y: 672}, {x: 298, y: 676}, 
-					{x: 298, y: 736}, {x: 300, y: 742}, 
-					{x: 324, y: 764}, {x: 326, y: 768}, 
-					{x: 326, y: 816}, {x: 324, y: 820}, 
-					{x: 312, y: 816}, {x: 312, y: 808}, 
-					{x: 310, y: 802}, {x: 300, y: 794}, 
-					{x: 298, y: 790}, {x: 298, y: 782}, 
-					{x: 288, y: 776}, {x: 274, y: 790}, 
-					{x: 270, y: 792}, {x: 262, y: 792}, 
-					{x: 258, y: 790}, {x: 248, y: 780}, 
-					{x: 246, y: 776}, {x: 246, y: 650}, 
-					{x: 248, y: 646}, {x: 258, y: 636}, 
-					{x: 260, y: 632}, {x: 260, y: 624}, 
-					{x: 262, y: 620},
-				]
-			},
+			id: 'deadsea',
+			pool: [
+				{
+					points: [
+						{x: 296, y: 584 }, {x: 302, y: 582}, 
+						{x: 310, y: 582}, {x: 314, y:  584}, 
+						{x:  336, y:  606}, {x: 338, y:  612}, 
+						{x: 338, y: 632}, {x: 336, y: 636}, 
+						{x: 300, y: 672}, {x: 298, y: 676}, 
+						{x: 298, y: 736}, {x: 300, y: 742}, 
+						{x: 324, y: 764}, {x: 326, y: 768}, 
+						{x: 326, y: 816}, {x: 324, y: 820}, 
+						{x: 312, y: 816}, {x: 312, y: 808}, 
+						{x: 310, y: 802}, {x: 300, y: 794}, 
+						{x: 298, y: 790}, {x: 298, y: 782}, 
+						{x: 288, y: 776}, {x: 274, y: 790}, 
+						{x: 270, y: 792}, {x: 262, y: 792}, 
+						{x: 258, y: 790}, {x: 248, y: 780}, 
+						{x: 246, y: 776}, {x: 246, y: 650}, 
+						{x: 248, y: 646}, {x: 258, y: 636}, 
+						{x: 260, y: 632}, {x: 260, y: 624}, 
+						{x: 262, y: 620},
+					]
+				},
+				{
+					points: [
+						{x: 278, y: 800}, {x: 286, y: 802}, 
+						{x: 284, y: 806}, {x: 276, y: 814}, 
+						{x: 276, y: 822}, {x: 298, y: 842}, 
+						{x: 298, y: 846}, {x: 298, y: 856}, 
+						{x: 298, y: 858}, {x: 274, y: 882}, 
+						{x: 272, y: 886}, {x: 272, y: 894}, 
+						{x: 272, y: 898}, {x: 268, y: 902}, 
+						{x: 260, y: 898}, {x: 260, y: 872}, 
+						{x: 258, y: 868}, {x: 248, y: 858}, 
+						{x: 246, y: 856}, {x: 246, y: 832}, 
+						{x: 248, y: 830}, {x: 260, y: 818}, 
+					]
+				}
+			],
 			direction: 'right-to-left',
 			name: 'dead sea',
 			description: 'Its surface and shores are 430.5 metres (1,412 ft) below sea level. It is 304 m (997 ft) deep, the deepest hypersaline lake in the world. With a salinity of 342 g/kg, or 34.2% (in 2011), 9.6 times as salty as the ocean – and has a density of 1.24 kg/litre. This salinity makes for a harsh environment in which plants and animals cannot flourish, hence its name. The Dead Sea\'s main, northern basin is 50 kilometres (31 mi) long and 15 kilometres (9 mi) wide at its widest point.',
 			figures: [
-				{
-					label: 'Figure 1',
-					value: '20%'
-				},
-				{
-					label: 'Figure 2',
-					value: '32%',
-				}
-			]
-		},
-		{
-			id: 'deadsea-2',
-			pool: {
-				points: [
-					{x: 278, y: 800}, {x: 286, y: 802}, 
-					{x: 284, y: 806}, {x: 276, y: 814}, 
-					{x: 276, y: 822}, {x: 298, y: 842}, 
-					{x: 298, y: 846}, {x: 298, y: 856}, 
-					{x: 298, y: 858}, {x: 274, y: 882}, 
-					{x: 272, y: 886}, {x: 272, y: 894}, 
-					{x: 272, y: 898}, {x: 268, y: 902}, 
-					{x: 260, y: 898}, {x: 260, y: 872}, 
-					{x: 258, y: 868}, {x: 248, y: 858}, 
-					{x: 246, y: 856}, {x: 246, y: 832}, 
-					{x: 248, y: 830}, {x: 260, y: 818}, 
-				]
-			},
-			direction: 'bottom-to-top',
-			name: 'dead sea',
-			description: 'Its surface and shores are 430.5 metres (1,412 ft) below sea level. It is 304 m (997 ft) deep, the deepest hypersaline lake in the world. With a salinity of 342 g/kg, or 34.2% (in 2011), 9.6 times as salty as the ocean – and has a density of 1.24 kg/litre. This salinity makes for a harsh environment in which plants and animals cannot flourish, hence its name. The Dead Sea\'s main, northern basin is 50 kilometres (31 mi) long and 15 kilometres (9 mi) wide at its widest point.',			figures: [
 				{
 					label: 'Figure 1',
 					value: '20%'

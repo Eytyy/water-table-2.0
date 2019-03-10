@@ -7,9 +7,15 @@ exports.default = void 0;
 
 var _react = _interopRequireWildcard(require("react"));
 
-var _Pool = _interopRequireDefault(require("./Pool"));
+var _poolsConfig = _interopRequireDefault(require("../../poolsConfig"));
 
-var _config = _interopRequireDefault(require("./config"));
+var _PoolComponent = _interopRequireDefault(require("./PoolComponent"));
+
+var _PoolsSvg = _interopRequireDefault(require("./PoolsSvg"));
+
+var _PoolText = _interopRequireDefault(require("./PoolText"));
+
+var _api = require("../../api");
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -55,44 +61,37 @@ function (_Component) {
 
     _defineProperty(_assertThisInitialized(_assertThisInitialized(_this)), "canvas", _react.default.createRef());
 
-    _defineProperty(_assertThisInitialized(_assertThisInitialized(_this)), "ctx", null);
-
     _defineProperty(_assertThisInitialized(_assertThisInitialized(_this)), "pools", []);
 
     _defineProperty(_assertThisInitialized(_assertThisInitialized(_this)), "width", "1080");
 
-    _defineProperty(_assertThisInitialized(_assertThisInitialized(_this)), "height", "1920");
+    _defineProperty(_assertThisInitialized(_assertThisInitialized(_this)), "height", "1540");
 
-    _defineProperty(_assertThisInitialized(_assertThisInitialized(_this)), "setupPools", function (ctx, au) {
-      _this.pools = _config.default.entries.map(function (config) {
-        return {
-          id: config.id,
-          instance: new _Pool.default(config)
-        };
-      });
+    _defineProperty(_assertThisInitialized(_assertThisInitialized(_this)), "state", {
+      ctx: null,
+      activePool: undefined
+    });
 
-      _this.pools.map(function (pool) {
-        pool.instance.init({
-          ctx: ctx,
-          au: au
-        });
+    _defineProperty(_assertThisInitialized(_assertThisInitialized(_this)), "listenToIncomingEvents", function () {
+      _api.socket.on('controller', function (message) {
+        var event = message.event,
+            payload = message.payload;
+
+        switch (event) {
+          case 'poolClicked':
+            _this.updateActivePool(payload);
+
+            break;
+
+          default:
+            return;
+        }
       });
     });
 
-    _defineProperty(_assertThisInitialized(_assertThisInitialized(_this)), "updatePools", function (ctx, au) {
-      ctx.clearRect(0, 0, _this.width, _this.height);
-
-      _this.pools.map(function (pool) {
-        pool.update({
-          ctx: ctx,
-          au: au
-        });
-      });
-    });
-
-    _defineProperty(_assertThisInitialized(_assertThisInitialized(_this)), "updateCurrentStop", function (ctx, au) {
-      _this.pools.map(function (pool) {
-        pool.updateCurrentStop();
+    _defineProperty(_assertThisInitialized(_assertThisInitialized(_this)), "updateActivePool", function (activePool) {
+      _this.setState({
+        activePool: activePool
       });
     });
 
@@ -102,32 +101,77 @@ function (_Component) {
   _createClass(Pools, [{
     key: "componentDidMount",
     value: function componentDidMount() {
-      var au = this.props.au;
-      this.ctx = this.canvas.current.getContext('2d');
-      this.setupPools(this.ctx, au);
+      this.setState({
+        ctx: this.canvas.current.getContext('2d')
+      });
+      this.listenToIncomingEvents();
     }
   }, {
-    key: "componentDidUpdate",
-    value: function componentDidUpdate(_ref) {
-      var au = _ref.au;
+    key: "componentWillReceiveProps",
+    value: function componentWillReceiveProps(_ref) {
+      var activeLayer = _ref.activeLayer;
 
-      if (au !== this.props.au) {
-        this.updatePools(this.ctx, au);
-
-        if (au === 0) {
-          this.updateCurrentStop(this.ctx, this.props.au);
-        }
+      if (this.props.activeLayer !== activeLayer) {
+        this.setState({
+          activePool: undefined
+        });
       }
     }
   }, {
     key: "render",
     value: function render() {
-      return _react.default.createElement("canvas", {
+      var _this2 = this;
+
+      var _this$props = this.props,
+          au = _this$props.au,
+          activeLayer = _this$props.activeLayer;
+      return _react.default.createElement("div", {
+        className: "layer layer--pools ".concat(activeLayer === 'natural' ? 'layer--is-active' : 'layer--is-hidden')
+      }, _react.default.createElement("canvas", {
         id: "pools",
         width: this.width,
         height: this.height,
         ref: this.canvas
-      });
+      }), this.state.ctx && _poolsConfig.default.entries.map(function (config) {
+        return Array.isArray(config.pool) ? config.pool.map(function (_ref2, index) {
+          var points = _ref2.points;
+          return _react.default.createElement(_PoolComponent.default, {
+            key: "".concat(config.id, "--").concat(index),
+            ctx: _this2.state.ctx,
+            config: config,
+            au: au,
+            points: points
+          });
+        }) : _react.default.createElement(_PoolComponent.default, {
+          key: config.id,
+          ctx: _this2.state.ctx,
+          config: config,
+          au: au
+        });
+      }), _react.default.createElement(_PoolsSvg.default, {
+        PoolsConfig: _poolsConfig.default,
+        activePool: this.state.activePool
+      }), _poolsConfig.default.entries.map(function (_ref3) {
+        var name = _ref3.name,
+            figures = _ref3.figures,
+            id = _ref3.id,
+            pool = _ref3.pool;
+        return Array.isArray(pool) ? _react.default.createElement(_PoolText.default, {
+          key: "rx-".concat(id),
+          activePool: _this2.state.activePool,
+          name: name,
+          figures: figures,
+          id: id,
+          points: pool[0].points
+        }) : _react.default.createElement(_PoolText.default, {
+          key: "rx-".concat(id),
+          activePool: _this2.state.activePool,
+          name: name,
+          figures: figures,
+          id: id,
+          points: pool.points
+        });
+      }));
     }
   }]);
 

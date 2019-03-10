@@ -2,8 +2,8 @@ import React, { Component } from 'react';
 import { Route, withRouter, Link } from 'react-router-dom'
 import { socket } from '../api';
 import Intro from './Intro';
-import MapControls from './MapControls';
-import VisualizationControls from './VisualizationControls';
+import MapControls from './Map/MapControls';
+import VisualizationControls from './Visualization/VisualizationControls';
 import { broadcastEvent } from '../api';
 
 class Controller extends Component {
@@ -16,7 +16,6 @@ class Controller extends Component {
 		socket.on('from-table', ({ event }) => {
 			switch(event) {
 				default:
-					console.log('whatever');
 					break;
 			}
 		});
@@ -41,8 +40,6 @@ class Controller extends Component {
 			});
 		}
 	}
-	
-	
 	
 	render() {
 		return (

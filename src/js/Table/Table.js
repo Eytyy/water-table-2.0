@@ -15,9 +15,6 @@ class Table extends Component {
 				case 'navigate':
 					this.navigate(payload);
 					break;
-				case 'switchMapView':
-					console.log(`show ${payload}`)
-					break;
 				default:
 					return;
 			}
