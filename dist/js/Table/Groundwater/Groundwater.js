@@ -7,15 +7,11 @@ exports.default = void 0;
 
 var _react = _interopRequireWildcard(require("react"));
 
-var _poolsConfig = _interopRequireDefault(require("../../poolsConfig"));
-
-var _PoolsSvg = _interopRequireDefault(require("./PoolsSvg"));
-
-var _PoolText = _interopRequireDefault(require("./PoolText"));
-
 var _api = require("../../api");
 
-var _cutout = _interopRequireDefault(require("../../../cutout.png"));
+var _GroundwaterText = _interopRequireDefault(require("./GroundwaterText"));
+
+var _groundwaterConfig = _interopRequireDefault(require("../../groundwaterConfig"));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -41,43 +37,26 @@ function _assertThisInitialized(self) { if (self === void 0) { throw new Referen
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
-var Pools =
+var Groundwater =
 /*#__PURE__*/
 function (_Component) {
-  _inherits(Pools, _Component);
+  _inherits(Groundwater, _Component);
 
-  function Pools() {
+  function Groundwater() {
     var _getPrototypeOf2;
 
     var _this;
 
-    _classCallCheck(this, Pools);
+    _classCallCheck(this, Groundwater);
 
     for (var _len = arguments.length, args = new Array(_len), _key = 0; _key < _len; _key++) {
       args[_key] = arguments[_key];
     }
 
-    _this = _possibleConstructorReturn(this, (_getPrototypeOf2 = _getPrototypeOf(Pools)).call.apply(_getPrototypeOf2, [this].concat(args)));
-
-    _defineProperty(_assertThisInitialized(_assertThisInitialized(_this)), "canvas", _react.default.createRef());
-
-    _defineProperty(_assertThisInitialized(_assertThisInitialized(_this)), "pools", []);
-
-    _defineProperty(_assertThisInitialized(_assertThisInitialized(_this)), "width", "912");
-
-    _defineProperty(_assertThisInitialized(_assertThisInitialized(_this)), "height", "1540");
-
-    _defineProperty(_assertThisInitialized(_assertThisInitialized(_this)), "particles", Array.from({
-      length: 180000
-    }, function () {
-      return [Math.round(Math.random() * (_this.width - 1)), Math.round(Math.random() * (_this.height - 1))];
-    }));
-
-    _defineProperty(_assertThisInitialized(_assertThisInitialized(_this)), "rf", null);
+    _this = _possibleConstructorReturn(this, (_getPrototypeOf2 = _getPrototypeOf(Groundwater)).call.apply(_getPrototypeOf2, [this].concat(args)));
 
     _defineProperty(_assertThisInitialized(_assertThisInitialized(_this)), "state", {
-      ctx: null,
-      activePool: undefined
+      activeResource: undefined
     });
 
     _defineProperty(_assertThisInitialized(_assertThisInitialized(_this)), "listenToIncomingEvents", function () {
@@ -86,8 +65,8 @@ function (_Component) {
             payload = message.payload;
 
         switch (event) {
-          case 'poolClicked':
-            _this.updateActivePool(payload);
+          case 'groundResourceClicked':
+            _this.updateActiveResource(payload);
 
             break;
 
@@ -97,50 +76,18 @@ function (_Component) {
       });
     });
 
-    _defineProperty(_assertThisInitialized(_assertThisInitialized(_this)), "updateActivePool", function (activePool) {
+    _defineProperty(_assertThisInitialized(_assertThisInitialized(_this)), "updateActiveResource", function (payload) {
       _this.setState({
-        activePool: activePool
+        activeResource: payload
       });
-    });
-
-    _defineProperty(_assertThisInitialized(_assertThisInitialized(_this)), "animate", function () {
-      _this.raf = requestAnimationFrame(_this.animate); // Draw particles:
-
-      _this.state.ctx.clearRect(0, 0, _this.width, _this.height);
-
-      var imageData = _this.state.ctx.getImageData(0, 0, _this.width, _this.height);
-
-      var data = imageData.data;
-
-      for (var i = 0; i < _this.particles.length; i++) {
-        var particle = _this.particles[i];
-        var index = 4 * (particle[0] + particle[1] * _this.width);
-        data[index + 0] = 255;
-        data[index + 1] = 255;
-        data[index + 2] = 255;
-        data[index + 3] = 255;
-      }
-
-      _this.state.ctx.putImageData(imageData, 0, 0); // Move particles randomly:
-
-
-      for (var _i = 0; _i < _this.particles.length; _i++) {
-        var _particle = _this.particles[_i];
-        _particle[0] = Math.max(0, Math.min(_this.width - 1, Math.round(_particle[0] + Math.random() * 2 - 1)));
-        _particle[1] = Math.max(0, Math.min(_this.height - 1, Math.round(_particle[1] + Math.random() * 2 - 1)));
-      }
     });
 
     return _this;
   }
 
-  _createClass(Pools, [{
+  _createClass(Groundwater, [{
     key: "componentDidMount",
     value: function componentDidMount() {
-      this.setState({
-        ctx: this.canvas.current.getContext('2d')
-      });
-      this.raf = requestAnimationFrame(this.animate);
       this.listenToIncomingEvents();
     }
   }, {
@@ -150,70 +97,87 @@ function (_Component) {
 
       if (this.props.activeLayer !== activeLayer) {
         this.setState({
-          activePool: undefined
+          activeResource: undefined
         });
       }
-    }
-  }, {
-    key: "componentWillUnmount",
-    value: function componentWillUnmount() {
-      cancelAnimationFrame(this.rf);
-      this.rf = null;
     }
   }, {
     key: "render",
     value: function render() {
       var _this2 = this;
 
-      var _this$props = this.props,
-          au = _this$props.au,
-          activeLayer = _this$props.activeLayer;
-      return _react.default.createElement("div", {
-        className: "layer layer--pools ".concat(activeLayer === 'natural' ? 'layer--is-active' : 'layer--is-hidden')
-      }, _react.default.createElement("canvas", {
-        id: "pools",
-        width: this.width,
-        height: this.height,
-        ref: this.canvas
-      }), _react.default.createElement("img", {
-        src: _cutout.default,
-        alt: "",
-        width: "auto",
-        height: this.height,
-        style: {
-          position: 'absolute',
-          top: '0px',
-          left: '0px'
+      var activeLayer = this.props.activeLayer;
+
+      var activeClass = function activeClass(id) {
+        if (typeof _this2.state.activeResource === 'undefined') {
+          return '';
+        } else {
+          if (_this2.state.activeResource === id) {
+            return 'is-active';
+          } else {
+            return 'is-inActive';
+          }
         }
-      }), _react.default.createElement(_PoolsSvg.default, {
-        PoolsConfig: _poolsConfig.default,
-        activePool: this.state.activePool
-      }), _poolsConfig.default.entries.map(function (_ref2) {
-        var name = _ref2.name,
-            figures = _ref2.figures,
-            id = _ref2.id,
-            pool = _ref2.pool;
-        return Array.isArray(pool) ? _react.default.createElement(_PoolText.default, {
+      };
+
+      return _react.default.createElement("div", {
+        className: "layer layer--ground ".concat(activeLayer === 'ground' ? 'layer--is-active' : 'layer--is-hidden')
+      }, _react.default.createElement("div", {
+        className: "resources resources--ground-water"
+      }, _react.default.createElement("svg", {
+        width: "1080",
+        height: "1580",
+        viewBox: "0 0 1080 1580"
+      }, _react.default.createElement("g", {
+        stroke: "none",
+        strokeWidth: "1",
+        fill: "none",
+        fillRule: "evenodd",
+        transform: "translate(180, 190)"
+      }, _groundwaterConfig.default.entries.map(function (_ref2) {
+        var id = _ref2.id,
+            position = _ref2.position;
+        return _react.default.createElement("g", {
+          className: "waste ".concat(activeClass(id)),
+          key: id,
+          transform: "translate(".concat(position.x, ", ").concat(position.y, ") ").concat(_this2.state.activeResource !== id ? 'scale(1, 1)' : 'scale(3, 3)')
+        }, _react.default.createElement("rect", {
+          id: "Rectangle-3",
+          fill: "#FFFFFF",
+          x: "4",
+          y: "0",
+          width: "33",
+          height: "27"
+        }), _react.default.createElement("path", {
+          d: "M0,11.5 C0.974431439,13.1666667 2.8362733,14 5.58552559,14 C9.70940401,14 9.75912746,11 13.8652459,11 C17.9713643,11 17.9056522,14 22.013542,14 C26.1214318,14 26.1702765,11 30.2932623,11 C33.0419195,11 35.2774987,12.3333333 37,15",
+          id: "Path-3-Copy",
+          stroke: "#000000",
+          strokeWidth: "3"
+        }), _react.default.createElement("path", {
+          d: "M0,18.5 C0.974431439,20.1666667 2.8362733,21 5.58552559,21 C9.70940401,21 9.75912746,18 13.8652459,18 C17.9713643,18 17.9056522,21 22.013542,21 C26.1214318,21 26.1702765,18 30.2932623,18 C33.0419195,18 35.2774987,19.3333333 37,22",
+          id: "Path-3-Copy",
+          stroke: "#000000",
+          strokeWidth: "3"
+        }));
+      })))), _groundwaterConfig.default.entries.map(function (_ref3) {
+        var name = _ref3.name,
+            figures = _ref3.figures,
+            id = _ref3.id,
+            position = _ref3.position;
+        return _react.default.createElement(_GroundwaterText.default, {
           key: "rx-".concat(id),
-          activePool: _this2.state.activePool,
+          activeResource: _this2.state.activeResource,
           name: name,
           figures: figures,
           id: id,
-          points: pool[0].points
-        }) : _react.default.createElement(_PoolText.default, {
-          key: "rx-".concat(id),
-          activePool: _this2.state.activePool,
-          name: name,
-          figures: figures,
-          id: id,
-          points: pool.points
+          position: position
         });
       }));
     }
   }]);
 
-  return Pools;
+  return Groundwater;
 }(_react.Component);
 
-var _default = Pools;
+var _default = Groundwater;
 exports.default = _default;

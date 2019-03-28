@@ -9,13 +9,13 @@ var _react = _interopRequireWildcard(require("react"));
 
 var _poolsConfig = _interopRequireDefault(require("../../poolsConfig"));
 
+var _PoolComponent = _interopRequireDefault(require("./PoolComponent"));
+
 var _PoolsSvg = _interopRequireDefault(require("./PoolsSvg"));
 
 var _PoolText = _interopRequireDefault(require("./PoolText"));
 
 var _api = require("../../api");
-
-var _cutout = _interopRequireDefault(require("../../../cutout.png"));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -63,17 +63,9 @@ function (_Component) {
 
     _defineProperty(_assertThisInitialized(_assertThisInitialized(_this)), "pools", []);
 
-    _defineProperty(_assertThisInitialized(_assertThisInitialized(_this)), "width", "912");
+    _defineProperty(_assertThisInitialized(_assertThisInitialized(_this)), "width", "1080");
 
     _defineProperty(_assertThisInitialized(_assertThisInitialized(_this)), "height", "1540");
-
-    _defineProperty(_assertThisInitialized(_assertThisInitialized(_this)), "particles", Array.from({
-      length: 180000
-    }, function () {
-      return [Math.round(Math.random() * (_this.width - 1)), Math.round(Math.random() * (_this.height - 1))];
-    }));
-
-    _defineProperty(_assertThisInitialized(_assertThisInitialized(_this)), "rf", null);
 
     _defineProperty(_assertThisInitialized(_assertThisInitialized(_this)), "state", {
       ctx: null,
@@ -103,34 +95,6 @@ function (_Component) {
       });
     });
 
-    _defineProperty(_assertThisInitialized(_assertThisInitialized(_this)), "animate", function () {
-      _this.raf = requestAnimationFrame(_this.animate); // Draw particles:
-
-      _this.state.ctx.clearRect(0, 0, _this.width, _this.height);
-
-      var imageData = _this.state.ctx.getImageData(0, 0, _this.width, _this.height);
-
-      var data = imageData.data;
-
-      for (var i = 0; i < _this.particles.length; i++) {
-        var particle = _this.particles[i];
-        var index = 4 * (particle[0] + particle[1] * _this.width);
-        data[index + 0] = 255;
-        data[index + 1] = 255;
-        data[index + 2] = 255;
-        data[index + 3] = 255;
-      }
-
-      _this.state.ctx.putImageData(imageData, 0, 0); // Move particles randomly:
-
-
-      for (var _i = 0; _i < _this.particles.length; _i++) {
-        var _particle = _this.particles[_i];
-        _particle[0] = Math.max(0, Math.min(_this.width - 1, Math.round(_particle[0] + Math.random() * 2 - 1)));
-        _particle[1] = Math.max(0, Math.min(_this.height - 1, Math.round(_particle[1] + Math.random() * 2 - 1)));
-      }
-    });
-
     return _this;
   }
 
@@ -140,7 +104,6 @@ function (_Component) {
       this.setState({
         ctx: this.canvas.current.getContext('2d')
       });
-      this.raf = requestAnimationFrame(this.animate);
       this.listenToIncomingEvents();
     }
   }, {
@@ -153,12 +116,6 @@ function (_Component) {
           activePool: undefined
         });
       }
-    }
-  }, {
-    key: "componentWillUnmount",
-    value: function componentWillUnmount() {
-      cancelAnimationFrame(this.rf);
-      this.rf = null;
     }
   }, {
     key: "render",
@@ -175,24 +132,30 @@ function (_Component) {
         width: this.width,
         height: this.height,
         ref: this.canvas
-      }), _react.default.createElement("img", {
-        src: _cutout.default,
-        alt: "",
-        width: "auto",
-        height: this.height,
-        style: {
-          position: 'absolute',
-          top: '0px',
-          left: '0px'
-        }
+      }), this.state.ctx && _poolsConfig.default.entries.map(function (config) {
+        return Array.isArray(config.pool) ? config.pool.map(function (_ref2, index) {
+          var points = _ref2.points;
+          return _react.default.createElement(_PoolComponent.default, {
+            key: "".concat(config.id, "--").concat(index),
+            ctx: _this2.state.ctx,
+            config: config,
+            au: au,
+            points: points
+          });
+        }) : _react.default.createElement(_PoolComponent.default, {
+          key: config.id,
+          ctx: _this2.state.ctx,
+          config: config,
+          au: au
+        });
       }), _react.default.createElement(_PoolsSvg.default, {
         PoolsConfig: _poolsConfig.default,
         activePool: this.state.activePool
-      }), _poolsConfig.default.entries.map(function (_ref2) {
-        var name = _ref2.name,
-            figures = _ref2.figures,
-            id = _ref2.id,
-            pool = _ref2.pool;
+      }), _poolsConfig.default.entries.map(function (_ref3) {
+        var name = _ref3.name,
+            figures = _ref3.figures,
+            id = _ref3.id,
+            pool = _ref3.pool;
         return Array.isArray(pool) ? _react.default.createElement(_PoolText.default, {
           key: "rx-".concat(id),
           activePool: _this2.state.activePool,

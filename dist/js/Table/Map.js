@@ -17,6 +17,10 @@ var _WasteWater = _interopRequireDefault(require("./WasteWater/WasteWater"));
 
 var _wastewaterConfig = _interopRequireDefault(require("../wastewaterConfig"));
 
+var _groundwaterConfig = _interopRequireDefault(require("../groundwaterConfig"));
+
+var _Groundwater = _interopRequireDefault(require("./Groundwater/Groundwater"));
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) { var desc = Object.defineProperty && Object.getOwnPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : {}; if (desc.get || desc.set) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } } newObj.default = obj; return newObj; } }
@@ -58,8 +62,6 @@ function (_Component) {
     }
 
     _this = _possibleConstructorReturn(this, (_getPrototypeOf2 = _getPrototypeOf(Map)).call.apply(_getPrototypeOf2, [this].concat(args)));
-
-    _defineProperty(_assertThisInitialized(_assertThisInitialized(_this)), "map", _react.default.createRef());
 
     _defineProperty(_assertThisInitialized(_assertThisInitialized(_this)), "state", {
       activeLayer: 'natural',
@@ -145,6 +147,9 @@ function (_Component) {
         case 'waste':
           return _wastewaterConfig.default;
 
+        case 'ground':
+          return _groundwaterConfig.default;
+
         default:
           return _poolsConfig.default;
       }
@@ -164,7 +169,6 @@ function (_Component) {
     value: function componentDidMount() {
       // this.startAnimation();
       this.listenToIncomingEvents();
-      this.map.current.addEventListener('click', this.stopAnimation);
       this.updateTextBox();
     }
   }, {
@@ -175,12 +179,12 @@ function (_Component) {
           description = _this$getTextBoxConte.description,
           icon = _this$getTextBoxConte.icon;
 
-      return _react.default.createElement("div", {
-        ref: this.map
-      }, _react.default.createElement(_Pools.default, {
+      return _react.default.createElement(_react.default.Fragment, null, _react.default.createElement(_Pools.default, {
         activeLayer: this.state.activeLayer,
         au: this.state.animationCurrentUnit
       }), _react.default.createElement(_WasteWater.default, {
+        activeLayer: this.state.activeLayer
+      }), _react.default.createElement(_Groundwater.default, {
         activeLayer: this.state.activeLayer
       }), _react.default.createElement("div", {
         className: "text-box"

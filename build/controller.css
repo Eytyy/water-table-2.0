@@ -7,7 +7,7 @@
 
 .map-console__controls {
   padding: 60px 0 0 60px; }
-  .map-console__controls__main {
+  .map-console__controls__group {
     display: flex;
     flex-wrap: wrap; }
   .map-console__controls .btn-group {
@@ -18,6 +18,8 @@
 .btn-group {
   cursor: pointer;
   opacity: 0.2; }
+  .btn-group.is-active {
+    opacity: 1; }
 
 .btn-icon {
   width: 94px;

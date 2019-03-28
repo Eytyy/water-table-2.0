@@ -10,10 +10,11 @@ import PoolsConfig from '../poolsConfig';
 
 import WasteWater from './WasteWater/WasteWater';
 import WasteWaterConfig from '../wastewaterConfig';
+import GroundwaterConfig from '../groundwaterConfig';
+
+import Groundwater from './Groundwater/Groundwater';
 
 class Map extends Component {
-	map = React.createRef()
-
 	state = {
 		activeLayer: 'natural',
 		playing: false,
@@ -91,6 +92,8 @@ class Map extends Component {
 		switch(this.state.activeLayer) {
 			case 'waste':
 				return WasteWaterConfig
+			case 'ground':
+				return GroundwaterConfig;
 			default:
 				return PoolsConfig
 		}
@@ -105,24 +108,24 @@ class Map extends Component {
 	componentDidMount() {
 		// this.startAnimation();
 		this.listenToIncomingEvents();
-		this.map.current.addEventListener('click', this.stopAnimation);
 		this.updateTextBox();
 	}
 
 	render() {
 		const { title, description, icon } = this.getTextBoxContent();
 		return (
-			<div ref={this.map}>
-				<Pools activeLayer={this.state.activeLayer} au={this.state.animationCurrentUnit} />
-				<WasteWater activeLayer={this.state.activeLayer} />
-				<div className="text-box">
-					<div className="text-box__header">
-						<i className="text-box__icon"><img src={icon} alt=""/></i>
-						<span className="text-box__title">{title}</span>
-					</div>
-					<div className="body">{description}</div>
+			<>
+			<Pools activeLayer={this.state.activeLayer} au={this.state.animationCurrentUnit} />
+			<WasteWater activeLayer={this.state.activeLayer} />
+			<Groundwater activeLayer={this.state.activeLayer} />
+			<div className="text-box">
+				<div className="text-box__header">
+					<i className="text-box__icon"><img src={icon} alt=""/></i>
+					<span className="text-box__title">{title}</span>
 				</div>
+				<div className="body">{description}</div>
 			</div>
+		</>
 		);
 	}
 }

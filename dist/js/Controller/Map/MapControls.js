@@ -17,6 +17,10 @@ var _WasteWaterSvg = _interopRequireDefault(require("./WasteWaterSvg"));
 
 var _wastewaterConfig = _interopRequireDefault(require("../../wastewaterConfig"));
 
+var _GroundWaterSvg = _interopRequireDefault(require("./GroundWaterSvg"));
+
+var _groundwaterConfig = _interopRequireDefault(require("../../groundwaterConfig"));
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) { var desc = Object.defineProperty && Object.getOwnPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : {}; if (desc.get || desc.set) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } } newObj.default = obj; return newObj; } }
@@ -62,7 +66,8 @@ function (_Component) {
     _defineProperty(_assertThisInitialized(_assertThisInitialized(_this)), "state", {
       activeLayer: 'natural',
       activePool: undefined,
-      activePlant: undefined
+      activePlant: undefined,
+      activeGroundWater: undefined
     });
 
     _defineProperty(_assertThisInitialized(_assertThisInitialized(_this)), "setActiveLayer", function (layer) {
@@ -105,6 +110,20 @@ function (_Component) {
       });
     });
 
+    _defineProperty(_assertThisInitialized(_assertThisInitialized(_this)), "onGroundWaterClick", function (e) {
+      var target = e.target.id;
+
+      _this.setState({
+        activeGroundWater: target
+      });
+
+      (0, _api.broadcastEvent)({
+        source: 'controller',
+        event: 'groundWaterClicked',
+        payload: target
+      });
+    });
+
     _defineProperty(_assertThisInitialized(_assertThisInitialized(_this)), "onPlantClick", function (e) {
       var target = e.target.id;
 
@@ -127,14 +146,15 @@ function (_Component) {
     value: function render() {
       var _this2 = this;
 
+      var activeLayer = this.state.activeLayer;
       return _react.default.createElement("section", {
         className: "map-console"
       }, _react.default.createElement("div", {
         className: "map-console__controls"
       }, _react.default.createElement("h1", null, "WATER MAP & PROJECTS"), _react.default.createElement("div", {
-        className: "map-console__controls__main"
+        className: "map-console__controls__group map-console__controls__group--main"
       }, _react.default.createElement("div", {
-        className: "btn-group",
+        className: "btn-group ".concat(activeLayer === 'natural' || activeLayer === 'ground' ? 'is-active' : ''),
         onClick: function onClick() {
           _this2.onClickLayer('natural');
         }
@@ -143,7 +163,7 @@ function (_Component) {
       }), _react.default.createElement("span", {
         className: "btn-label"
       }, "Natural Water Resources")), _react.default.createElement("div", {
-        className: "btn-group",
+        className: "btn-group ".concat(activeLayer === 'utilities' ? 'is-active' : ''),
         onClick: function onClick() {
           _this2.onClickLayer('utilities');
         }
@@ -152,7 +172,7 @@ function (_Component) {
       }), _react.default.createElement("span", {
         className: "btn-label"
       }, "Utilities & Water Supply Projects")), _react.default.createElement("div", {
-        className: "btn-group",
+        className: "btn-group ".concat(activeLayer === 'waste' ? 'is-active' : ''),
         onClick: function onClick() {
           _this2.onClickLayer('waste');
         }
@@ -161,7 +181,7 @@ function (_Component) {
       }), _react.default.createElement("span", {
         className: "btn-label"
       }, "Wastewater Treatment Plants")), _react.default.createElement("div", {
-        className: "btn-group",
+        className: "btn-group ".concat(activeLayer === 'conveyors' ? 'is-active' : ''),
         onClick: function onClick() {
           _this2.onClickLayer('conveyors');
         }
@@ -170,7 +190,7 @@ function (_Component) {
       }), _react.default.createElement("span", {
         className: "btn-label"
       }, "Water Conveyors")), _react.default.createElement("div", {
-        className: "btn-group",
+        className: "btn-group ".concat(activeLayer === 'dams' ? 'is-active' : ''),
         onClick: function onClick() {
           _this2.onClickLayer('dams');
         }
@@ -178,7 +198,27 @@ function (_Component) {
         className: "btn-icon icon--dams"
       }), _react.default.createElement("span", {
         className: "btn-label"
-      }, "Dams")))), _react.default.createElement("div", {
+      }, "Dams"))), (this.state.activeLayer === 'natural' || this.state.activeLayer === 'ground') && _react.default.createElement("div", {
+        className: "map-console__controls__group map-console__controls__group--secondary"
+      }, _react.default.createElement("div", {
+        className: "btn-group ".concat(activeLayer === 'natural' ? 'is-active' : ''),
+        onClick: function onClick() {
+          _this2.onClickLayer('natural');
+        }
+      }, _react.default.createElement("i", {
+        className: "btn-icon icon--surface"
+      }), _react.default.createElement("span", {
+        className: "btn-label"
+      }, "Surface Water")), _react.default.createElement("div", {
+        className: "btn-group ".concat(activeLayer === 'ground' ? 'is-active' : ''),
+        onClick: function onClick() {
+          _this2.onClickLayer('ground');
+        }
+      }, _react.default.createElement("i", {
+        className: "btn-icon icon--ground"
+      }), _react.default.createElement("span", {
+        className: "btn-label"
+      }, "Ground Water")))), _react.default.createElement("div", {
         className: "map-console__mini-map"
       }, _react.default.createElement(_PoolsSVG.default, {
         activeLayer: this.state.activeLayer,
@@ -190,6 +230,11 @@ function (_Component) {
         config: _wastewaterConfig.default,
         activePlant: this.state.activePlant,
         onPlantClick: this.onPlantClick
+      }), _react.default.createElement(_GroundWaterSvg.default, {
+        activeLayer: this.state.activeLayer,
+        config: _groundwaterConfig.default,
+        activeGroundWater: this.state.activeGroundWater,
+        onGroundWaterClick: this.onGroundWaterClick
       })));
     }
   }]);

@@ -9,7 +9,7 @@ const getRandomInt = (min, max) => {
 const WasteWaterSVG = ({ config, activePlant, onPlantClick, activeLayer }) => {
 	return (
 		<svg width="1080" height="1580" viewBox="0 0 1080 1580" className={`${activeLayer === 'waste' ? 'is-active' : 'is-hidden'} resources resources--waste`}>
-			<g  stroke="none" strokeWidth="1" fill="none" fillRule="evenodd" transform="translate(180, 190)">
+			<g stroke="none" strokeWidth="1" fill="none" fillRule="evenodd" transform="translate(180, 190)">
 				{
 					config.entries.map(({ id, position }) => 
 						<g onClick={onPlantClick} className={`waste ${activePlant === id ? 'is-active' : ''}`}
