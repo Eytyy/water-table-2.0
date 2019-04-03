@@ -68,10 +68,26 @@ function (_Component) {
     _defineProperty(_assertThisInitialized(_assertThisInitialized(_this)), "height", "1540");
 
     _defineProperty(_assertThisInitialized(_assertThisInitialized(_this)), "particles", Array.from({
-      length: 180000
+      length: 140000
     }, function () {
       return [Math.round(Math.random() * (_this.width - 1)), Math.round(Math.random() * (_this.height - 1))];
     }));
+
+    _defineProperty(_assertThisInitialized(_assertThisInitialized(_this)), "stop", false);
+
+    _defineProperty(_assertThisInitialized(_assertThisInitialized(_this)), "frameCount", 0);
+
+    _defineProperty(_assertThisInitialized(_assertThisInitialized(_this)), "fps", 30);
+
+    _defineProperty(_assertThisInitialized(_assertThisInitialized(_this)), "fpsInterval", void 0);
+
+    _defineProperty(_assertThisInitialized(_assertThisInitialized(_this)), "startTime", void 0);
+
+    _defineProperty(_assertThisInitialized(_assertThisInitialized(_this)), "now", void 0);
+
+    _defineProperty(_assertThisInitialized(_assertThisInitialized(_this)), "then", void 0);
+
+    _defineProperty(_assertThisInitialized(_assertThisInitialized(_this)), "elapsed", void 0);
 
     _defineProperty(_assertThisInitialized(_assertThisInitialized(_this)), "rf", null);
 
@@ -103,31 +119,49 @@ function (_Component) {
       });
     });
 
+    _defineProperty(_assertThisInitialized(_assertThisInitialized(_this)), "startAnimating", function () {
+      _this.fpsInterval = 1000 / _this.fps;
+      _this.then = Date.now();
+      _this.startTime = _this.then;
+
+      _this.animate();
+    });
+
     _defineProperty(_assertThisInitialized(_assertThisInitialized(_this)), "animate", function () {
-      _this.raf = requestAnimationFrame(_this.animate); // Draw particles:
+      // request another frame
+      _this.raf = requestAnimationFrame(_this.animate); // calc elapsed time since last loop
 
-      _this.state.ctx.clearRect(0, 0, _this.width, _this.height);
+      _this.now = Date.now();
+      _this.elapsed = _this.now - _this.then; // if enough time has elapsed, draw the next frame
 
-      var imageData = _this.state.ctx.getImageData(0, 0, _this.width, _this.height);
+      if (_this.elapsed > _this.fpsInterval) {
+        // Get ready for next frame by setting then=now, but also adjust for your
+        // specified fpsInterval not being a multiple of RAF's interval (16.7ms)
+        _this.then = _this.now - _this.elapsed % _this.fpsInterval; // draw 
 
-      var data = imageData.data;
+        _this.state.ctx.clearRect(0, 0, _this.width, _this.height);
 
-      for (var i = 0; i < _this.particles.length; i++) {
-        var particle = _this.particles[i];
-        var index = 4 * (particle[0] + particle[1] * _this.width);
-        data[index + 0] = 255;
-        data[index + 1] = 255;
-        data[index + 2] = 255;
-        data[index + 3] = 255;
-      }
+        var imageData = _this.state.ctx.getImageData(0, 0, _this.width, _this.height);
 
-      _this.state.ctx.putImageData(imageData, 0, 0); // Move particles randomly:
+        var data = imageData.data;
+
+        for (var i = 0; i < _this.particles.length; i++) {
+          var particle = _this.particles[i];
+          var index = 4 * (particle[0] + particle[1] * _this.width);
+          data[index + 0] = 255;
+          data[index + 1] = 255;
+          data[index + 2] = 255;
+          data[index + 3] = 255;
+        }
+
+        _this.state.ctx.putImageData(imageData, 0, 0); // Move particles randomly:
 
 
-      for (var _i = 0; _i < _this.particles.length; _i++) {
-        var _particle = _this.particles[_i];
-        _particle[0] = Math.max(0, Math.min(_this.width - 1, Math.round(_particle[0] + Math.random() * 2 - 1)));
-        _particle[1] = Math.max(0, Math.min(_this.height - 1, Math.round(_particle[1] + Math.random() * 2 - 1)));
+        for (var _i = 0; _i < _this.particles.length; _i++) {
+          var _particle = _this.particles[_i];
+          _particle[0] = Math.max(0, Math.min(_this.width - 1, Math.round(_particle[0] + Math.random() * 2 - 1)));
+          _particle[1] = Math.max(0, Math.min(_this.height - 1, Math.round(_particle[1] + Math.random() * 2 - 1)));
+        }
       }
     });
 
@@ -140,7 +174,7 @@ function (_Component) {
       this.setState({
         ctx: this.canvas.current.getContext('2d')
       });
-      this.raf = requestAnimationFrame(this.animate);
+      this.startAnimating();
       this.listenToIncomingEvents();
     }
   }, {
@@ -169,7 +203,7 @@ function (_Component) {
           au = _this$props.au,
           activeLayer = _this$props.activeLayer;
       return _react.default.createElement("div", {
-        className: "layer layer--pools ".concat(activeLayer === 'natural' ? 'layer--is-active' : 'layer--is-hidden')
+        className: "layer layer--pools ".concat(activeLayer === 'default' ? 'layer--is-active' : 'layer--is-hidden')
       }, _react.default.createElement("canvas", {
         id: "pools",
         width: this.width,
@@ -179,7 +213,7 @@ function (_Component) {
         src: _cutout.default,
         alt: "",
         width: "auto",
-        height: this.height,
+        height: "".concat(parseInt(this.height, 10) + 1),
         style: {
           position: 'absolute',
           top: '0px',

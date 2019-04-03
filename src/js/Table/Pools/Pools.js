@@ -12,11 +12,19 @@ class Pools extends Component {
 	width="912"
 	height="1540"
 
-	particles = Array.from({length: 180000}, () => [
+	particles = Array.from({length: 140000}, () => [
 		Math.round(Math.random() * (this.width - 1)),
 		Math.round(Math.random() * (this.height - 1))
 	]);
 	
+	stop = false
+	frameCount = 0;
+	fps = 30
+	fpsInterval
+	startTime
+	now
+	then
+	elapsed
 	rf = null
 
 	state = {
@@ -28,7 +36,7 @@ class Pools extends Component {
 		this.setState({
 			ctx: this.canvas.current.getContext('2d')
 		});
-		this.raf = requestAnimationFrame(this.animate);
+		this.startAnimating();
 		this.listenToIncomingEvents();
 	}
  
@@ -63,38 +71,64 @@ class Pools extends Component {
 		cancelAnimationFrame(this.rf)	;
 		this.rf = null;
 	}
+
+
+	startAnimating = () => {
+		this.fpsInterval = 1000 / this.fps;
+		this.then = Date.now();
+		this.startTime = this.then;
+		this.animate();
+	}
+
 	
 
 	animate = () => {
+
+		// request another frame
 		this.raf = requestAnimationFrame(this.animate);
-		  // Draw particles:
-			this.state.ctx.clearRect(0, 0, this.width, this.height);
-			const imageData = this.state.ctx.getImageData(0, 0, this.width, this.height);
-			const data = imageData.data;
-			for (let i = 0; i < this.particles.length; i++) {
-				const particle = this.particles[i];
-				const index = 4 * (particle[0] + particle[1] * this.width);
-				data[index + 0] = 255;
-				data[index + 1] = 255;
-				data[index + 2] = 255;
-				data[index + 3] = 255;
-			}
-			this.state.ctx.putImageData(imageData, 0, 0);
-			
-			// Move particles randomly:
-			for (let i = 0; i < this.particles.length; i++) {
-				const particle = this.particles[i];
-				particle[0] = Math.max(0, Math.min(this.width - 1, Math.round(particle[0] + Math.random() * 2 - 1)));
-				particle[1] = Math.max(0, Math.min(this.height - 1, Math.round(particle[1] + Math.random() * 2 - 1)));
-			}
+		
+		// calc elapsed time since last loop
+		this.now = Date.now();
+		this.elapsed = this.now - this.then;
+
+		// if enough time has elapsed, draw the next frame
+		
+		if (this.elapsed > this.fpsInterval) {
+				// Get ready for next frame by setting then=now, but also adjust for your
+        // specified fpsInterval not being a multiple of RAF's interval (16.7ms)
+				this.then = this.now - (this.elapsed % this.fpsInterval);
+				
+				// draw 
+
+				this.state.ctx.clearRect(0, 0, this.width, this.height);
+				const imageData = this.state.ctx.getImageData(0, 0, this.width, this.height);
+				const data = imageData.data;
+				for (let i = 0; i < this.particles.length; i++) {
+					const particle = this.particles[i];
+					const index = 4 * (particle[0] + particle[1] * this.width);
+					data[index + 0] = 255;
+					data[index + 1] = 255;
+					data[index + 2] = 255;
+					data[index + 3] = 255;
+				}
+				this.state.ctx.putImageData(imageData, 0, 0);
+				
+				// Move particles randomly:
+				for (let i = 0; i < this.particles.length; i++) {
+					const particle = this.particles[i];
+					particle[0] = Math.max(0, Math.min(this.width - 1, Math.round(particle[0] + Math.random() * 2 - 1)));
+					particle[1] = Math.max(0, Math.min(this.height - 1, Math.round(particle[1] + Math.random() * 2 - 1)));
+				}
+		}
+
 	}
 	
 	render() {
 		const { au, activeLayer } = this.props;
 		return (
-			<div className={`layer layer--pools ${activeLayer === 'natural' ? 'layer--is-active' : 'layer--is-hidden'}`}>
+			<div className={`layer layer--pools ${activeLayer === 'default' ? 'layer--is-active' : 'layer--is-hidden'}`}>
 				<canvas id="pools" width={this.width} height={this.height} ref={this.canvas} />
-				<img src={cutout} alt="" width="auto" height={this.height} style={{ position: 'absolute', top: '0px', left: '0px'}}/>
+				<img src={cutout} alt="" width="auto" height={`${parseInt(this.height, 10) + 1}`} style={{ position: 'absolute', top: '0px', left: '0px'}}/>
 				<PoolsSVG
 					PoolsConfig={PoolsConfig}
 					activePool={this.state.activePool}

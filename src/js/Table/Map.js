@@ -1,22 +1,24 @@
 import React, { Component } from 'react';
 import { socket } from '../api';
 
-// import Textures, { update as updateTextures } from './Pools/Textures';
-// import Particles from './research/particles';
-// import Textures from './Pools/Textures';
-
+import poolsConfig from '../poolsConfig';
 import Pools from './Pools/Pools';
-import PoolsConfig from '../poolsConfig';
 
 import WasteWater from './WasteWater/WasteWater';
 import WasteWaterConfig from '../wastewaterConfig';
-import GroundwaterConfig from '../groundwaterConfig';
 
-import Groundwater from './Groundwater/Groundwater';
+import Dams from './Dams/Dams';
+import DamsConfig from '../damsConfig';
+
+import Supply from './Supply/Supply';
+import SupplyConfig from '../supplyConfig';
+
+import Desalination from './Desalination/Desalination';
+import DesalinationConfig from '../desalinationConfig';
 
 class Map extends Component {
 	state = {
-		activeLayer: 'natural',
+		activeLayer: 'default',
 		playing: false,
 		animationCurrentUnit: 0.0,
 	}
@@ -90,18 +92,22 @@ class Map extends Component {
 
 	getTextBoxContent = () => {
 		switch(this.state.activeLayer) {
+			case 'supply':
+				return SupplyConfig;
 			case 'waste':
 				return WasteWaterConfig
-			case 'ground':
-				return GroundwaterConfig;
+			case 'desalination':
+				return DesalinationConfig;
+			case 'dams':
+				return DamsConfig;
 			default:
-				return PoolsConfig
+				return poolsConfig;
 		}
 	}
 
 	setActiveLayer = (layer) => {
 		this.setState({
-			activeLayer: layer
+			activeLayer: this.state.activeLayer === layer ? 'default' : layer
 		});
 	}
 
@@ -116,8 +122,10 @@ class Map extends Component {
 		return (
 			<>
 			<Pools activeLayer={this.state.activeLayer} au={this.state.animationCurrentUnit} />
+			<Dams activeLayer={this.state.activeLayer} />
 			<WasteWater activeLayer={this.state.activeLayer} />
-			<Groundwater activeLayer={this.state.activeLayer} />
+			<Supply activeLayer={this.state.activeLayer} />
+			<Desalination activeLayer={this.state.activeLayer} />
 			<div className="text-box">
 				<div className="text-box__header">
 					<i className="text-box__icon"><img src={icon} alt=""/></i>

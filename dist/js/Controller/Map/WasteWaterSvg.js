@@ -17,8 +17,8 @@ var getRandomInt = function getRandomInt(min, max) {
 
 var WasteWaterSVG = function WasteWaterSVG(_ref) {
   var config = _ref.config,
-      activePlant = _ref.activePlant,
-      onPlantClick = _ref.onPlantClick,
+      active = _ref.active,
+      _onClick = _ref.onClick,
       activeLayer = _ref.activeLayer;
   return _react.default.createElement("svg", {
     width: "1080",
@@ -35,11 +35,13 @@ var WasteWaterSVG = function WasteWaterSVG(_ref) {
     var id = _ref2.id,
         position = _ref2.position;
     return _react.default.createElement("g", {
-      onClick: onPlantClick,
-      className: "waste ".concat(activePlant === id ? 'is-active' : ''),
+      onClick: function onClick(e) {
+        return _onClick(e, 'waste');
+      },
+      className: "waste ".concat(active === id ? 'is-active' : ''),
       key: id,
       id: id,
-      transform: "translate(".concat(position.x, ", ").concat(position.y, ") ").concat(activePlant === id ? 'scale(3,3)' : 'scale(1,1)')
+      transform: "translate(".concat(position.x, ", ").concat(position.y, ") ").concat(active === id ? 'scale(3,3)' : 'scale(1,1)')
     }, _react.default.createElement("g", {
       className: "waste-inner",
       transform: "rotate(".concat(getRandomInt(0, 360), ")")

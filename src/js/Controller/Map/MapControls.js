@@ -6,22 +6,32 @@ import PoolsConfig from '../../poolsConfig';
 import WasteWaterSvg from './WasteWaterSvg';
 import WasteWaterConfig from '../../wastewaterConfig';
 
-import GroundWaterSVG from './GroundWaterSvg';
-import GroundWaterConfig from '../../groundwaterConfig';
+import SupplySVG from './SupplySvg';
+import SupplyConfig from '../../supplyConfig';
+
+import DamSVG from './DamSvg';
+import DamsConfig from '../../DamsConfig';
+
+import DesalinationSVG from './DesalinationSVG';
+import desalinationConfig from '../../desalinationConfig';
+
+import SupplyIcon from '../../icons/SupplyIcon';
+import DamIcon from '../../icons/DamIcon';
+import CanalIcon from '../../icons/CanalIcon';
+import DesalinationIcon from '../../icons/DesalinationIcon';
+import TreatmentPlantIcon from '../../icons/TreatmentPlantIcon';
+
 
 class MapControls extends Component {
 	state = {
-		activeLayer: 'natural',
-		activePool: undefined,
-		activePlant: undefined,
-		activeGroundWater: undefined,
+		activeLayer: 'default', 
+		active: undefined, 
 	}
 
 	setActiveLayer = (layer) => {
 		this.setState({
-			activeLayer: layer,
-			activePool: undefined,
-			activePlant: undefined,
+			activeLayer: this.state.activeLayer === layer ? 'default' : layer,
+			active: undefined,
 		});
 	}
 
@@ -34,55 +44,22 @@ class MapControls extends Component {
 		})
 	}
 
-	onPoolClick = (e) => {
-		let id;
-		let target = e.target;
-		let parent = target.parentNode;
-		if (parent.classList.contains('svg-group')) {
-			id = parent.id;
-		} else {
-			id = target.id;
-		}
+	onMapClick = (e, type) => {
+		const event = `${type}Clicked`;
+		const target = e.target.id;
 
 		this.setState({
-			activePool: id
+			active: target
 		});
 
 		broadcastEvent({
 			source: 'controller',
-			event:  'poolClicked',
-			payload: id
-		})
-	}
-
-	onGroundWaterClick = (e) => {
-		let target = e.target.id;
-
-		this.setState({
-			activeGroundWater: target
-		});
-
-		broadcastEvent({
-			source: 'controller',
-			event:  'groundWaterClicked',
+			event,
 			payload: target
 		})
 	}
 
-	onPlantClick = (e) => {
-		let target = e.target.id;
-
-		this.setState({
-			activePlant: target
-		});
-
-		broadcastEvent({
-			source: 'controller',
-			event:  'plantClicked',
-			payload: target
-		})
-	}
-
+	// Put the buttons in a config file and loop over for better readability
 	render() {
 		const { activeLayer } = this.state;
 		return (
@@ -91,79 +68,81 @@ class MapControls extends Component {
 					<h1>WATER MAP &amp; PROJECTS</h1>
 					<div className="map-console__controls__group map-console__controls__group--main">
 						<div 
-							className={`btn-group ${activeLayer === 'natural' || activeLayer === 'ground' ? 'is-active' : ''}`}
-							onClick={() => { this.onClickLayer('natural'); }}
+							className={`btn-group ${activeLayer === 'supply' ? 'is-active' : ''}`}
+							onClick={() => { this.onClickLayer('supply'); }}
 						>
-							<i className="btn-icon icon--natural" />
-							<span className="btn-label">Natural Water Resources</span>
-						</div>
-						<div 
-							className={`btn-group ${activeLayer === 'utilities' ? 'is-active' : ''}`}
-							onClick={() => { this.onClickLayer('utilities'); }}
-						>
-							<i className="btn-icon icon--projects" />
+							<i className="btn-icon icon--supply">
+								<SupplyIcon />
+							</i>
 							<span className="btn-label">Utilities &amp; Water Supply Projects</span>
 						</div>
 						<div 
 							className={`btn-group ${activeLayer === 'waste' ? 'is-active' : ''}`}
 							onClick={() => { this.onClickLayer('waste'); }}
 						>
-							<i className="btn-icon icon--waste" />
+							<i className="btn-icon icon--waste">
+								<TreatmentPlantIcon />
+							</i>
 							<span className="btn-label">Wastewater Treatment Plants</span>
 						</div>
 						<div 
-							className={`btn-group ${activeLayer === 'conveyors' ? 'is-active' : ''}`}
-							onClick={() => { this.onClickLayer('conveyors'); }}
+							className={`btn-group ${activeLayer === 'desalination' ? 'is-active' : ''}`}
+							onClick={() => { this.onClickLayer('desalination'); }}
 						>
-							<i className="btn-icon icon--conveyors" />
-							<span className="btn-label">Water Conveyors</span>
+							<i className="btn-icon icon--desalination">
+								<DesalinationIcon />
+							</i>
+							<span className="btn-label">Water Desalination Stations</span>
 						</div>
-						<div 
+						<div
 							className={`btn-group ${activeLayer === 'dams' ? 'is-active' : ''}`}
 							onClick={() => { this.onClickLayer('dams'); }}
 						>
-							<i className="btn-icon icon--dams" />
+							<i className="btn-icon icon--dams">
+								<DamIcon />
+							</i>
 							<span className="btn-label">Dams</span>
 						</div>
-					</div>
-					{
-						(this.state.activeLayer === 'natural' || this.state.activeLayer === 'ground') &&
-						<div className="map-console__controls__group map-console__controls__group--secondary">
-							<div
-								className={`btn-group ${activeLayer === 'natural' ? 'is-active' : ''}`}
-								onClick={() => { this.onClickLayer('natural'); }}
-							>
-								<i className="btn-icon icon--surface" />
-								<span className="btn-label">Surface Water</span>
-							</div>
-							<div
-								className={`btn-group ${activeLayer === 'ground' ? 'is-active' : ''}`}
-								onClick={() => { this.onClickLayer('ground'); }}
-							>
-								<i className="btn-icon icon--ground" />
-								<span className="btn-label">Ground Water</span>
-							</div>
+						<div
+							className={`btn-group ${activeLayer === 'canal' ? 'is-active' : ''}`}
+							onClick={() => { this.onClickLayer('canal'); }}
+						>
+							<i className="btn-icon icon--canal">
+								<CanalIcon />
+							</i>
+							<span className="btn-label">King Abdullah Canal</span>
 						</div>
-					}
+					</div>
 				</div>
 				<div className="map-console__mini-map">
 					<PoolsSVG
 						activeLayer={this.state.activeLayer}
 						PoolsConfig={PoolsConfig}
-						activePool={this.state.activePool}
-						onPoolClick={this.onPoolClick}
+						active={this.state.active}
+					/>
+					<SupplySVG 
+						activeLayer={this.state.activeLayer}
+						config={SupplyConfig}
+						active={this.state.active}
+						onClick={this.onMapClick}
 					/>
 					<WasteWaterSvg
 						activeLayer={this.state.activeLayer}
 						config={WasteWaterConfig}
-						activePlant={this.state.activePlant}
-						onPlantClick={this.onPlantClick}
+						active={this.state.active}
+						onClick={this.onMapClick}
 					/>
-					<GroundWaterSVG 
+					<DamSVG 
 						activeLayer={this.state.activeLayer}
-						config={GroundWaterConfig}
-						activeGroundWater={this.state.activeGroundWater}
-						onGroundWaterClick={this.onGroundWaterClick}
+						config={DamsConfig}
+						active={this.state.active}
+						onClick={this.onMapClick}
+					/>
+					<DesalinationSVG 
+						activeLayer={this.state.activeLayer}
+						config={desalinationConfig}
+						active={this.state.active}
+						onClick={this.onMapClick}
 					/>
 				</div>
 			</section>

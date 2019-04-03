@@ -9,17 +9,25 @@ var _react = _interopRequireWildcard(require("react"));
 
 var _api = require("../api");
 
-var _Pools = _interopRequireDefault(require("./Pools/Pools"));
-
 var _poolsConfig = _interopRequireDefault(require("../poolsConfig"));
+
+var _Pools = _interopRequireDefault(require("./Pools/Pools"));
 
 var _WasteWater = _interopRequireDefault(require("./WasteWater/WasteWater"));
 
 var _wastewaterConfig = _interopRequireDefault(require("../wastewaterConfig"));
 
-var _groundwaterConfig = _interopRequireDefault(require("../groundwaterConfig"));
+var _Dams = _interopRequireDefault(require("./Dams/Dams"));
 
-var _Groundwater = _interopRequireDefault(require("./Groundwater/Groundwater"));
+var _damsConfig = _interopRequireDefault(require("../damsConfig"));
+
+var _Supply = _interopRequireDefault(require("./Supply/Supply"));
+
+var _supplyConfig = _interopRequireDefault(require("../supplyConfig"));
+
+var _Desalination = _interopRequireDefault(require("./Desalination/Desalination"));
+
+var _desalinationConfig = _interopRequireDefault(require("../desalinationConfig"));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -64,7 +72,7 @@ function (_Component) {
     _this = _possibleConstructorReturn(this, (_getPrototypeOf2 = _getPrototypeOf(Map)).call.apply(_getPrototypeOf2, [this].concat(args)));
 
     _defineProperty(_assertThisInitialized(_assertThisInitialized(_this)), "state", {
-      activeLayer: 'natural',
+      activeLayer: 'default',
       playing: false,
       animationCurrentUnit: 0.0 //animation settings
 
@@ -144,11 +152,17 @@ function (_Component) {
 
     _defineProperty(_assertThisInitialized(_assertThisInitialized(_this)), "getTextBoxContent", function () {
       switch (_this.state.activeLayer) {
+        case 'supply':
+          return _supplyConfig.default;
+
         case 'waste':
           return _wastewaterConfig.default;
 
-        case 'ground':
-          return _groundwaterConfig.default;
+        case 'desalination':
+          return _desalinationConfig.default;
+
+        case 'dams':
+          return _damsConfig.default;
 
         default:
           return _poolsConfig.default;
@@ -157,7 +171,7 @@ function (_Component) {
 
     _defineProperty(_assertThisInitialized(_assertThisInitialized(_this)), "setActiveLayer", function (layer) {
       _this.setState({
-        activeLayer: layer
+        activeLayer: _this.state.activeLayer === layer ? 'default' : layer
       });
     });
 
@@ -182,9 +196,13 @@ function (_Component) {
       return _react.default.createElement(_react.default.Fragment, null, _react.default.createElement(_Pools.default, {
         activeLayer: this.state.activeLayer,
         au: this.state.animationCurrentUnit
+      }), _react.default.createElement(_Dams.default, {
+        activeLayer: this.state.activeLayer
       }), _react.default.createElement(_WasteWater.default, {
         activeLayer: this.state.activeLayer
-      }), _react.default.createElement(_Groundwater.default, {
+      }), _react.default.createElement(_Supply.default, {
+        activeLayer: this.state.activeLayer
+      }), _react.default.createElement(_Desalination.default, {
         activeLayer: this.state.activeLayer
       }), _react.default.createElement("div", {
         className: "text-box"

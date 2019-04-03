@@ -6,16 +6,16 @@ const getRandomInt = (min, max) => {
   return Math.floor(Math.random() * (max - min)) + min; //The maximum is exclusive and the minimum is inclusive
 };
 
-const WasteWaterSVG = ({ config, activePlant, onPlantClick, activeLayer }) => {
+const WasteWaterSVG = ({ config, active, onClick, activeLayer }) => {
 	return (
 		<svg width="1080" height="1580" viewBox="0 0 1080 1580" className={`${activeLayer === 'waste' ? 'is-active' : 'is-hidden'} resources resources--waste`}>
 			<g stroke="none" strokeWidth="1" fill="none" fillRule="evenodd" transform="translate(180, 190)">
 				{
 					config.entries.map(({ id, position }) => 
-						<g onClick={onPlantClick} className={`waste ${activePlant === id ? 'is-active' : ''}`}
+						<g onClick={(e) => onClick(e, 'waste')} className={`waste ${active === id ? 'is-active' : ''}`}
 							key={id}
 							id={id}
-							transform={`translate(${position.x}, ${position.y}) ${activePlant === id ? 'scale(3,3)' : 'scale(1,1)'}`}
+							transform={`translate(${position.x}, ${position.y}) ${active === id ? 'scale(3,3)' : 'scale(1,1)'}`}
 						>
 							<g className="waste-inner" transform={`rotate(${getRandomInt(0, 360)})`}>
 								<path d="M16.8958333,13.3958333 C16.8958333,15.3288378 15.3288378,16.8958333 13.3958333,16.8958333 C11.4628289,16.8958333 9.89583333,15.3288378 9.89583333,13.3958333 C9.89583333,11.4628289 11.4628289,9.89583333 13.3958333,9.89583333 C15.3288378,9.89583333 16.8958333,11.4628289 16.8958333,13.3958333 Z" id="Stroke-1" stroke="#262525" strokeWidth="3"></path>

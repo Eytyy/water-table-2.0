@@ -1,9 +1,9 @@
 import React from 'react';
 import Polygon from './Polygon';
 
-const PoolsSvg = ({ PoolsConfig, activePool, onPoolClick, activeLayer }) => {
+const PoolsSvg = ({ PoolsConfig, activePool, activeLayer }) => {
 	return (
-		<svg id="pools" className={`${activeLayer === 'natural' ? 'is-active' : 'is-hidden'} resources resources---pools`} width="914" height="1539" viewBox="0 0 914 1539">
+		<svg id="pools" className={`${activeLayer === 'default' ? 'is-active' : 'is-hidden'} resources resources---pools`} width="914" height="1539" viewBox="0 0 914 1539">
 			{
 				PoolsConfig.entries.map(({ pool, id }) =>
 					Array.isArray(pool) ?
@@ -12,7 +12,6 @@ const PoolsSvg = ({ PoolsConfig, activePool, onPoolClick, activeLayer }) => {
 						className="pool"
 						activePool={activePool}
 						pool={pool}
-						onPoolClick={onPoolClick}
 						id={id}
 						group={true}
 					/> :
@@ -21,7 +20,6 @@ const PoolsSvg = ({ PoolsConfig, activePool, onPoolClick, activeLayer }) => {
 						className="pool"
 						activePool={activePool}
 						points={pool.points}
-						onPoolClick={onPoolClick}
 						id={id}
 					/>
 				)

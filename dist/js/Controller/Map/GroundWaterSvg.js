@@ -11,8 +11,8 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 var GroundWaterSVG = function GroundWaterSVG(_ref) {
   var config = _ref.config,
-      activeGroundWater = _ref.activeGroundWater,
-      onGroundWaterClick = _ref.onGroundWaterClick,
+      active = _ref.active,
+      onClick = _ref.onClick,
       activeLayer = _ref.activeLayer;
   return _react.default.createElement("svg", {
     width: "1080",
@@ -29,11 +29,11 @@ var GroundWaterSVG = function GroundWaterSVG(_ref) {
     var id = _ref2.id,
         position = _ref2.position;
     return _react.default.createElement("g", {
-      onClick: onGroundWaterClick,
+      onClick: onClick,
       className: "ground",
       key: id,
       id: id,
-      transform: "translate(".concat(position.x, ", ").concat(position.y, ") ").concat(activeGroundWater !== id ? 'scale(1, 1)' : 'scale(3, 3)')
+      transform: "translate(".concat(position.x, ", ").concat(position.y, ") ").concat(active !== id ? 'scale(1, 1)' : 'scale(3, 3)')
     }, _react.default.createElement("rect", {
       id: id,
       fill: "#FFFFFF",

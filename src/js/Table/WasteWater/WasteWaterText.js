@@ -1,13 +1,13 @@
 import React from 'react';
 
-const WasteWaterText = ({ name, figures, id, position, activePlant }) => {
+const WasteWaterText = ({ name, figures, id, position, active }) => {
 
 	const style = {
 		position: 'absolute',
 		top: `${position.y}px`,
 		left: `${position.x + 50 + 180}px`,
 		color: '#FFF',
-		opacity: activePlant === id ? '1' : '0',
+		opacity: active === id ? '1' : '0',
 	};
 
 	return (

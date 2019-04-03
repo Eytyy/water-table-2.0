@@ -14,13 +14,13 @@ var GroundwaterText = function GroundwaterText(_ref) {
       figures = _ref.figures,
       id = _ref.id,
       position = _ref.position,
-      activePlant = _ref.activePlant;
+      active = _ref.active;
   var style = {
     position: 'absolute',
     top: "".concat(position.y, "px"),
     left: "".concat(position.x + 50 + 180, "px"),
     color: '#FFF',
-    opacity: activePlant === id ? '1' : '0'
+    opacity: active === id ? '1' : '0'
   };
   return _react.default.createElement("div", {
     style: style,

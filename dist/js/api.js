@@ -11,7 +11,9 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 // const ip = '192.168.1.130' // strada
 // const ip = '192.168.14.40' // syntax
-var ip = '192.168.86.21';
+// const ip = '192.168.86.21';
+var ip = '192.168.86.248'; // const ip = '172.20.10.2';
+
 var port = '8080';
 
 var socket = _socket.default.connect("http://".concat(ip, ":").concat(port));

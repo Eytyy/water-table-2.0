@@ -1,13 +1,13 @@
 import React from 'react';
 
-const GroundwaterText = ({ name, figures, id, position, activePlant }) => {
+const DamsText = ({ name, figures, id, position, active }) => {
 
 	const style = {
 		position: 'absolute',
 		top: `${position.y}px`,
 		left: `${position.x + 50 + 180}px`,
 		color: '#FFF',
-		opacity: activePlant === id ? '1' : '0',
+		opacity: active === id ? '1' : '0',
 	};
 
 	return (
@@ -27,4 +27,4 @@ const GroundwaterText = ({ name, figures, id, position, activePlant }) => {
 	);
 };
 
-export default GroundwaterText;
+export default DamsText;

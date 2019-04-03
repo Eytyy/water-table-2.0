@@ -62,7 +62,6 @@ h1 {
   transform-box: fill-box; }
 
 .waste-inner {
-  animation: spin 5s linear infinite;
   transform-origin: center;
   transform-box: fill-box; }
 

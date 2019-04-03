@@ -17,9 +17,27 @@ var _WasteWaterSvg = _interopRequireDefault(require("./WasteWaterSvg"));
 
 var _wastewaterConfig = _interopRequireDefault(require("../../wastewaterConfig"));
 
-var _GroundWaterSvg = _interopRequireDefault(require("./GroundWaterSvg"));
+var _SupplySvg = _interopRequireDefault(require("./SupplySvg"));
 
-var _groundwaterConfig = _interopRequireDefault(require("../../groundwaterConfig"));
+var _supplyConfig = _interopRequireDefault(require("../../supplyConfig"));
+
+var _DamSvg = _interopRequireDefault(require("./DamSvg"));
+
+var _DamsConfig = _interopRequireDefault(require("../../DamsConfig"));
+
+var _DesalinationSVG = _interopRequireDefault(require("./DesalinationSVG"));
+
+var _desalinationConfig = _interopRequireDefault(require("../../desalinationConfig"));
+
+var _SupplyIcon = _interopRequireDefault(require("../../icons/SupplyIcon"));
+
+var _DamIcon = _interopRequireDefault(require("../../icons/DamIcon"));
+
+var _CanalIcon = _interopRequireDefault(require("../../icons/CanalIcon"));
+
+var _DesalinationIcon = _interopRequireDefault(require("../../icons/DesalinationIcon"));
+
+var _TreatmentPlantIcon = _interopRequireDefault(require("../../icons/TreatmentPlantIcon"));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -64,17 +82,14 @@ function (_Component) {
     _this = _possibleConstructorReturn(this, (_getPrototypeOf2 = _getPrototypeOf(MapControls)).call.apply(_getPrototypeOf2, [this].concat(args)));
 
     _defineProperty(_assertThisInitialized(_assertThisInitialized(_this)), "state", {
-      activeLayer: 'natural',
-      activePool: undefined,
-      activePlant: undefined,
-      activeGroundWater: undefined
+      activeLayer: 'default',
+      active: undefined
     });
 
     _defineProperty(_assertThisInitialized(_assertThisInitialized(_this)), "setActiveLayer", function (layer) {
       _this.setState({
-        activeLayer: layer,
-        activePool: undefined,
-        activePlant: undefined
+        activeLayer: _this.state.activeLayer === layer ? 'default' : layer,
+        active: undefined
       });
     });
 
@@ -88,52 +103,17 @@ function (_Component) {
       });
     });
 
-    _defineProperty(_assertThisInitialized(_assertThisInitialized(_this)), "onPoolClick", function (e) {
-      var id;
-      var target = e.target;
-      var parent = target.parentNode;
-
-      if (parent.classList.contains('svg-group')) {
-        id = parent.id;
-      } else {
-        id = target.id;
-      }
-
-      _this.setState({
-        activePool: id
-      });
-
-      (0, _api.broadcastEvent)({
-        source: 'controller',
-        event: 'poolClicked',
-        payload: id
-      });
-    });
-
-    _defineProperty(_assertThisInitialized(_assertThisInitialized(_this)), "onGroundWaterClick", function (e) {
+    _defineProperty(_assertThisInitialized(_assertThisInitialized(_this)), "onMapClick", function (e, type) {
+      var event = "".concat(type, "Clicked");
       var target = e.target.id;
 
       _this.setState({
-        activeGroundWater: target
+        active: target
       });
 
       (0, _api.broadcastEvent)({
         source: 'controller',
-        event: 'groundWaterClicked',
-        payload: target
-      });
-    });
-
-    _defineProperty(_assertThisInitialized(_assertThisInitialized(_this)), "onPlantClick", function (e) {
-      var target = e.target.id;
-
-      _this.setState({
-        activePlant: target
-      });
-
-      (0, _api.broadcastEvent)({
-        source: 'controller',
-        event: 'plantClicked',
+        event: event,
         payload: target
       });
     });
@@ -143,6 +123,7 @@ function (_Component) {
 
   _createClass(MapControls, [{
     key: "render",
+    // Put the buttons in a config file and loop over for better readability
     value: function render() {
       var _this2 = this;
 
@@ -154,22 +135,13 @@ function (_Component) {
       }, _react.default.createElement("h1", null, "WATER MAP & PROJECTS"), _react.default.createElement("div", {
         className: "map-console__controls__group map-console__controls__group--main"
       }, _react.default.createElement("div", {
-        className: "btn-group ".concat(activeLayer === 'natural' || activeLayer === 'ground' ? 'is-active' : ''),
+        className: "btn-group ".concat(activeLayer === 'supply' ? 'is-active' : ''),
         onClick: function onClick() {
-          _this2.onClickLayer('natural');
+          _this2.onClickLayer('supply');
         }
       }, _react.default.createElement("i", {
-        className: "btn-icon icon--natural"
-      }), _react.default.createElement("span", {
-        className: "btn-label"
-      }, "Natural Water Resources")), _react.default.createElement("div", {
-        className: "btn-group ".concat(activeLayer === 'utilities' ? 'is-active' : ''),
-        onClick: function onClick() {
-          _this2.onClickLayer('utilities');
-        }
-      }, _react.default.createElement("i", {
-        className: "btn-icon icon--projects"
-      }), _react.default.createElement("span", {
+        className: "btn-icon icon--supply"
+      }, _react.default.createElement(_SupplyIcon.default, null)), _react.default.createElement("span", {
         className: "btn-label"
       }, "Utilities & Water Supply Projects")), _react.default.createElement("div", {
         className: "btn-group ".concat(activeLayer === 'waste' ? 'is-active' : ''),
@@ -178,63 +150,61 @@ function (_Component) {
         }
       }, _react.default.createElement("i", {
         className: "btn-icon icon--waste"
-      }), _react.default.createElement("span", {
+      }, _react.default.createElement(_TreatmentPlantIcon.default, null)), _react.default.createElement("span", {
         className: "btn-label"
       }, "Wastewater Treatment Plants")), _react.default.createElement("div", {
-        className: "btn-group ".concat(activeLayer === 'conveyors' ? 'is-active' : ''),
+        className: "btn-group ".concat(activeLayer === 'desalination' ? 'is-active' : ''),
         onClick: function onClick() {
-          _this2.onClickLayer('conveyors');
+          _this2.onClickLayer('desalination');
         }
       }, _react.default.createElement("i", {
-        className: "btn-icon icon--conveyors"
-      }), _react.default.createElement("span", {
+        className: "btn-icon icon--desalination"
+      }, _react.default.createElement(_DesalinationIcon.default, null)), _react.default.createElement("span", {
         className: "btn-label"
-      }, "Water Conveyors")), _react.default.createElement("div", {
+      }, "Water Desalination Stations")), _react.default.createElement("div", {
         className: "btn-group ".concat(activeLayer === 'dams' ? 'is-active' : ''),
         onClick: function onClick() {
           _this2.onClickLayer('dams');
         }
       }, _react.default.createElement("i", {
         className: "btn-icon icon--dams"
-      }), _react.default.createElement("span", {
+      }, _react.default.createElement(_DamIcon.default, null)), _react.default.createElement("span", {
         className: "btn-label"
-      }, "Dams"))), (this.state.activeLayer === 'natural' || this.state.activeLayer === 'ground') && _react.default.createElement("div", {
-        className: "map-console__controls__group map-console__controls__group--secondary"
-      }, _react.default.createElement("div", {
-        className: "btn-group ".concat(activeLayer === 'natural' ? 'is-active' : ''),
+      }, "Dams")), _react.default.createElement("div", {
+        className: "btn-group ".concat(activeLayer === 'canal' ? 'is-active' : ''),
         onClick: function onClick() {
-          _this2.onClickLayer('natural');
+          _this2.onClickLayer('canal');
         }
       }, _react.default.createElement("i", {
-        className: "btn-icon icon--surface"
-      }), _react.default.createElement("span", {
+        className: "btn-icon icon--canal"
+      }, _react.default.createElement(_CanalIcon.default, null)), _react.default.createElement("span", {
         className: "btn-label"
-      }, "Surface Water")), _react.default.createElement("div", {
-        className: "btn-group ".concat(activeLayer === 'ground' ? 'is-active' : ''),
-        onClick: function onClick() {
-          _this2.onClickLayer('ground');
-        }
-      }, _react.default.createElement("i", {
-        className: "btn-icon icon--ground"
-      }), _react.default.createElement("span", {
-        className: "btn-label"
-      }, "Ground Water")))), _react.default.createElement("div", {
+      }, "King Abdullah Canal")))), _react.default.createElement("div", {
         className: "map-console__mini-map"
       }, _react.default.createElement(_PoolsSVG.default, {
         activeLayer: this.state.activeLayer,
         PoolsConfig: _poolsConfig.default,
-        activePool: this.state.activePool,
-        onPoolClick: this.onPoolClick
+        active: this.state.active
+      }), _react.default.createElement(_SupplySvg.default, {
+        activeLayer: this.state.activeLayer,
+        config: _supplyConfig.default,
+        active: this.state.active,
+        onClick: this.onMapClick
       }), _react.default.createElement(_WasteWaterSvg.default, {
         activeLayer: this.state.activeLayer,
         config: _wastewaterConfig.default,
-        activePlant: this.state.activePlant,
-        onPlantClick: this.onPlantClick
-      }), _react.default.createElement(_GroundWaterSvg.default, {
+        active: this.state.active,
+        onClick: this.onMapClick
+      }), _react.default.createElement(_DamSvg.default, {
         activeLayer: this.state.activeLayer,
-        config: _groundwaterConfig.default,
-        activeGroundWater: this.state.activeGroundWater,
-        onGroundWaterClick: this.onGroundWaterClick
+        config: _DamsConfig.default,
+        active: this.state.active,
+        onClick: this.onMapClick
+      }), _react.default.createElement(_DesalinationSVG.default, {
+        activeLayer: this.state.activeLayer,
+        config: _desalinationConfig.default,
+        active: this.state.active,
+        onClick: this.onMapClick
       })));
     }
   }]);
