@@ -3,11 +3,6 @@ import { broadcastEvent } from '../../api';
 
 import PoolsSVG from './PoolsSVG';
 
-// unify the usage of icon and svg
-// what's the difference ? one has onClick event listener the other
-// is just for looks :S
-// actually wait an svg has multiple icons with each icon having an event listener
-// the icon is just an ico... okay need to think about this separately
 import SupplyIcon from '../../icons/SupplyIcon';
 import DamIcon from '../../icons/DamIcon';
 import CanalIcon from '../../icons/CanalIcon';

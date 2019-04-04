@@ -3,7 +3,10 @@ import PropTypes from 'prop-types';
 
 const MapLayer = ({ layerName, config, active, activeLayer, renderIcon, onClick }) => {
 	return (
-		<div className={`${activeLayer === layerName ? 'is-active' : 'is-hidden'} resources resources--${layerName}`}>
+		<div
+			className={`${activeLayer === layerName ? 'is-active' : 'is-hidden'} resources resources--${layerName}`}
+			style={{ width: '914px', height: '1539px', position: 'absolute', left: '0px', top: '0px'}}
+		>
 			{
 				config.entries.map(({ id, position }) => 
 					<div
@@ -11,11 +14,13 @@ const MapLayer = ({ layerName, config, active, activeLayer, renderIcon, onClick 
 						key={id}
 						id={id}
 						style={{
-							width: '50px',
-							height: '50px',
+							width: '36px',
+							height: '36px',
 							position: 'absolute',
-							top: position.y,
-							left: position.x,
+							// scale down by 66.5
+							// then adjust top/left position those are determined visually
+							top: Math.floor(position.y * 0.665) + 130,
+							left: Math.floor(position.x * 0.665) + 180,
 							transform: `${active !== id ? 'scale(1, 1)' : 'scale(3, 3)'}`,
 							zIndex: `${active !== id ? '2' : '1'}`
 						}}

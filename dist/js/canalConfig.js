@@ -11,8 +11,8 @@ var _default = {
   entries: [{
     id: 'kac',
     position: {
-      x: 350,
-      y: 380
+      x: 80,
+      y: 180
     },
     name: 'King Abdullah Canal',
     description: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nostrum totam minus explicabo. Tenetur veniam exercitationem nisi quidem porro sunt qui.',
