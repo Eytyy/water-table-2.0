@@ -1,26 +1,27 @@
 import React, { Component } from 'react';
 import { broadcastEvent } from '../../api';
+
 import PoolsSVG from './PoolsSVG';
-import PoolsConfig from '../../poolsConfig';
 
-import WasteWaterSvg from './WasteWaterSvg';
-import WasteWaterConfig from '../../wastewaterConfig';
-
-import SupplySVG from './SupplySvg';
-import SupplyConfig from '../../supplyConfig';
-
-import DamSVG from './DamSvg';
-import DamsConfig from '../../DamsConfig';
-
-import DesalinationSVG from './DesalinationSVG';
-import desalinationConfig from '../../desalinationConfig';
-
+// unify the usage of icon and svg
+// what's the difference ? one has onClick event listener the other
+// is just for looks :S
+// actually wait an svg has multiple icons with each icon having an event listener
+// the icon is just an ico... okay need to think about this separately
 import SupplyIcon from '../../icons/SupplyIcon';
 import DamIcon from '../../icons/DamIcon';
 import CanalIcon from '../../icons/CanalIcon';
 import DesalinationIcon from '../../icons/DesalinationIcon';
 import TreatmentPlantIcon from '../../icons/TreatmentPlantIcon';
 
+import MapLayer from './MapLayer';
+
+import poolsConfig from '../../poolsConfig';
+import damsConfig from '../../damsConfig';
+import desalinationConfig from '../../desalinationConfig';
+import canalConfig from '../../canalConfig';
+import supplyConfig from '../../supplyConfig';
+import wastewaterConfig from '../../wastewaterConfig';
 
 class MapControls extends Component {
 	state = {
@@ -117,31 +118,47 @@ class MapControls extends Component {
 				<div className="map-console__mini-map">
 					<PoolsSVG
 						activeLayer={this.state.activeLayer}
-						PoolsConfig={PoolsConfig}
+						PoolsConfig={poolsConfig}
 						active={this.state.active}
 					/>
-					<SupplySVG 
-						activeLayer={this.state.activeLayer}
-						config={SupplyConfig}
-						active={this.state.active}
-						onClick={this.onMapClick}
-					/>
-					<WasteWaterSvg
-						activeLayer={this.state.activeLayer}
-						config={WasteWaterConfig}
-						active={this.state.active}
-						onClick={this.onMapClick}
-					/>
-					<DamSVG 
-						activeLayer={this.state.activeLayer}
-						config={DamsConfig}
-						active={this.state.active}
-						onClick={this.onMapClick}
-					/>
-					<DesalinationSVG 
-						activeLayer={this.state.activeLayer}
+					<MapLayer
+						layerName="desalination"
 						config={desalinationConfig}
+						renderIcon={() => <DesalinationIcon />}
 						active={this.state.active}
+						activeLayer={this.state.activeLayer}
+						onClick={this.onMapClick}
+					/>
+					<MapLayer
+						layerName="supply"
+						config={supplyConfig}
+						renderIcon={() => <SupplyIcon />}
+						active={this.state.active}
+						activeLayer={this.state.activeLayer}
+						onClick={this.onMapClick}
+					/>
+					<MapLayer
+						layerName="waste"
+						config={wastewaterConfig}
+						renderIcon={() => <TreatmentPlantIcon />}
+						active={this.state.active}
+						activeLayer={this.state.activeLayer}
+						onClick={this.onMapClick}
+					/>
+					<MapLayer
+						layerName="dams"
+						config={damsConfig}
+						renderIcon={() => <DamIcon />}
+						active={this.state.active}
+						activeLayer={this.state.activeLayer}
+						onClick={this.onMapClick}
+					/>
+					<MapLayer
+						layerName="canal"
+						config={canalConfig}
+						renderIcon={() => <CanalIcon />}
+						active={this.state.active}
+						activeLayer={this.state.activeLayer}
 						onClick={this.onMapClick}
 					/>
 				</div>

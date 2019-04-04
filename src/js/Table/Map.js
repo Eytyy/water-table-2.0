@@ -16,6 +16,9 @@ import SupplyConfig from '../supplyConfig';
 import Desalination from './Desalination/Desalination';
 import DesalinationConfig from '../desalinationConfig';
 
+import Canal from './Canal/Canal';
+import CanalConfig from '../canalConfig';
+
 class Map extends Component {
 	state = {
 		activeLayer: 'default',
@@ -100,6 +103,8 @@ class Map extends Component {
 				return DesalinationConfig;
 			case 'dams':
 				return DamsConfig;
+				case 'canal':
+					return CanalConfig;
 			default:
 				return poolsConfig;
 		}
@@ -126,6 +131,7 @@ class Map extends Component {
 			<WasteWater activeLayer={this.state.activeLayer} />
 			<Supply activeLayer={this.state.activeLayer} />
 			<Desalination activeLayer={this.state.activeLayer} />
+			<Canal activeLayer={this.state.activeLayer} />
 			<div className="text-box">
 				<div className="text-box__header">
 					<i className="text-box__icon"><img src={icon} alt=""/></i>

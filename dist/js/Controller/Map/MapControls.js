@@ -11,24 +11,6 @@ var _api = require("../../api");
 
 var _PoolsSVG = _interopRequireDefault(require("./PoolsSVG"));
 
-var _poolsConfig = _interopRequireDefault(require("../../poolsConfig"));
-
-var _WasteWaterSvg = _interopRequireDefault(require("./WasteWaterSvg"));
-
-var _wastewaterConfig = _interopRequireDefault(require("../../wastewaterConfig"));
-
-var _SupplySvg = _interopRequireDefault(require("./SupplySvg"));
-
-var _supplyConfig = _interopRequireDefault(require("../../supplyConfig"));
-
-var _DamSvg = _interopRequireDefault(require("./DamSvg"));
-
-var _DamsConfig = _interopRequireDefault(require("../../DamsConfig"));
-
-var _DesalinationSVG = _interopRequireDefault(require("./DesalinationSVG"));
-
-var _desalinationConfig = _interopRequireDefault(require("../../desalinationConfig"));
-
 var _SupplyIcon = _interopRequireDefault(require("../../icons/SupplyIcon"));
 
 var _DamIcon = _interopRequireDefault(require("../../icons/DamIcon"));
@@ -38,6 +20,20 @@ var _CanalIcon = _interopRequireDefault(require("../../icons/CanalIcon"));
 var _DesalinationIcon = _interopRequireDefault(require("../../icons/DesalinationIcon"));
 
 var _TreatmentPlantIcon = _interopRequireDefault(require("../../icons/TreatmentPlantIcon"));
+
+var _MapLayer = _interopRequireDefault(require("./MapLayer"));
+
+var _poolsConfig = _interopRequireDefault(require("../../poolsConfig"));
+
+var _damsConfig = _interopRequireDefault(require("../../damsConfig"));
+
+var _desalinationConfig = _interopRequireDefault(require("../../desalinationConfig"));
+
+var _canalConfig = _interopRequireDefault(require("../../canalConfig"));
+
+var _supplyConfig = _interopRequireDefault(require("../../supplyConfig"));
+
+var _wastewaterConfig = _interopRequireDefault(require("../../wastewaterConfig"));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -185,25 +181,50 @@ function (_Component) {
         activeLayer: this.state.activeLayer,
         PoolsConfig: _poolsConfig.default,
         active: this.state.active
-      }), _react.default.createElement(_SupplySvg.default, {
-        activeLayer: this.state.activeLayer,
-        config: _supplyConfig.default,
-        active: this.state.active,
-        onClick: this.onMapClick
-      }), _react.default.createElement(_WasteWaterSvg.default, {
-        activeLayer: this.state.activeLayer,
-        config: _wastewaterConfig.default,
-        active: this.state.active,
-        onClick: this.onMapClick
-      }), _react.default.createElement(_DamSvg.default, {
-        activeLayer: this.state.activeLayer,
-        config: _DamsConfig.default,
-        active: this.state.active,
-        onClick: this.onMapClick
-      }), _react.default.createElement(_DesalinationSVG.default, {
-        activeLayer: this.state.activeLayer,
+      }), _react.default.createElement(_MapLayer.default, {
+        layerName: "desalination",
         config: _desalinationConfig.default,
+        renderIcon: function renderIcon() {
+          return _react.default.createElement(_DesalinationIcon.default, null);
+        },
         active: this.state.active,
+        activeLayer: this.state.activeLayer,
+        onClick: this.onMapClick
+      }), _react.default.createElement(_MapLayer.default, {
+        layerName: "supply",
+        config: _supplyConfig.default,
+        renderIcon: function renderIcon() {
+          return _react.default.createElement(_SupplyIcon.default, null);
+        },
+        active: this.state.active,
+        activeLayer: this.state.activeLayer,
+        onClick: this.onMapClick
+      }), _react.default.createElement(_MapLayer.default, {
+        layerName: "waste",
+        config: _wastewaterConfig.default,
+        renderIcon: function renderIcon() {
+          return _react.default.createElement(_TreatmentPlantIcon.default, null);
+        },
+        active: this.state.active,
+        activeLayer: this.state.activeLayer,
+        onClick: this.onMapClick
+      }), _react.default.createElement(_MapLayer.default, {
+        layerName: "dams",
+        config: _damsConfig.default,
+        renderIcon: function renderIcon() {
+          return _react.default.createElement(_DamIcon.default, null);
+        },
+        active: this.state.active,
+        activeLayer: this.state.activeLayer,
+        onClick: this.onMapClick
+      }), _react.default.createElement(_MapLayer.default, {
+        layerName: "canal",
+        config: _canalConfig.default,
+        renderIcon: function renderIcon() {
+          return _react.default.createElement(_CanalIcon.default, null);
+        },
+        active: this.state.active,
+        activeLayer: this.state.activeLayer,
         onClick: this.onMapClick
       })));
     }

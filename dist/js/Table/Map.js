@@ -29,6 +29,10 @@ var _Desalination = _interopRequireDefault(require("./Desalination/Desalination"
 
 var _desalinationConfig = _interopRequireDefault(require("../desalinationConfig"));
 
+var _Canal = _interopRequireDefault(require("./Canal/Canal"));
+
+var _canalConfig = _interopRequireDefault(require("../canalConfig"));
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) { var desc = Object.defineProperty && Object.getOwnPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : {}; if (desc.get || desc.set) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } } newObj.default = obj; return newObj; } }
@@ -164,6 +168,9 @@ function (_Component) {
         case 'dams':
           return _damsConfig.default;
 
+        case 'canal':
+          return _canalConfig.default;
+
         default:
           return _poolsConfig.default;
       }
@@ -203,6 +210,8 @@ function (_Component) {
       }), _react.default.createElement(_Supply.default, {
         activeLayer: this.state.activeLayer
       }), _react.default.createElement(_Desalination.default, {
+        activeLayer: this.state.activeLayer
+      }), _react.default.createElement(_Canal.default, {
         activeLayer: this.state.activeLayer
       }), _react.default.createElement("div", {
         className: "text-box"
