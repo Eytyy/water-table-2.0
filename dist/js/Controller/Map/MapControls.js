@@ -99,9 +99,8 @@ function (_Component) {
       });
     });
 
-    _defineProperty(_assertThisInitialized(_assertThisInitialized(_this)), "onMapClick", function (e, type) {
-      var event = "".concat(type, "Clicked");
-      var target = e.target.id;
+    _defineProperty(_assertThisInitialized(_assertThisInitialized(_this)), "onMapClick", function (e) {
+      var target = e.currentTarget.id;
 
       _this.setState({
         active: target
@@ -109,7 +108,7 @@ function (_Component) {
 
       (0, _api.broadcastEvent)({
         source: 'controller',
-        event: event,
+        event: 'mapClicked',
         payload: target
       });
     });

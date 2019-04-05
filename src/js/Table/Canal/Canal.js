@@ -1,48 +1,12 @@
 import React, { Component } from 'react';
-import { socket } from '../../api';
 import CanalConfig from '../../canalConfig';
 import CanalText from './CanalText';
 import CanalIcon from '../../icons/CanalIcon';
+import MapLayer from '../MapLayer';
 
 class Canal extends Component {
-
-	state = {
-		active: undefined,
-	}
-
-	listenToIncomingEvents = () => {
-		socket.on('controller', message => {
-			const { event, payload } = message;
-			switch(event) {
-				case 'canalClicked':
-					this.updateActive(payload)
-					break;
-				default:
-					return;
-			}
-		});
-	}
-
-	updateActive = (payload) => {
-		this.setState({
-			active: payload
-		})
-	}
-
-	componentDidMount() {
-		this.listenToIncomingEvents();
-	}
-
-	componentWillReceiveProps({ activeLayer }) {
-		if(this.props.activeLayer !== activeLayer) {
-			this.setState({
-				active: undefined
-			});
-		}
-	}
-	
 	render() {
-		const { activeLayer } = this.props;
+		const { activeLayer, active } = this.props;
 
 		return (
 			<div className={`layer layer--canal ${activeLayer === 'canal' ? 'layer--is-active' : 'layer--is-hidden'}`}>
@@ -55,8 +19,8 @@ class Canal extends Component {
 								position: 'absolute',
 								top: position.y + 180,
 								left: position.x + 190,
-								transform: `${this.state.active !== id ? 'scale(1, 1)' : 'scale(3, 3)'}`,
-								zIndex: `${this.state.active !== id ? '2' : '1'}`
+								transform: `${active !== id ? 'scale(1, 1)' : 'scale(3, 3)'}`,
+								zIndex: `${active !== id ? '2' : '1'}`
 								}}
 							>
 								<CanalIcon />
@@ -68,7 +32,7 @@ class Canal extends Component {
 					CanalConfig.entries.map(({ name, figures, id, position }) =>
 						<CanalText
 							key={`rx-${id}`}
-							active={this.state.active}
+							active={active}
 							name={name}
 							figures={figures}
 							id={id}
@@ -77,10 +41,12 @@ class Canal extends Component {
 					)
 				}
 			</div>
-			
 		);
 	}
 }
 
-export default Canal;
+
+export default MapLayer(Canal, {
+  pageName: 'canal',
+});
 

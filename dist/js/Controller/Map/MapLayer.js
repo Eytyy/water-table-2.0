@@ -17,7 +17,7 @@ var MapLayer = function MapLayer(_ref) {
       active = _ref.active,
       activeLayer = _ref.activeLayer,
       renderIcon = _ref.renderIcon,
-      _onClick = _ref.onClick;
+      onClick = _ref.onClick;
   return _react.default.createElement("div", {
     className: "".concat(activeLayer === layerName ? 'is-active' : 'is-hidden', " resources resources--").concat(layerName),
     style: {
@@ -43,11 +43,10 @@ var MapLayer = function MapLayer(_ref) {
         top: Math.floor(position.y * 0.665) + 130,
         left: Math.floor(position.x * 0.665) + 180,
         transform: "".concat(active !== id ? 'scale(1, 1)' : 'scale(3, 3)'),
+        opacity: "".concat(typeof active !== 'undefined' && active !== id ? '0.2' : '1'),
         zIndex: "".concat(active !== id ? '2' : '1')
       },
-      onClick: function onClick(e) {
-        return _onClick(e, layerName);
-      }
+      onClick: onClick
     }, renderIcon());
   }));
 };

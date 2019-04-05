@@ -7,15 +7,7 @@ exports.default = void 0;
 
 var _react = _interopRequireWildcard(require("react"));
 
-var _supplyConfig = _interopRequireDefault(require("../../supplyConfig"));
-
-var _SupplyText = _interopRequireDefault(require("./SupplyText"));
-
-var _SupplyIcon = _interopRequireDefault(require("../../icons/SupplyIcon"));
-
-var _MapLayer = _interopRequireDefault(require("../MapLayer"));
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+var _api = require("../api");
 
 function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) { var desc = Object.defineProperty && Object.getOwnPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : {}; if (desc.get || desc.set) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } } newObj.default = obj; return newObj; } }
 
@@ -29,74 +21,99 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
 function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
 
-function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
-
 function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
 
 function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
 
-var Supply =
-/*#__PURE__*/
-function (_Component) {
-  _inherits(Supply, _Component);
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
 
-  function Supply() {
-    _classCallCheck(this, Supply);
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
-    return _possibleConstructorReturn(this, _getPrototypeOf(Supply).apply(this, arguments));
-  }
+var MapLayer = function MapLayer(WrappedComponent, _ref) {
+  var pageName = _ref.pageName;
 
-  _createClass(Supply, [{
-    key: "render",
-    value: function render() {
-      var _this$props = this.props,
-          activeLayer = _this$props.activeLayer,
-          active = _this$props.active;
-      return _react.default.createElement("div", {
-        className: "layer layer--supply ".concat(activeLayer === 'supply' ? 'layer--is-active' : 'layer--is-hidden')
-      }, _react.default.createElement("div", {
-        className: "resources resources--supply"
-      }, _supplyConfig.default.entries.map(function (_ref) {
-        var id = _ref.id,
-            position = _ref.position;
-        return _react.default.createElement("div", {
-          className: "icon",
-          key: id,
-          style: {
-            width: '50px',
-            height: '50px',
-            position: 'absolute',
-            top: position.y + 180,
-            left: position.x + 190,
-            transform: "".concat(active !== id ? 'scale(1, 1)' : 'scale(3, 3)'),
-            opacity: "".concat(typeof active !== 'undefined' && active !== id ? '0.2' : '1'),
-            zIndex: "".concat(active !== id ? '2' : '1')
-          }
-        }, _react.default.createElement(_SupplyIcon.default, null));
-      })), _supplyConfig.default.entries.map(function (_ref2) {
-        var name = _ref2.name,
-            figures = _ref2.figures,
-            id = _ref2.id,
-            position = _ref2.position;
-        return _react.default.createElement(_SupplyText.default, {
-          key: "rx-".concat(id),
-          active: active,
-          name: name,
-          figures: figures,
-          id: id,
-          position: position
+  var MapLayer =
+  /*#__PURE__*/
+  function (_Component) {
+    _inherits(MapLayer, _Component);
+
+    function MapLayer() {
+      var _getPrototypeOf2;
+
+      var _this;
+
+      _classCallCheck(this, MapLayer);
+
+      for (var _len = arguments.length, args = new Array(_len), _key = 0; _key < _len; _key++) {
+        args[_key] = arguments[_key];
+      }
+
+      _this = _possibleConstructorReturn(this, (_getPrototypeOf2 = _getPrototypeOf(MapLayer)).call.apply(_getPrototypeOf2, [this].concat(args)));
+
+      _defineProperty(_assertThisInitialized(_assertThisInitialized(_this)), "state", {
+        active: undefined
+      });
+
+      _defineProperty(_assertThisInitialized(_assertThisInitialized(_this)), "updateActive", function (payload) {
+        _this.setState({
+          active: payload
         });
-      }));
+      });
+
+      _defineProperty(_assertThisInitialized(_assertThisInitialized(_this)), "listenToIncomingEvents", function () {
+        _api.socket.on('controller', function (message) {
+          var event = message.event,
+              payload = message.payload;
+
+          switch (event) {
+            case 'mapClicked':
+              _this.updateActive(payload);
+
+              break;
+
+            default:
+              return;
+          }
+        });
+      });
+
+      return _this;
     }
-  }]);
 
-  return Supply;
-}(_react.Component);
+    _createClass(MapLayer, [{
+      key: "componentDidMount",
+      value: function componentDidMount() {
+        this.listenToIncomingEvents();
+      }
+    }, {
+      key: "componentWillReceiveProps",
+      value: function componentWillReceiveProps(_ref2) {
+        var activeLayer = _ref2.activeLayer;
 
-var _default = (0, _MapLayer.default)(Supply, {
-  pageName: 'supply'
-});
+        if (this.props.activeLayer !== activeLayer) {
+          this.setState({
+            active: undefined
+          });
+        }
+      }
+    }, {
+      key: "render",
+      value: function render() {
+        var activeLayer = this.props.activeLayer;
+        return _react.default.createElement(WrappedComponent, {
+          active: this.state.active,
+          activeLayer: activeLayer
+        });
+      }
+    }]);
 
+    return MapLayer;
+  }(_react.Component);
+
+  return MapLayer;
+};
+
+var _default = MapLayer;
 exports.default = _default;

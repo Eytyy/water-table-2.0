@@ -1,48 +1,12 @@
 import React, { Component } from 'react';
-import { socket } from '../../api';
 import SupplyConfig from '../../supplyConfig';
 import SupplyText from './SupplyText';
 import SupplyIcon from '../../icons/SupplyIcon';
+import MapLayer from '../MapLayer';
 
 class Supply extends Component {
-
-	state = {
-		active: undefined,
-	}
-
-	listenToIncomingEvents = () => {
-		socket.on('controller', message => {
-			const { event, payload } = message;
-			switch(event) {
-				case 'supplyClicked':
-					this.updateActive(payload)
-					break;
-				default:
-					return;
-			}
-		});
-	}
-
-	updateActive = (payload) => {
-		this.setState({
-			active: payload
-		})
-	}
-
-	componentDidMount() {
-		this.listenToIncomingEvents();
-	}
-
-	componentWillReceiveProps({ activeLayer }) {
-		if(this.props.activeLayer !== activeLayer) {
-			this.setState({
-				active: undefined
-			});
-		}
-	}
-	
 	render() {
-		const { activeLayer } = this.props;
+		const { activeLayer, active } = this.props;
 
 		return (
 			<div className={`layer layer--supply ${activeLayer === 'supply' ? 'layer--is-active' : 'layer--is-hidden'}`}>
@@ -55,8 +19,9 @@ class Supply extends Component {
 								position: 'absolute',
 								top: position.y + 180,
 								left: position.x + 190,
-								transform: `${this.state.active !== id ? 'scale(1, 1)' : 'scale(3, 3)'}`,
-								zIndex: `${this.state.active !== id ? '2' : '1'}`
+								transform: `${active !== id ? 'scale(1, 1)' : 'scale(3, 3)'}`,
+								opacity: `${ typeof active !== 'undefined' && active !== id ? '0.2' : '1'}`,
+								zIndex: `${active !== id ? '2' : '1'}`
 								}}
 							>
 								<SupplyIcon />
@@ -68,7 +33,7 @@ class Supply extends Component {
 					SupplyConfig.entries.map(({ name, figures, id, position }) =>
 						<SupplyText
 							key={`rx-${id}`}
-							active={this.state.active}
+							active={active}
 							name={name}
 							figures={figures}
 							id={id}
@@ -82,5 +47,8 @@ class Supply extends Component {
 	}
 }
 
-export default Supply;
+export default MapLayer(Supply, {
+  pageName: 'supply',
+});
+
 

@@ -7,13 +7,13 @@ exports.default = void 0;
 
 var _react = _interopRequireWildcard(require("react"));
 
-var _api = require("../../api");
-
 var _DamsConfig = _interopRequireDefault(require("../../DamsConfig"));
 
 var _DamsText = _interopRequireDefault(require("./DamsText"));
 
 var _DamIcon = _interopRequireDefault(require("../../icons/DamIcon"));
+
+var _MapLayer = _interopRequireDefault(require("../MapLayer"));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -29,15 +29,13 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
 function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
 
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
 function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
 
 function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
-
-function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
-
-function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
 var Dams =
 /*#__PURE__*/
@@ -45,77 +43,24 @@ function (_Component) {
   _inherits(Dams, _Component);
 
   function Dams() {
-    var _getPrototypeOf2;
-
-    var _this;
-
     _classCallCheck(this, Dams);
 
-    for (var _len = arguments.length, args = new Array(_len), _key = 0; _key < _len; _key++) {
-      args[_key] = arguments[_key];
-    }
-
-    _this = _possibleConstructorReturn(this, (_getPrototypeOf2 = _getPrototypeOf(Dams)).call.apply(_getPrototypeOf2, [this].concat(args)));
-
-    _defineProperty(_assertThisInitialized(_assertThisInitialized(_this)), "state", {
-      active: undefined
-    });
-
-    _defineProperty(_assertThisInitialized(_assertThisInitialized(_this)), "listenToIncomingEvents", function () {
-      _api.socket.on('controller', function (message) {
-        var event = message.event,
-            payload = message.payload;
-
-        switch (event) {
-          case 'damClicked':
-            _this.updateActive(payload);
-
-            break;
-
-          default:
-            return;
-        }
-      });
-    });
-
-    _defineProperty(_assertThisInitialized(_assertThisInitialized(_this)), "updateActive", function (payload) {
-      _this.setState({
-        active: payload
-      });
-    });
-
-    return _this;
+    return _possibleConstructorReturn(this, _getPrototypeOf(Dams).apply(this, arguments));
   }
 
   _createClass(Dams, [{
-    key: "componentDidMount",
-    value: function componentDidMount() {
-      this.listenToIncomingEvents();
-    }
-  }, {
-    key: "componentWillReceiveProps",
-    value: function componentWillReceiveProps(_ref) {
-      var activeLayer = _ref.activeLayer;
-
-      if (this.props.activeLayer !== activeLayer) {
-        this.setState({
-          active: undefined
-        });
-      }
-    }
-  }, {
     key: "render",
     value: function render() {
-      var _this2 = this;
-
-      var activeLayer = this.props.activeLayer;
+      var _this$props = this.props,
+          activeLayer = _this$props.activeLayer,
+          active = _this$props.active;
       return _react.default.createElement("div", {
         className: "layer layer--dams ".concat(activeLayer === 'dams' ? 'layer--is-active' : 'layer--is-hidden')
       }, _react.default.createElement("div", {
         className: "resources resources--dams"
-      }, _DamsConfig.default.entries.map(function (_ref2) {
-        var id = _ref2.id,
-            position = _ref2.position;
+      }, _DamsConfig.default.entries.map(function (_ref) {
+        var id = _ref.id,
+            position = _ref.position;
         return _react.default.createElement("div", {
           className: "icon",
           key: id,
@@ -125,18 +70,19 @@ function (_Component) {
             position: 'absolute',
             top: position.y + 180,
             left: position.x + 190,
-            transform: "".concat(_this2.state.active !== id ? 'scale(1, 1)' : 'scale(3, 3)'),
-            zIndex: "".concat(_this2.state.active !== id ? '2' : '1')
+            transform: "".concat(active !== id ? 'scale(1, 1)' : 'scale(3, 3)'),
+            opacity: "".concat(typeof active !== 'undefined' && active !== id ? '0.2' : '1'),
+            zIndex: "".concat(active !== id ? '2' : '1')
           }
         }, _react.default.createElement(_DamIcon.default, null));
-      })), _DamsConfig.default.entries.map(function (_ref3) {
-        var name = _ref3.name,
-            figures = _ref3.figures,
-            id = _ref3.id,
-            position = _ref3.position;
+      })), _DamsConfig.default.entries.map(function (_ref2) {
+        var name = _ref2.name,
+            figures = _ref2.figures,
+            id = _ref2.id,
+            position = _ref2.position;
         return _react.default.createElement(_DamsText.default, {
           key: "rx-".concat(id),
-          active: _this2.state.active,
+          active: active,
           name: name,
           figures: figures,
           id: id,
@@ -149,5 +95,8 @@ function (_Component) {
   return Dams;
 }(_react.Component);
 
-var _default = Dams;
+var _default = (0, _MapLayer.default)(Dams, {
+  pageName: 'dams'
+});
+
 exports.default = _default;

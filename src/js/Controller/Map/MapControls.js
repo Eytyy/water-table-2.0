@@ -40,9 +40,8 @@ class MapControls extends Component {
 		})
 	}
 
-	onMapClick = (e, type) => {
-		const event = `${type}Clicked`;
-		const target = e.target.id;
+	onMapClick = (e) => {
+		const target = e.currentTarget.id;
 
 		this.setState({
 			active: target
@@ -50,7 +49,7 @@ class MapControls extends Component {
 
 		broadcastEvent({
 			source: 'controller',
-			event,
+			event: 'mapClicked',
 			payload: target
 		})
 	}

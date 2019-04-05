@@ -3,46 +3,11 @@ import { socket } from '../../api';
 import WasteWaterConfig from '../../wastewaterConfig';
 import WasteWaterText from './WasteWaterText';
 import TreatmentPlantIcon from '../../icons/TreatmentPlantIcon';
+import MapLayer from '../MapLayer';
 
 class WasteWater extends Component {
-
-	state = {
-		active: undefined,
-	}
-
-	listenToIncomingEvents = () => {
-		socket.on('controller', message => {
-			const { event, payload } = message;
-			switch(event) {
-				case 'wasteClicked':
-					this.updateActive(payload)
-					break;
-				default:
-					return;
-			}
-		});
-	}
-
-	updateActive = (payload) => {
-		this.setState({
-			active: payload
-		})
-	}
-
-	componentDidMount() {
-		this.listenToIncomingEvents();
-	}
-
-	componentWillReceiveProps({ activeLayer }) {
-		if(this.props.activeLayer !== activeLayer) {
-			this.setState({
-				active: undefined
-			});
-		}
-	}
-	
 	render() {
-		const { activeLayer } = this.props;
+		const { activeLayer, active } = this.props;
 
 		return (
 			<div className={`layer layer--waste ${activeLayer === 'waste' ? 'layer--is-active' : 'layer--is-hidden'}`}>
@@ -55,8 +20,9 @@ class WasteWater extends Component {
 								position: 'absolute',
 								top: position.y + 180,
 								left: position.x + 190,
-								transform: `${this.state.active !== id ? 'scale(1, 1)' : 'scale(3, 3)'}`,
-								zIndex: `${this.state.active !== id ? '2' : '1'}`
+								transform: `${active !== id ? 'scale(1, 1)' : 'scale(3, 3)'}`,
+								opacity: `${ typeof active !== 'undefined' && active !== id ? '0.2' : '1'}`,
+								zIndex: `${active !== id ? '2' : '1'}`
 								}}
 							>
 								<TreatmentPlantIcon />
@@ -68,7 +34,7 @@ class WasteWater extends Component {
 					WasteWaterConfig.entries.map(({ name, figures, id, position }) =>
 						<WasteWaterText
 							key={`rx-${id}`}
-							active={this.state.active}
+							active={active}
 							name={name}
 							figures={figures}
 							id={id}
@@ -82,5 +48,9 @@ class WasteWater extends Component {
 	}
 }
 
-export default WasteWater;
+export default MapLayer(WasteWater, {
+  pageName: 'waste',
+});
+
+
 
