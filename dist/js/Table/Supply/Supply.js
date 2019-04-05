@@ -15,6 +15,8 @@ var _SupplyIcon = _interopRequireDefault(require("../../icons/SupplyIcon"));
 
 var _MapLayer = _interopRequireDefault(require("../MapLayer"));
 
+var _MapLayerContent = _interopRequireDefault(require("../MapLayerContent"));
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) { var desc = Object.defineProperty && Object.getOwnPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : {}; if (desc.get || desc.set) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } } newObj.default = obj; return newObj; } }
@@ -54,41 +56,29 @@ function (_Component) {
       var _this$props = this.props,
           activeLayer = _this$props.activeLayer,
           active = _this$props.active;
-      return _react.default.createElement("div", {
-        className: "layer layer--supply ".concat(activeLayer === 'supply' ? 'layer--is-active' : 'layer--is-hidden')
-      }, _react.default.createElement("div", {
-        className: "resources resources--supply"
-      }, _supplyConfig.default.entries.map(function (_ref) {
-        var id = _ref.id,
-            position = _ref.position;
-        return _react.default.createElement("div", {
-          className: "icon",
-          key: id,
-          style: {
-            width: '50px',
-            height: '50px',
-            position: 'absolute',
-            top: position.y + 180,
-            left: position.x + 190,
-            transform: "".concat(active !== id ? 'scale(1, 1)' : 'scale(3, 3)'),
-            opacity: "".concat(typeof active !== 'undefined' && active !== id ? '0.2' : '1'),
-            zIndex: "".concat(active !== id ? '2' : '1')
-          }
-        }, _react.default.createElement(_SupplyIcon.default, null));
-      })), _supplyConfig.default.entries.map(function (_ref2) {
-        var name = _ref2.name,
-            figures = _ref2.figures,
-            id = _ref2.id,
-            position = _ref2.position;
-        return _react.default.createElement(_SupplyText.default, {
-          key: "rx-".concat(id),
-          active: active,
-          name: name,
-          figures: figures,
-          id: id,
-          position: position
-        });
-      }));
+      return _react.default.createElement(_MapLayerContent.default, {
+        layerName: "supply",
+        activeLayer: activeLayer,
+        active: active,
+        config: _supplyConfig.default,
+        renderIcon: function renderIcon() {
+          return _react.default.createElement(_SupplyIcon.default, null);
+        },
+        renderText: function renderText(_ref) {
+          var name = _ref.name,
+              figures = _ref.figures,
+              id = _ref.id,
+              position = _ref.position;
+          return _react.default.createElement(_SupplyText.default, {
+            key: "rx-".concat(id),
+            active: active,
+            name: name,
+            figures: figures,
+            id: id,
+            position: position
+          });
+        }
+      });
     }
   }]);
 

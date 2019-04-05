@@ -7,13 +7,15 @@ exports.default = void 0;
 
 var _react = _interopRequireWildcard(require("react"));
 
-var _canalConfig = _interopRequireDefault(require("../../canalConfig"));
+var _MapLayer = _interopRequireDefault(require("../MapLayer"));
+
+var _MapLayerContent = _interopRequireDefault(require("../MapLayerContent"));
 
 var _CanalText = _interopRequireDefault(require("./CanalText"));
 
 var _CanalIcon = _interopRequireDefault(require("../../icons/CanalIcon"));
 
-var _MapLayer = _interopRequireDefault(require("../MapLayer"));
+var _canalConfig = _interopRequireDefault(require("../../canalConfig"));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -54,40 +56,29 @@ function (_Component) {
       var _this$props = this.props,
           activeLayer = _this$props.activeLayer,
           active = _this$props.active;
-      return _react.default.createElement("div", {
-        className: "layer layer--canal ".concat(activeLayer === 'canal' ? 'layer--is-active' : 'layer--is-hidden')
-      }, _react.default.createElement("div", {
-        className: "resources resources--canal"
-      }, _canalConfig.default.entries.map(function (_ref) {
-        var id = _ref.id,
-            position = _ref.position;
-        return _react.default.createElement("div", {
-          className: "icon",
-          key: id,
-          style: {
-            width: '50px',
-            height: '50px',
-            position: 'absolute',
-            top: position.y + 180,
-            left: position.x + 190,
-            transform: "".concat(active !== id ? 'scale(1, 1)' : 'scale(3, 3)'),
-            zIndex: "".concat(active !== id ? '2' : '1')
-          }
-        }, _react.default.createElement(_CanalIcon.default, null));
-      })), _canalConfig.default.entries.map(function (_ref2) {
-        var name = _ref2.name,
-            figures = _ref2.figures,
-            id = _ref2.id,
-            position = _ref2.position;
-        return _react.default.createElement(_CanalText.default, {
-          key: "rx-".concat(id),
-          active: active,
-          name: name,
-          figures: figures,
-          id: id,
-          position: position
-        });
-      }));
+      return _react.default.createElement(_MapLayerContent.default, {
+        layerName: "canal",
+        activeLayer: activeLayer,
+        active: active,
+        config: _canalConfig.default,
+        renderIcon: function renderIcon() {
+          return _react.default.createElement(_CanalIcon.default, null);
+        },
+        renderText: function renderText(_ref) {
+          var name = _ref.name,
+              figures = _ref.figures,
+              id = _ref.id,
+              position = _ref.position;
+          return _react.default.createElement(_CanalText.default, {
+            key: "rx-".concat(id),
+            active: active,
+            name: name,
+            figures: figures,
+            id: id,
+            position: position
+          });
+        }
+      });
     }
   }]);
 
