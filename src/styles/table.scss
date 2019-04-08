@@ -88,9 +88,35 @@ h1 {
 
 .pool.is-active {
 	opacity: 1;
-	transform: scale(1.3,1.3);
 }
 
+#azraq {
+	transform: translate(-60%, -50%);
+	&.is-active {
+		transform: translate(-60%, -70%) scale(1.5, 1.5);
+	}
+}
+
+#jafar {
+	transform: translate(-10%, -140%);
+	&.is-active {
+		transform: translate(-10%, -140%) scale(1.5, 1.5);
+	}
+}
+
+#deadsea {
+	transform: translate(0%, -5%);
+	&.is-active {
+		transform: translate(0%, -5%) scale(1.3, 1.3);
+	}
+}
+
+#aqaba {
+	transform: translate(5%, -8%) scale(1.1,1.1);
+	&.is-active {
+		transform: translate(5%, -8%) scale(1.3, 1.3);
+	}
+}
 .waste {
 	transition: transform 200ms linear, opacity 200ms linear;
 	transform-origin: center;
@@ -158,21 +184,42 @@ h1 {
 
 .resources-text {
 	transition: opacity 200ms linear;
-	width: 300px;
-	background: rgba(0,0,0,0.5);
-	padding: 10px;
+	width: 240px;
+	background: rgba(0,0,0,0.3);
+	padding: 20px;
 	z-index: 2;
 	&:after {
 		content: '';
+		position: absolute;
 		display: block;
 		border: 5px solid transparent;
 		width: 0;
 		height: 0;
-		border-right: 5px solid #FFF;
 		border-top: 5px solid #FFF;
-		transform: translate(-15px, 20px) rotate(-15deg);
 		transform-origin: center;
 	}
+	&--top:after {
+		bottom: 0px;
+	}
+	&--bottom:after {
+		top: 0px;
+	}
+	&--right:after {
+		border-right: 5px solid #FFF;
+		transform: rotate(-15deg);
+		left: 0px;
+	}
+	&--left:after {
+		border-left: 5px solid #FFF;
+		transform: rotate(-15deg);
+		right: 0px;
+	}
+	
+}
+
+.resources-text--bottom.resources-text--right:after {
+	border-bottom: 5px solid #FFF;
+	border-top: 5px solid transparent;
 }
 
 .resource-text {
