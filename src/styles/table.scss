@@ -42,15 +42,21 @@ body {
   box-sizing: border-box;
 }
 
+h1, h2, h3 {
+	@extend %bold-font;
+}
 h1 {
   font-size: 16px;
   margin-bottom: 20px;
 }
 
 #table {
+	width: 1080px;
 	height: 1920px;
 	position: relative;
+	overflow: hidden;
 }
+
 .layer,
 .resources--pools {
 	position: absolute;
@@ -63,14 +69,13 @@ h1 {
 	opacity: 0;
 	transition: opacity 200ms linear;
 	&--pools {
-		opacity: 0.2;
+		opacity: 0.4;
 	}
 }
 
 .layer--is-active {
 	opacity: 1;
 }
-
 
 .pool {
 	fill: #FFF;
@@ -83,9 +88,8 @@ h1 {
 
 .pool.is-active {
 	opacity: 1;
-	transform: scale(1.5,1.5);
+	transform: scale(1.3,1.3);
 }
-
 
 .waste {
 	transition: transform 200ms linear, opacity 200ms linear;
@@ -154,4 +158,57 @@ h1 {
 
 .resources-text {
 	transition: opacity 200ms linear;
+	width: 300px;
+	background: rgba(0,0,0,0.5);
+	padding: 10px;
+	z-index: 2;
+	&:after {
+		content: '';
+		display: block;
+		border: 5px solid transparent;
+		width: 0;
+		height: 0;
+		border-right: 5px solid #FFF;
+		border-top: 5px solid #FFF;
+		transform: translate(-15px, 20px) rotate(-15deg);
+		transform-origin: center;
+	}
+}
+
+.resource-text {
+	&__title {
+		font-size: 18px;
+		margin: 0 0 10px;
+	}
+	&__group__item {
+		margin-right: 20px;
+	}
+	&__figure-value {
+		@extend %bold-font;
+		font-size: 30px;
+	}
+	&__figure-label {
+		font-size: 14px;
+	}
+}
+
+.icon {
+	&--waste svg,
+	&--desalination svg,
+	&--supply svg {
+		animation:spin 5s linear infinite;
+		transform-origin: center;
+		transform-box: fill-box;
+	}
+	svg {
+		width: 100%;
+		height: auto;
+	}
+}
+
+
+@keyframes spin { 
+	100% {
+		transform:rotate(360deg); 
+	}
 }

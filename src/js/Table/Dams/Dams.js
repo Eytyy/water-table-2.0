@@ -1,10 +1,11 @@
 import React, { Component } from 'react';
-import damsConfig from '../../damsConfig';
-import DamsText from './DamsText';
-import DamIcon from '../../icons/DamIcon';
 
 import MapLayer from '../MapLayer';
 import MapLayerContent from '../MapLayerContent';
+
+import damsConfig from '../../damsConfig';
+import DamsText from './DamsText';
+import DamIcon from '../../icons/DamIcon';
 
 class Dams extends Component {
 	render() {

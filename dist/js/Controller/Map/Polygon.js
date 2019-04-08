@@ -16,7 +16,7 @@ var Polygon = function Polygon(_ref) {
       points = _ref.points,
       onPoolClick = _ref.onPoolClick,
       id = _ref.id,
-      activePool = _ref.activePool,
+      active = _ref.active,
       group = _ref.group,
       pool = _ref.pool;
 
@@ -27,11 +27,11 @@ var Polygon = function Polygon(_ref) {
   };
 
   var activeClass = function activeClass() {
-    if (typeof activePool === 'undefined') return '';
+    if (typeof active === 'undefined') return '';
 
-    if (activePool === id) {
+    if (active === id) {
       return 'is-active';
-    } else if ((activePool === 'deadsea-1' || activePool === 'deadsea-2') && (id === 'deadsea-1' || id === 'deadsea-2')) {
+    } else if ((active === 'deadsea-1' || active === 'deadsea-2') && (id === 'deadsea-1' || id === 'deadsea-2')) {
       return 'is-active';
     } else {
       return '';

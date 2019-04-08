@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
-import { socket } from '../../api';
-import wastewaterConfig from '../../wastewaterConfig';
-import WasteWaterText from './WasteWaterText';
-import TreatmentPlantIcon from '../../icons/TreatmentPlantIcon';
+
 import MapLayer from '../MapLayer';
 import MapLayerContent from '../MapLayerContent';
 
+import wastewaterConfig from '../../wastewaterConfig';
+import WasteWaterText from './WasteWaterText';
+import TreatmentPlantIcon from '../../icons/TreatmentPlantIcon';
 
 class WasteWater extends Component {
 	render() {

@@ -1,9 +1,11 @@
 import React, { Component } from 'react';
+
+import MapLayer from '../MapLayer';
+import MapLayerContent from '../MapLayerContent';
+
 import supplyConfig from '../../supplyConfig';
 import SupplyText from './SupplyText';
 import SupplyIcon from '../../icons/SupplyIcon';
-import MapLayer from '../MapLayer';
-import MapLayerContent from '../MapLayerContent';
 
 class Supply extends Component {
 	render() {

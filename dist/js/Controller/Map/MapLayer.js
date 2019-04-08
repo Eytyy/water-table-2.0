@@ -42,7 +42,6 @@ var MapLayer = function MapLayer(_ref) {
         // then adjust top/left position those are determined visually
         top: Math.floor(position.y * 0.665) + 130,
         left: Math.floor(position.x * 0.665) + 180,
-        transform: "".concat(active !== id ? 'scale(1, 1)' : 'scale(3, 3)'),
         opacity: "".concat(typeof active !== 'undefined' && active !== id ? '0.2' : '1'),
         zIndex: "".concat(active !== id ? '2' : '1')
       },

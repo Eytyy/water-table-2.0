@@ -7,17 +7,15 @@ exports.default = void 0;
 
 var _react = _interopRequireWildcard(require("react"));
 
-var _api = require("../../api");
+var _MapLayer = _interopRequireDefault(require("../MapLayer"));
+
+var _MapLayerContent = _interopRequireDefault(require("../MapLayerContent"));
 
 var _wastewaterConfig = _interopRequireDefault(require("../../wastewaterConfig"));
 
 var _WasteWaterText = _interopRequireDefault(require("./WasteWaterText"));
 
 var _TreatmentPlantIcon = _interopRequireDefault(require("../../icons/TreatmentPlantIcon"));
-
-var _MapLayer = _interopRequireDefault(require("../MapLayer"));
-
-var _MapLayerContent = _interopRequireDefault(require("../MapLayerContent"));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 

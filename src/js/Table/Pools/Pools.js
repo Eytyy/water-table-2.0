@@ -8,6 +8,7 @@ import cutout from '../../../cutout.png';
 
 class Pools extends Component {
 	canvas = React.createRef()
+	ctx
 	pools = []
 	width="912"
 	height="1540"
@@ -19,7 +20,7 @@ class Pools extends Component {
 	
 	stop = false
 	frameCount = 0;
-	fps = 30
+	fps = 15
 	fpsInterval
 	startTime
 	now
@@ -28,14 +29,11 @@ class Pools extends Component {
 	rf = null
 
 	state = {
-		ctx: null,
 		activePool: undefined,
 	}
 
 	componentDidMount() {
-		this.setState({
-			ctx: this.canvas.current.getContext('2d')
-		});
+		this.ctx = this.canvas.current.getContext('2d');
 		this.startAnimating();
 		this.listenToIncomingEvents();
 	}
@@ -72,7 +70,6 @@ class Pools extends Component {
 		this.rf = null;
 	}
 
-
 	startAnimating = () => {
 		this.fpsInterval = 1000 / this.fps;
 		this.then = Date.now();
@@ -80,7 +77,24 @@ class Pools extends Component {
 		this.animate();
 	}
 
-	
+	draw = () => {
+		const ctx = this.ctx || this.canvas.current.getContext('2d');
+
+		ctx.clearRect(0, 0, this.width, this.height);
+		const imageData = ctx.getImageData(0, 0, this.width, this.height);
+		const data = imageData.data;
+
+		for (let i = 0; i < this.particles.length; i++) {
+			const particle = this.particles[i];
+			const index = 4 * (particle[0] + particle[1] * this.width);
+			data[index + 0] = 255;
+			data[index + 1] = 255;
+			data[index + 2] = 255;
+			data[index + 3] = 255;
+		}
+
+		ctx.putImageData(imageData, 0, 0);
+	}
 
 	animate = () => {
 
@@ -99,20 +113,8 @@ class Pools extends Component {
 				this.then = this.now - (this.elapsed % this.fpsInterval);
 				
 				// draw 
+				this.draw();
 
-				this.state.ctx.clearRect(0, 0, this.width, this.height);
-				const imageData = this.state.ctx.getImageData(0, 0, this.width, this.height);
-				const data = imageData.data;
-				for (let i = 0; i < this.particles.length; i++) {
-					const particle = this.particles[i];
-					const index = 4 * (particle[0] + particle[1] * this.width);
-					data[index + 0] = 255;
-					data[index + 1] = 255;
-					data[index + 2] = 255;
-					data[index + 3] = 255;
-				}
-				this.state.ctx.putImageData(imageData, 0, 0);
-				
 				// Move particles randomly:
 				for (let i = 0; i < this.particles.length; i++) {
 					const particle = this.particles[i];

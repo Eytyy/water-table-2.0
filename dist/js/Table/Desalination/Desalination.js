@@ -7,15 +7,15 @@ exports.default = void 0;
 
 var _react = _interopRequireWildcard(require("react"));
 
+var _MapLayer = _interopRequireDefault(require("../MapLayer"));
+
+var _MapLayerContent = _interopRequireDefault(require("../MapLayerContent"));
+
 var _desalinationConfig = _interopRequireDefault(require("../../desalinationConfig"));
 
 var _DesalinationText = _interopRequireDefault(require("./DesalinationText"));
 
 var _DesalinationIcon = _interopRequireDefault(require("../../icons/DesalinationIcon"));
-
-var _MapLayer = _interopRequireDefault(require("../MapLayer"));
-
-var _MapLayerContent = _interopRequireDefault(require("../MapLayerContent"));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 

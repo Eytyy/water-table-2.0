@@ -1,15 +1,15 @@
 import React from 'react';
 
-const Polygon = ({ className, points, onPoolClick, id, activePool, group, pool }) => {
+const Polygon = ({ className, points, onPoolClick, id, active, group, pool }) => {
 	const flattenedPoints = (unflattenedPoints) => unflattenedPoints.reduce((c, n) => {
 		return c + ` ${n.x} ${n.y}`;
 	}, '');
 
 	const activeClass = () => {
-		if (typeof activePool === 'undefined') return '';
-		if (activePool === id) {
+		if (typeof active === 'undefined') return '';
+		if (active === id) {
 			return 'is-active';
-		} else if ((activePool === 'deadsea-1' || activePool === 'deadsea-2') &&
+		} else if ((active === 'deadsea-1' || active === 'deadsea-2') &&
 			(id === 'deadsea-1' || id === 'deadsea-2')) {
 				return 'is-active';
 		} else {

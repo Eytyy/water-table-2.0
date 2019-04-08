@@ -20,7 +20,6 @@ const MapLayer = ({ layerName, config, active, activeLayer, renderIcon, onClick 
 						// then adjust top/left position those are determined visually
 						top: Math.floor(position.y * 0.665) + 130,
 						left: Math.floor(position.x * 0.665) + 180,
-						transform: `${active !== id ? 'scale(1, 1)' : 'scale(3, 3)'}`,
 						opacity: `${ typeof active !== 'undefined' && active !== id ? '0.2' : '1'}`,
 						zIndex: `${active !== id ? '2' : '1'}`
 					}}

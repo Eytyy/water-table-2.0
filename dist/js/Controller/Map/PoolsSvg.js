@@ -13,8 +13,9 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 var PoolsSvg = function PoolsSvg(_ref) {
   var PoolsConfig = _ref.PoolsConfig,
-      activePool = _ref.activePool,
-      activeLayer = _ref.activeLayer;
+      active = _ref.active,
+      activeLayer = _ref.activeLayer,
+      onPoolClick = _ref.onPoolClick;
   return _react.default.createElement("svg", {
     id: "pools",
     className: "".concat(activeLayer === 'default' ? 'is-active' : 'is-hidden', " resources resources---pools"),
@@ -27,16 +28,18 @@ var PoolsSvg = function PoolsSvg(_ref) {
     return Array.isArray(pool) ? _react.default.createElement(_Polygon.default, {
       key: "svg-".concat(id),
       className: "pool",
-      activePool: activePool,
+      active: active,
       pool: pool,
       id: id,
-      group: true
+      group: true,
+      onPoolClick: onPoolClick
     }) : _react.default.createElement(_Polygon.default, {
       key: "svg-".concat(id),
       className: "pool",
-      activePool: activePool,
+      active: active,
       points: pool.points,
-      id: id
+      id: id,
+      onPoolClick: onPoolClick
     });
   }));
 };

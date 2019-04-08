@@ -61,6 +61,8 @@ function (_Component) {
 
     _defineProperty(_assertThisInitialized(_assertThisInitialized(_this)), "canvas", _react.default.createRef());
 
+    _defineProperty(_assertThisInitialized(_assertThisInitialized(_this)), "ctx", void 0);
+
     _defineProperty(_assertThisInitialized(_assertThisInitialized(_this)), "pools", []);
 
     _defineProperty(_assertThisInitialized(_assertThisInitialized(_this)), "width", "912");
@@ -77,7 +79,7 @@ function (_Component) {
 
     _defineProperty(_assertThisInitialized(_assertThisInitialized(_this)), "frameCount", 0);
 
-    _defineProperty(_assertThisInitialized(_assertThisInitialized(_this)), "fps", 30);
+    _defineProperty(_assertThisInitialized(_assertThisInitialized(_this)), "fps", 15);
 
     _defineProperty(_assertThisInitialized(_assertThisInitialized(_this)), "fpsInterval", void 0);
 
@@ -92,7 +94,6 @@ function (_Component) {
     _defineProperty(_assertThisInitialized(_assertThisInitialized(_this)), "rf", null);
 
     _defineProperty(_assertThisInitialized(_assertThisInitialized(_this)), "state", {
-      ctx: null,
       activePool: undefined
     });
 
@@ -127,6 +128,25 @@ function (_Component) {
       _this.animate();
     });
 
+    _defineProperty(_assertThisInitialized(_assertThisInitialized(_this)), "draw", function () {
+      var ctx = _this.ctx || _this.canvas.current.getContext('2d');
+
+      ctx.clearRect(0, 0, _this.width, _this.height);
+      var imageData = ctx.getImageData(0, 0, _this.width, _this.height);
+      var data = imageData.data;
+
+      for (var i = 0; i < _this.particles.length; i++) {
+        var particle = _this.particles[i];
+        var index = 4 * (particle[0] + particle[1] * _this.width);
+        data[index + 0] = 255;
+        data[index + 1] = 255;
+        data[index + 2] = 255;
+        data[index + 3] = 255;
+      }
+
+      ctx.putImageData(imageData, 0, 0);
+    });
+
     _defineProperty(_assertThisInitialized(_assertThisInitialized(_this)), "animate", function () {
       // request another frame
       _this.raf = requestAnimationFrame(_this.animate); // calc elapsed time since last loop
@@ -139,28 +159,13 @@ function (_Component) {
         // specified fpsInterval not being a multiple of RAF's interval (16.7ms)
         _this.then = _this.now - _this.elapsed % _this.fpsInterval; // draw 
 
-        _this.state.ctx.clearRect(0, 0, _this.width, _this.height);
+        _this.draw(); // Move particles randomly:
 
-        var imageData = _this.state.ctx.getImageData(0, 0, _this.width, _this.height);
-
-        var data = imageData.data;
 
         for (var i = 0; i < _this.particles.length; i++) {
           var particle = _this.particles[i];
-          var index = 4 * (particle[0] + particle[1] * _this.width);
-          data[index + 0] = 255;
-          data[index + 1] = 255;
-          data[index + 2] = 255;
-          data[index + 3] = 255;
-        }
-
-        _this.state.ctx.putImageData(imageData, 0, 0); // Move particles randomly:
-
-
-        for (var _i = 0; _i < _this.particles.length; _i++) {
-          var _particle = _this.particles[_i];
-          _particle[0] = Math.max(0, Math.min(_this.width - 1, Math.round(_particle[0] + Math.random() * 2 - 1)));
-          _particle[1] = Math.max(0, Math.min(_this.height - 1, Math.round(_particle[1] + Math.random() * 2 - 1)));
+          particle[0] = Math.max(0, Math.min(_this.width - 1, Math.round(particle[0] + Math.random() * 2 - 1)));
+          particle[1] = Math.max(0, Math.min(_this.height - 1, Math.round(particle[1] + Math.random() * 2 - 1)));
         }
       }
     });
@@ -171,9 +176,7 @@ function (_Component) {
   _createClass(Pools, [{
     key: "componentDidMount",
     value: function componentDidMount() {
-      this.setState({
-        ctx: this.canvas.current.getContext('2d')
-      });
+      this.ctx = this.canvas.current.getContext('2d');
       this.startAnimating();
       this.listenToIncomingEvents();
     }

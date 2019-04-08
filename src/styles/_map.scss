@@ -33,10 +33,10 @@
 .btn-icon {
 	width: 94px;
 	height: 94px;
-	display: block;
-	border: 2px solid #FFF;
-	border-radius: 10px;
+	display: flex;
 	margin: 0px auto;
+	justify-content: center;
+	align-items: center;
 }
 
 .btn-label {

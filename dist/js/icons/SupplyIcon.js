@@ -11,68 +11,24 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 var SupplyIcon = function SupplyIcon() {
   return _react.default.createElement("svg", {
-    version: "1.1",
-    viewBox: "0 0 60 60",
-    enableBackground: "new 0 0 60 60"
-  }, _react.default.createElement("g", null, _react.default.createElement("path", {
-    id: "tank_water_1_1_",
-    opacity: "0.95",
-    fill: "#FFFFFF",
-    d: "M8.5,32.65l4.16,2.52c1.55,1.6,3.64,2.56,5.86,2.69h0 c1.49,0.09,2.65,0.8,3.9,1.88l1.05,1.17c1.88,2.09,4.64,3.17,7.45,2.9h0l3.52-3.66c1.7-1.76,4.12-2.62,6.55-2.32h0 c0.15,0.02,0.3-0.03,0.4-0.14l3.19-3.33c1.74-1.82,4.25-2.68,6.74-2.32h0l0,0c-4.12-1.14-4.69-4.56-10.2-4.16l0,0 c-0.66,0.15-1.35,0.14-2-0.02l-0.13-0.03c-4.4,0.31-4.82-2.58-10.07-6.23"
-  }), _react.default.createElement("path", {
-    opacity: "0.8",
-    fill: "#FFFFFF",
-    d: "M45.25,33.6c1.94-1.33,3.86-2.12,4.41-1.98l1.63,0.42c-0.03,0.7-0.03,0.7-0.06,1.69 l0.27,6.11L31.1,51.48L8.5,38.66v-6.01l4.73,1.57c0.82,0.78,1.86,2.8,2.95,3.08l0.23,0.07c0.27,0.28,1.63,0.42,2.46,0.5 c0.2,0.02,0.35,0.03,0.37,0.04c1.05,0.31,2.03,0.83,2.88,1.53l4.05,3.54l4.72,0.83l3.95-4.13c0.8-0.84,3.24-1.9,4.51-2.01 c0.14-0.01,0.27,0,0.41,0.02l0.6-0.03c0.21,0.14,0.93,0.18,1.02-0.08"
-  }), _react.default.createElement("g", {
-    id: "tank_cube"
-  }, _react.default.createElement("polygon", {
-    fill: "none",
-    stroke: "#FFFFFF",
-    strokeLinecap: "round",
-    strokeLinejoin: "round",
-    strokeMiterlimit: "10",
-    points: "30.9,51.6  30.9,32.19 51.3,20.42 51.3,39.82 \t\t"
-  }), _react.default.createElement("polygon", {
-    fill: "none",
-    stroke: "#FFFFFF",
-    strokeLinecap: "round",
-    strokeLinejoin: "round",
-    strokeMiterlimit: "10",
-    points: " 30.9,32.19 30.9,51.6 8.5,38.66 8.5,19.26 \t\t"
-  }), _react.default.createElement("polygon", {
-    fill: "none",
-    stroke: "#FFFFFF",
-    strokeLinecap: "round",
-    strokeLinejoin: "round",
-    strokeMiterlimit: "10",
-    points: " 28.89,7.48 28.89,26.89 8.5,38.66 8.5,19.26 \t\t"
-  }), _react.default.createElement("polygon", {
-    fill: "none",
-    stroke: "#FFFFFF",
-    strokeLinecap: "round",
-    strokeLinejoin: "round",
-    strokeMiterlimit: "10",
-    points: " 51.3,39.82 28.89,26.89 28.89,7.48 51.3,20.42 \t\t"
-  }), _react.default.createElement("polygon", {
-    id: "tank_top",
-    fill: "none",
-    stroke: "#FFFFFF",
-    strokeLinecap: "round",
-    strokeLinejoin: "round",
-    strokeMiterlimit: "10",
-    points: " 28.89,7.48 8.5,19.26 30.9,32.19 51.3,20.42 \t\t"
-  })), _react.default.createElement("g", {
-    id: "lid_3_"
+    width: "47px",
+    height: "47px",
+    viewBox: "0 0 47 47"
   }, _react.default.createElement("g", {
-    id: "lid_1_"
-  }, _react.default.createElement("path", {
+    id: "update-with-new-content-March-29",
+    stroke: "none",
+    strokeWidth: "1",
     fill: "none",
-    stroke: "#FFFFFF",
-    strokeLinecap: "round",
-    strokeLinejoin: "round",
-    strokeMiterlimit: "10",
-    d: "M34.51,16.23 c-2.78-1.41-7.13-1.43-9.67-0.05s-2.33,3.86,0.45,5.51s7.13,1.67,9.67,0.05C37.49,20.11,37.29,17.63,34.51,16.23z"
-  })))));
+    fillRule: "evenodd"
+  }, _react.default.createElement("g", {
+    id: "Controller---Projects-Surface-Water----Active-Copy-2",
+    transform: "translate(-268.000000, -223.000000)",
+    stroke: "#FFF",
+    strokeWidth: "2"
+  }, _react.default.createElement("path", {
+    d: "M291.566773,225 C294.919729,225 294.522178,227.756691 298.280687,229.385223 C302.039197,231.013755 303.729992,228.676113 306.338473,231.400458 C308.946954,234.124803 307.039315,236.570307 308.417375,239.972162 C309.795434,243.374018 312.363243,243.10353 312.363243,246.273106 C312.363243,249.442682 310.038526,248.635075 308.417375,252.618501 C306.796223,256.601928 308.819706,258.47797 306.338473,261.076926 C303.85724,263.675882 301.876318,261.689548 298.280687,263.236127 C294.685056,264.782706 294.900816,267.430638 291.566773,267.430638 C288.232731,267.430638 288.809662,264.893362 284.906202,263.236127 C281.002742,261.578891 279.16891,263.489406 276.601207,261.076926 C274.033505,258.664445 277.360052,256.259693 275.695038,252.525745 C274.030024,248.791797 270,249.637552 270,246.273106 C270,242.90866 272.622476,243.433658 274.327006,239.59332 C276.031535,235.752981 273.947848,233.960742 276.601207,231.400458 C279.254567,228.840174 281.294959,230.929676 284.906202,229.385223 C288.517445,227.84077 288.213818,225 291.566773,225 Z",
+    id: "Path-5"
+  }))));
 };
 
 var _default = SupplyIcon;

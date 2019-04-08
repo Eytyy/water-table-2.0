@@ -3,6 +3,7 @@ import { broadcastEvent } from '../../api';
 
 import PoolsSVG from './PoolsSVG';
 
+import NaturalIcon from '../../icons/NaturalIcon';
 import SupplyIcon from '../../icons/SupplyIcon';
 import DamIcon from '../../icons/DamIcon';
 import CanalIcon from '../../icons/CanalIcon';
@@ -40,6 +41,28 @@ class MapControls extends Component {
 		})
 	}
 
+	onPoolClick = (e) => {
+		let id;
+		let target = e.currentTarget;
+		let parent = target.parentNode;
+		if (parent.classList.contains('svg-group')) {
+			id = parent.id;
+		} else {
+			id = target.id;
+		}
+
+		this.setState({
+			active: id
+		});
+
+		broadcastEvent({
+			source: 'controller',
+			event:  'poolClicked',
+			payload: id
+		})
+	}
+
+
 	onMapClick = (e) => {
 		const target = e.currentTarget.id;
 
@@ -63,6 +86,15 @@ class MapControls extends Component {
 					<h1>WATER MAP &amp; PROJECTS</h1>
 					<div className="map-console__controls__group map-console__controls__group--main">
 						<div 
+							className={`btn-group ${activeLayer === 'default' ? 'is-active' : ''}`}
+							onClick={() => { this.onClickLayer('default'); }}
+						>
+							<i className="btn-icon icon--default">
+								<NaturalIcon />
+							</i>
+							<span className="btn-label">Natural Water Resources</span>
+						</div>
+						<div 
 							className={`btn-group ${activeLayer === 'supply' ? 'is-active' : ''}`}
 							onClick={() => { this.onClickLayer('supply'); }}
 						>
@@ -71,6 +103,7 @@ class MapControls extends Component {
 							</i>
 							<span className="btn-label">Utilities &amp; Water Supply Projects</span>
 						</div>
+
 						<div 
 							className={`btn-group ${activeLayer === 'waste' ? 'is-active' : ''}`}
 							onClick={() => { this.onClickLayer('waste'); }}
@@ -114,6 +147,7 @@ class MapControls extends Component {
 						activeLayer={this.state.activeLayer}
 						PoolsConfig={poolsConfig}
 						active={this.state.active}
+						onPoolClick={this.onPoolClick}
 					/>
 					<MapLayer
 						layerName="desalination"

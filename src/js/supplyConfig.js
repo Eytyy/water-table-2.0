@@ -1,7 +1,7 @@
 export default {
 	description: 'Water Supply description adipisicing elit. Sit nemo veniam culpa provident dolore aut aliquid cumque laboriosam quo! Magnam!',
 	title: 'Water Supply Resources',
-	icon: '../waste-water-icon.svg',
+	icon: '../supply.svg',
 	entries: [
 		{ 
 			id: 'ws1',

@@ -11,6 +11,8 @@ var _api = require("../../api");
 
 var _PoolsSVG = _interopRequireDefault(require("./PoolsSVG"));
 
+var _NaturalIcon = _interopRequireDefault(require("../../icons/NaturalIcon"));
+
 var _SupplyIcon = _interopRequireDefault(require("../../icons/SupplyIcon"));
 
 var _DamIcon = _interopRequireDefault(require("../../icons/DamIcon"));
@@ -99,6 +101,28 @@ function (_Component) {
       });
     });
 
+    _defineProperty(_assertThisInitialized(_assertThisInitialized(_this)), "onPoolClick", function (e) {
+      var id;
+      var target = e.currentTarget;
+      var parent = target.parentNode;
+
+      if (parent.classList.contains('svg-group')) {
+        id = parent.id;
+      } else {
+        id = target.id;
+      }
+
+      _this.setState({
+        active: id
+      });
+
+      (0, _api.broadcastEvent)({
+        source: 'controller',
+        event: 'poolClicked',
+        payload: id
+      });
+    });
+
     _defineProperty(_assertThisInitialized(_assertThisInitialized(_this)), "onMapClick", function (e) {
       var target = e.currentTarget.id;
 
@@ -130,6 +154,15 @@ function (_Component) {
       }, _react.default.createElement("h1", null, "WATER MAP & PROJECTS"), _react.default.createElement("div", {
         className: "map-console__controls__group map-console__controls__group--main"
       }, _react.default.createElement("div", {
+        className: "btn-group ".concat(activeLayer === 'default' ? 'is-active' : ''),
+        onClick: function onClick() {
+          _this2.onClickLayer('default');
+        }
+      }, _react.default.createElement("i", {
+        className: "btn-icon icon--default"
+      }, _react.default.createElement(_NaturalIcon.default, null)), _react.default.createElement("span", {
+        className: "btn-label"
+      }, "Natural Water Resources")), _react.default.createElement("div", {
         className: "btn-group ".concat(activeLayer === 'supply' ? 'is-active' : ''),
         onClick: function onClick() {
           _this2.onClickLayer('supply');
@@ -179,7 +212,8 @@ function (_Component) {
       }, _react.default.createElement(_PoolsSVG.default, {
         activeLayer: this.state.activeLayer,
         PoolsConfig: _poolsConfig.default,
-        active: this.state.active
+        active: this.state.active,
+        onPoolClick: this.onPoolClick
       }), _react.default.createElement(_MapLayer.default, {
         layerName: "desalination",
         config: _desalinationConfig.default,

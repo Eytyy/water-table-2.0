@@ -7,15 +7,15 @@ exports.default = void 0;
 
 var _react = _interopRequireWildcard(require("react"));
 
+var _MapLayer = _interopRequireDefault(require("../MapLayer"));
+
+var _MapLayerContent = _interopRequireDefault(require("../MapLayerContent"));
+
 var _supplyConfig = _interopRequireDefault(require("../../supplyConfig"));
 
 var _SupplyText = _interopRequireDefault(require("./SupplyText"));
 
 var _SupplyIcon = _interopRequireDefault(require("../../icons/SupplyIcon"));
-
-var _MapLayer = _interopRequireDefault(require("../MapLayer"));
-
-var _MapLayerContent = _interopRequireDefault(require("../MapLayerContent"));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 

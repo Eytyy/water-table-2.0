@@ -1,7 +1,7 @@
 export default {
 	description: 'King Abdullah Canal adipisicing elit. Sit nemo veniam culpa provident dolore aut aliquid cumque laboriosam quo! Magnam!',
 	title: 'King Abdullah Canal',
-	icon: '../waste-water-icon.svg',
+	icon: '../canal.svg',
 	entries: [
 		{ 
 			id: 'kac',

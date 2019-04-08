@@ -7,7 +7,7 @@ exports.default = void 0;
 var _default = {
   description: 'Desalination Plant description adipisicing elit. Sit nemo veniam culpa provident dolore aut aliquid cumque laboriosam quo! Magnam!',
   title: 'Desalination Plant',
-  icon: '../waste-water-icon.svg',
+  icon: '../desalination.svg',
   entries: [{
     id: 'd1',
     position: {

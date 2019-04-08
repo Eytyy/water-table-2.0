@@ -1,9 +1,12 @@
 import React, { Component } from 'react';
+
+import MapLayer from '../MapLayer';
+import MapLayerContent from '../MapLayerContent';
+
 import desalinationConfig from '../../desalinationConfig';
 import DesalinationText from './DesalinationText';
 import DesalinationIcon from '../../icons/DesalinationIcon';
-import MapLayer from '../MapLayer';
-import MapLayerContent from '../MapLayerContent';
+
 
 class Desalination extends Component {
 	render() {

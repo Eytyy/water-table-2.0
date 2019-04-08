@@ -7,7 +7,7 @@ exports.default = void 0;
 var _default = {
   description: 'waste water plants description adipisicing elit. Sit nemo veniam culpa provident dolore aut aliquid cumque laboriosam quo! Magnam!',
   title: 'Waste Water Treatement Plants',
-  icon: '../waste-water-icon.svg',
+  icon: '../waste.svg',
   entries: [{
     id: 'ww1',
     position: {

@@ -7,7 +7,7 @@ exports.default = void 0;
 var _default = {
   description: 'natural resources description adipisicing elit. Sit nemo veniam culpa provident dolore aut aliquid cumque laboriosam quo! Magnam!',
   title: 'Natural Water Resources',
-  icon: '../natural-icon.svg',
+  icon: '../water_resources.svg',
   entries: [{
     id: 'taberias',
     pool: {
