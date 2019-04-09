@@ -41,7 +41,15 @@ function (_Component) {
   _createClass(Intro, [{
     key: "render",
     value: function render() {
-      return _react.default.createElement("div", null, "Imagine this is where it all starts?");
+      return _react.default.createElement("div", {
+        className: "intro"
+      }, _react.default.createElement("div", {
+        className: "intro__content"
+      }, _react.default.createElement("h1", {
+        className: "intro__title"
+      }, "Water Table"), _react.default.createElement("p", {
+        className: "intro__text"
+      }, "Use the controller to", _react.default.createElement("br", null), "start your experience")));
     }
   }]);
 

@@ -21,8 +21,8 @@ var MapLayer = function MapLayer(_ref) {
   return _react.default.createElement("div", {
     className: "".concat(activeLayer === layerName ? 'is-active' : 'is-hidden', " resources resources--").concat(layerName),
     style: {
-      width: '914px',
-      height: '1539px',
+      width: '683px',
+      height: '1024px',
       position: 'absolute',
       left: '0px',
       top: '0px'

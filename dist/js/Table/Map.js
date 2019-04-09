@@ -13,23 +13,23 @@ var _poolsConfig = _interopRequireDefault(require("../poolsConfig"));
 
 var _Pools = _interopRequireDefault(require("./Pools/Pools"));
 
-var _WasteWater = _interopRequireDefault(require("./WasteWater/WasteWater"));
+var _WasteWater = _interopRequireDefault(require("./Layers/WasteWater"));
 
 var _wastewaterConfig = _interopRequireDefault(require("../wastewaterConfig"));
 
-var _Dams = _interopRequireDefault(require("./Dams/Dams"));
+var _Dams = _interopRequireDefault(require("./Layers/Dams"));
 
 var _damsConfig = _interopRequireDefault(require("../damsConfig"));
 
-var _Supply = _interopRequireDefault(require("./Supply/Supply"));
+var _Supply = _interopRequireDefault(require("./Layers/Supply"));
 
 var _supplyConfig = _interopRequireDefault(require("../supplyConfig"));
 
-var _Desalination = _interopRequireDefault(require("./Desalination/Desalination"));
+var _Desalination = _interopRequireDefault(require("./Layers/Desalination"));
 
 var _desalinationConfig = _interopRequireDefault(require("../desalinationConfig"));
 
-var _Canal = _interopRequireDefault(require("./Canal/Canal"));
+var _Canal = _interopRequireDefault(require("./Layers/Canal"));
 
 var _canalConfig = _interopRequireDefault(require("../canalConfig"));
 

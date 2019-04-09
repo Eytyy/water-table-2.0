@@ -84,6 +84,14 @@ function (_Component) {
       history.push("/table/".concat(to));
     });
 
+    _defineProperty(_assertThisInitialized(_assertThisInitialized(_this)), "updateBodyClassName", function () {
+      if (_this.props.location.pathname === '/table/') {
+        document.body.classList.add('landing');
+      } else {
+        document.body.classList.remove('landing');
+      }
+    });
+
     return _this;
   }
 
@@ -91,6 +99,12 @@ function (_Component) {
     key: "componentDidMount",
     value: function componentDidMount() {
       this.listenToIncomingEvents();
+      this.updateBodyClassName();
+    }
+  }, {
+    key: "componentDidUpdate",
+    value: function componentDidUpdate(prevProps, prevState) {
+      this.updateBodyClassName();
     }
   }, {
     key: "render",

@@ -25,10 +25,24 @@ class Table extends Component {
 		const { history } = this.props;
     history.push(`/table/${to}`);
 	};
+
+	updateBodyClassName = () => {
+		if (this.props.location.pathname === '/table/') {
+			document.body.classList.add('landing');
+		} else {
+			document.body.classList.remove('landing');
+		}
+	}
 	
 	componentDidMount() {
 		this.listenToIncomingEvents();
+		this.updateBodyClassName();
 	}
+
+	componentDidUpdate(prevProps, prevState) {
+		this.updateBodyClassName();
+	}
+	
 	
 	render() {
 		return (

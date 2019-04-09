@@ -7,9 +7,15 @@ exports.default = void 0;
 
 var _react = _interopRequireWildcard(require("react"));
 
-var _reactRouterDom = require("react-router-dom");
+var _MapLayer = _interopRequireDefault(require("./MapLayer"));
 
-var _api = require("../api");
+var _MapLayerContent = _interopRequireDefault(require("./MapLayerContent"));
+
+var _supplyConfig = _interopRequireDefault(require("../../supplyConfig"));
+
+var _SupplyIcon = _interopRequireDefault(require("../../icons/SupplyIcon"));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) { var desc = Object.defineProperty && Object.getOwnPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : {}; if (desc.get || desc.set) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } } newObj.default = obj; return newObj; } }
 
@@ -23,72 +29,48 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
 function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
 
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
 function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
 
 function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
 
-function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
-
-function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
-
-var Intro =
+var Supply =
 /*#__PURE__*/
 function (_Component) {
-  _inherits(Intro, _Component);
+  _inherits(Supply, _Component);
 
-  function Intro() {
-    var _getPrototypeOf2;
+  function Supply() {
+    _classCallCheck(this, Supply);
 
-    var _this;
-
-    _classCallCheck(this, Intro);
-
-    for (var _len = arguments.length, args = new Array(_len), _key = 0; _key < _len; _key++) {
-      args[_key] = arguments[_key];
-    }
-
-    _this = _possibleConstructorReturn(this, (_getPrototypeOf2 = _getPrototypeOf(Intro)).call.apply(_getPrototypeOf2, [this].concat(args)));
-
-    _defineProperty(_assertThisInitialized(_assertThisInitialized(_this)), "onLinkClick", function (to) {
-      (0, _api.broadcastEvent)({
-        source: 'controller',
-        event: 'navigate',
-        payload: to
-      });
-    });
-
-    return _this;
+    return _possibleConstructorReturn(this, _getPrototypeOf(Supply).apply(this, arguments));
   }
 
-  _createClass(Intro, [{
+  _createClass(Supply, [{
     key: "render",
     value: function render() {
-      var _this2 = this;
-
-      return _react.default.createElement("section", {
-        className: "intro"
-      }, _react.default.createElement("div", {
-        className: "intro__section intro__section--left"
-      }, _react.default.createElement(_reactRouterDom.Link, {
-        onClick: function onClick() {
-          return _this2.onLinkClick('map');
-        },
-        to: "/controller/map"
-      }, "water map & porjects")), _react.default.createElement("div", {
-        className: "intro__section intro__section--right"
-      }, _react.default.createElement(_reactRouterDom.Link, {
-        onClick: function onClick() {
-          return _this2.onLinkClick('story');
-        },
-        to: "/controller/viz"
-      }, "story & visualisation")));
+      var _this$props = this.props,
+          activeLayer = _this$props.activeLayer,
+          active = _this$props.active;
+      return _react.default.createElement(_MapLayerContent.default, {
+        layerName: "supply",
+        activeLayer: activeLayer,
+        active: active,
+        config: _supplyConfig.default,
+        renderIcon: function renderIcon() {
+          return _react.default.createElement(_SupplyIcon.default, null);
+        }
+      });
     }
   }]);
 
-  return Intro;
+  return Supply;
 }(_react.Component);
 
-var _default = Intro;
+var _default = (0, _MapLayer.default)(Supply, {
+  pageName: 'supply'
+});
+
 exports.default = _default;

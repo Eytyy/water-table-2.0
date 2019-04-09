@@ -1,15 +1,13 @@
 import React, { Component } from 'react';
-import { calculateTextPosition } from '../utility';
+import { calculateTextPosition } from '../../utility';
 
 class MapLayerText extends Component {
 	textBox = React.createRef()
 
 	render() {
-		const { position, figures, active, id, name, layerName } = this.props;
-		const iconWidth = 50;
-		const iconHeight = 50;
+		const { position, figures, active, id, name, layerName, iconWidth, iconHeight } = this.props;
 		const isActive = typeof active !== 'undefined' && active === id;
-		const margin = 0;
+		const margin = 50;
 		let textWidth = this.textBox.current ? this.textBox.current.offsetwidth : 240;
 		let textHeight = this.textBox.current ? this.textBox.current.offsetHeight : 120;
 		const maxScreenWidth = 1080;

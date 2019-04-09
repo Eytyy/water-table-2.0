@@ -1,51 +1,57 @@
 import React from 'react';
+import MapLayerText from './MapLayerText';
 
 const MapLayerContent = ({ layerName, activeLayer, active, config, renderIcon, renderText }) => {
 	const iconSizes = {
 		'supply': {
-			w: '30px',
-			h: '30px',
+			w: 30,
+			h: 30,
 			scale: '2',
 		}, 
 		'desalination': {
-			w: '30px',
-			h: '30px',
+			w: 30,
+			h: 30,
 			scale: '2',
 		},  
 		'waste': {
-			w: '30px',
-			h: '30px',
+			w: 30,
+			h: 30,
 			scale: '2',
 		},  
 		'canal': {
-			w: '30px',
-			h: '30px',
+			w: 50,
+			h: 30,
 			scale: '1.5',
 		},  
 		'dams': {
-			w: '30px',
-			h: '30px',
+			w: 30,
+			h: 30,
 			scale: '1.5',
 		}, 
 	}
 	const getOpacity = (id) => {
+	
 		if (typeof active !== 'undefined' && active !== id) {
 			return '0.5';
 		} 
 		return '1';
 	};
+	const width = iconSizes[layerName].w;
+	const height = iconSizes[layerName].h;
+	const scale = iconSizes[layerName].scale;
+
 	return (
 		<div className={`layer layer--${layerName} ${activeLayer === layerName ? 'layer--is-active' : 'layer--is-hidden'}`}>
 			<div className={`resources resources--${layerName}`}>
 				{
 					config.entries.map(({ id, position }) => 
 						<div className={`icon icon--${layerName}`} key={id} style={{
-							width: iconSizes[layerName].w,
-							height: iconSizes[layerName].h,
+							width: `${width}px`,
+							height: `${height}px`,
 							position: 'absolute',
 							top: position.y + 180,
 							left: position.x + 190,
-							transform: `${active !== id ? 'scale(1, 1)' : `scale(${iconSizes[layerName].scale}, ${iconSizes[layerName].scale})`}`,
+							transform: `${active !== id ? 'scale(1, 1)' : `scale(${scale}, ${scale})`}`,
 							opacity: getOpacity(id),
 							zIndex: `${active !== id ? '2' : '1'}`
 							}}
@@ -58,7 +64,19 @@ const MapLayerContent = ({ layerName, activeLayer, active, config, renderIcon, r
 				}
 			</div>
 			{
-				config.entries.map(({ name, figures, id, position }) => renderText({ name, figures, id, position }))
+				config.entries.map(({ name, figures, id, position }) => 
+					<MapLayerText
+						layerName={layerName}
+						key={`rx-${id}`}
+						active={active}
+						name={name}
+						figures={figures}
+						id={id}
+						position={position}
+						iconWidth={width}
+						iconHeight={height}
+					/>
+				)
 			}
 		</div>
 	);

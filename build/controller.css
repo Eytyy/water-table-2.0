@@ -129,10 +129,12 @@ a {
 
 .intro {
   display: flex;
-  flex-wrap: wrap; }
+  flex-wrap: wrap;
+  height: 100%;
+  align-content: center;
+  font-size: 32px; }
   .intro__section {
-    display: flex;
-    justify-content: center;
+    text-align: center;
     flex: 0 0 50%; }
 
 .pool {

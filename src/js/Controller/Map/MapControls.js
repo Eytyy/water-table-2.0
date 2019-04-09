@@ -26,14 +26,25 @@ class MapControls extends Component {
 	}
 
 	setActiveLayer = (layer) => {
+		let active;
+		if (layer === 'canal') {
+			active = canalConfig.entries[0].id;
+		}
 		this.setState({
 			activeLayer: this.state.activeLayer === layer ? 'default' : layer,
-			active: undefined,
+			active,
 		});
 	}
 
 	onClickLayer = view => {
 		this.setActiveLayer(view);
+		if (view === 'canal') {
+			broadcastEvent({
+				source: 'controller',
+				event:  'mapClicked',
+				payload: canalConfig.entries[0].id
+			})
+		}
 		broadcastEvent({
 			source: 'controller',
 			event:  'switchMapView',

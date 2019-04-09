@@ -4,7 +4,13 @@ import PropTypes from 'prop-types';
 const MapLayer = ({ layerName, config, active, activeLayer, renderIcon, onClick }) => (
 	<div
 		className={`${activeLayer === layerName ? 'is-active' : 'is-hidden'} resources resources--${layerName}`}
-		style={{ width: '914px', height: '1539px', position: 'absolute', left: '0px', top: '0px'}}
+		style={{ 
+			width: '683px',
+			height: '1024px',
+			position: 'absolute',
+			left: '0px',
+			top: '0px'
+		}}
 	>
 		{
 			config.entries.map(({ id, position }) => 

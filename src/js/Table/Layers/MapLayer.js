@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { socket } from '../api';
+import { socket } from '../../api';
 
 const MapLayer = (WrappedComponent, { pageName }) => {
 	class MapLayer extends Component {
@@ -13,7 +13,7 @@ const MapLayer = (WrappedComponent, { pageName }) => {
 		}
 
 		componentWillReceiveProps({ activeLayer }) {
-			if(this.props.activeLayer !== activeLayer) {
+			if(this.props.activeLayer !== activeLayer && activeLayer !== 'canal') {
 				this.setState({
 					active: undefined
 				});

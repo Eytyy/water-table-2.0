@@ -55,6 +55,28 @@ h1 {
 	height: 1920px;
 	position: relative;
 	overflow: hidden;
+	.landing & {
+		width: 100%;
+		background: url('../images/intro.png') no-repeat center top;
+		background-size: 100%;
+	}
+}
+
+.intro {
+	&__content {
+		position: fixed;
+		bottom: 0;
+		left: 0;
+		right: 0;
+		text-align: center;
+		padding: 120px;
+	}
+	&__title {
+		font-size: 100px;
+	}
+	&__text {
+		font-size: 28px;
+	}
 }
 
 .layer,

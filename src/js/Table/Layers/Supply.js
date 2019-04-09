@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
 
-import MapLayer from '../MapLayer';
-import MapLayerContent from '../MapLayerContent';
-import MapLayerText from '../MapLayerText';
+import MapLayer from './MapLayer';
+import MapLayerContent from './MapLayerContent';
 
 import supplyConfig from '../../supplyConfig';
 import SupplyIcon from '../../icons/SupplyIcon';
@@ -18,17 +17,6 @@ class Supply extends Component {
 				active={active}
 				config={supplyConfig}
 				renderIcon={() => <SupplyIcon />}
-				renderText={({ name, figures, id, position }) => (
-					<MapLayerText
-						layerName="supply"
-						key={`rx-${id}`}
-						active={active}
-						name={name}
-						figures={figures}
-						id={id}
-						position={position}
-					/>
-				)}
 			/>
 		);
 	}

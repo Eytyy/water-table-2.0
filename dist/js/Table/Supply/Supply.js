@@ -11,8 +11,6 @@ var _MapLayer = _interopRequireDefault(require("../MapLayer"));
 
 var _MapLayerContent = _interopRequireDefault(require("../MapLayerContent"));
 
-var _MapLayerText = _interopRequireDefault(require("../MapLayerText"));
-
 var _supplyConfig = _interopRequireDefault(require("../../supplyConfig"));
 
 var _SupplyIcon = _interopRequireDefault(require("../../icons/SupplyIcon"));
@@ -63,21 +61,6 @@ function (_Component) {
         config: _supplyConfig.default,
         renderIcon: function renderIcon() {
           return _react.default.createElement(_SupplyIcon.default, null);
-        },
-        renderText: function renderText(_ref) {
-          var name = _ref.name,
-              figures = _ref.figures,
-              id = _ref.id,
-              position = _ref.position;
-          return _react.default.createElement(_MapLayerText.default, {
-            layerName: "supply",
-            key: "rx-".concat(id),
-            active: active,
-            name: name,
-            figures: figures,
-            id: id,
-            position: position
-          });
         }
       });
     }

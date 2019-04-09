@@ -65,11 +65,11 @@ function (_Component) {
           active = _this$props.active,
           id = _this$props.id,
           name = _this$props.name,
-          layerName = _this$props.layerName;
-      var iconWidth = 50;
-      var iconHeight = 50;
+          layerName = _this$props.layerName,
+          iconWidth = _this$props.iconWidth,
+          iconHeight = _this$props.iconHeight;
       var isActive = typeof active !== 'undefined' && active === id;
-      var margin = 0;
+      var margin = 50;
       var textWidth = this.textBox.current ? this.textBox.current.offsetwidth : 240;
       var textHeight = this.textBox.current ? this.textBox.current.offsetHeight : 120;
       var maxScreenWidth = 1080;

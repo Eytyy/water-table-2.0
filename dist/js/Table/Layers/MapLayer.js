@@ -7,9 +7,7 @@ exports.default = void 0;
 
 var _react = _interopRequireWildcard(require("react"));
 
-var _reactRouterDom = require("react-router-dom");
-
-var _api = require("../api");
+var _api = require("../../api");
 
 function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) { var desc = Object.defineProperty && Object.getOwnPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : {}; if (desc.get || desc.set) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } } newObj.default = obj; return newObj; } }
 
@@ -33,62 +31,89 @@ function _assertThisInitialized(self) { if (self === void 0) { throw new Referen
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
-var Intro =
-/*#__PURE__*/
-function (_Component) {
-  _inherits(Intro, _Component);
+var MapLayer = function MapLayer(WrappedComponent, _ref) {
+  var pageName = _ref.pageName;
 
-  function Intro() {
-    var _getPrototypeOf2;
+  var MapLayer =
+  /*#__PURE__*/
+  function (_Component) {
+    _inherits(MapLayer, _Component);
 
-    var _this;
+    function MapLayer() {
+      var _getPrototypeOf2;
 
-    _classCallCheck(this, Intro);
+      var _this;
 
-    for (var _len = arguments.length, args = new Array(_len), _key = 0; _key < _len; _key++) {
-      args[_key] = arguments[_key];
-    }
+      _classCallCheck(this, MapLayer);
 
-    _this = _possibleConstructorReturn(this, (_getPrototypeOf2 = _getPrototypeOf(Intro)).call.apply(_getPrototypeOf2, [this].concat(args)));
+      for (var _len = arguments.length, args = new Array(_len), _key = 0; _key < _len; _key++) {
+        args[_key] = arguments[_key];
+      }
 
-    _defineProperty(_assertThisInitialized(_assertThisInitialized(_this)), "onLinkClick", function (to) {
-      (0, _api.broadcastEvent)({
-        source: 'controller',
-        event: 'navigate',
-        payload: to
+      _this = _possibleConstructorReturn(this, (_getPrototypeOf2 = _getPrototypeOf(MapLayer)).call.apply(_getPrototypeOf2, [this].concat(args)));
+
+      _defineProperty(_assertThisInitialized(_assertThisInitialized(_this)), "state", {
+        active: undefined
       });
-    });
 
-    return _this;
-  }
+      _defineProperty(_assertThisInitialized(_assertThisInitialized(_this)), "updateActive", function (payload) {
+        _this.setState({
+          active: payload
+        });
+      });
 
-  _createClass(Intro, [{
-    key: "render",
-    value: function render() {
-      var _this2 = this;
+      _defineProperty(_assertThisInitialized(_assertThisInitialized(_this)), "listenToIncomingEvents", function () {
+        _api.socket.on('controller', function (message) {
+          var event = message.event,
+              payload = message.payload;
 
-      return _react.default.createElement("section", {
-        className: "intro"
-      }, _react.default.createElement("div", {
-        className: "intro__section intro__section--left"
-      }, _react.default.createElement(_reactRouterDom.Link, {
-        onClick: function onClick() {
-          return _this2.onLinkClick('map');
-        },
-        to: "/controller/map"
-      }, "water map & porjects")), _react.default.createElement("div", {
-        className: "intro__section intro__section--right"
-      }, _react.default.createElement(_reactRouterDom.Link, {
-        onClick: function onClick() {
-          return _this2.onLinkClick('story');
-        },
-        to: "/controller/viz"
-      }, "story & visualisation")));
+          switch (event) {
+            case 'mapClicked':
+              _this.updateActive(payload);
+
+              break;
+
+            default:
+              return;
+          }
+        });
+      });
+
+      return _this;
     }
-  }]);
 
-  return Intro;
-}(_react.Component);
+    _createClass(MapLayer, [{
+      key: "componentDidMount",
+      value: function componentDidMount() {
+        this.listenToIncomingEvents();
+      }
+    }, {
+      key: "componentWillReceiveProps",
+      value: function componentWillReceiveProps(_ref2) {
+        var activeLayer = _ref2.activeLayer;
 
-var _default = Intro;
+        if (this.props.activeLayer !== activeLayer && activeLayer !== 'canal') {
+          this.setState({
+            active: undefined
+          });
+        }
+      }
+    }, {
+      key: "render",
+      value: function render() {
+        var activeLayer = this.props.activeLayer;
+        return _react.default.createElement(WrappedComponent, {
+          active: this.state.active,
+          activeLayer: activeLayer
+        });
+      }
+    }]);
+
+    return MapLayer;
+  }(_react.Component);
+
+  return MapLayer;
+};
+
+var _default = MapLayer;
 exports.default = _default;

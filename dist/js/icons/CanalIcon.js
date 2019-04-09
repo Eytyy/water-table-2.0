@@ -11,37 +11,25 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 var CanalIcon = function CanalIcon() {
   return _react.default.createElement("svg", {
-    width: "18px",
-    height: "91px",
-    viewBox: "0 0 18 91",
-    version: "1.1"
+    width: "72px",
+    height: "17px",
+    viewBox: "0 0 72 17"
   }, _react.default.createElement("g", {
-    id: "update-with-new-content-March-29",
     stroke: "none",
     strokeWidth: "1",
     fill: "none",
-    fillRule: "evenodd",
-    opacity: "0.699999988"
+    fillRule: "evenodd"
   }, _react.default.createElement("g", {
-    id: "Controller---Projects-Surface-Water----Active-Copy-2",
-    transform: "translate(-485.000000, -396.000000)",
-    stroke: "#FFFFFF"
+    transform: "translate(-462.000000, -452.000000)",
+    stroke: "#FFFFFF",
+    strokeWidth: "2"
   }, _react.default.createElement("g", {
-    id: "king_abdullah_canal",
-    transform: "translate(487.000000, 396.000000)"
-  }, _react.default.createElement("g", {
-    id: "Group"
+    transform: "translate(462.000000, 453.000000)"
   }, _react.default.createElement("polyline", {
-    id: "Path-2",
-    strokeWidth: "3",
-    points: "14.1953125 0.34375 14.1953125 13.3046875 0.57421875 23.0351562 0.57421875 57.2773437"
-  }), _react.default.createElement("path", {
-    d: "M0.2578125,60.7617188 L11.59375,72.0976562 L11.59375,91.9101562",
-    id: "Path-8",
-    strokeWidth: "3",
-    strokeLinecap: "round",
-    strokeDasharray: "1,7"
-  }))))));
+    points: "5 0 12.1251102 0 17.4314481 7.07511717 42.8671818 7.07511717 47.6515084 0 69.9643946 0"
+  }), _react.default.createElement("polyline", {
+    points: "0 7 12.1251102 7 17.4314481 14.0751172 42.8671818 14.0751172 47.6515084 7 71.9643946 7"
+  })))));
 };
 
 var _default = CanalIcon;

@@ -7,13 +7,13 @@ exports.default = void 0;
 
 var _react = _interopRequireWildcard(require("react"));
 
-var _reactRouterDom = require("react-router-dom");
-
-var _api = require("../api");
+var _utility = require("../../utility");
 
 function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) { var desc = Object.defineProperty && Object.getOwnPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : {}; if (desc.get || desc.set) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } } newObj.default = obj; return newObj; } }
 
 function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; var ownKeys = Object.keys(source); if (typeof Object.getOwnPropertySymbols === 'function') { ownKeys = ownKeys.concat(Object.getOwnPropertySymbols(source).filter(function (sym) { return Object.getOwnPropertyDescriptor(source, sym).enumerable; })); } ownKeys.forEach(function (key) { _defineProperty(target, key, source[key]); }); } return target; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
@@ -33,62 +33,90 @@ function _assertThisInitialized(self) { if (self === void 0) { throw new Referen
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
-var Intro =
+var MapLayerText =
 /*#__PURE__*/
 function (_Component) {
-  _inherits(Intro, _Component);
+  _inherits(MapLayerText, _Component);
 
-  function Intro() {
+  function MapLayerText() {
     var _getPrototypeOf2;
 
     var _this;
 
-    _classCallCheck(this, Intro);
+    _classCallCheck(this, MapLayerText);
 
     for (var _len = arguments.length, args = new Array(_len), _key = 0; _key < _len; _key++) {
       args[_key] = arguments[_key];
     }
 
-    _this = _possibleConstructorReturn(this, (_getPrototypeOf2 = _getPrototypeOf(Intro)).call.apply(_getPrototypeOf2, [this].concat(args)));
+    _this = _possibleConstructorReturn(this, (_getPrototypeOf2 = _getPrototypeOf(MapLayerText)).call.apply(_getPrototypeOf2, [this].concat(args)));
 
-    _defineProperty(_assertThisInitialized(_assertThisInitialized(_this)), "onLinkClick", function (to) {
-      (0, _api.broadcastEvent)({
-        source: 'controller',
-        event: 'navigate',
-        payload: to
-      });
-    });
+    _defineProperty(_assertThisInitialized(_assertThisInitialized(_this)), "textBox", _react.default.createRef());
 
     return _this;
   }
 
-  _createClass(Intro, [{
+  _createClass(MapLayerText, [{
     key: "render",
     value: function render() {
-      var _this2 = this;
+      var _this$props = this.props,
+          position = _this$props.position,
+          figures = _this$props.figures,
+          active = _this$props.active,
+          id = _this$props.id,
+          name = _this$props.name,
+          layerName = _this$props.layerName,
+          iconWidth = _this$props.iconWidth,
+          iconHeight = _this$props.iconHeight;
+      var isActive = typeof active !== 'undefined' && active === id;
+      var margin = 50;
+      var textWidth = this.textBox.current ? this.textBox.current.offsetwidth : 240;
+      var textHeight = this.textBox.current ? this.textBox.current.offsetHeight : 120;
+      var maxScreenWidth = 1080;
 
-      return _react.default.createElement("section", {
-        className: "intro"
-      }, _react.default.createElement("div", {
-        className: "intro__section intro__section--left"
-      }, _react.default.createElement(_reactRouterDom.Link, {
-        onClick: function onClick() {
-          return _this2.onLinkClick('map');
-        },
-        to: "/controller/map"
-      }, "water map & porjects")), _react.default.createElement("div", {
-        className: "intro__section intro__section--right"
-      }, _react.default.createElement(_reactRouterDom.Link, {
-        onClick: function onClick() {
-          return _this2.onLinkClick('story');
-        },
-        to: "/controller/viz"
-      }, "story & visualisation")));
+      var _calculateTextPositio = (0, _utility.calculateTextPosition)({
+        x: position.x + 190,
+        y: position.y + 180,
+        iconWidth: iconWidth,
+        iconHeight: iconHeight,
+        margin: margin,
+        textHeight: textHeight,
+        textWidth: textWidth,
+        maxScreenWidth: maxScreenWidth
+      }),
+          orientation = _calculateTextPositio.orientation,
+          positionCSS = _calculateTextPositio.positionCSS;
+
+      var style = _objectSpread({
+        color: '#FFF',
+        opacity: isActive ? '1' : '0'
+      }, positionCSS);
+
+      return _react.default.createElement("div", {
+        ref: this.textBox,
+        style: style,
+        className: "resources-text resources-text--".concat(layerName.toLowerCase(), " resources-text--").concat(orientation.x, " resources-text--").concat(orientation.y)
+      }, _react.default.createElement("h2", {
+        className: "resource-text__title"
+      }, name), _react.default.createElement("div", {
+        className: "resource-text__group"
+      }, figures.map(function (_ref) {
+        var label = _ref.label,
+            value = _ref.value;
+        return _react.default.createElement("div", {
+          key: "".concat(id, "-").concat(label),
+          className: "resource-text__group__item"
+        }, _react.default.createElement("div", {
+          className: "resource-text__figure-label"
+        }, label), _react.default.createElement("div", {
+          className: "resource-text__figure-value"
+        }, value));
+      })));
     }
   }]);
 
-  return Intro;
+  return MapLayerText;
 }(_react.Component);
 
-var _default = Intro;
+var _default = MapLayerText;
 exports.default = _default;

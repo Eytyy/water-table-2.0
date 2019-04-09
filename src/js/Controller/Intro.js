@@ -15,10 +15,10 @@ class Intro extends Component {
 		return (
 			<section className="intro">
 				<div className="intro__section intro__section--left">
-					<Link onClick={() => this.onLinkClick('map')} to="/controller/map">Map</Link>
+					<Link onClick={() => this.onLinkClick('map')} to="/controller/map">water map &amp; porjects</Link>
 				</div>
 				<div className="intro__section intro__section--right">
-					<Link onClick={() => this.onLinkClick('story')} to="/controller/viz">Story</Link>
+					<Link onClick={() => this.onLinkClick('story')} to="/controller/viz">story &amp; visualisation</Link>
 				</div>
 			</section>
 		);

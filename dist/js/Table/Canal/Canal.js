@@ -11,8 +11,6 @@ var _MapLayer = _interopRequireDefault(require("../MapLayer"));
 
 var _MapLayerContent = _interopRequireDefault(require("../MapLayerContent"));
 
-var _MapLayerText = _interopRequireDefault(require("../MapLayerText"));
-
 var _CanalIcon = _interopRequireDefault(require("../../icons/CanalIcon"));
 
 var _canalConfig = _interopRequireDefault(require("../../canalConfig"));
@@ -63,21 +61,6 @@ function (_Component) {
         config: _canalConfig.default,
         renderIcon: function renderIcon() {
           return _react.default.createElement(_CanalIcon.default, null);
-        },
-        renderText: function renderText(_ref) {
-          var name = _ref.name,
-              figures = _ref.figures,
-              id = _ref.id,
-              position = _ref.position;
-          return _react.default.createElement(_MapLayerText.default, {
-            layerName: "canal",
-            key: "rx-".concat(id),
-            active: active,
-            name: name,
-            figures: figures,
-            id: id,
-            position: position
-          });
         }
       });
     }

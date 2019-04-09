@@ -92,7 +92,7 @@ var MapLayer = function MapLayer(WrappedComponent, _ref) {
       value: function componentWillReceiveProps(_ref2) {
         var activeLayer = _ref2.activeLayer;
 
-        if (this.props.activeLayer !== activeLayer) {
+        if (this.props.activeLayer !== activeLayer && activeLayer !== 'canal') {
           this.setState({
             active: undefined
           });

@@ -63,21 +63,6 @@ function (_Component) {
         config: _wastewaterConfig.default,
         renderIcon: function renderIcon() {
           return _react.default.createElement(_TreatmentPlantIcon.default, null);
-        },
-        renderText: function renderText(_ref) {
-          var name = _ref.name,
-              figures = _ref.figures,
-              id = _ref.id,
-              position = _ref.position;
-          return _react.default.createElement(_MapLayerText.default, {
-            layerName: "waste",
-            key: "rx-".concat(id),
-            active: active,
-            name: name,
-            figures: figures,
-            id: id,
-            position: position
-          });
         }
       });
     }

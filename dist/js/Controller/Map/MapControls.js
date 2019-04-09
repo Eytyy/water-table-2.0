@@ -85,14 +85,28 @@ function (_Component) {
     });
 
     _defineProperty(_assertThisInitialized(_assertThisInitialized(_this)), "setActiveLayer", function (layer) {
+      var active;
+
+      if (layer === 'canal') {
+        active = _canalConfig.default.entries[0].id;
+      }
+
       _this.setState({
         activeLayer: _this.state.activeLayer === layer ? 'default' : layer,
-        active: undefined
+        active: active
       });
     });
 
     _defineProperty(_assertThisInitialized(_assertThisInitialized(_this)), "onClickLayer", function (view) {
       _this.setActiveLayer(view);
+
+      if (view === 'canal') {
+        (0, _api.broadcastEvent)({
+          source: 'controller',
+          event: 'mapClicked',
+          payload: _canalConfig.default.entries[0].id
+        });
+      }
 
       (0, _api.broadcastEvent)({
         source: 'controller',

@@ -4,19 +4,19 @@ import { socket } from '../api';
 import poolsConfig from '../poolsConfig';
 import Pools from './Pools/Pools';
 
-import WasteWater from './WasteWater/WasteWater';
+import WasteWater from './Layers/WasteWater';
 import WasteWaterConfig from '../wastewaterConfig';
 
-import Dams from './Dams/Dams';
+import Dams from './Layers/Dams';
 import DamsConfig from '../damsConfig';
 
-import Supply from './Supply/Supply';
+import Supply from './Layers/Supply';
 import SupplyConfig from '../supplyConfig';
 
-import Desalination from './Desalination/Desalination';
+import Desalination from './Layers/Desalination';
 import DesalinationConfig from '../desalinationConfig';
 
-import Canal from './Canal/Canal';
+import Canal from './Layers/Canal';
 import CanalConfig from '../canalConfig';
 
 class Map extends Component {
