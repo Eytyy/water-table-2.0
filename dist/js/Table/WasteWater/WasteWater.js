@@ -11,9 +11,9 @@ var _MapLayer = _interopRequireDefault(require("../MapLayer"));
 
 var _MapLayerContent = _interopRequireDefault(require("../MapLayerContent"));
 
-var _wastewaterConfig = _interopRequireDefault(require("../../wastewaterConfig"));
+var _MapLayerText = _interopRequireDefault(require("../MapLayerText"));
 
-var _WasteWaterText = _interopRequireDefault(require("./WasteWaterText"));
+var _wastewaterConfig = _interopRequireDefault(require("../../wastewaterConfig"));
 
 var _TreatmentPlantIcon = _interopRequireDefault(require("../../icons/TreatmentPlantIcon"));
 
@@ -69,7 +69,8 @@ function (_Component) {
               figures = _ref.figures,
               id = _ref.id,
               position = _ref.position;
-          return _react.default.createElement(_WasteWaterText.default, {
+          return _react.default.createElement(_MapLayerText.default, {
+            layerName: "waste",
             key: "rx-".concat(id),
             active: active,
             name: name,

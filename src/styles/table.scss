@@ -192,34 +192,60 @@ h1 {
 		content: '';
 		position: absolute;
 		display: block;
-		border: 5px solid transparent;
+		border: 6px solid transparent;
 		width: 0;
 		height: 0;
-		border-top: 5px solid #FFF;
+		border-bottom: 6px solid #FFF;
 		transform-origin: center;
 	}
-	&--top:after {
+}
+
+.resources-text--top {
+	&:after {
 		bottom: 0px;
 	}
-	&--bottom:after {
+}
+
+.resources-text--bottom {
+	&:after {
 		top: 0px;
 	}
-	&--right:after {
-		border-right: 5px solid #FFF;
+}
+
+.resources-text--right {
+	&:after {
+		border-left: 6px solid #FFF;
 		transform: rotate(-15deg);
 		left: 0px;
 	}
-	&--left:after {
-		border-left: 5px solid #FFF;
+	&.resources-text--bottom:after {
+		border-top: 6px solid #FFF;
+		border-bottom: 6px solid transparent;
+	}
+	&.resources-text--top {
+		&.resources-text--desalination,
+		&.resources-text--waste,
+		&.resources-text--dams,
+		&.resources-text--supply,
+		&.resources-text--canal {
+			&:after {
+				transform: rotate(0deg);
+				bottom: 10px;
+			}
+		}
+	}
+}
+
+.resources-text--left {
+	&:after {
+		border-right: 6px solid #FFF;
 		transform: rotate(-15deg);
 		right: 0px;
 	}
-	
-}
-
-.resources-text--bottom.resources-text--right:after {
-	border-bottom: 5px solid #FFF;
-	border-top: 5px solid transparent;
+	&.resources-text--left:after {
+		right: 10px;
+		top: bottom;
+	}
 }
 
 .resource-text {

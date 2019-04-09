@@ -11,9 +11,9 @@ var _MapLayer = _interopRequireDefault(require("../MapLayer"));
 
 var _MapLayerContent = _interopRequireDefault(require("../MapLayerContent"));
 
-var _supplyConfig = _interopRequireDefault(require("../../supplyConfig"));
+var _MapLayerText = _interopRequireDefault(require("../MapLayerText"));
 
-var _SupplyText = _interopRequireDefault(require("./SupplyText"));
+var _supplyConfig = _interopRequireDefault(require("../../supplyConfig"));
 
 var _SupplyIcon = _interopRequireDefault(require("../../icons/SupplyIcon"));
 
@@ -69,7 +69,8 @@ function (_Component) {
               figures = _ref.figures,
               id = _ref.id,
               position = _ref.position;
-          return _react.default.createElement(_SupplyText.default, {
+          return _react.default.createElement(_MapLayerText.default, {
+            layerName: "supply",
             key: "rx-".concat(id),
             active: active,
             name: name,

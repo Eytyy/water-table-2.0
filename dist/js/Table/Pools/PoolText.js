@@ -7,7 +7,7 @@ exports.default = void 0;
 
 var _react = _interopRequireDefault(require("react"));
 
-var _utility = require("./utility");
+var _utility = require("../../utility");
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -38,44 +38,26 @@ var PoolText = function PoolText(_ref) {
   var textHeight = 120;
   var maxScreenWidth = 1080;
 
-  var calculatePosition = function calculatePosition() {
-    var orientation = {};
-    var position = {
-      position: 'absolute'
-    };
-
-    if (xMin + poolWidth + margin + textWidth > maxScreenWidth) {
-      position.right = "".concat(xMin - maxScreenWidth + textWidth + margin, "px");
-      orientation.x = 'left';
-    } else {
-      position.left = "".concat(xMin + poolWidth + margin, "px");
-      orientation.x = 'right';
-    }
-
-    if (yMin - textHeight < 0) {
-      position.top = "".concat(yMax, "px");
-      orientation.y = 'bottom';
-    } else {
-      position.top = "".concat(yMin - textHeight, "px");
-      orientation.y = 'top';
-    }
-
-    return {
-      orientation: orientation,
-      position: position
-    };
-  };
-
-  var _calculatePosition = calculatePosition(),
-      orientation = _calculatePosition.orientation,
-      position = _calculatePosition.position;
+  var _calculatePoolTextPos = (0, _utility.calculatePoolTextPosition)({
+    xMin: xMin,
+    xMax: xMax,
+    yMin: yMin,
+    yMax: yMax,
+    poolWidth: poolWidth,
+    poolHeight: poolHeight,
+    margin: margin,
+    textHeight: textHeight,
+    textWidth: textWidth,
+    maxScreenWidth: maxScreenWidth
+  }),
+      orientation = _calculatePoolTextPos.orientation,
+      position = _calculatePoolTextPos.position;
 
   var style = _objectSpread({
     color: '#FFF',
     opacity: isActive ? '1' : '0'
   }, position);
 
-  console.log(style);
   return _react.default.createElement("div", {
     style: style,
     className: "resources-text resources-text--".concat(orientation.x, " resources-text--").concat(orientation.y)

@@ -1,5 +1,5 @@
 import React from 'react';
-import { setMinMax } from './utility';
+import { setMinMax, calculatePoolTextPosition } from '../../utility';
 
 const PoolText = ({ name, figures, id, points, activePool }) => {
 	const {x: {min: xMin, max: xMax}, y: {min: yMin, max: yMax}} = setMinMax(points);
@@ -11,37 +11,13 @@ const PoolText = ({ name, figures, id, points, activePool }) => {
 	const textHeight = 120;
 	const maxScreenWidth = 1080;
 
-	const calculatePosition = () => {
-		let orientation = {};
-		let position = {
-			position: 'absolute'
-		};
-		if (xMin + poolWidth + margin + textWidth > maxScreenWidth) {
-			position.right = `${(xMin - maxScreenWidth) + textWidth + margin}px`
-			orientation.x = 'left';
-		} else {
-			position.left = `${xMin + poolWidth + margin}px`;
-			orientation.x = 'right'
-		}
-		if (yMin - textHeight < 0) {
-			position.top = `${yMax}px`
-			orientation.y = 'bottom';
-		} else {
-			position.top = `${yMin - textHeight}px`
-			orientation.y = 'top';
-		}
-		return {
-			orientation,
-			position
-		}
-	}
-	const { orientation, position } = calculatePosition();
+	const { orientation, position } = calculatePoolTextPosition({ xMin, xMax, yMin, yMax, poolWidth, poolHeight, margin, textHeight, textWidth, maxScreenWidth });
+
 	const style = {
 		color: '#FFF',
 		opacity: isActive ? '1' : '0',
 		...position
 	};
-	console.log(style)
 
 	return (
 		<div style={style} className={`resources-text resources-text--${orientation.x} resources-text--${orientation.y}`}>

@@ -2,9 +2,9 @@ import React, { Component } from 'react';
 
 import MapLayer from '../MapLayer';
 import MapLayerContent from '../MapLayerContent';
+import MapLayerText from '../MapLayerText';
 
 import supplyConfig from '../../supplyConfig';
-import SupplyText from './SupplyText';
 import SupplyIcon from '../../icons/SupplyIcon';
 
 class Supply extends Component {
@@ -19,7 +19,8 @@ class Supply extends Component {
 				config={supplyConfig}
 				renderIcon={() => <SupplyIcon />}
 				renderText={({ name, figures, id, position }) => (
-					<SupplyText
+					<MapLayerText
+						layerName="supply"
 						key={`rx-${id}`}
 						active={active}
 						name={name}

@@ -11,7 +11,7 @@ var _MapLayer = _interopRequireDefault(require("../MapLayer"));
 
 var _MapLayerContent = _interopRequireDefault(require("../MapLayerContent"));
 
-var _CanalText = _interopRequireDefault(require("./CanalText"));
+var _MapLayerText = _interopRequireDefault(require("../MapLayerText"));
 
 var _CanalIcon = _interopRequireDefault(require("../../icons/CanalIcon"));
 
@@ -69,7 +69,8 @@ function (_Component) {
               figures = _ref.figures,
               id = _ref.id,
               position = _ref.position;
-          return _react.default.createElement(_CanalText.default, {
+          return _react.default.createElement(_MapLayerText.default, {
+            layerName: "canal",
             key: "rx-".concat(id),
             active: active,
             name: name,

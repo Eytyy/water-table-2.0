@@ -2,9 +2,8 @@ import React, { Component } from 'react';
 
 import MapLayer from '../MapLayer';
 import MapLayerContent from '../MapLayerContent';
+import MapLayerText from '../MapLayerText';
 
-
-import CanalText from './CanalText';
 import CanalIcon from '../../icons/CanalIcon';
 import canalConfig from '../../canalConfig';
 
@@ -20,7 +19,8 @@ class Canal extends Component {
 				config={canalConfig}
 				renderIcon={() => <CanalIcon />}
 				renderText={({ name, figures, id, position }) => (
-					<CanalText
+					<MapLayerText
+						layerName="canal"
 						key={`rx-${id}`}
 						active={active}
 						name={name}

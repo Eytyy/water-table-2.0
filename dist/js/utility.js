@@ -115,39 +115,37 @@ var calculatePoolTextPosition = function calculatePoolTextPosition(_ref3) {
 exports.calculatePoolTextPosition = calculatePoolTextPosition;
 
 var calculateTextPosition = function calculateTextPosition(_ref4) {
-  var xMin = _ref4.xMin,
-      xMax = _ref4.xMax,
-      yMin = _ref4.yMin,
-      yMax = _ref4.yMax,
-      poolWidth = _ref4.poolWidth,
+  var x = _ref4.x,
+      y = _ref4.y,
+      iconWidth = _ref4.iconWidth,
       margin = _ref4.margin,
       textHeight = _ref4.textHeight,
       textWidth = _ref4.textWidth,
       maxScreenWidth = _ref4.maxScreenWidth;
   var orientation = {};
-  var position = {
+  var style = {
     position: 'absolute'
   };
 
-  if (xMin + poolWidth + margin + textWidth > maxScreenWidth) {
-    position.right = "".concat(xMin - maxScreenWidth + textWidth + margin, "px");
+  if (x + iconWidth + margin + textWidth > maxScreenWidth) {
+    style.right = "".concat(x - maxScreenWidth + textWidth + margin, "px");
     orientation.x = 'left';
   } else {
-    position.left = "".concat(xMin + poolWidth + margin, "px");
+    style.left = "".concat(x + iconWidth + margin, "px");
     orientation.x = 'right';
   }
 
-  if (yMin - textHeight < 0) {
-    position.top = "".concat(yMax, "px");
+  if (y - textHeight < 0) {
+    style.top = "".concat(y, "px");
     orientation.y = 'bottom';
   } else {
-    position.top = "".concat(yMin - textHeight, "px");
+    style.top = "".concat(y - textHeight, "px");
     orientation.y = 'top';
   }
 
   return {
     orientation: orientation,
-    position: position
+    positionCSS: style
   };
 };
 

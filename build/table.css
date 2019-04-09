@@ -146,27 +146,39 @@ h1 {
     content: '';
     position: absolute;
     display: block;
-    border: 5px solid transparent;
+    border: 6px solid transparent;
     width: 0;
     height: 0;
-    border-top: 5px solid #FFF;
+    border-bottom: 6px solid #FFF;
     transform-origin: center; }
-  .resources-text--top:after {
-    bottom: 0px; }
-  .resources-text--bottom:after {
-    top: 0px; }
-  .resources-text--right:after {
-    border-right: 5px solid #FFF;
-    transform: rotate(-15deg);
-    left: 0px; }
-  .resources-text--left:after {
-    border-left: 5px solid #FFF;
-    transform: rotate(-15deg);
-    right: 0px; }
 
-.resources-text--bottom.resources-text--right:after {
-  border-bottom: 5px solid #FFF;
-  border-top: 5px solid transparent; }
+.resources-text--top:after {
+  bottom: 0px; }
+
+.resources-text--bottom:after {
+  top: 0px; }
+
+.resources-text--right:after {
+  border-left: 6px solid #FFF;
+  transform: rotate(-15deg);
+  left: 0px; }
+
+.resources-text--right.resources-text--bottom:after {
+  border-top: 6px solid #FFF;
+  border-bottom: 6px solid transparent; }
+
+.resources-text--right.resources-text--top.resources-text--desalination:after, .resources-text--right.resources-text--top.resources-text--waste:after, .resources-text--right.resources-text--top.resources-text--dams:after, .resources-text--right.resources-text--top.resources-text--supply:after, .resources-text--right.resources-text--top.resources-text--canal:after {
+  transform: rotate(0deg);
+  bottom: 10px; }
+
+.resources-text--left:after {
+  border-right: 6px solid #FFF;
+  transform: rotate(-15deg);
+  right: 0px; }
+
+.resources-text--left.resources-text--left:after {
+  right: 10px;
+  top: bottom; }
 
 .resource-text__title {
   font-size: 18px;

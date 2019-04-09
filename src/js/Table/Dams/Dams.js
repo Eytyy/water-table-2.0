@@ -2,9 +2,9 @@ import React, { Component } from 'react';
 
 import MapLayer from '../MapLayer';
 import MapLayerContent from '../MapLayerContent';
+import MapLayerText from '../MapLayerText';
 
 import damsConfig from '../../damsConfig';
-import DamsText from './DamsText';
 import DamIcon from '../../icons/DamIcon';
 
 class Dams extends Component {
@@ -18,7 +18,8 @@ class Dams extends Component {
 				config={damsConfig}
 				renderIcon={() => <DamIcon />}
 				renderText={({ name, figures, id, position }) => (
-					<DamsText
+					<MapLayerText
+						layerName="dams"
 						key={`rx-${id}`}
 						active={active}
 						name={name}

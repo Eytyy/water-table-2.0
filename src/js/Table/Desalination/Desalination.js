@@ -4,7 +4,7 @@ import MapLayer from '../MapLayer';
 import MapLayerContent from '../MapLayerContent';
 
 import desalinationConfig from '../../desalinationConfig';
-import DesalinationText from './DesalinationText';
+import MapLayerText from '../MapLayerText';
 import DesalinationIcon from '../../icons/DesalinationIcon';
 
 
@@ -19,7 +19,8 @@ class Desalination extends Component {
 				config={desalinationConfig}
 				renderIcon={() => <DesalinationIcon />}
 				renderText={({ name, figures, id, position }) => (
-					<DesalinationText
+					<MapLayerText 
+						layerName="desalination"
 						key={`rx-${id}`}
 						active={active}
 						name={name}

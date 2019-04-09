@@ -2,9 +2,9 @@ import React, { Component } from 'react';
 
 import MapLayer from '../MapLayer';
 import MapLayerContent from '../MapLayerContent';
+import MapLayerText from '../MapLayerText';
 
 import wastewaterConfig from '../../wastewaterConfig';
-import WasteWaterText from './WasteWaterText';
 import TreatmentPlantIcon from '../../icons/TreatmentPlantIcon';
 
 class WasteWater extends Component {
@@ -19,7 +19,8 @@ class WasteWater extends Component {
 				config={wastewaterConfig}
 				renderIcon={() => <TreatmentPlantIcon />}
 				renderText={({ name, figures, id, position }) => (
-					<WasteWaterText
+					<MapLayerText
+						layerName="waste"
 						key={`rx-${id}`}
 						active={active}
 						name={name}

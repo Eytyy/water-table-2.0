@@ -13,7 +13,7 @@ var _MapLayerContent = _interopRequireDefault(require("../MapLayerContent"));
 
 var _desalinationConfig = _interopRequireDefault(require("../../desalinationConfig"));
 
-var _DesalinationText = _interopRequireDefault(require("./DesalinationText"));
+var _MapLayerText = _interopRequireDefault(require("../MapLayerText"));
 
 var _DesalinationIcon = _interopRequireDefault(require("../../icons/DesalinationIcon"));
 
@@ -69,7 +69,8 @@ function (_Component) {
               figures = _ref.figures,
               id = _ref.id,
               position = _ref.position;
-          return _react.default.createElement(_DesalinationText.default, {
+          return _react.default.createElement(_MapLayerText.default, {
+            layerName: "desalination",
             key: "rx-".concat(id),
             active: active,
             name: name,

@@ -11,9 +11,9 @@ var _MapLayer = _interopRequireDefault(require("../MapLayer"));
 
 var _MapLayerContent = _interopRequireDefault(require("../MapLayerContent"));
 
-var _damsConfig = _interopRequireDefault(require("../../damsConfig"));
+var _MapLayerText = _interopRequireDefault(require("../MapLayerText"));
 
-var _DamsText = _interopRequireDefault(require("./DamsText"));
+var _damsConfig = _interopRequireDefault(require("../../damsConfig"));
 
 var _DamIcon = _interopRequireDefault(require("../../icons/DamIcon"));
 
@@ -69,7 +69,8 @@ function (_Component) {
               figures = _ref.figures,
               id = _ref.id,
               position = _ref.position;
-          return _react.default.createElement(_DamsText.default, {
+          return _react.default.createElement(_MapLayerText.default, {
+            layerName: "dams",
             key: "rx-".concat(id),
             active: active,
             name: name,
