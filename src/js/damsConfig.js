@@ -1,6 +1,6 @@
 export default {
 	description: 'Dams description adipisicing elit. Sit nemo veniam culpa provident dolore aut aliquid cumque laboriosam quo! Magnam!',
-	title: 'Waste Water Treatement Dams',
+	title: 'Dams',
 	icon: '../dams.svg',
 	entries: [
 		{ 

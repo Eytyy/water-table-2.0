@@ -199,8 +199,9 @@ h1 {
   top: bottom; }
 
 .resource-text__title {
-  font-size: 18px;
-  margin: 0 0 10px; }
+  margin: 0 0 10px;
+  font-size: 38px;
+  text-transform: uppercase; }
 
 .resource-text__group__item {
   margin-right: 20px; }

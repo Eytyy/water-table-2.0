@@ -5,8 +5,8 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.default = void 0;
 var _default = {
-  description: 'Water Supply description adipisicing elit. Sit nemo veniam culpa provident dolore aut aliquid cumque laboriosam quo! Magnam!',
-  title: 'Water Supply Resources',
+  description: 'Utilities Water Supply Projects description adipisicing elit. Sit nemo veniam culpa provident dolore aut aliquid cumque laboriosam quo! Magnam!',
+  title: 'Utilities & Water Supply Projects',
   icon: '../supply.svg',
   entries: [{
     id: 'ws1',

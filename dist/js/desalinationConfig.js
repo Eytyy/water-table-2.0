@@ -6,7 +6,7 @@ Object.defineProperty(exports, "__esModule", {
 exports.default = void 0;
 var _default = {
   description: 'Desalination Plant description adipisicing elit. Sit nemo veniam culpa provident dolore aut aliquid cumque laboriosam quo! Magnam!',
-  title: 'Desalination Plant',
+  title: 'Water Desalination Stations',
   icon: '../desalination.svg',
   entries: [{
     id: 'd1',

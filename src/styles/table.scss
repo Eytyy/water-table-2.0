@@ -272,8 +272,9 @@ h1 {
 
 .resource-text {
 	&__title {
-		font-size: 18px;
 		margin: 0 0 10px;
+		font-size: 38px;
+		text-transform: uppercase;
 	}
 	&__group__item {
 		margin-right: 20px;
