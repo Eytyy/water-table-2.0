@@ -28,6 +28,8 @@
   margin: 0px auto;
   justify-content: center;
   align-items: center; }
+  .btn-icon svg {
+    width: 100%; }
 
 .btn-label {
   display: block;

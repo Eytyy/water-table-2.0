@@ -11,9 +11,9 @@ var _MapLayer = _interopRequireDefault(require("./MapLayer"));
 
 var _MapLayerContent = _interopRequireDefault(require("./MapLayerContent"));
 
-var _damsConfig = _interopRequireDefault(require("../../damsConfig"));
+var _groundwaterconfig = _interopRequireDefault(require("../../groundwaterconfig"));
 
-var _DamIcon = _interopRequireDefault(require("../../icons/DamIcon"));
+var _GroundWaterIcon = _interopRequireDefault(require("../../icons/GroundWaterIcon"));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -37,40 +37,40 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 
 function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
 
-var Dams =
+var Groundwater =
 /*#__PURE__*/
 function (_Component) {
-  _inherits(Dams, _Component);
+  _inherits(Groundwater, _Component);
 
-  function Dams() {
-    _classCallCheck(this, Dams);
+  function Groundwater() {
+    _classCallCheck(this, Groundwater);
 
-    return _possibleConstructorReturn(this, _getPrototypeOf(Dams).apply(this, arguments));
+    return _possibleConstructorReturn(this, _getPrototypeOf(Groundwater).apply(this, arguments));
   }
 
-  _createClass(Dams, [{
+  _createClass(Groundwater, [{
     key: "render",
     value: function render() {
       var _this$props = this.props,
           activeLayer = _this$props.activeLayer,
           active = _this$props.active;
       return _react.default.createElement(_MapLayerContent.default, {
-        layerName: "dams",
+        layerName: "groundwater",
         activeLayer: activeLayer,
         active: active,
-        config: _damsConfig.default,
+        config: _groundwaterconfig.default,
         renderIcon: function renderIcon() {
-          return _react.default.createElement(_DamIcon.default, null);
+          return _react.default.createElement(_GroundWaterIcon.default, null);
         }
       });
     }
   }]);
 
-  return Dams;
+  return Groundwater;
 }(_react.Component);
 
-var _default = (0, _MapLayer.default)(Dams, {
-  pageName: 'dams'
+var _default = (0, _MapLayer.default)(Groundwater, {
+  pageName: 'groundwater'
 });
 
 exports.default = _default;

@@ -37,6 +37,12 @@ var _supplyConfig = _interopRequireDefault(require("../../supplyConfig"));
 
 var _wastewaterConfig = _interopRequireDefault(require("../../wastewaterConfig"));
 
+var _groundwaterconfig = _interopRequireDefault(require("../../groundwaterconfig"));
+
+var _MapControlButton = _interopRequireDefault(require("./MapControlButton"));
+
+var _GroundWaterIcon = _interopRequireDefault(require("../../icons/GroundWaterIcon"));
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) { var desc = Object.defineProperty && Object.getOwnPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : {}; if (desc.get || desc.set) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } } newObj.default = obj; return newObj; } }
@@ -80,7 +86,7 @@ function (_Component) {
     _this = _possibleConstructorReturn(this, (_getPrototypeOf2 = _getPrototypeOf(MapControls)).call.apply(_getPrototypeOf2, [this].concat(args)));
 
     _defineProperty(_assertThisInitialized(_assertThisInitialized(_this)), "state", {
-      activeLayer: 'default',
+      activeLayer: 'surface',
       active: undefined
     });
 
@@ -92,7 +98,7 @@ function (_Component) {
       }
 
       _this.setState({
-        activeLayer: _this.state.activeLayer === layer ? 'default' : layer,
+        activeLayer: _this.state.activeLayer === layer ? 'surface' : layer,
         active: active
       });
     });
@@ -158,8 +164,6 @@ function (_Component) {
     key: "render",
     // Put the buttons in a config file and loop over for better readability
     value: function render() {
-      var _this2 = this;
-
       var activeLayer = this.state.activeLayer;
       return _react.default.createElement("section", {
         className: "map-console"
@@ -167,67 +171,88 @@ function (_Component) {
         className: "map-console__controls"
       }, _react.default.createElement("h1", null, "WATER MAP & PROJECTS"), _react.default.createElement("div", {
         className: "map-console__controls__group map-console__controls__group--main"
-      }, _react.default.createElement("div", {
-        className: "btn-group ".concat(activeLayer === 'default' ? 'is-active' : ''),
-        onClick: function onClick() {
-          _this2.onClickLayer('default');
-        }
-      }, _react.default.createElement("i", {
-        className: "btn-icon icon--default"
-      }, _react.default.createElement(_NaturalIcon.default, null)), _react.default.createElement("span", {
-        className: "btn-label"
-      }, "Natural Water Resources")), _react.default.createElement("div", {
-        className: "btn-group ".concat(activeLayer === 'supply' ? 'is-active' : ''),
-        onClick: function onClick() {
-          _this2.onClickLayer('supply');
-        }
-      }, _react.default.createElement("i", {
-        className: "btn-icon icon--supply"
-      }, _react.default.createElement(_SupplyIcon.default, null)), _react.default.createElement("span", {
-        className: "btn-label"
-      }, "Utilities & Water Supply Projects")), _react.default.createElement("div", {
-        className: "btn-group ".concat(activeLayer === 'waste' ? 'is-active' : ''),
-        onClick: function onClick() {
-          _this2.onClickLayer('waste');
-        }
-      }, _react.default.createElement("i", {
-        className: "btn-icon icon--waste"
-      }, _react.default.createElement(_TreatmentPlantIcon.default, null)), _react.default.createElement("span", {
-        className: "btn-label"
-      }, "Wastewater Treatment Plants")), _react.default.createElement("div", {
-        className: "btn-group ".concat(activeLayer === 'desalination' ? 'is-active' : ''),
-        onClick: function onClick() {
-          _this2.onClickLayer('desalination');
-        }
-      }, _react.default.createElement("i", {
-        className: "btn-icon icon--desalination"
-      }, _react.default.createElement(_DesalinationIcon.default, null)), _react.default.createElement("span", {
-        className: "btn-label"
-      }, "Water Desalination Stations")), _react.default.createElement("div", {
-        className: "btn-group ".concat(activeLayer === 'dams' ? 'is-active' : ''),
-        onClick: function onClick() {
-          _this2.onClickLayer('dams');
-        }
-      }, _react.default.createElement("i", {
-        className: "btn-icon icon--dams"
-      }, _react.default.createElement(_DamIcon.default, null)), _react.default.createElement("span", {
-        className: "btn-label"
-      }, "Dams")), _react.default.createElement("div", {
-        className: "btn-group ".concat(activeLayer === 'canal' ? 'is-active' : ''),
-        onClick: function onClick() {
-          _this2.onClickLayer('canal');
-        }
-      }, _react.default.createElement("i", {
-        className: "btn-icon icon--canal"
-      }, _react.default.createElement(_CanalIcon.default, null)), _react.default.createElement("span", {
-        className: "btn-label"
-      }, "King Abdullah Canal")))), _react.default.createElement("div", {
+      }, _react.default.createElement(_MapControlButton.default, {
+        activeLayer: activeLayer,
+        label: "default",
+        renderIcon: function renderIcon() {
+          return _react.default.createElement(_NaturalIcon.default, null);
+        },
+        title: "Natural Water Resources",
+        onClick: this.onClickLayer
+      }), _react.default.createElement(_MapControlButton.default, {
+        activeLayer: activeLayer,
+        label: "supply",
+        renderIcon: function renderIcon() {
+          return _react.default.createElement(_SupplyIcon.default, null);
+        },
+        title: "Utilities & Water Supply Projects",
+        onClick: this.onClickLayer
+      }), _react.default.createElement(_MapControlButton.default, {
+        activeLayer: activeLayer,
+        label: "waste",
+        renderIcon: function renderIcon() {
+          return _react.default.createElement(_TreatmentPlantIcon.default, null);
+        },
+        title: "Wastewater Treatment Plants",
+        onClick: this.onClickLayer
+      }), _react.default.createElement(_MapControlButton.default, {
+        activeLayer: activeLayer,
+        label: "desalination",
+        renderIcon: function renderIcon() {
+          return _react.default.createElement(_DesalinationIcon.default, null);
+        },
+        title: "Water Desalination Stations",
+        onClick: this.onClickLayer
+      }), _react.default.createElement(_MapControlButton.default, {
+        activeLayer: activeLayer,
+        label: "dams",
+        renderIcon: function renderIcon() {
+          return _react.default.createElement(_DamIcon.default, null);
+        },
+        title: "Dams",
+        onClick: this.onClickLayer
+      }), _react.default.createElement(_MapControlButton.default, {
+        activeLayer: activeLayer,
+        label: "canal",
+        renderIcon: function renderIcon() {
+          return _react.default.createElement(_CanalIcon.default, null);
+        },
+        title: "King Abdullah Canal",
+        onClick: this.onClickLayer
+      })), (activeLayer === 'surface' || activeLayer === 'groundwater') && _react.default.createElement("div", {
+        className: "map-console__controls__group map-console__controls__group--secondary"
+      }, _react.default.createElement(_MapControlButton.default, {
+        activeLayer: activeLayer,
+        label: "surface",
+        renderIcon: function renderIcon() {
+          return _react.default.createElement(_NaturalIcon.default, null);
+        },
+        title: "Surface Water",
+        onClick: this.onClickLayer
+      }), _react.default.createElement(_MapControlButton.default, {
+        activeLayer: activeLayer,
+        label: "groundwater",
+        renderIcon: function renderIcon() {
+          return _react.default.createElement(_GroundWaterIcon.default, null);
+        },
+        title: "Ground Water",
+        onClick: this.onClickLayer
+      }))), _react.default.createElement("div", {
         className: "map-console__mini-map"
       }, _react.default.createElement(_PoolsSVG.default, {
         activeLayer: this.state.activeLayer,
         PoolsConfig: _poolsConfig.default,
         active: this.state.active,
         onPoolClick: this.onPoolClick
+      }), _react.default.createElement(_MapLayer.default, {
+        layerName: "groundwater",
+        config: _groundwaterconfig.default,
+        renderIcon: function renderIcon() {
+          return _react.default.createElement(_GroundWaterIcon.default, null);
+        },
+        active: this.state.active,
+        activeLayer: this.state.activeLayer,
+        onClick: this.onMapClick
       }), _react.default.createElement(_MapLayer.default, {
         layerName: "desalination",
         config: _desalinationConfig.default,

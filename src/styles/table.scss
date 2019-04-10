@@ -145,23 +145,11 @@ h1 {
 	transform-box: fill-box;
 }
 
-.waste-inner {
-	// animation:spin 5s linear infinite;
-	transform-origin: center;
-	transform-box: fill-box;
-}
-
 .waste.is-active {
 	opacity: 1;
 }
 .waste.is-inActive {
 	opacity: 0.2;
-}
-
-@keyframes spin { 
-	100% {
-		transform:rotate(360deg); 
-	}
 }
 
 .text-box {
@@ -287,15 +275,23 @@ h1 {
 		font-size: 14px;
 	}
 }
-
-.icon {
-	&--waste svg,
-	&--desalination svg,
-	&--supply svg {
-		animation:spin 5s linear infinite;
+.layer--is-active {
+	.icon {
+		&--waste svg,
+		&--desalination svg,
+		&--supply svg {
+			animation:spin 5s linear infinite;
+			transform-origin: center;
+			transform-box: fill-box;
+		}
+	}
+	.icon--groundwater svg {
+		animation:spin 10s linear infinite;
 		transform-origin: center;
 		transform-box: fill-box;
 	}
+}
+.icon {
 	svg {
 		width: 100%;
 		height: auto;

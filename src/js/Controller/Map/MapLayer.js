@@ -1,5 +1,4 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 
 const MapLayer = ({ layerName, config, active, activeLayer, renderIcon, onClick }) => (
 	<div

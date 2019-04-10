@@ -18,10 +18,13 @@ import desalinationConfig from '../../desalinationConfig';
 import canalConfig from '../../canalConfig';
 import supplyConfig from '../../supplyConfig';
 import wastewaterConfig from '../../wastewaterConfig';
+import groundwaterconfig from '../../groundwaterconfig';
+import MapControlButton from './MapControlButton';
+import GroundWaterIcon from '../../icons/GroundWaterIcon';
 
 class MapControls extends Component {
 	state = {
-		activeLayer: 'default', 
+		activeLayer: 'surface', 
 		active: undefined, 
 	}
 
@@ -31,7 +34,7 @@ class MapControls extends Component {
 			active = canalConfig.entries[0].id;
 		}
 		this.setState({
-			activeLayer: this.state.activeLayer === layer ? 'default' : layer,
+			activeLayer: this.state.activeLayer === layer ? 'surface' : layer,
 			active,
 		});
 	}
@@ -96,62 +99,65 @@ class MapControls extends Component {
 				<div className="map-console__controls">
 					<h1>WATER MAP &amp; PROJECTS</h1>
 					<div className="map-console__controls__group map-console__controls__group--main">
-						<div 
-							className={`btn-group ${activeLayer === 'default' ? 'is-active' : ''}`}
-							onClick={() => { this.onClickLayer('default'); }}
-						>
-							<i className="btn-icon icon--default">
-								<NaturalIcon />
-							</i>
-							<span className="btn-label">Natural Water Resources</span>
-						</div>
-						<div 
-							className={`btn-group ${activeLayer === 'supply' ? 'is-active' : ''}`}
-							onClick={() => { this.onClickLayer('supply'); }}
-						>
-							<i className="btn-icon icon--supply">
-								<SupplyIcon />
-							</i>
-							<span className="btn-label">Utilities &amp; Water Supply Projects</span>
-						</div>
-
-						<div 
-							className={`btn-group ${activeLayer === 'waste' ? 'is-active' : ''}`}
-							onClick={() => { this.onClickLayer('waste'); }}
-						>
-							<i className="btn-icon icon--waste">
-								<TreatmentPlantIcon />
-							</i>
-							<span className="btn-label">Wastewater Treatment Plants</span>
-						</div>
-						<div 
-							className={`btn-group ${activeLayer === 'desalination' ? 'is-active' : ''}`}
-							onClick={() => { this.onClickLayer('desalination'); }}
-						>
-							<i className="btn-icon icon--desalination">
-								<DesalinationIcon />
-							</i>
-							<span className="btn-label">Water Desalination Stations</span>
-						</div>
-						<div
-							className={`btn-group ${activeLayer === 'dams' ? 'is-active' : ''}`}
-							onClick={() => { this.onClickLayer('dams'); }}
-						>
-							<i className="btn-icon icon--dams">
-								<DamIcon />
-							</i>
-							<span className="btn-label">Dams</span>
-						</div>
-						<div
-							className={`btn-group ${activeLayer === 'canal' ? 'is-active' : ''}`}
-							onClick={() => { this.onClickLayer('canal'); }}
-						>
-							<i className="btn-icon icon--canal">
-								<CanalIcon />
-							</i>
-							<span className="btn-label">King Abdullah Canal</span>
-						</div>
+						<MapControlButton 
+							activeLayer={activeLayer}
+							label="default"
+							renderIcon={() => <NaturalIcon />}
+							title="Natural Water Resources"
+							onClick={this.onClickLayer}
+						/>
+						<MapControlButton 
+							activeLayer={activeLayer}
+							label="supply"
+							renderIcon={() => <SupplyIcon />}
+							title="Utilities &amp; Water Supply Projects"
+							onClick={this.onClickLayer}
+						/>
+						<MapControlButton 
+							activeLayer={activeLayer}
+							label="waste"
+							renderIcon={() => <TreatmentPlantIcon />}
+							title="Wastewater Treatment Plants"
+							onClick={this.onClickLayer}
+						/>
+						<MapControlButton 
+							activeLayer={activeLayer}
+							label="desalination"
+							renderIcon={() => <DesalinationIcon />}
+							title="Water Desalination Stations"
+							onClick={this.onClickLayer}
+						/>
+						<MapControlButton 
+							activeLayer={activeLayer}
+							label="dams"
+							renderIcon={() => <DamIcon />}
+							title="Dams"
+							onClick={this.onClickLayer}
+						/>
+						<MapControlButton 
+							activeLayer={activeLayer}
+							label="canal"
+							renderIcon={() => <CanalIcon />}
+							title="King Abdullah Canal"
+							onClick={this.onClickLayer}
+						/>
 					</div>
+					{ (activeLayer === 'surface' || activeLayer === 'groundwater') && <div className="map-console__controls__group map-console__controls__group--secondary">
+						<MapControlButton 
+							activeLayer={activeLayer}
+							label="surface"
+							renderIcon={() => <NaturalIcon />}
+							title="Surface Water"
+							onClick={this.onClickLayer}
+						/>
+						<MapControlButton 
+							activeLayer={activeLayer}
+							label="groundwater"
+							renderIcon={() => <GroundWaterIcon />}
+							title="Ground Water"
+							onClick={this.onClickLayer}
+						/>
+					</div>}
 				</div>
 				<div className="map-console__mini-map">
 					<PoolsSVG
@@ -159,6 +165,14 @@ class MapControls extends Component {
 						PoolsConfig={poolsConfig}
 						active={this.state.active}
 						onPoolClick={this.onPoolClick}
+					/>
+					<MapLayer
+						layerName="groundwater"
+						config={groundwaterconfig}
+						renderIcon={() => <GroundWaterIcon />}
+						active={this.state.active}
+						activeLayer={this.state.activeLayer}
+						onClick={this.onMapClick}
 					/>
 					<MapLayer
 						layerName="desalination"

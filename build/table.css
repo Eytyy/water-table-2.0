@@ -105,19 +105,11 @@ h1 {
   transform-origin: center;
   transform-box: fill-box; }
 
-.waste-inner {
-  transform-origin: center;
-  transform-box: fill-box; }
-
 .waste.is-active {
   opacity: 1; }
 
 .waste.is-inActive {
   opacity: 0.2; }
-
-@keyframes spin {
-  100% {
-    transform: rotate(360deg); } }
 
 .text-box {
   position: absolute;
@@ -212,10 +204,15 @@ h1 {
 .resource-text__figure-label {
   font-size: 14px; }
 
-.icon--waste svg,
-.icon--desalination svg,
-.icon--supply svg {
+.layer--is-active .icon--waste svg,
+.layer--is-active .icon--desalination svg,
+.layer--is-active .icon--supply svg {
   animation: spin 5s linear infinite;
+  transform-origin: center;
+  transform-box: fill-box; }
+
+.layer--is-active .icon--groundwater svg {
+  animation: spin 10s linear infinite;
   transform-origin: center;
   transform-box: fill-box; }
 

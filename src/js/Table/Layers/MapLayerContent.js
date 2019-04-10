@@ -8,6 +8,11 @@ const MapLayerContent = ({ layerName, activeLayer, active, config, renderIcon, r
 			h: 30,
 			scale: '2',
 		}, 
+		'groundwater': {
+			w: 30,
+			h: 30,
+			scale: '2',
+		}, 
 		'desalination': {
 			w: 30,
 			h: 30,
@@ -32,16 +37,31 @@ const MapLayerContent = ({ layerName, activeLayer, active, config, renderIcon, r
 	const getOpacity = (id) => {
 	
 		if (typeof active !== 'undefined' && active !== id) {
+			if (active === 'default' && (id === 'surface' || id === 'ground')) {
+				return '1';
+			}
 			return '0.5';
 		} 
 		return '1';
 	};
+
+	const getLayerVisibility = () => {
+		if (activeLayer === layerName) {
+			return true;
+		} else {
+			if (activeLayer === 'default' && (layerName === 'surface' || layerName === 'groundwater')) {
+				return true;
+			}
+		}
+		return false;
+	};
+
 	const width = iconSizes[layerName].w;
 	const height = iconSizes[layerName].h;
 	const scale = iconSizes[layerName].scale;
-
+	const isLayerActive = getLayerVisibility();
 	return (
-		<div className={`layer layer--${layerName} ${activeLayer === layerName ? 'layer--is-active' : 'layer--is-hidden'}`}>
+		<div className={`layer layer--${layerName} ${isLayerActive ? 'layer--is-active' : 'layer--is-hidden'}`}>
 			<div className={`resources resources--${layerName}`}>
 				{
 					config.entries.map(({ id, position }) => 

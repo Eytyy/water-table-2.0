@@ -18,6 +18,7 @@ import DesalinationConfig from '../desalinationConfig';
 
 import Canal from './Layers/Canal';
 import CanalConfig from '../canalConfig';
+import Groundwater from './Layers/Groundwater';
 
 class Map extends Component {
 	state = {
@@ -127,6 +128,7 @@ class Map extends Component {
 		return (
 			<>
 			<Pools activeLayer={this.state.activeLayer} au={this.state.animationCurrentUnit} />
+			<Groundwater activeLayer={this.state.activeLayer} />
 			<Dams activeLayer={this.state.activeLayer} />
 			<WasteWater activeLayer={this.state.activeLayer} />
 			<Supply activeLayer={this.state.activeLayer} />

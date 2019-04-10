@@ -24,6 +24,11 @@ var MapLayerContent = function MapLayerContent(_ref) {
       h: 30,
       scale: '2'
     },
+    'groundwater': {
+      w: 30,
+      h: 30,
+      scale: '2'
+    },
     'desalination': {
       w: 30,
       h: 30,
@@ -48,17 +53,34 @@ var MapLayerContent = function MapLayerContent(_ref) {
 
   var getOpacity = function getOpacity(id) {
     if (typeof active !== 'undefined' && active !== id) {
+      if (active === 'default' && (id === 'surface' || id === 'ground')) {
+        return '1';
+      }
+
       return '0.5';
     }
 
     return '1';
   };
 
+  var getLayerVisibility = function getLayerVisibility() {
+    if (activeLayer === layerName) {
+      return true;
+    } else {
+      if (activeLayer === 'default' && (layerName === 'surface' || layerName === 'groundwater')) {
+        return true;
+      }
+    }
+
+    return false;
+  };
+
   var width = iconSizes[layerName].w;
   var height = iconSizes[layerName].h;
   var scale = iconSizes[layerName].scale;
+  var isLayerActive = getLayerVisibility();
   return _react.default.createElement("div", {
-    className: "layer layer--".concat(layerName, " ").concat(activeLayer === layerName ? 'layer--is-active' : 'layer--is-hidden')
+    className: "layer layer--".concat(layerName, " ").concat(isLayerActive ? 'layer--is-active' : 'layer--is-hidden')
   }, _react.default.createElement("div", {
     className: "resources resources--".concat(layerName)
   }, config.entries.map(function (_ref2) {
