@@ -49,7 +49,7 @@ const MapLayerContent = ({ layerName, activeLayer, active, config, renderIcon, r
 		if (activeLayer === layerName) {
 			return true;
 		} else {
-			if (activeLayer === 'default' && (layerName === 'surface' || layerName === 'groundwater')) {
+			if (activeLayer === 'default' && layerName === 'surface') {
 				return true;
 			}
 		}

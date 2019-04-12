@@ -67,7 +67,7 @@ var MapLayerContent = function MapLayerContent(_ref) {
     if (activeLayer === layerName) {
       return true;
     } else {
-      if (activeLayer === 'default' && (layerName === 'surface' || layerName === 'groundwater')) {
+      if (activeLayer === 'default' && layerName === 'surface') {
         return true;
       }
     }

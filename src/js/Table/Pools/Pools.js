@@ -128,7 +128,7 @@ class Pools extends Component {
 	render() {
 		const { au, activeLayer } = this.props;
 		return (
-			<div className={`layer layer--pools ${activeLayer === 'default' ? 'layer--is-active' : 'layer--is-hidden'}`}>
+			<div className={`layer layer--pools ${activeLayer === 'default' || activeLayer === 'surface' ? 'layer--is-active' : 'layer--is-hidden'}`}>
 				<canvas id="pools" width={this.width} height={this.height} ref={this.canvas} />
 				<img src={cutout} alt="" width="auto" height={`${parseInt(this.height, 10) + 1}`} style={{ position: 'absolute', top: '0px', left: '0px'}}/>
 				<PoolsSVG

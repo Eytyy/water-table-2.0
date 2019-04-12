@@ -206,7 +206,7 @@ function (_Component) {
           au = _this$props.au,
           activeLayer = _this$props.activeLayer;
       return _react.default.createElement("div", {
-        className: "layer layer--pools ".concat(activeLayer === 'default' ? 'layer--is-active' : 'layer--is-hidden')
+        className: "layer layer--pools ".concat(activeLayer === 'default' || activeLayer === 'surface' ? 'layer--is-active' : 'layer--is-hidden')
       }, _react.default.createElement("canvas", {
         id: "pools",
         width: this.width,
