@@ -18,7 +18,7 @@ var PoolsSvg = function PoolsSvg(_ref) {
       onPoolClick = _ref.onPoolClick;
   return _react.default.createElement("svg", {
     id: "pools",
-    className: "".concat(activeLayer === 'default' ? 'is-active' : 'is-hidden', " resources resources---pools"),
+    className: "".concat(activeLayer === 'natural' ? 'is-active' : 'is-hidden', " resources resources---pools"),
     width: "914",
     height: "1539",
     viewBox: "0 0 914 1539"

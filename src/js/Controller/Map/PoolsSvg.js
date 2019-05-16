@@ -5,7 +5,7 @@ const PoolsSvg = ({ PoolsConfig, active, activeLayer, onPoolClick }) => {
 	return (
 		<svg
 			id="pools"
-			className={`${activeLayer === 'default' ? 'is-active' : 'is-hidden'} resources resources---pools`}
+			className={`${activeLayer === 'natural' ? 'is-active' : 'is-hidden'} resources resources---pools`}
 			width="914" height="1539" viewBox="0 0 914 1539"
 		>
 			{

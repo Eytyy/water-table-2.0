@@ -1,0 +1,68 @@
+@import './base';
+@import './map';
+@import './data-viz';
+
+#table {
+	width: 1080px;
+	height: 1920px;
+	position: relative;
+	overflow: hidden;
+	.landing & {
+		width: 100%;
+		background: url('../../images/intro.png') no-repeat center top;
+		background-size: 100%;
+	}
+}
+
+.intro {
+	&__content {
+		position: fixed;
+		bottom: 0;
+		left: 0;
+		right: 0;
+		text-align: center;
+		padding: 120px;
+	}
+	&__title {
+		font-size: 100px;
+	}
+	&__text {
+		font-size: 28px;
+	}
+}
+
+.layer,
+.resources--pools {
+	position: absolute;
+	top: 0;
+	left: 0;
+	height: 1540px;
+}
+
+.layer {
+	opacity: 0;
+	transition: opacity 200ms linear;
+	&--pools {
+		opacity: 0.4;
+	}
+}
+
+.layer--is-active {
+	opacity: 1;
+}
+
+.intro--story {
+	padding: 60px;
+}
+
+.intro--story__section {
+	margin-bottom: 110px;
+	&:last-child {
+		margin-bottom: 0;
+	}
+	p {
+		font-size: 28px;
+		margin-bottom: 2em;
+		line-height: 1.35em;
+	}
+}

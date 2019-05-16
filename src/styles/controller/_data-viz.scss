@@ -1,0 +1,33 @@
+.controller__data-viz {
+	padding: 100px 60px 60px;
+}
+
+.timeline__controls {
+	display: flex;
+	flex-wrap: wrap;
+}
+
+.timeline__time {
+	flex: 0 0 20%;
+	text-align: left;
+	margin-bottom: 20px;
+}
+
+.intro__btn {
+	font-size: 48px;
+}
+
+.controller__section--data {
+	display: flex;
+	&__item {
+		margin-right: 100px;
+		&:last-child {
+			margin-right: 0;
+		}
+	}
+}
+
+.data__item__content {
+	font-size: 36px;
+	margin-top: 20px;
+}

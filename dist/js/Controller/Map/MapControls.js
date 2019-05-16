@@ -86,7 +86,7 @@ function (_Component) {
     _this = _possibleConstructorReturn(this, (_getPrototypeOf2 = _getPrototypeOf(MapControls)).call.apply(_getPrototypeOf2, [this].concat(args)));
 
     _defineProperty(_assertThisInitialized(_assertThisInitialized(_this)), "state", {
-      activeLayer: 'surface',
+      activeLayer: 'natural',
       active: undefined
     });
 
@@ -98,7 +98,7 @@ function (_Component) {
       }
 
       _this.setState({
-        activeLayer: _this.state.activeLayer === layer ? 'surface' : layer,
+        activeLayer: _this.state.activeLayer === layer ? 'natural' : layer,
         active: active
       });
     });
@@ -166,14 +166,17 @@ function (_Component) {
     value: function render() {
       var activeLayer = this.state.activeLayer;
       return _react.default.createElement("section", {
-        className: "map-console"
+        className: "controller map-console"
       }, _react.default.createElement("div", {
         className: "map-console__controls"
-      }, _react.default.createElement("h1", null, "WATER MAP & PROJECTS"), _react.default.createElement("div", {
+      }, _react.default.createElement("h1", {
+        className: "controller__title"
+      }, "WATER MAP & PROJECTS"), _react.default.createElement("div", {
         className: "map-console__controls__group map-console__controls__group--main"
       }, _react.default.createElement(_MapControlButton.default, {
         activeLayer: activeLayer,
-        label: "default",
+        label: "natural",
+        children: ['surface', 'groundwater'],
         renderIcon: function renderIcon() {
           return _react.default.createElement(_NaturalIcon.default, null);
         },
@@ -219,10 +222,12 @@ function (_Component) {
         },
         title: "King Abdullah Canal",
         onClick: this.onClickLayer
-      })), (activeLayer === 'surface' || activeLayer === 'groundwater') && _react.default.createElement("div", {
+      })), (activeLayer === 'natural' || activeLayer === 'surface' || activeLayer === 'groundwater') && _react.default.createElement("div", {
         className: "map-console__controls__group map-console__controls__group--secondary"
       }, _react.default.createElement(_MapControlButton.default, {
         activeLayer: activeLayer,
+        parent: "natural",
+        defaultChild: true,
         label: "surface",
         renderIcon: function renderIcon() {
           return _react.default.createElement(_NaturalIcon.default, null);
@@ -230,6 +235,7 @@ function (_Component) {
         title: "Surface Water",
         onClick: this.onClickLayer
       }), _react.default.createElement(_MapControlButton.default, {
+        parent: "natural",
         activeLayer: activeLayer,
         label: "groundwater",
         renderIcon: function renderIcon() {

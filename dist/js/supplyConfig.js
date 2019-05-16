@@ -9,325 +9,125 @@ var _default = {
   title: 'Utilities & Water Supply Projects',
   icon: '../supply.svg',
   entries: [{
-    id: 'ws1',
+    id: 's1',
     position: {
       x: 335.000000,
       y: 0.000000
     },
     name: 'Water Supply Project No. 1',
-    description: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nostrum totam minus explicabo. Tenetur veniam exercitationem nisi quidem porro sunt qui.',
-    facts: ['Completed in 1983', 'Capacity: 20m^2'],
-    figures: [{
-      label: 'Figure 1',
-      value: '20%'
-    }, {
-      label: 'Figure 2',
-      value: '32%'
-    }]
+    startYear: '1985',
+    upgradeYear: '2002',
+    initialCapactiy: '45 mcm per year',
+    upgradedCapacity: '90',
+    type: 'project'
   }, {
-    id: 'ws2',
+    id: 's2',
     position: {
       x: 335.000000,
       y: 43.000000
     },
-    name: 'Water Supply Project No. 2',
-    description: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nostrum totam minus explicabo. Tenetur veniam exercitationem nisi quidem porro sunt qui.',
-    facts: ['Completed in 1983', 'Capacity: 20m^2'],
-    figures: [{
-      label: 'Figure 1',
-      value: '20%'
-    }, {
-      label: 'Figure 2',
-      value: '32%'
-    }]
+    name: 'Dabouq Reservoir',
+    startYear: '1980',
+    initialCapactiy: '250000 CM',
+    type: 'project'
   }, {
-    id: 'ws3',
+    id: 's3',
     position: {
       x: 237.000000,
       y: 8.000000
     },
-    name: 'Water Supply Project No. 3',
-    description: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nostrum totam minus explicabo. Tenetur veniam exercitationem nisi quidem porro sunt qui.',
-    facts: ['Completed in 1983', 'Capacity: 20m^2'],
-    figures: [{
-      label: 'Figure 1',
-      value: '20%'
-    }, {
-      label: 'Figure 2',
-      value: '32%'
-    }]
+    name: 'Disi-Aqaba conveyor and Disi wellfield',
+    startYear: '2013',
+    initialCapactiy: '20 MCM per year',
+    type: 'project'
   }, {
-    id: 'ws4',
+    id: 's4',
     position: {
       x: 373.000000,
       y: 43.000000
     },
-    name: 'Water Supply Project No. 4',
-    description: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nostrum totam minus explicabo. Tenetur veniam exercitationem nisi quidem porro sunt qui.',
-    facts: ['Completed in 1983', 'Capacity: 20m^2'],
-    figures: [{
-      label: 'Figure 1',
-      value: '20%'
-    }, {
-      label: 'Figure 2',
-      value: '32%'
-    }]
+    name: 'Zara-Maein Project',
+    startYear: '2006',
+    initialCapactiy: '110,000 CM per day',
+    type: 'project'
   }, {
-    id: 'ws5',
+    id: 's5',
     position: {
       x: 330.000000,
       y: 121.000000
     },
-    name: 'Water Supply Project No. 5',
-    description: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nostrum totam minus explicabo. Tenetur veniam exercitationem nisi quidem porro sunt qui.',
-    facts: ['Completed in 1983', 'Capacity: 20m^2'],
-    figures: [{
-      label: 'Figure 1',
-      value: '20%'
-    }, {
-      label: 'Figure 2',
-      value: '32%'
-    }]
+    name: 'Disi Project',
+    startYear: '2013',
+    initialCapactiy: '100 MCM per year',
+    type: 'project'
   }, {
-    id: 'ws6',
+    id: 's6',
     position: {
       x: 259.000000,
       y: 122.000000
     },
-    name: 'Water Supply Project No. 6',
-    description: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nostrum totam minus explicabo. Tenetur veniam exercitationem nisi quidem porro sunt qui.',
-    facts: ['Completed in 1983', 'Capacity: 20m^2'],
-    figures: [{
-      label: 'Figure 1',
-      value: '20%'
-    }, {
-      label: 'Figure 2',
-      value: '32%'
-    }]
+    name: 'Wadi Arab Project',
+    startYear: '2015',
+    initialCapactiy: '45 MCM per year',
+    type: 'project'
   }, {
-    id: 'ws7',
+    id: 's7',
     position: {
       x: 258.000000,
       y: 419.000000
     },
-    name: 'Water Supply Project No. 7',
-    description: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nostrum totam minus explicabo. Tenetur veniam exercitationem nisi quidem porro sunt qui.',
-    facts: ['Completed in 1983', 'Capacity: 20m^2'],
-    figures: [{
-      label: 'Figure 1',
-      value: '20%'
-    }, {
-      label: 'Figure 2',
-      value: '32%'
-    }]
+    name: 'Yarmouk Water Company',
+    year: '1997',
+    type: 'utility'
   }, {
-    id: 'ws8',
+    id: 's8',
     position: {
       x: 228.000000,
       y: 111.000000
     },
-    name: 'Water Supply Project No. 8',
-    description: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nostrum totam minus explicabo. Tenetur veniam exercitationem nisi quidem porro sunt qui.',
-    facts: ['Completed in 1983', 'Capacity: 20m^2'],
-    figures: [{
-      label: 'Figure 1',
-      value: '20%'
-    }, {
-      label: 'Figure 2',
-      value: '32%'
-    }]
+    name: 'Aqaba Water Company',
+    year: '2004',
+    type: 'utility'
   }, {
-    id: 'ws9',
+    id: 's9',
     position: {
       x: 213.000000,
       y: 419.000000
     },
-    name: 'Water Supply Project No. 9',
-    description: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nostrum totam minus explicabo. Tenetur veniam exercitationem nisi quidem porro sunt qui.',
-    facts: ['Completed in 1983', 'Capacity: 20m^2'],
-    figures: [{
-      label: 'Figure 1',
-      value: '20%'
-    }, {
-      label: 'Figure 2',
-      value: '32%'
-    }]
+    name: 'Jordan Water Company (Miyahuna)',
+    year: '2007',
+    city: 'Amman',
+    type: 'utility'
   }, {
-    id: 'ws10',
+    id: 's10',
     position: {
       x: 260.000000,
       y: 465.000000
     },
-    name: 'Water Supply Project No. 10',
-    description: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nostrum totam minus explicabo. Tenetur veniam exercitationem nisi quidem porro sunt qui.',
-    facts: ['Completed in 1983', 'Capacity: 20m^2'],
-    figures: [{
-      label: 'Figure 1',
-      value: '20%'
-    }, {
-      label: 'Figure 2',
-      value: '32%'
-    }]
+    name: 'Miyahuna (2)',
+    year: '2013',
+    city: 'Madaba',
+    type: 'utility'
   }, {
-    id: 'ws11',
+    id: 's11',
     position: {
       x: 414.000000,
       y: 178.000000
     },
-    name: 'Water Supply Project No. 11',
-    description: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nostrum totam minus explicabo. Tenetur veniam exercitationem nisi quidem porro sunt qui.',
-    facts: ['Completed in 1983', 'Capacity: 20m^2'],
-    figures: [{
-      label: 'Figure 1',
-      value: '20%'
-    }, {
-      label: 'Figure 2',
-      value: '32%'
-    }]
+    name: 'Miyahuna (3)',
+    year: '2015',
+    city: 'Zarqa',
+    type: 'utility'
   }, {
-    id: 'ws12',
+    id: 's12',
     position: {
       x: 411.000000,
       y: 110.000000
     },
-    name: 'Water Supply Project No. 12',
-    description: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nostrum totam minus explicabo. Tenetur veniam exercitationem nisi quidem porro sunt qui.',
-    facts: ['Completed in 1983', 'Capacity: 20m^2'],
-    figures: [{
-      label: 'Figure 1',
-      value: '20%'
-    }, {
-      label: 'Figure 2',
-      value: '32%'
-    }]
-  }, {
-    id: 'ws13',
-    position: {
-      x: 237.000000,
-      y: 557.000000
-    },
-    name: 'Water Supply Project No. 13',
-    description: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nostrum totam minus explicabo. Tenetur veniam exercitationem nisi quidem porro sunt qui.',
-    facts: ['Completed in 1983', 'Capacity: 20m^2'],
-    figures: [{
-      label: 'Figure 1',
-      value: '20%'
-    }, {
-      label: 'Figure 2',
-      value: '32%'
-    }]
-  }, {
-    id: 'ws14',
-    position: {
-      x: 202.000000,
-      y: 825.000000
-    },
-    name: 'Water Supply Project No. 14',
-    description: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nostrum totam minus explicabo. Tenetur veniam exercitationem nisi quidem porro sunt qui.',
-    facts: ['Completed in 1983', 'Capacity: 20m^2'],
-    figures: [{
-      label: 'Figure 1',
-      value: '20%'
-    }, {
-      label: 'Figure 2',
-      value: '32%'
-    }]
-  }, {
-    id: 'ws15',
-    position: {
-      x: 155.000000,
-      y: 901.000000
-    },
-    name: 'Water Supply Project No. 15',
-    description: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nostrum totam minus explicabo. Tenetur veniam exercitationem nisi quidem porro sunt qui.',
-    facts: ['Completed in 1983', 'Capacity: 20m^2'],
-    figures: [{
-      label: 'Figure 1',
-      value: '20%'
-    }, {
-      label: 'Figure 2',
-      value: '32%'
-    }]
-  }, {
-    id: 'ws16',
-    position: {
-      x: 0.000000,
-      y: 1265.000000
-    },
-    ame: 'Water Supply Project No. 16',
-    description: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nostrum totam minus explicabo. Tenetur veniam exercitationem nisi quidem porro sunt qui.',
-    facts: ['Completed in 1983', 'Capacity: 20m^2'],
-    figures: [{
-      label: 'Figure 1',
-      value: '20%'
-    }, {
-      label: 'Figure 2',
-      value: '32%'
-    }]
-  }, {
-    id: 'ws17',
-    position: {
-      x: 227.000000,
-      y: 932.000000
-    },
-    name: 'Water Supply Project No. 17',
-    description: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nostrum totam minus explicabo. Tenetur veniam exercitationem nisi quidem porro sunt qui.',
-    facts: ['Completed in 1983', 'Capacity: 20m^2'],
-    figures: [{
-      label: 'Figure 1',
-      value: '20%'
-    }, {
-      label: 'Figure 2',
-      value: '32%'
-    }]
-  }, {
-    id: 'ws18',
-    position: {
-      x: 219.000000,
-      y: 667.000000
-    },
-    name: 'Water Supply Project No. 18',
-    description: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nostrum totam minus explicabo. Tenetur veniam exercitationem nisi quidem porro sunt qui.',
-    facts: ['Completed in 1983', 'Capacity: 20m^2'],
-    figures: [{
-      label: 'Figure 1',
-      value: '20%'
-    }, {
-      label: 'Figure 2',
-      value: '32%'
-    }]
-  }, {
-    id: 'ws19',
-    position: {
-      x: 325.000000,
-      y: 505.000000
-    },
-    name: 'Water Supply Project No. 19',
-    description: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nostrum totam minus explicabo. Tenetur veniam exercitationem nisi quidem porro sunt qui.',
-    facts: ['Completed in 1983', 'Capacity: 20m^2'],
-    figures: [{
-      label: 'Figure 1',
-      value: '20%'
-    }, {
-      label: 'Figure 2',
-      value: '32%'
-    }]
-  }, {
-    id: 'ws20',
-    position: {
-      x: 191.000000,
-      y: 509.000000
-    },
-    name: 'Water Supply Project No. 20',
-    description: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nostrum totam minus explicabo. Tenetur veniam exercitationem nisi quidem porro sunt qui.',
-    facts: ['Completed in 1983', 'Capacity: 20m^2'],
-    figures: [{
-      label: 'Figure 1',
-      value: '20%'
-    }, {
-      label: 'Figure 2',
-      value: '32%'
-    }]
+    name: 'Miyahuna (4)',
+    year: '2018',
+    city: 'Madaba',
+    type: 'utility'
   }]
 };
 exports.default = _default;

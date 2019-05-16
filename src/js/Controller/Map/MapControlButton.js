@@ -1,11 +1,12 @@
 import React from 'react';
 
-const MapControlButton = ({ activeLayer, label, title, renderIcon, onClick }) => {
+const MapControlButton = ({ activeLayer, label, title, renderIcon, onClick, parent, children, defaultChild }) => {
 	const isActive = () => {
-		if (activeLayer === label) {
+		if (activeLayer === label || (parent && parent === activeLayer && defaultChild)){
 			return true;
-		} else if (label === 'default' && (activeLayer === 'surface' || activeLayer === 'groundwater')) {
-			return true;
+		} else if (children) {
+			const isParentOfActiveSub = children.indexOf(activeLayer) >= 0;
+			return isParentOfActiveSub;
 		}
 		return false;
 	}

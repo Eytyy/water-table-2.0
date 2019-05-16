@@ -1,0 +1,86 @@
+.map-console {
+	display: flex;
+	&__controls,
+	&__mini-map {
+		flex: 0 0 50%;
+	}
+
+}
+
+.map-console__controls {
+	padding: 60px 0 0 60px;
+	&__group {
+		display: flex;
+		flex-wrap: wrap;
+	}
+	.btn-group {
+		flex: 0 0 120px;
+		text-align: center;
+		margin: 0px 80px 40px  0px;
+	}
+}
+
+.btn-group {
+	cursor: pointer;
+	opacity: 0.2;
+	&.is-active {
+		opacity: 1;
+	}
+}
+
+.btn-icon {
+	width: 94px;
+	height: 94px;
+	display: flex;
+	margin: 0px auto;
+	justify-content: center;
+	align-items: center;
+	svg {
+		width: 100%;
+	}
+}
+
+.btn-label {
+	display: block;
+	margin-top: 10px;
+	font-size: 14px;
+}
+
+.map-console__mini-map {
+	height: 100vh;
+	position: relative;
+	svg {
+		position: absolute;
+		top: 0;
+		left: 0;
+		height: 100%;
+		width: 100%;
+	}
+}
+
+.resources {
+	opacity: 0;
+	visibility: hidden;
+	transition: opacity 200ms linear;
+}
+
+.resources.is-active {
+	opacity: 1;
+	visibility: visible;
+}
+
+.resources---pools {
+	opacity: 0.2;
+	visibility: visible;
+}
+
+.waste {
+	transition: transform 200ms linear;
+	transform-origin: center;
+	transform-box: fill-box;
+}
+
+.waste-inner {
+	transform-box: fill-box;
+	transform-origin: center;
+}

@@ -24,7 +24,6 @@ export const lerp = (a, b, t) => {
 	return r;
 }
 
-
 export const setMinMax = (points) => {
 	return points.reduce((curr, next) => {
 		let { x: xNext, y: yNext } = next;
@@ -54,7 +53,6 @@ export const setMinMax = (points) => {
 		}
 	}, {});
 }
-
 
 export const calculatePoolTextPosition = ({ xMin, xMax, yMin, yMax, poolWidth, margin, textHeight, textWidth, maxScreenWidth }) => {
 	let orientation = {};

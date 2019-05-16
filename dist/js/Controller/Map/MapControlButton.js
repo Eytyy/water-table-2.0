@@ -14,13 +14,17 @@ var MapControlButton = function MapControlButton(_ref) {
       label = _ref.label,
       title = _ref.title,
       renderIcon = _ref.renderIcon,
-      _onClick = _ref.onClick;
+      _onClick = _ref.onClick,
+      parent = _ref.parent,
+      children = _ref.children,
+      defaultChild = _ref.defaultChild;
 
   var isActive = function isActive() {
-    if (activeLayer === label) {
+    if (activeLayer === label || parent && parent === activeLayer && defaultChild) {
       return true;
-    } else if (label === 'default' && (activeLayer === 'surface' || activeLayer === 'groundwater')) {
-      return true;
+    } else if (children) {
+      var isParentOfActiveSub = children.indexOf(activeLayer) >= 0;
+      return isParentOfActiveSub;
     }
 
     return false;

@@ -64,15 +64,17 @@ function (_Component) {
       language: 'english'
     });
 
-    _defineProperty(_assertThisInitialized(_assertThisInitialized(_this)), "listenToIncomingEvents", function () {
-      _api.socket.on('from-table', function (_ref) {
-        var event = _ref.event;
+    _defineProperty(_assertThisInitialized(_assertThisInitialized(_this)), "onIncomingEvents", function (_ref) {
+      var event = _ref.event;
 
-        switch (event) {
-          default:
-            break;
-        }
-      });
+      switch (event) {
+        default:
+          break;
+      }
+    });
+
+    _defineProperty(_assertThisInitialized(_assertThisInitialized(_this)), "listenToIncomingEvents", function () {
+      _api.socket.on('from-table', _this.onIncomingEvents);
     });
 
     _defineProperty(_assertThisInitialized(_assertThisInitialized(_this)), "onLinkClick", function (to) {
@@ -90,6 +92,11 @@ function (_Component) {
     key: "componentDidMount",
     value: function componentDidMount() {
       this.listenToIncomingEvents();
+    }
+  }, {
+    key: "componentWillUnmount",
+    value: function componentWillUnmount() {
+      _api.socket.off('from-table', this.onIncomingEvents);
     }
   }, {
     key: "componentDidUpdate",

@@ -8,7 +8,7 @@ var _reactDom = require("react-dom");
 
 var _Controller = _interopRequireDefault(require("./Controller"));
 
-var _controller = _interopRequireDefault(require("../../styles/controller.scss"));
+var _controller = _interopRequireDefault(require("../../styles/controller/controller.scss"));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 

@@ -12,13 +12,15 @@ class Controller extends Component {
 		language: 'english',
 	}
 
+	onIncomingEvents = ({ event }) => {
+		switch(event) {
+			default:
+				break;
+		}
+	}
+	
 	listenToIncomingEvents = () => {
-		socket.on('from-table', ({ event }) => {
-			switch(event) {
-				default:
-					break;
-			}
-		});
+		socket.on('from-table', this.onIncomingEvents);
 	}
 
 	onLinkClick = (to) => {
@@ -31,6 +33,10 @@ class Controller extends Component {
 	
 	componentDidMount() {
 		this.listenToIncomingEvents();
+	}
+	
+	componentWillUnmount() {
+		socket.off('from-table', this.onIncomingEvents);
 	}
 
 	componentDidUpdate(prevProps) {

@@ -11,9 +11,9 @@ var _reactRouterDom = require("react-router-dom");
 
 var _Intro = _interopRequireDefault(require("./Intro"));
 
-var _Story = _interopRequireDefault(require("./Story"));
+var _Container = _interopRequireDefault(require("./Data/Container"));
 
-var _Map = _interopRequireDefault(require("./Map"));
+var _Map = _interopRequireDefault(require("./Map/Map"));
 
 var _api = require("../api");
 
@@ -59,26 +59,6 @@ function (_Component) {
 
     _this = _possibleConstructorReturn(this, (_getPrototypeOf2 = _getPrototypeOf(Table)).call.apply(_getPrototypeOf2, [this].concat(args)));
 
-    _defineProperty(_assertThisInitialized(_assertThisInitialized(_this)), "listenToIncomingEvents", function () {
-      _api.socket.on('controller', function (message) {
-        var event = message.event,
-            payload = message.payload;
-
-        switch (event) {
-          case 'poolClicked':
-            break;
-
-          case 'navigate':
-            _this.navigate(payload);
-
-            break;
-
-          default:
-            return;
-        }
-      });
-    });
-
     _defineProperty(_assertThisInitialized(_assertThisInitialized(_this)), "navigate", function (to) {
       var history = _this.props.history;
       history.push("/table/".concat(to));
@@ -92,6 +72,30 @@ function (_Component) {
       }
     });
 
+    _defineProperty(_assertThisInitialized(_assertThisInitialized(_this)), "onIncomingEvents", function (message) {
+      var event = message.event,
+          payload = message.payload;
+
+      switch (event) {
+        case 'poolClicked':
+          break;
+
+        case 'navigate':
+          _this.navigate(payload);
+
+          break;
+
+        default:
+          return;
+      }
+
+      ;
+    });
+
+    _defineProperty(_assertThisInitialized(_assertThisInitialized(_this)), "listenToIncomingEvents", function () {
+      _api.socket.on('controller', _this.onIncomingEvents);
+    });
+
     return _this;
   }
 
@@ -103,8 +107,13 @@ function (_Component) {
     }
   }, {
     key: "componentDidUpdate",
-    value: function componentDidUpdate(prevProps, prevState) {
+    value: function componentDidUpdate() {
       this.updateBodyClassName();
+    }
+  }, {
+    key: "componentWillUnmount",
+    value: function componentWillUnmount() {
+      _api.socket.off('controller', this.onIncomingEvents);
     }
   }, {
     key: "render",
@@ -114,9 +123,9 @@ function (_Component) {
         exact: true,
         component: _Intro.default
       }), _react.default.createElement(_reactRouterDom.Route, {
-        path: "/table/story",
+        path: "/table/story-viz",
         exact: true,
-        component: _Story.default
+        component: _Container.default
       }), _react.default.createElement(_reactRouterDom.Route, {
         path: "/table/map",
         exact: true,

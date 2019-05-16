@@ -18,7 +18,7 @@ class Intro extends Component {
 					<Link onClick={() => this.onLinkClick('map')} to="/controller/map">water map &amp; porjects</Link>
 				</div>
 				<div className="intro__section intro__section--right">
-					<Link onClick={() => this.onLinkClick('story')} to="/controller/viz">story &amp; visualisation</Link>
+					<Link onClick={() => this.onLinkClick('story-viz')} to="/controller/viz">story &amp; visualisation</Link>
 				</div>
 			</section>
 		);

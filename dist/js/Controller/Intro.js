@@ -80,7 +80,7 @@ function (_Component) {
         className: "intro__section intro__section--right"
       }, _react.default.createElement(_reactRouterDom.Link, {
         onClick: function onClick() {
-          return _this2.onLinkClick('story');
+          return _this2.onLinkClick('story-viz');
         },
         to: "/controller/viz"
       }, "story & visualisation")));

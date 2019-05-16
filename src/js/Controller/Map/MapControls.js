@@ -24,7 +24,7 @@ import GroundWaterIcon from '../../icons/GroundWaterIcon';
 
 class MapControls extends Component {
 	state = {
-		activeLayer: 'surface', 
+		activeLayer: 'natural', 
 		active: undefined, 
 	}
 
@@ -34,9 +34,10 @@ class MapControls extends Component {
 			active = canalConfig.entries[0].id;
 		}
 		this.setState({
-			activeLayer: this.state.activeLayer === layer ? 'surface' : layer,
+			activeLayer: this.state.activeLayer === layer ? 'natural' : layer,
 			active,
 		});
+
 	}
 
 	onClickLayer = view => {
@@ -95,13 +96,14 @@ class MapControls extends Component {
 	render() {
 		const { activeLayer } = this.state;
 		return (
-			<section className="map-console">
+			<section className="controller map-console">
 				<div className="map-console__controls">
-					<h1>WATER MAP &amp; PROJECTS</h1>
+					<h1 className="controller__title">WATER MAP &amp; PROJECTS</h1>
 					<div className="map-console__controls__group map-console__controls__group--main">
 						<MapControlButton 
 							activeLayer={activeLayer}
-							label="default"
+							label="natural"
+							children={['surface', 'groundwater']}
 							renderIcon={() => <NaturalIcon />}
 							title="Natural Water Resources"
 							onClick={this.onClickLayer}
@@ -142,15 +144,18 @@ class MapControls extends Component {
 							onClick={this.onClickLayer}
 						/>
 					</div>
-					{ (activeLayer === 'surface' || activeLayer === 'groundwater') && <div className="map-console__controls__group map-console__controls__group--secondary">
+					{ (activeLayer === 'natural' || activeLayer === 'surface' || activeLayer === 'groundwater') && <div className="map-console__controls__group map-console__controls__group--secondary">
 						<MapControlButton 
 							activeLayer={activeLayer}
+							parent='natural'
+							defaultChild
 							label="surface"
 							renderIcon={() => <NaturalIcon />}
 							title="Surface Water"
 							onClick={this.onClickLayer}
 						/>
 						<MapControlButton 
+							parent='natural'
 							activeLayer={activeLayer}
 							label="groundwater"
 							renderIcon={() => <GroundWaterIcon />}

@@ -27,6 +27,11 @@ io.on('connection', function (client) {
   });
 });
 app.use(_express.default.static(_path.default.resolve(__dirname, "../build")));
+app.get("/", function (req, res) {
+  res.send(templateLanding({
+    title: 'Water Table Jordan'
+  }));
+});
 app.get("/table/:section?", function (req, res) {
   res.send(template({
     title: 'Water Table Jordan'

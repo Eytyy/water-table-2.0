@@ -25,6 +25,12 @@ io.on('connection', function(client) {
 
 app.use(express.static(path.resolve( __dirname, "../build" )));
 
+app.get( "/", ( req, res ) => {
+	res.send(templateLanding({
+		title: 'Water Table Jordan',
+	}));
+});
+
 app.get( "/table/:section?", ( req, res ) => {
 	res.send(template({
 		title: 'Water Table Jordan',

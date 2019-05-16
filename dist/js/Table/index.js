@@ -8,7 +8,7 @@ var _reactDom = require("react-dom");
 
 var _Table = _interopRequireDefault(require("./Table"));
 
-var _table = _interopRequireDefault(require("../../styles/table.scss"));
+var _table = _interopRequireDefault(require("../../styles/table/table.scss"));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
