@@ -18,17 +18,19 @@ var DamsText = function DamsText(_ref) {
     className: "project-description__text project-description__text--dams"
   }, _react.default.createElement("h2", {
     className: "project-name"
-  }, name), yearConstructed && _react.default.createElement("div", {
+  }, name), _react.default.createElement("div", {
+    className: "project-details"
+  }, yearConstructed && _react.default.createElement("div", {
     className: "project-description__item"
   }, _react.default.createElement("span", {
     className: "label"
-  }, "Year of Construction: "), _react.default.createElement("span", {
+  }, "Year"), _react.default.createElement("span", {
     className: "value"
   }, yearConstructed)), yearRaised && _react.default.createElement("div", {
     className: "project-description__item"
   }, _react.default.createElement("span", {
     className: "label"
-  }, "Year Raised: "), _react.default.createElement("span", {
+  }, "Raised"), _react.default.createElement("span", {
     className: "value"
   }, yearRaised)), capacity && _react.default.createElement("div", {
     className: "project-description__item"
@@ -36,9 +38,9 @@ var DamsText = function DamsText(_ref) {
     className: "label"
   }, "Capacity: "), _react.default.createElement("span", {
     className: "value"
-  }, capacity, " ", _react.default.createElement("span", {
+  }, capacity, _react.default.createElement("span", {
     className: "unit"
-  }, "m\xB3"))));
+  }, "m\xB3")))));
 };
 
 var _default = DamsText;

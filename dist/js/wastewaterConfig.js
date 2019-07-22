@@ -10,9 +10,10 @@ var _default = {
   icon: '../waste.svg',
   entries: [{
     id: 'ww1',
+    //
     position: {
-      x: 335.000000,
-      y: 0.000000
+      x: 340.000000,
+      y: 90.000000
     },
     name: 'Central Irbid',
     startYear: '1987',
@@ -21,8 +22,8 @@ var _default = {
   }, {
     id: 'ww2',
     position: {
-      x: 335.000000,
-      y: 43.000000
+      x: 430.000000,
+      y: 80.000000
     },
     name: 'Al-Ramtha',
     startYear: '1987',
@@ -31,128 +32,129 @@ var _default = {
   }, {
     id: 'ww3',
     position: {
-      x: 237.000000,
-      y: 8.000000
+      x: 240.000000,
+      y: 200.000000
     },
     name: 'Kufranjeh',
     startYear: '1989',
     upgradeYear: [],
-    designFlow: ''
+    designFlow: '9,000'
   }, {
     id: 'ww4',
     position: {
-      x: 373.000000,
-      y: 43.000000
+      x: 365.000000,
+      y: 210.000000
     },
     name: 'East Jerash',
     startYear: '1983',
     upgradeYear: [],
-    designFlow: ''
+    designFlow: '9,500'
   }, {
     id: 'ww5',
     position: {
-      x: 330.000000,
-      y: 121.000000
+      x: 510.000000,
+      y: 160.000000
     },
     name: 'Al-Mafraq',
     startYear: '1988',
     upgradeYear: [],
-    designFlow: ''
+    designFlow: '6,500'
   }, {
     id: 'ww6',
     position: {
-      x: 259.000000,
-      y: 122.000000
+      x: 480.000000,
+      y: 280.000000
     },
     name: 'As-Samra',
     startYear: '1985',
     upgradeYear: ['2004', '2015'],
-    designFlow: '346000'
+    designFlow: '346,000'
   }, {
     id: 'ww7',
     position: {
-      x: 258.000000,
-      y: 419.000000
+      x: 350.000000,
+      y: 300.000000
     },
     name: 'Al-Baq’a',
     startYear: '1987',
     upgradeYear: [],
-    designFlow: ''
+    designFlow: '14,900'
   }, {
     id: 'ww8',
     position: {
-      x: 228.000000,
-      y: 111.000000
+      x: 380.000000,
+      y: 330.000000
     },
     name: 'Abu Nuseir',
     startYear: '1986',
     upgradeYear: [],
-    designFlow: ''
+    designFlow: '4,000'
   }, {
     id: 'ww9',
     position: {
-      x: 213.000000,
-      y: 419.000000
+      x: 295.000000,
+      y: 320.000000
     },
     name: 'As-Salt',
     startYear: '1981',
     upgradeYear: [],
-    designFlow: ''
+    designFlow: '7,700'
   }, {
     id: 'ww10',
     position: {
-      x: 260.000000,
-      y: 465.000000
+      x: 280.000000,
+      y: 450.000000
     },
     name: 'Madaba',
-    startYear: '',
+    startYear: '1989',
     upgradeYear: [],
-    designFlow: ''
+    designFlow: '7,600'
   }, {
     id: 'ww11',
     position: {
-      x: 414.000000,
-      y: 178.000000
+      x: 10.000000,
+      y: 1190.000000
     },
     name: 'Aqaba',
-    startYear: '',
+    startYear: '1987',
     upgradeYear: [],
-    designFlow: ''
+    designFlow: '9,000'
   }, {
     id: 'ww12',
     position: {
-      x: 411.000000,
-      y: 110.000000
+      x: 270.000000,
+      y: 1040.000000
     },
     name: 'Ma’an',
-    startYear: '',
+    startYear: '1989',
     upgradeYear: [],
-    designFlow: ''
+    designFlow: '3,900'
   }, {
     id: 'ww13',
     position: {
-      x: 237.000000,
-      y: 557.000000
+      x: 180.000000,
+      y: 800.000000
     },
     name: 'Al-Tafelah',
-    startYear: '',
+    startYear: '1988',
     upgradeYear: [],
-    designFlow: ''
+    designFlow: '7,500'
   }, {
     id: 'ww14',
     position: {
-      x: 202.000000,
-      y: 825.000000
+      x: 230.000000,
+      y: 645.000000
     },
     name: 'Al-Karak',
-    startYear: '',
+    startYear: '1988',
     upgradeYear: [],
-    designFlow: ''
+    designFlow: '5,500'
   }, {
     id: 'ww15',
+    //
     position: {
-      x: 155.000000,
-      y: 901.000000
+      x: 300.000000,
+      y: 80.000000
     },
     name: 'Wadi Al-Arab',
     startYear: '',
@@ -161,108 +163,108 @@ var _default = {
   }, {
     id: 'ww16',
     position: {
-      x: 0.000000,
-      y: 1265.000000
+      x: 315.000000,
+      y: 350.000000
     },
     name: 'Al Fuhais',
-    startYear: '',
+    startYear: '1997',
     upgradeYear: [],
-    designFlow: ''
+    designFlow: '2,400'
   }, {
     id: 'ww17',
     position: {
-      x: 227.000000,
-      y: 932.000000
+      x: 275.000000,
+      y: 375.000000
     },
     name: 'Wadi As Seer',
-    startYear: '',
+    startYear: '1997',
     upgradeYear: [],
-    designFlow: ''
+    designFlow: '4,000'
   }, {
     id: 'ww18',
     position: {
-      x: 219.000000,
-      y: 667.000000
+      x: 380.000000,
+      y: 170.000000
     },
     name: 'Wadi Hasan',
-    startYear: '',
+    startYear: '2001',
     upgradeYear: [],
-    designFlow: ''
+    designFlow: '13,700'
   }, {
     id: 'ww19',
     position: {
-      x: 325.000000,
-      y: 505.000000
+      x: 495.000000,
+      y: 130.000000
     },
     name: 'Al-Ekader (septage)',
-    startYear: '',
+    startYear: '2005',
     upgradeYear: [],
-    designFlow: ''
+    designFlow: '4,000'
   }, {
     id: 'ww20',
     position: {
-      x: 191.000000,
-      y: 509.000000
+      x: 310.000000,
+      y: 420.000000
     },
     name: 'Jiza & Talbiiyah',
-    startYear: '',
+    startYear: '2009',
     upgradeYear: [],
-    designFlow: ''
+    designFlow: '4,500'
   }, {
     id: 'ww21',
     position: {
-      x: 121.000000,
-      y: 509.000000
+      x: 70.000000,
+      y: 1190.000000
     },
     name: 'Aqaba Mechanical',
-    startYear: '',
+    startYear: '2005',
     upgradeYear: [],
-    designFlow: ''
+    designFlow: '12,000'
   }, {
     id: 'ww22',
     position: {
-      x: 131.000000,
-      y: 409.000000
+      x: 90.000000,
+      y: 1000.000000
     },
     name: 'Wadi Musa',
-    startYear: '',
+    startYear: '2000',
     upgradeYear: [],
-    designFlow: ''
+    designFlow: '3,400'
   }, {
     id: 'ww23',
     position: {
-      x: 91.000000,
-      y: 309.000000
+      x: 120.000000,
+      y: 940.000000
     },
     name: 'Al Shobak (septage)',
-    startYear: '',
+    startYear: '2000',
     upgradeYear: [],
-    designFlow: ''
+    designFlow: '350'
   }, {
     id: 'ww24',
     position: {
-      x: 81.000000,
-      y: 323.000000
+      x: 150.000000,
+      y: 880.000000
     },
     name: 'Al Mansourah (septage)',
-    startYear: '',
+    startYear: '2000',
     upgradeYear: [],
-    designFlow: ''
+    designFlow: '50'
   }, {
     id: 'ww25',
     position: {
-      x: 400.000000,
-      y: 609.000000
+      x: 350.000000,
+      y: 655.000000
     },
     name: 'Al Lajoun (septage)',
-    startYear: '',
+    startYear: '2005',
     upgradeYear: [],
-    designFlow: ''
+    designFlow: '1,200'
   }, {
     id: 'ww26',
     position: {
-      x: 321.000000,
-      y: 311.000000
+      x: 400.000000,
+      y: 105.000000
     },
     name: 'Wadi Shalala',
     startYear: '',
@@ -271,73 +273,73 @@ var _default = {
   }, {
     id: 'ww27',
     position: {
-      x: 41.000000,
-      y: 231.000000
+      x: 185.000000,
+      y: 110.000000
     },
-    name: '',
-    startYear: '',
+    name: 'North Shuneh (septage)',
+    startYear: '2015',
     upgradeYear: [],
-    designFlow: ''
+    designFlow: '1,200'
   }, {
     id: 'ww28',
     position: {
-      x: 412.000000,
-      y: 113.000000
+      x: 350.000000,
+      y: 230.000000
     },
-    name: '',
-    startYear: '',
+    name: 'West Jerash / Al Me’rad',
+    startYear: '2010',
     upgradeYear: [],
-    designFlow: ''
+    designFlow: '10,000'
   }, {
     id: 'ww29',
     position: {
-      x: 543.000000,
-      y: 312.000000
+      x: 530.000000,
+      y: 190.000000
     },
-    name: '',
-    startYear: '',
+    name: 'Z’atary Refugee Camp',
+    startYear: '2015',
     upgradeYear: [],
-    designFlow: ''
+    designFlow: '3,700'
   }, {
     id: 'ww30',
     position: {
-      x: 412.000000,
-      y: 423.000000
+      x: 190.000000,
+      y: 275.000000
     },
-    name: '',
-    startYear: '',
+    name: 'Tel Al-Mantah (septage)',
+    startYear: '2011',
     upgradeYear: [],
-    designFlow: ''
+    designFlow: '400'
   }, {
     id: 'ww31',
     position: {
-      x: 642.000000,
-      y: 321.000000
+      x: 340.000000,
+      y: 440.000000
     },
-    name: '',
-    startYear: '',
+    name: 'South Amman',
+    startYear: '2015',
     upgradeYear: [],
-    designFlow: ''
+    designFlow: '52,000'
   }, {
     id: 'ww32',
     position: {
-      x: 441.000000,
-      y: 563.000000
+      x: 575.000000,
+      y: 480.000000
     },
-    name: '',
-    startYear: '',
+    name: 'Azraq Refugee Camp',
+    startYear: '2015',
     upgradeYear: [],
-    designFlow: ''
+    designFlow: '800'
   }, {
     id: 'ww33',
     position: {
-      x: 546.000000,
-      y: 123.000000
+      x: 280.000000,
+      y: 685.000000
     },
-    name: '',
-    startYear: '',
+    name: 'Mouta’a',
+    startYear: '2015',
     upgradeYear: [],
-    designFlow: ''
+    designFlow: '7,100'
   }]
 };
 exports.default = _default;

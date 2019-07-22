@@ -1,26 +1,27 @@
 import React from 'react';
 import MapLayerText from './MapLayerText';
+import Basins from './Basins';
 
 const MapLayerContent = ({ layerName, activeLayer, active, config, renderIcon, renderText }) => {
 	const iconSizes = {
 		'supply': {
-			w: 30,
-			h: 30,
+			w: 25,
+			h: 25,
 			scale: '2',
 		}, 
 		'groundwater': {
-			w: 30,
-			h: 30,
+			w: 25,
+			h: 25,
 			scale: '2',
 		}, 
 		'desalination': {
-			w: 30,
-			h: 30,
+			w: 25,
+			h: 25,
 			scale: '2',
 		},  
 		'waste': {
-			w: 30,
-			h: 30,
+			w: 25,
+			h: 25,
 			scale: '2',
 		},  
 		'canal': {
@@ -29,8 +30,8 @@ const MapLayerContent = ({ layerName, activeLayer, active, config, renderIcon, r
 			scale: '1.5',
 		},  
 		'dams': {
-			w: 30,
-			h: 30,
+			w: 25,
+			h: 25,
 			scale: '1.5',
 		}, 
 	}
@@ -59,6 +60,7 @@ const MapLayerContent = ({ layerName, activeLayer, active, config, renderIcon, r
 	
 	return (
 		<div className={`layer layer--${layerName} ${isLayerActive ? 'layer--is-active' : 'layer--is-hidden'}`}>
+			{ layerName === 'groundwater' && <Basins />}
 			<div className={`resources resources--${layerName}`}>
 				{
 					config.entries.map(({ id, position }) => 
@@ -66,8 +68,8 @@ const MapLayerContent = ({ layerName, activeLayer, active, config, renderIcon, r
 							width: `${width}px`,
 							height: `${height}px`,
 							position: 'absolute',
-							top: position.y + 180,
-							left: position.x + 190,
+							top: position.y,
+							left: position.x,
 							transform: `${active !== id ? 'scale(1, 1)' : `scale(${scale}, ${scale})`}`,
 							opacity: getOpacity(id),
 							zIndex: `${active !== id ? '2' : '1'}`

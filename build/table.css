@@ -11,7 +11,7 @@ h1, h2, h3, .project-description__item .value, .resource-text__figure-value {
   font-weight: normal;
   font-style: normal; }
 
-body {
+body, .project-description__item .unit {
   font-family: 'ZeitungMonoPro-Reg';
   font-weight: normal;
   font-style: normal; }
@@ -106,12 +106,17 @@ h1 {
 .resource-text__group {
   display: flex; }
 
+.resources {
+  position: absolute;
+  top: 155px;
+  left: 130px; }
+
 .project-description {
   transition: opacity 200ms linear;
-  width: 240px;
   background: rgba(0, 0, 0, 0.3);
   padding: 20px;
-  z-index: 2; }
+  z-index: 2;
+  min-width: 402px; }
   .project-description:after {
     content: '';
     position: absolute;
@@ -150,15 +155,31 @@ h1 {
   right: 10px;
   top: bottom; }
 
-.project-description__item .label,
-.project-description__item .value {
-  display: block; }
+.project-name {
+  font-size: 32px;
+  line-height: 38px;
+  margin: 0 0 20px; }
 
-.project-description__item .label {
-  font-size: 18px; }
+.project-description__item {
+  margin: 0 0 10px;
+  flex: 1 1 50%; }
+  .project-description__item .label,
+  .project-description__item .value {
+    display: block; }
+  .project-description__item .label {
+    font-size: 16px;
+    line-height: 22px; }
+  .project-description__item .value {
+    font-size: 32px;
+    line-height: 42px; }
+  .project-description__item .unit {
+    font-size: 12px;
+    line-height: 14px;
+    margin-left: 10px; }
 
-.project-description__item .value {
-  font-size: 32px; }
+.project-details {
+  display: flex;
+  flex-wrap: wrap; }
 
 .resource-text__title {
   margin: 0 0 10px;
@@ -193,6 +214,43 @@ h1 {
 @keyframes spin {
   100% {
     transform: rotate(360deg); } }
+
+.basins {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 1655px; }
+
+.cls-1 {
+  fill: none; }
+
+.cls-2 {
+  fill: #fff; }
+
+.basins__group {
+  opacity: 0.35;
+  transform: translate(89px, -64px); }
+
+.cls-4 {
+  fill: url(#New_Pattern_Swatch_7); }
+
+.cls-5 {
+  fill: url(#New_Pattern_Swatch_8); }
+
+.cls-6 {
+  fill: url(#New_Pattern_Swatch_6); }
+
+.cls-7 {
+  fill: url(#New_Pattern_Swatch_10); }
+
+.cls-8 {
+  fill: url(#New_Pattern_Swatch_3); }
+
+.cls-9 {
+  fill: url(#New_Pattern_Swatch_5); }
+
+.cls-10 {
+  fill: url(#New_Pattern_Swatch_9); }
 
 .intro--story__section__header {
   margin-bottom: 50px; }

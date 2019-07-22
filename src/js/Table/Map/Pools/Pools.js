@@ -9,7 +9,7 @@ class Pools extends Component {
 	canvas = React.createRef()
 	ctx
 	pools = []
-	width="912"
+	width="1080"
 	height="1540"
 
 	particles = Array.from({length: 140000}, () => [

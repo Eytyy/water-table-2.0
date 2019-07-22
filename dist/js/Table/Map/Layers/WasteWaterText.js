@@ -18,17 +18,19 @@ var WasteWaterText = function WasteWaterText(_ref) {
     className: "project-description__text project-description__text--wastewater"
   }, _react.default.createElement("h2", {
     className: "project-name"
-  }, name), startYear && _react.default.createElement("div", {
+  }, name), _react.default.createElement("div", {
+    className: "project-details"
+  }, startYear && _react.default.createElement("div", {
     className: "project-description__item"
   }, _react.default.createElement("span", {
     className: "label"
-  }, "Year of Operation: "), _react.default.createElement("span", {
+  }, "Year"), _react.default.createElement("span", {
     className: "value"
   }, startYear)), upgradeYear.length > 0 && _react.default.createElement("div", {
     className: "project-description__item"
   }, _react.default.createElement("span", {
     className: "label"
-  }, "Upgraded in: "), _react.default.createElement("span", {
+  }, "Upgraded"), _react.default.createElement("span", {
     className: "value"
   }, upgradeYear.map(function (year, i) {
     return i === upgradeYear.length - 1 ? "".concat(year, ".") : "".concat(year, ", ");
@@ -36,11 +38,11 @@ var WasteWaterText = function WasteWaterText(_ref) {
     className: "project-description__item"
   }, _react.default.createElement("span", {
     className: "label"
-  }, "Design Flow: "), _react.default.createElement("span", {
+  }, "Design Flow"), _react.default.createElement("span", {
     className: "value"
-  }, designFlow, " ", _react.default.createElement("span", {
+  }, designFlow, _react.default.createElement("span", {
     className: "unit"
-  }, "m\xB3 per day"))));
+  }, "m\xB3 per day")))));
 };
 
 var _default = WasteWaterText;

@@ -17,48 +17,53 @@ var SupplyText = function SupplyText(_ref) {
       initialCapactiy = _ref.initialCapactiy,
       upgradedCapacity = _ref.upgradedCapacity,
       city = _ref.city,
-      year = _ref.year;
+      year = _ref.year,
+      unit = _ref.unit;
   return _react.default.createElement("div", {
     className: "project-description__text project-description__text--supply--".concat(type)
   }, _react.default.createElement("h2", {
     className: "project-name"
-  }, name), type === 'project' && _react.default.createElement(_react.default.Fragment, null, startYear && _react.default.createElement("div", {
+  }, name), _react.default.createElement("div", {
+    className: "project-details"
+  }, type === 'project' && _react.default.createElement(_react.default.Fragment, null, startYear && _react.default.createElement("div", {
     className: "project-description__item"
   }, _react.default.createElement("span", {
     className: "label"
-  }, "Year of Operation: "), _react.default.createElement("span", {
+  }, "Year"), _react.default.createElement("span", {
     className: "value"
   }, startYear)), upgradeYear && _react.default.createElement("div", {
     className: "project-description__item"
   }, _react.default.createElement("span", {
     className: "label"
-  }, "Upgraded in: "), _react.default.createElement("span", {
+  }, "Expanded"), _react.default.createElement("span", {
     className: "value"
   }, upgradeYear)), initialCapactiy && _react.default.createElement("div", {
     className: "project-description__item"
   }, _react.default.createElement("span", {
     className: "label"
-  }, "Capacity: "), _react.default.createElement("span", {
+  }, "Capacity"), _react.default.createElement("span", {
     className: "value"
-  }, initialCapactiy)), upgradedCapacity && _react.default.createElement("div", {
+  }, initialCapactiy, _react.default.createElement("span", {
+    className: "unit"
+  }, unit))), upgradedCapacity && _react.default.createElement("div", {
     className: "project-description__item"
   }, _react.default.createElement("span", {
     className: "label"
-  }, "New Capacity: "), _react.default.createElement("span", {
+  }, "New Capacity"), _react.default.createElement("span", {
     className: "value"
   }, upgradedCapacity))), type === 'utility' && _react.default.createElement(_react.default.Fragment, null, year && _react.default.createElement("div", {
     className: "project-description__item"
   }, _react.default.createElement("span", {
     className: "label"
-  }, "Year of Operation: "), _react.default.createElement("span", {
+  }, "Year"), _react.default.createElement("span", {
     className: "value"
   }, year)), city && _react.default.createElement("div", {
     className: "project-description__item"
   }, _react.default.createElement("span", {
     className: "label"
-  }, "Location: "), _react.default.createElement("span", {
+  }, "Location"), _react.default.createElement("span", {
     className: "value"
-  }, city))));
+  }, city)))));
 };
 
 var _default = SupplyText;

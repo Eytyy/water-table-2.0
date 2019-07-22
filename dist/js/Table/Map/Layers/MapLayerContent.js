@@ -9,6 +9,8 @@ var _react = _interopRequireDefault(require("react"));
 
 var _MapLayerText = _interopRequireDefault(require("./MapLayerText"));
 
+var _Basins = _interopRequireDefault(require("./Basins"));
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var MapLayerContent = function MapLayerContent(_ref) {
@@ -20,23 +22,23 @@ var MapLayerContent = function MapLayerContent(_ref) {
       renderText = _ref.renderText;
   var iconSizes = {
     'supply': {
-      w: 30,
-      h: 30,
+      w: 25,
+      h: 25,
       scale: '2'
     },
     'groundwater': {
-      w: 30,
-      h: 30,
+      w: 25,
+      h: 25,
       scale: '2'
     },
     'desalination': {
-      w: 30,
-      h: 30,
+      w: 25,
+      h: 25,
       scale: '2'
     },
     'waste': {
-      w: 30,
-      h: 30,
+      w: 25,
+      h: 25,
       scale: '2'
     },
     'canal': {
@@ -45,8 +47,8 @@ var MapLayerContent = function MapLayerContent(_ref) {
       scale: '1.5'
     },
     'dams': {
-      w: 30,
-      h: 30,
+      w: 25,
+      h: 25,
       scale: '1.5'
     }
   };
@@ -77,7 +79,7 @@ var MapLayerContent = function MapLayerContent(_ref) {
   var isLayerActive = getLayerVisibility();
   return _react.default.createElement("div", {
     className: "layer layer--".concat(layerName, " ").concat(isLayerActive ? 'layer--is-active' : 'layer--is-hidden')
-  }, _react.default.createElement("div", {
+  }, layerName === 'groundwater' && _react.default.createElement(_Basins.default, null), _react.default.createElement("div", {
     className: "resources resources--".concat(layerName)
   }, config.entries.map(function (_ref2) {
     var id = _ref2.id,
@@ -89,8 +91,8 @@ var MapLayerContent = function MapLayerContent(_ref) {
         width: "".concat(width, "px"),
         height: "".concat(height, "px"),
         position: 'absolute',
-        top: position.y + 180,
-        left: position.x + 190,
+        top: position.y,
+        left: position.x,
         transform: "".concat(active !== id ? 'scale(1, 1)' : "scale(".concat(scale, ", ").concat(scale, ")")),
         opacity: getOpacity(id),
         zIndex: "".concat(active !== id ? '2' : '1')

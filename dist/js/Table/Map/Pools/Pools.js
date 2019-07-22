@@ -65,7 +65,7 @@ function (_Component) {
 
     _defineProperty(_assertThisInitialized(_assertThisInitialized(_this)), "pools", []);
 
-    _defineProperty(_assertThisInitialized(_assertThisInitialized(_this)), "width", "912");
+    _defineProperty(_assertThisInitialized(_assertThisInitialized(_this)), "width", "1080");
 
     _defineProperty(_assertThisInitialized(_assertThisInitialized(_this)), "height", "1540");
 

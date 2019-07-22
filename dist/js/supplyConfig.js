@@ -14,21 +14,23 @@ var _default = {
       x: 335.000000,
       y: 0.000000
     },
-    name: 'Water Supply Project No. 1',
+    name: 'Zay Water Treatment Plant',
     startYear: '1985',
     upgradeYear: '2002',
-    initialCapactiy: '45 mcm per year',
+    initialCapactiy: '45',
+    unit: 'mcm per year',
     upgradedCapacity: '90',
     type: 'project'
   }, {
     id: 's2',
     position: {
-      x: 335.000000,
-      y: 43.000000
+      x: 320.000000,
+      y: 345.000000
     },
     name: 'Dabouq Reservoir',
     startYear: '1980',
-    initialCapactiy: '250000 CM',
+    initialCapactiy: '250000',
+    unit: 'CM',
     type: 'project'
   }, {
     id: 's3',
@@ -38,17 +40,19 @@ var _default = {
     },
     name: 'Disi-Aqaba conveyor and Disi wellfield',
     startYear: '2013',
-    initialCapactiy: '20 MCM per year',
+    initialCapactiy: '20',
+    unit: 'MCM per year',
     type: 'project'
   }, {
     id: 's4',
     position: {
-      x: 373.000000,
-      y: 43.000000
+      x: 180.000000,
+      y: 385.000000
     },
     name: 'Zara-Maein Project',
     startYear: '2006',
-    initialCapactiy: '110,000 CM per day',
+    initialCapactiy: '110,000',
+    unit: 'CM per day',
     type: 'project'
   }, {
     id: 's5',
@@ -58,23 +62,25 @@ var _default = {
     },
     name: 'Disi Project',
     startYear: '2013',
-    initialCapactiy: '100 MCM per year',
+    initialCapactiy: '100',
+    unit: 'MCM per year',
     type: 'project'
   }, {
     id: 's6',
     position: {
-      x: 259.000000,
-      y: 122.000000
+      x: 230.000000,
+      y: 78.000000
     },
     name: 'Wadi Arab Project',
     startYear: '2015',
-    initialCapactiy: '45 MCM per year',
+    initialCapactiy: '45',
+    unit: 'MCM per year',
     type: 'project'
   }, {
     id: 's7',
     position: {
-      x: 258.000000,
-      y: 419.000000
+      x: 290.000000,
+      y: 115.000000
     },
     name: 'Yarmouk Water Company',
     year: '1997',
@@ -82,8 +88,8 @@ var _default = {
   }, {
     id: 's8',
     position: {
-      x: 228.000000,
-      y: 111.000000
+      x: 40.000000,
+      y: 1220.000000
     },
     name: 'Aqaba Water Company',
     year: '2004',
@@ -91,8 +97,8 @@ var _default = {
   }, {
     id: 's9',
     position: {
-      x: 213.000000,
-      y: 419.000000
+      x: 375.000000,
+      y: 360.000000
     },
     name: 'Jordan Water Company (Miyahuna)',
     year: '2007',
@@ -101,18 +107,18 @@ var _default = {
   }, {
     id: 's10',
     position: {
-      x: 260.000000,
-      y: 465.000000
+      x: 285.000000,
+      y: 445.000000
     },
-    name: 'Miyahuna (2)',
+    name: 'Miyahuna Madaba (1)',
     year: '2013',
     city: 'Madaba',
     type: 'utility'
   }, {
     id: 's11',
     position: {
-      x: 414.000000,
-      y: 178.000000
+      x: 435.000000,
+      y: 290.000000
     },
     name: 'Miyahuna (3)',
     year: '2015',
@@ -121,10 +127,10 @@ var _default = {
   }, {
     id: 's12',
     position: {
-      x: 411.000000,
-      y: 110.000000
+      x: 255.000000,
+      y: 455.000000
     },
-    name: 'Miyahuna (4)',
+    name: 'Miyahuna Madaba (2)',
     year: '2018',
     city: 'Madaba',
     type: 'utility'

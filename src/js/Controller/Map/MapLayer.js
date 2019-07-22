@@ -18,13 +18,13 @@ const MapLayer = ({ layerName, config, active, activeLayer, renderIcon, onClick 
 					key={id}
 					id={id}
 					style={{
-						width: '36px',
-						height: '36px',
+						width: '25px',
+						height: '25px',
 						position: 'absolute',
 						// scale down by 66.5
 						// then adjust top/left position those are determined visually
-						top: Math.floor(position.y * 0.665) + 130,
-						left: Math.floor(position.x * 0.665) + 180,
+						top: Math.floor(position.y * 0.665) + 105,
+						left: Math.floor(position.x * 0.665) + 125,
 						opacity: `${ typeof active !== 'undefined' && active !== id ? '0.2' : '1'}`,
 						zIndex: `${active !== id ? '2' : '1'}`
 					}}

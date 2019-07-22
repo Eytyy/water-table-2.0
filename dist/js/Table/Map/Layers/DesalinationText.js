@@ -21,15 +21,15 @@ var DesalinationText = function DesalinationText(_ref) {
     className: "project-description__item"
   }, _react.default.createElement("span", {
     className: "label"
-  }, "Year of Construction: "), _react.default.createElement("span", {
+  }, "Year"), _react.default.createElement("span", {
     className: "value"
   }, year)), capacity && _react.default.createElement("div", {
     className: "project-description__item"
   }, _react.default.createElement("span", {
     className: "label"
-  }, "Capacity: "), _react.default.createElement("span", {
+  }, "Capacity"), _react.default.createElement("span", {
     className: "value"
-  }, capacity, " ", _react.default.createElement("span", {
+  }, capacity, _react.default.createElement("span", {
     className: "unit"
   }, "m\xB3 per year"))));
 };

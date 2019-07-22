@@ -19,18 +19,20 @@ var GroundWaterText = function GroundWaterText(_ref) {
   }, _react.default.createElement("h2", {
     className: "project-name"
   }, name), _react.default.createElement("div", {
+    className: "project-details"
+  }, _react.default.createElement("div", {
     className: "project-description__item"
   }, _react.default.createElement("span", {
     className: "label"
-  }, "Total Extraction:"), _react.default.createElement("span", {
+  }, "Total Extraction"), _react.default.createElement("span", {
     className: "value"
-  }, extraction, " ", _react.default.createElement("span", {
+  }, extraction, _react.default.createElement("span", {
     className: "unit"
   }, "m\xB3"))), _react.default.createElement("div", {
     className: "project-description__item"
   }, _react.default.createElement("span", {
     className: "label"
-  }, "Balance: "), _react.default.createElement("span", {
+  }, "Balance"), _react.default.createElement("span", {
     className: "value"
   }, balance, " ", _react.default.createElement("span", {
     className: "unit"
@@ -38,11 +40,11 @@ var GroundWaterText = function GroundWaterText(_ref) {
     className: "project-description__item"
   }, _react.default.createElement("span", {
     className: "label"
-  }, "Safe yield: "), _react.default.createElement("span", {
+  }, "Safe yield"), _react.default.createElement("span", {
     className: "value"
-  }, safeyield, " ", _react.default.createElement("span", {
+  }, safeyield, _react.default.createElement("span", {
     className: "unit"
-  }, "m\xB3 per year"))));
+  }, "m\xB3 per year")))));
 };
 
 var _default = GroundWaterText;

@@ -70,8 +70,8 @@ function (_Component) {
           entryProps = _this$props.entryProps;
       var isActive = typeof active !== 'undefined' && active === id;
       var margin = 50;
-      var textWidth = this.textBox.current ? this.textBox.current.offsetwidth : 240;
       var textHeight = this.textBox.current ? this.textBox.current.offsetHeight : 120;
+      var textWidth = this.textBox.current ? this.textBox.current.offsetHeight : 402;
       var maxScreenWidth = 1080;
 
       var _calculateTextPositio = (0, _utility.calculateTextPosition)({
