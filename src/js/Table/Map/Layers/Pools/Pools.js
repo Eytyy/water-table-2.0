@@ -1,9 +1,8 @@
 import React, { Component } from 'react';
-import PoolsConfig from '../../../poolsConfig';
 import PoolsSVG from './PoolsSvg';
 import PoolText from './PoolText';
-import { socket } from '../../../api';
-import cutout from '../../../../cutout.png';
+import { socket } from '../../../../api';
+import cutout from '../../../../../cutout.png';
 
 class Pools extends Component {
 	canvas = React.createRef()
@@ -86,6 +85,7 @@ class Pools extends Component {
 				return;
 		}
 	}
+	
 	listenToIncomingEvents = () => {
 		socket.on('controller', this.onIncomingEvent);
 	}
@@ -114,17 +114,17 @@ class Pools extends Component {
 	}
 	
 	render() {
-		const { au, activeLayer } = this.props;
+		const { au, activeLayer, config } = this.props;
 		return (
 			<div className={`layer layer--pools ${activeLayer === 'natural' || activeLayer === 'surface' ? 'layer--is-active' : 'layer--is-hidden'}`}>
 				<canvas id="pools" width={this.width} height={this.height} ref={this.canvas} />
 				<img src={cutout} alt="" width="auto" height={`${parseInt(this.height, 10) + 1}`} style={{ position: 'absolute', top: '0px', left: '0px'}}/>
 				<PoolsSVG
-					PoolsConfig={PoolsConfig}
+					PoolsConfig={config}
 					activePool={this.state.activePool}
 				/>
 				{
-					PoolsConfig.entries.map(({ name, figures, id, pool }) =>
+					config.entries.map(({ name, figures, id, pool }) =>
 						Array.isArray(pool) ?
 							<PoolText
 								key={`rx-${id}`}

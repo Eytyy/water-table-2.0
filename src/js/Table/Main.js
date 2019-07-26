@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
 import { Route, withRouter } from 'react-router-dom'
-import Intro from './Intro';
-import Data from './Data/Container';
+import Intro from './Landing';
+import Story from './StoryVisualization/Container';
 import Map from './Map/Map';
 import { socket } from '../api';
 
-class Table extends Component {
+class Main extends Component {
 
 	navigate = (to) => {
 		const { history } = this.props;
@@ -54,11 +54,11 @@ class Table extends Component {
 		return (
 			<>
 				<Route path="/table" exact component={Intro} />
-				<Route path="/table/story-viz" exact component={Data} />
+				<Route path="/table/story-viz" exact component={Story} />
 				<Route path="/table/map" exact component={Map} />
 			</>
 		);
 	}
 }
 
-export default withRouter(Table);
+export default withRouter(Main);

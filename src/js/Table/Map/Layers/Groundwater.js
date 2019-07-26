@@ -1,21 +1,20 @@
 import React, { Component } from 'react';
 
-import MapLayer from './MapLayer';
-import MapLayerContent from './MapLayerContent';
+import LayerWrapper from '../LayerWrapper';
+import MapLayerContent from '../MapLayerContent';
 
-import groundwaterconfig from '../../../groundwaterconfig';
 import GroundWaterIcon from '../../../icons/GroundWaterIcon';
 import GroundWaterText from './GroundWaterText';
 
 class Groundwater extends Component {
 	render() {
-		const { activeLayer, active } = this.props;
+		const { activeLayer, active, config } = this.props;
 		return (
 			<MapLayerContent
 				layerName="groundwater"
 				activeLayer={activeLayer}
 				active={active}
-				config={groundwaterconfig}
+				config={config}
 				renderIcon={() => <GroundWaterIcon />}
 				renderText={(props) => <GroundWaterText {...props}/>}
 			/>
@@ -23,7 +22,7 @@ class Groundwater extends Component {
 	}
 }
 
-export default MapLayer(Groundwater, {
+export default LayerWrapper(Groundwater, {
   pageName: 'groundwater',
 });
 

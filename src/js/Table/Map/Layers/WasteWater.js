@@ -1,22 +1,21 @@
 import React, { Component } from 'react';
 
-import MapLayer from './MapLayer';
-import MapLayerContent from './MapLayerContent';
+import LayerWrapper from '../LayerWrapper';
+import MapLayerContent from '../MapLayerContent';
 
-import wastewaterConfig from '../../../wastewaterConfig';
 import TreatmentPlantIcon from '../../../icons/TreatmentPlantIcon';
 import WasteWaterText from './WasteWaterText';
 
 class WasteWater extends Component {
 	render() {
-		const { activeLayer, active } = this.props;
+		const { activeLayer, active, config } = this.props;
 
 		return (
 			<MapLayerContent
 				layerName="waste"
 				activeLayer={activeLayer}
 				active={active}
-				config={wastewaterConfig}
+				config={config}
 				renderIcon={() => <TreatmentPlantIcon />}
 				renderText={(props) => <WasteWaterText {...props} />}
 			/>
@@ -24,7 +23,7 @@ class WasteWater extends Component {
 	}
 }
 
-export default MapLayer(WasteWater, {
+export default LayerWrapper(WasteWater, {
   pageName: 'waste',
 });
 

@@ -9,9 +9,9 @@ var _react = _interopRequireWildcard(require("react"));
 
 var _reactRouterDom = require("react-router-dom");
 
-var _Intro = _interopRequireDefault(require("./Intro"));
+var _TableLandingPage = _interopRequireDefault(require("./TableLandingPage"));
 
-var _Container = _interopRequireDefault(require("./Data/Container"));
+var _Container = _interopRequireDefault(require("./Story/Container"));
 
 var _Map = _interopRequireDefault(require("./Map/Map"));
 
@@ -121,7 +121,7 @@ function (_Component) {
       return _react.default.createElement(_react.default.Fragment, null, _react.default.createElement(_reactRouterDom.Route, {
         path: "/table",
         exact: true,
-        component: _Intro.default
+        component: _TableLandingPage.default
       }), _react.default.createElement(_reactRouterDom.Route, {
         path: "/table/story-viz",
         exact: true,

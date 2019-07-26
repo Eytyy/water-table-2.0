@@ -7,11 +7,9 @@ exports.default = void 0;
 
 var _react = _interopRequireWildcard(require("react"));
 
-var _MapLayer = _interopRequireDefault(require("./MapLayer"));
+var _LayerWrapper = _interopRequireDefault(require("../LayerWrapper"));
 
-var _MapLayerContent = _interopRequireDefault(require("./MapLayerContent"));
-
-var _desalinationConfig = _interopRequireDefault(require("../../../desalinationConfig"));
+var _MapLayerContent = _interopRequireDefault(require("../MapLayerContent"));
 
 var _DesalinationIcon = _interopRequireDefault(require("../../../icons/DesalinationIcon"));
 
@@ -55,12 +53,13 @@ function (_Component) {
     value: function render() {
       var _this$props = this.props,
           activeLayer = _this$props.activeLayer,
-          active = _this$props.active;
+          active = _this$props.active,
+          config = _this$props.config;
       return _react.default.createElement(_MapLayerContent.default, {
         layerName: "desalination",
         activeLayer: activeLayer,
         active: active,
-        config: _desalinationConfig.default,
+        config: config,
         renderIcon: function renderIcon() {
           return _react.default.createElement(_DesalinationIcon.default, null);
         },
@@ -74,7 +73,7 @@ function (_Component) {
   return Desalination;
 }(_react.Component);
 
-var _default = (0, _MapLayer.default)(Desalination, {
+var _default = (0, _LayerWrapper.default)(Desalination, {
   pageName: 'desalination'
 });
 

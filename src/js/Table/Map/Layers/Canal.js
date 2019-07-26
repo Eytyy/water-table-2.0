@@ -1,21 +1,20 @@
 import React, { Component } from 'react';
 
-import MapLayer from './MapLayer';
-import MapLayerContent from './MapLayerContent';
+import LayerWrapper from '../LayerWrapper';
+import MapLayerContent from '../MapLayerContent';
 
 import CanalIcon from '../../../icons/CanalIcon';
-import canalConfig from '../../../canalConfig';
 import CanalText from './CanalText';
 
 class Canal extends Component {
 	render() {
-		const { activeLayer, active } = this.props;
+		const { activeLayer, active, config } = this.props;
 		return (
 			<MapLayerContent
 				layerName="canal"
 				activeLayer={activeLayer}
 				active={active}
-				config={canalConfig}
+				config={config}
 				renderIcon={() => <CanalIcon />}
 				renderText={(props) => <CanalText {...props} />}
 			/>
@@ -24,7 +23,7 @@ class Canal extends Component {
 }
 
 
-export default MapLayer(Canal, {
+export default LayerWrapper(Canal, {
   pageName: 'canal',
 });
 

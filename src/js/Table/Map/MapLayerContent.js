@@ -1,6 +1,6 @@
 import React from 'react';
 import MapLayerText from './MapLayerText';
-import Basins from './Basins';
+import Basins from './layers/Basins';
 
 const MapLayerContent = ({ layerName, activeLayer, active, config, renderIcon, renderText }) => {
 	const iconSizes = {

@@ -9,7 +9,7 @@ var _react = _interopRequireDefault(require("react"));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-var DamsText = function DamsText(_ref) {
+var DamDescription = function DamDescription(_ref) {
   var name = _ref.name,
       yearConstructed = _ref.yearConstructed,
       yearRaised = _ref.yearRaised,
@@ -43,5 +43,5 @@ var DamsText = function DamsText(_ref) {
   }, "m\xB3")))));
 };
 
-var _default = DamsText;
+var _default = DamDescription;
 exports.default = _default;

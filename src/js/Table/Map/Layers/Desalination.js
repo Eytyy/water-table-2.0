@@ -1,21 +1,20 @@
 import React, { Component } from 'react';
 
-import MapLayer from './MapLayer';
-import MapLayerContent from './MapLayerContent';
+import LayerWrapper from '../LayerWrapper';
+import MapLayerContent from '../MapLayerContent';
 
-import desalinationConfig from '../../../desalinationConfig';
 import DesalinationIcon from '../../../icons/DesalinationIcon';
 import DesalinationText from './DesalinationText';
 
 class Desalination extends Component {
 	render() {
-		const { activeLayer, active } = this.props;
+		const { activeLayer, active, config } = this.props;
 		return (
 			<MapLayerContent
 				layerName="desalination"
 				activeLayer={activeLayer}
 				active={active}
-				config={desalinationConfig}
+				config={config}
 				renderIcon={() => <DesalinationIcon />}
 				renderText={(props) => <DesalinationText {...props} />}
 			/>
@@ -23,6 +22,6 @@ class Desalination extends Component {
 	}
 }
 
-export default MapLayer(Desalination, {
+export default LayerWrapper(Desalination, {
   pageName: 'desalination',
 });

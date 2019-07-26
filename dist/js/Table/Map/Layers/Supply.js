@@ -7,11 +7,9 @@ exports.default = void 0;
 
 var _react = _interopRequireWildcard(require("react"));
 
-var _MapLayer = _interopRequireDefault(require("./MapLayer"));
+var _LayerWrapper = _interopRequireDefault(require("../LayerWrapper"));
 
-var _MapLayerContent = _interopRequireDefault(require("./MapLayerContent"));
-
-var _supplyConfig = _interopRequireDefault(require("../../../supplyConfig"));
+var _MapLayerContent = _interopRequireDefault(require("../MapLayerContent"));
 
 var _SupplyIcon = _interopRequireDefault(require("../../../icons/SupplyIcon"));
 
@@ -55,12 +53,13 @@ function (_Component) {
     value: function render() {
       var _this$props = this.props,
           activeLayer = _this$props.activeLayer,
-          active = _this$props.active;
+          active = _this$props.active,
+          config = _this$props.config;
       return _react.default.createElement(_MapLayerContent.default, {
         layerName: "supply",
         activeLayer: activeLayer,
         active: active,
-        config: _supplyConfig.default,
+        config: config,
         renderIcon: function renderIcon() {
           return _react.default.createElement(_SupplyIcon.default, null);
         },
@@ -74,7 +73,7 @@ function (_Component) {
   return Supply;
 }(_react.Component);
 
-var _default = (0, _MapLayer.default)(Supply, {
+var _default = (0, _LayerWrapper.default)(Supply, {
   pageName: 'supply'
 });
 

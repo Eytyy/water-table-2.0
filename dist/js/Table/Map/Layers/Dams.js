@@ -7,11 +7,9 @@ exports.default = void 0;
 
 var _react = _interopRequireWildcard(require("react"));
 
-var _MapLayer = _interopRequireDefault(require("./MapLayer"));
+var _LayerWrapper = _interopRequireDefault(require("../LayerWrapper"));
 
-var _MapLayerContent = _interopRequireDefault(require("./MapLayerContent"));
-
-var _damsConfig = _interopRequireDefault(require("../../../damsConfig"));
+var _MapLayerContent = _interopRequireDefault(require("../MapLayerContent"));
 
 var _DamIcon = _interopRequireDefault(require("../../../icons/DamIcon"));
 
@@ -55,12 +53,13 @@ function (_Component) {
     value: function render() {
       var _this$props = this.props,
           activeLayer = _this$props.activeLayer,
-          active = _this$props.active;
+          active = _this$props.active,
+          config = _this$props.config;
       return _react.default.createElement(_MapLayerContent.default, {
         layerName: "dams",
         activeLayer: activeLayer,
         active: active,
-        config: _damsConfig.default,
+        config: config,
         renderIcon: function renderIcon() {
           return _react.default.createElement(_DamIcon.default, null);
         },
@@ -74,7 +73,7 @@ function (_Component) {
   return Dams;
 }(_react.Component);
 
-var _default = (0, _MapLayer.default)(Dams, {
+var _default = (0, _LayerWrapper.default)(Dams, {
   pageName: 'dams'
 });
 

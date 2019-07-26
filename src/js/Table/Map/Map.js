@@ -1,24 +1,21 @@
 import React, { Component } from 'react';
 import { socket } from '../../api';
 
-import poolsConfig from '../../poolsConfig';
-import Pools from './Pools/Pools';
+import Pools from './layers/Pools/Pools';
+import Dams from './layers/Dams';
+import WasteWater from './layers/WasteWater';
+import Supply from './layers/Supply';
+import Desalination from './layers/Desalination';
+import Canal from './layers/Canal';
+import Groundwater from './layers/Groundwater';
 
-import WasteWater from './Layers/WasteWater';
-import WasteWaterConfig from '../../wastewaterConfig';
-
-import Dams from './Layers/Dams';
-import DamsConfig from '../../damsConfig';
-
-import Supply from './Layers/Supply';
-import SupplyConfig from '../../supplyConfig';
-
-import Desalination from './Layers/Desalination';
-import DesalinationConfig from '../../desalinationConfig';
-
-import Canal from './Layers/Canal';
-import CanalConfig from '../../canalConfig';
-import Groundwater from './Layers/Groundwater';
+import poolsConfig from '../../config/poolsConfig';
+import groundwaterconfig from '../../config/groundwaterconfig';
+import DamsConfig from '../../config/damsConfig';
+import WasteWaterConfig from '../../config/wastewaterConfig';
+import SupplyConfig from '../../config/supplyConfig';
+import DesalinationConfig from '../../config/desalinationConfig';
+import CanalConfig from '../../config/canalConfig';
 
 class Map extends Component {
 	state = {
@@ -78,17 +75,18 @@ class Map extends Component {
 	componentWillUnmount() {
 		socket.off('controller', this.onIncomingEvents);
 	}
+	
 	render() {
 		const { title, description, icon } = this.getTextBoxContent();
 		return (
 			<>
-			<Pools activeLayer={this.state.activeLayer} au={this.state.animationCurrentUnit} />
-			<Groundwater activeLayer={this.state.activeLayer} />
-			<Dams activeLayer={this.state.activeLayer} />
-			<WasteWater activeLayer={this.state.activeLayer} />
-			<Supply activeLayer={this.state.activeLayer} />
-			<Desalination activeLayer={this.state.activeLayer} />
-			<Canal activeLayer={this.state.activeLayer} />
+			<Pools config={poolsConfig} activeLayer={this.state.activeLayer} au={this.state.animationCurrentUnit} />
+			<Groundwater config={groundwaterconfig} activeLayer={this.state.activeLayer} />
+			<Dams config={DamsConfig} activeLayer={this.state.activeLayer} />
+			<WasteWater config={WasteWaterConfig} activeLayer={this.state.activeLayer} />
+			<Supply config={SupplyConfig} activeLayer={this.state.activeLayer} />
+			<Desalination config={DesalinationConfig} activeLayer={this.state.activeLayer} />
+			<Canal config={CanalConfig} activeLayer={this.state.activeLayer} />
 			<div className="text-box">
 				<div className="text-box__header">
 					<i className="text-box__icon"><img src={icon} alt=""/></i>

@@ -7,11 +7,9 @@ exports.default = void 0;
 
 var _react = _interopRequireWildcard(require("react"));
 
-var _MapLayer = _interopRequireDefault(require("./MapLayer"));
+var _LayerWrapper = _interopRequireDefault(require("../LayerWrapper"));
 
-var _MapLayerContent = _interopRequireDefault(require("./MapLayerContent"));
-
-var _wastewaterConfig = _interopRequireDefault(require("../../../wastewaterConfig"));
+var _MapLayerContent = _interopRequireDefault(require("../MapLayerContent"));
 
 var _TreatmentPlantIcon = _interopRequireDefault(require("../../../icons/TreatmentPlantIcon"));
 
@@ -55,12 +53,13 @@ function (_Component) {
     value: function render() {
       var _this$props = this.props,
           activeLayer = _this$props.activeLayer,
-          active = _this$props.active;
+          active = _this$props.active,
+          config = _this$props.config;
       return _react.default.createElement(_MapLayerContent.default, {
         layerName: "waste",
         activeLayer: activeLayer,
         active: active,
-        config: _wastewaterConfig.default,
+        config: config,
         renderIcon: function renderIcon() {
           return _react.default.createElement(_TreatmentPlantIcon.default, null);
         },
@@ -74,7 +73,7 @@ function (_Component) {
   return WasteWater;
 }(_react.Component);
 
-var _default = (0, _MapLayer.default)(WasteWater, {
+var _default = (0, _LayerWrapper.default)(WasteWater, {
   pageName: 'waste'
 });
 

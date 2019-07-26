@@ -7,7 +7,7 @@ exports.default = void 0;
 
 var _react = _interopRequireWildcard(require("react"));
 
-var _poolsConfig = _interopRequireDefault(require("../../../poolsConfig"));
+var _poolsConfig = _interopRequireDefault(require("../../../config/poolsConfig"));
 
 var _PoolsSvg = _interopRequireDefault(require("./PoolsSvg"));
 

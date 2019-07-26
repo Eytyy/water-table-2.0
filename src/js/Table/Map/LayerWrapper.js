@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
-import { socket } from '../../../api';
+import { socket } from '../../api';
 
-const MapLayer = (WrappedComponent, { pageName }) => {
-	class MapLayer extends Component {
+const LayerWrapper = (WrappedComponent, { pageName }) => {
+	class LayerWrapper extends Component {
 
 		state = {
 			active: undefined,
@@ -46,15 +46,15 @@ const MapLayer = (WrappedComponent, { pageName }) => {
 		}
 
 		render() {
-			const { activeLayer } = this.props;
+			const { activeLayer, config } = this.props;
 
 			return (
-				<WrappedComponent active={this.state.active} activeLayer={activeLayer} />
+				<WrappedComponent config={config} active={this.state.active} activeLayer={activeLayer} />
 			);
 		}
 	}
 
-	return MapLayer;
+	return LayerWrapper;
 }
 
-export default MapLayer;
+export default LayerWrapper;

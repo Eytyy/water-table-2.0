@@ -9,6 +9,10 @@ var _react = _interopRequireWildcard(require("react"));
 
 var _api = require("../../api");
 
+var _MapLayer = _interopRequireDefault(require("./MapLayer"));
+
+var _MapControlButton = _interopRequireDefault(require("./MapControlButton"));
+
 var _PoolsSVG = _interopRequireDefault(require("./PoolsSVG"));
 
 var _NaturalIcon = _interopRequireDefault(require("../../icons/NaturalIcon"));
@@ -23,25 +27,21 @@ var _DesalinationIcon = _interopRequireDefault(require("../../icons/Desalination
 
 var _TreatmentPlantIcon = _interopRequireDefault(require("../../icons/TreatmentPlantIcon"));
 
-var _MapLayer = _interopRequireDefault(require("./MapLayer"));
-
-var _poolsConfig = _interopRequireDefault(require("../../poolsConfig"));
-
-var _damsConfig = _interopRequireDefault(require("../../damsConfig"));
-
-var _desalinationConfig = _interopRequireDefault(require("../../desalinationConfig"));
-
-var _canalConfig = _interopRequireDefault(require("../../canalConfig"));
-
-var _supplyConfig = _interopRequireDefault(require("../../supplyConfig"));
-
-var _wastewaterConfig = _interopRequireDefault(require("../../wastewaterConfig"));
-
-var _groundwaterconfig = _interopRequireDefault(require("../../groundwaterconfig"));
-
-var _MapControlButton = _interopRequireDefault(require("./MapControlButton"));
-
 var _GroundWaterIcon = _interopRequireDefault(require("../../icons/GroundWaterIcon"));
+
+var _poolsConfig = _interopRequireDefault(require("../../config/poolsConfig"));
+
+var _damsConfig = _interopRequireDefault(require("../../config/damsConfig"));
+
+var _desalinationConfig = _interopRequireDefault(require("../../config/desalinationConfig"));
+
+var _canalConfig = _interopRequireDefault(require("../../config/canalConfig"));
+
+var _supplyConfig = _interopRequireDefault(require("../../config/supplyConfig"));
+
+var _wastewaterConfig = _interopRequireDefault(require("../../config/wastewaterConfig"));
+
+var _groundwaterconfig = _interopRequireDefault(require("../../config/groundwaterconfig"));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 

@@ -1,21 +1,20 @@
 import React, { Component } from 'react';
 
-import MapLayer from './MapLayer';
-import MapLayerContent from './MapLayerContent';
+import LayerWrapper from '../LayerWrapper';
+import MapLayerContent from '../MapLayerContent';
 
-import damsConfig from '../../../damsConfig';
 import DamIcon from '../../../icons/DamIcon';
 import DamsText from './DamsText';
 
 class Dams extends Component {
 	render() {
-		const { activeLayer, active } = this.props;
+		const { activeLayer, active, config } = this.props;
 		return (
 			<MapLayerContent
 				layerName="dams"
 				activeLayer={activeLayer}
 				active={active}
-				config={damsConfig}
+				config={config}
 				renderIcon={() => <DamIcon />}
 				renderText={(props) => <DamsText {...props} />}
 			/>
@@ -23,7 +22,7 @@ class Dams extends Component {
 	}
 }
 
-export default MapLayer(Dams, {
+export default LayerWrapper(Dams, {
   pageName: 'dams',
 });
 

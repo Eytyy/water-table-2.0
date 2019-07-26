@@ -9,31 +9,33 @@ var _react = _interopRequireWildcard(require("react"));
 
 var _api = require("../../api");
 
-var _poolsConfig = _interopRequireDefault(require("../../poolsConfig"));
+var _Pools = _interopRequireDefault(require("./layers/Pools/Pools"));
 
-var _Pools = _interopRequireDefault(require("./Pools/Pools"));
+var _Dams = _interopRequireDefault(require("./layers/Dams"));
 
-var _WasteWater = _interopRequireDefault(require("./Layers/WasteWater"));
+var _WasteWater = _interopRequireDefault(require("./layers/WasteWater"));
 
-var _wastewaterConfig = _interopRequireDefault(require("../../wastewaterConfig"));
+var _Supply = _interopRequireDefault(require("./layers/Supply"));
 
-var _Dams = _interopRequireDefault(require("./Layers/Dams"));
+var _Desalination = _interopRequireDefault(require("./layers/Desalination"));
 
-var _damsConfig = _interopRequireDefault(require("../../damsConfig"));
+var _Canal = _interopRequireDefault(require("./layers/Canal"));
 
-var _Supply = _interopRequireDefault(require("./Layers/Supply"));
+var _Groundwater = _interopRequireDefault(require("./layers/Groundwater"));
 
-var _supplyConfig = _interopRequireDefault(require("../../supplyConfig"));
+var _poolsConfig = _interopRequireDefault(require("../../config/poolsConfig"));
 
-var _Desalination = _interopRequireDefault(require("./Layers/Desalination"));
+var _groundwaterconfig = _interopRequireDefault(require("../../config/groundwaterconfig"));
 
-var _desalinationConfig = _interopRequireDefault(require("../../desalinationConfig"));
+var _damsConfig = _interopRequireDefault(require("../../config/damsConfig"));
 
-var _Canal = _interopRequireDefault(require("./Layers/Canal"));
+var _wastewaterConfig = _interopRequireDefault(require("../../config/wastewaterConfig"));
 
-var _canalConfig = _interopRequireDefault(require("../../canalConfig"));
+var _supplyConfig = _interopRequireDefault(require("../../config/supplyConfig"));
 
-var _Groundwater = _interopRequireDefault(require("./Layers/Groundwater"));
+var _desalinationConfig = _interopRequireDefault(require("../../config/desalinationConfig"));
+
+var _canalConfig = _interopRequireDefault(require("../../config/canalConfig"));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -158,19 +160,26 @@ function (_Component) {
           icon = _this$getTextBoxConte.icon;
 
       return _react.default.createElement(_react.default.Fragment, null, _react.default.createElement(_Pools.default, {
+        config: _poolsConfig.default,
         activeLayer: this.state.activeLayer,
         au: this.state.animationCurrentUnit
       }), _react.default.createElement(_Groundwater.default, {
+        config: _groundwaterconfig.default,
         activeLayer: this.state.activeLayer
       }), _react.default.createElement(_Dams.default, {
+        config: _damsConfig.default,
         activeLayer: this.state.activeLayer
       }), _react.default.createElement(_WasteWater.default, {
+        config: _wastewaterConfig.default,
         activeLayer: this.state.activeLayer
       }), _react.default.createElement(_Supply.default, {
+        config: _supplyConfig.default,
         activeLayer: this.state.activeLayer
       }), _react.default.createElement(_Desalination.default, {
+        config: _desalinationConfig.default,
         activeLayer: this.state.activeLayer
       }), _react.default.createElement(_Canal.default, {
+        config: _canalConfig.default,
         activeLayer: this.state.activeLayer
       }), _react.default.createElement("div", {
         className: "text-box"

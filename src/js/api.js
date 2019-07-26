@@ -3,7 +3,7 @@ import io from 'socket.io-client';
 // const ip = '192.168.1.130' // strada 
 const ip = '192.168.1.146' // strada 
 // const ip = '192.168.14.40' // syntax
-// const ip = '192.168.86.64';
+// const ip = '192.168.86.140';
 // const ip = '192.168.86.50';
 // const ip = '172.20.10.2';
 

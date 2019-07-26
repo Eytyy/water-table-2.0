@@ -1,6 +1,6 @@
 import React from 'react';
 
-const DamsText = ({ name, yearConstructed, yearRaised, capacity}) => {
+const DamDescription = ({ name, yearConstructed, yearRaised, capacity}) => {
 	return (
 		<div className="project-description__text project-description__text--dams">
 			<h2 className="project-name">{name}</h2>
@@ -28,4 +28,4 @@ const DamsText = ({ name, yearConstructed, yearRaised, capacity}) => {
 	);
 };
 
-export default DamsText;
+export default DamDescription;

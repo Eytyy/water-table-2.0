@@ -1,5 +1,5 @@
 import React from 'react';
-import { setMinMax, calculatePoolTextPosition } from '../../../utility';
+import { setMinMax, calculatePoolTextPosition } from '../../../../utility';
 
 const PoolText = ({ name, figures, id, points, activePool }) => {
 	const {x: {min: xMin, max: xMax}, y: {min: yMin, max: yMax}} = setMinMax(points);
@@ -11,7 +11,7 @@ const PoolText = ({ name, figures, id, points, activePool }) => {
 	const textHeight = 120;
 	const maxScreenWidth = 1080;
 
-	const { orientation, position } = calculatePoolTextPosition({ xMin, xMax, yMin, yMax, poolWidth, poolHeight, margin, textHeight, textWidth, maxScreenWidth });
+	const { orientation, position } = calculatePoolTextPosition({xMin, xMax, yMin, yMax, poolWidth, poolHeight, margin, textHeight, textWidth, maxScreenWidth });
 
 	const style = {
 		color: '#FFF',

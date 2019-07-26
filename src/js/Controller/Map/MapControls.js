@@ -1,6 +1,9 @@
 import React, { Component } from 'react';
 import { broadcastEvent } from '../../api';
 
+import MapLayer from './MapLayer';
+import MapControlButton from './MapControlButton';
+
 import PoolsSVG from './PoolsSVG';
 
 import NaturalIcon from '../../icons/NaturalIcon';
@@ -9,18 +12,16 @@ import DamIcon from '../../icons/DamIcon';
 import CanalIcon from '../../icons/CanalIcon';
 import DesalinationIcon from '../../icons/DesalinationIcon';
 import TreatmentPlantIcon from '../../icons/TreatmentPlantIcon';
-
-import MapLayer from './MapLayer';
-
-import poolsConfig from '../../poolsConfig';
-import damsConfig from '../../damsConfig';
-import desalinationConfig from '../../desalinationConfig';
-import canalConfig from '../../canalConfig';
-import supplyConfig from '../../supplyConfig';
-import wastewaterConfig from '../../wastewaterConfig';
-import groundwaterconfig from '../../groundwaterconfig';
-import MapControlButton from './MapControlButton';
 import GroundWaterIcon from '../../icons/GroundWaterIcon';
+
+import poolsConfig from '../../config/poolsConfig';
+import damsConfig from '../../config/damsConfig';
+import desalinationConfig from '../../config/desalinationConfig';
+import canalConfig from '../../config/canalConfig';
+import supplyConfig from '../../config/supplyConfig';
+import wastewaterConfig from '../../config/wastewaterConfig';
+import groundwaterconfig from '../../config/groundwaterconfig';
+
 
 class MapControls extends Component {
 	state = {

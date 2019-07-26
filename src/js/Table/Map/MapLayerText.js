@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { calculateTextPosition } from '../../../utility';
+import { calculateTextPosition } from '../../utility';
 
 class MapLayerText extends Component {
 	textBox = React.createRef()
