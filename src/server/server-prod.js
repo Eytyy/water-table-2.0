@@ -43,5 +43,50 @@ app.get( "/controller/:section?", ( req, res ) => {
 });
 
 
+function controllerTemplate({
+	title = "Water Table Jordan | Controller",
+	ogURL = "http://www.watertablejordan.com",
+}) {
+	return `
+		<!DOCTYPE html>
+		<html>
+		<head>
+			<meta charset="utf-8">
+			<meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
+			<title>${title}</title>
+			<meta property="og:title" content="${title}" />
+			<meta property="og:url" content="${ogURL}" />
+			<link rel="stylesheet" href="/controller.css"/>
+		</head>
+		<body>
+			<div id="controller"></div>
+			<script src="/controller.js"></script>
+		</body>
+		</html>
+	`;
+}
+function template({
+	title = "Water Table Jordan",
+	ogURL = "http://www.watertablejordan.com",
+}) {
+	return `
+		<!DOCTYPE html>
+		<html>
+		<head>
+			<meta charset="utf-8">
+			<meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
+			<title>${title}</title>
+			<meta property="og:title" content="${title}" />
+			<meta property="og:url" content="${ogURL}" />
+			<link rel="stylesheet" href="/table.css"/>
+		</head>
+		<body>
+			<div id="table"></div>
+			<script src="/table.js"></script>
+		</body>
+		</html>
+	`;
+}
+
 const PORT = process.env.PORT || 8080;
 server.listen( PORT );
