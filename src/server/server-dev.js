@@ -1,11 +1,27 @@
+import path from 'path';
 import express from "express";
-import path from "path";
 import socket from "socket.io";
+import webpack from 'webpack';
+import webpackDevMiddleware from 'webpack-dev-middleware';
+import webpackHotMiddleware from 'webpack-hot-middleware';
+import config from '../../webpack.dev.config';
+import historyApiFallback from 'connect-history-api-fallback';
 
-const port = process.env.PORT || 8080;
 const app = express();
+const DIST_DIR = __dirname;
 const server = require('http').createServer(app);
 const io = socket(server);
+// const compiler = webpack(config);
+
+// app.use(historyApiFallback({ verbose: false }));
+
+// app.use(webpackDevMiddleware(compiler, {
+// 	publicPath: config.output.publicPath
+// }));
+
+// app.use(webpackHotMiddleware(compiler))
+
+app.use(express.static(DIST_DIR));
 
 io.on('connection', function(client) {  
 	client.on('join', function(data) {
@@ -23,15 +39,13 @@ io.on('connection', function(client) {
 
 });
 
-app.use(express.static(path.resolve( __dirname, "../build" )));
-
 app.get( "/", ( req, res ) => {
 	res.send(templateLanding({
 		title: 'Water Table Jordan',
 	}));
 });
 
-app.get( "/table/:section?", ( req, res ) => {
+app.get( "/table/:section?", ( req, res, ext ) => {
 	res.send(template({
 		title: 'Water Table Jordan',
 	}));
@@ -43,7 +57,8 @@ app.get( "/controller/:section?", ( req, res ) => {
 	}));
 });
 
-server.listen( port );
+const PORT = process.env.PORT || 8080;
+server.listen( PORT );
 
 function controllerTemplate({
 	title = "Water Table Jordan | Controller",
