@@ -9,7 +9,7 @@ import io from 'socket.io-client';
 
 
 const port = '8080';
-export const socket = io.connect(`http://water-table--v2-dev.us-west-2.elasticbeanstalk.com:${port}`);
+export const socket = io.connect(`http://water-table--v2-dev.us-west-2.elasticbeanstalk.com`);
 
 socket.on('connect', () => {
 	socket.emit('join', 'Water Table Controller: connected');
