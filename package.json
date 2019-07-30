@@ -8,7 +8,9 @@
     "dev:client": "NODE_ENV=development webpack --mode development --watch --progress",
     "dev:server": "NODE_ENV=development nodemon server.js",
     "webpack:watch": "NODE_ENV=development webpack --mode development --progress --watch",
-    "babel:watch": "babel --watch src/ -d dist/"
+    "babel:watch": "babel --watch src/ -d dist/",
+    "buildProd": "rm -rf dist && babel src/ -d dist/ && webpack --mode production",
+    "start": "node ./dist/server.js"
   },
   "keywords": [],
   "author": "",

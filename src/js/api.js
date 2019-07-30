@@ -1,7 +1,7 @@
 import io from 'socket.io-client';
 
 // const ip = '192.168.1.130' // strada 
-const ip = '192.168.1.146' // strada 
+// const ip = '192.168.1.146' // strada 
 // const ip = '192.168.14.40' // syntax
 // const ip = '192.168.86.140';
 // const ip = '192.168.86.50';
@@ -9,7 +9,7 @@ const ip = '192.168.1.146' // strada
 
 
 const port = '8080';
-export const socket = io.connect(`http://${ip}:${port}`);
+export const socket = io.connect(`http://localhost:${port}`);
 
 socket.on('connect', () => {
 	socket.emit('join', 'Water Table Controller: connected');
