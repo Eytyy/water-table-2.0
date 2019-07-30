@@ -1,25 +1,10 @@
-import path from 'path';
 import express from "express";
 import socket from "socket.io";
-import webpack from 'webpack';
-import webpackDevMiddleware from 'webpack-dev-middleware';
-import webpackHotMiddleware from 'webpack-hot-middleware';
-import config from '../../webpack.dev.config';
-import historyApiFallback from 'connect-history-api-fallback';
 
 const app = express();
 const DIST_DIR = __dirname;
 const server = require('http').createServer(app);
 const io = socket(server);
-// const compiler = webpack(config);
-
-// app.use(historyApiFallback({ verbose: false }));
-
-// app.use(webpackDevMiddleware(compiler, {
-// 	publicPath: config.output.publicPath
-// }));
-
-// app.use(webpackHotMiddleware(compiler))
 
 app.use(express.static(DIST_DIR));
 
