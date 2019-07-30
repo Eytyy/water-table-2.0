@@ -25,9 +25,7 @@ io.on('connection', function(client) {
 });
 
 app.get( "/", ( req, res ) => {
-	res.send(templateLanding({
-		title: 'Water Table Jordan',
-	}));
+  res.redirect('/table');
 });
 
 app.get( "/table/:section?", ( req, res, ext ) => {
@@ -44,6 +42,7 @@ app.get( "/controller/:section?", ( req, res ) => {
 
 const PORT = process.env.PORT || 8080;
 server.listen( PORT );
+
 
 function controllerTemplate({
 	title = "Water Table Jordan | Controller",
@@ -67,6 +66,7 @@ function controllerTemplate({
 		</html>
 	`;
 }
+
 function template({
 	title = "Water Table Jordan",
 	ogURL = "http://www.watertablejordan.com",

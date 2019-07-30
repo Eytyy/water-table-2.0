@@ -25,9 +25,7 @@ io.on('connection', function(client) {
 });
 
 app.get( "/", ( req, res ) => {
-	res.send(templateLanding({
-		title: 'Water Table Jordan',
-	}));
+  res.redirect('/table');
 });
 
 app.get( "/table/:section?", ( req, res, ext ) => {
