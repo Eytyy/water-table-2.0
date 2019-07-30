@@ -3,7 +3,6 @@
 /archive
 /backup
 /zello
-/dist
 /build
 .elasticbeanstalk/
 # Elastic Beanstalk Files
