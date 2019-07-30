@@ -1,8 +1,8 @@
 import React from 'react';
 import MapLayerText from './MapLayerText';
-import Basins from './layers/Basins';
 
-const MapLayerContent = ({ layerName, activeLayer, active, config, renderIcon, renderText }) => {
+const MapLayerContent = (props) => {
+	const {layerName, activeLayer, active, config, renderIcon, renderText, children} = props;
 	const iconSizes = {
 		'supply': {
 			w: 25,
@@ -57,10 +57,9 @@ const MapLayerContent = ({ layerName, activeLayer, active, config, renderIcon, r
 	const height = iconSizes[layerName].h;
 	const scale = iconSizes[layerName].scale;
 	const isLayerActive = getLayerVisibility();
-	
 	return (
 		<div className={`layer layer--${layerName} ${isLayerActive ? 'layer--is-active' : 'layer--is-hidden'}`}>
-			{ layerName === 'groundwater' && <Basins />}
+			{ children && children}
 			<div className={`resources resources--${layerName}`}>
 				{
 					config.entries.map(({ id, position }) => 

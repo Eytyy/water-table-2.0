@@ -16,6 +16,7 @@ import WasteWaterConfig from '../../config/wastewaterConfig';
 import SupplyConfig from '../../config/supplyConfig';
 import DesalinationConfig from '../../config/desalinationConfig';
 import CanalConfig from '../../config/canalConfig';
+import Basins from './layers/Basins';
 
 class Map extends Component {
 	state = {
