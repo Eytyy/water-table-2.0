@@ -83,11 +83,7 @@ class Map extends Component {
     const { title, description, icon } = this.getTextBoxContent();
     return (
       <>
-        <Pools
-          config={poolsConfig}
-          activeLayer={this.state.activeLayer}
-          au={this.state.animationCurrentUnit}
-        />
+        <Pools config={poolsConfig} activeLayer={this.state.activeLayer} />
         <Groundwater
           config={groundwaterconfig}
           activeLayer={this.state.activeLayer}
