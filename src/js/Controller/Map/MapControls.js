@@ -6,13 +6,15 @@ import MapControlButton from "./MapControlButton";
 
 import PoolsSVG from "./PoolsSVG";
 
-import NaturalIcon from "../../icons/NaturalIcon";
-import SupplyIcon from "../../icons/SupplyIcon";
-import DamIcon from "../../icons/DamIcon";
-import CanalIcon from "../../icons/CanalIcon";
-import DesalinationIcon from "../../icons/DesalinationIcon";
-import TreatmentPlantIcon from "../../icons/TreatmentPlantIcon";
-import GroundWaterIcon from "../../icons/GroundWaterIcon";
+import {
+  NaturalIcon,
+  SupplyIcon,
+  DamIcon,
+  CanalIcon,
+  DesalinationIcon,
+  TreatmentPlantIcon,
+  GroundWaterIcon
+} from "../../icons";
 
 import {
   poolsConfig,
