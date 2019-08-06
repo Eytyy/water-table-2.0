@@ -3,7 +3,7 @@ import React, { Component } from "react";
 import LayerWrapper from "../LayerWrapper";
 import MapLayerContent from "../MapLayerContent";
 
-import TreatmentPlantIcon from "../../../icons/TreatmentPlantIcon";
+import { TreatmentPlantIcon } from "../../../icons/";
 import WasteWaterText from "./WasteWaterText";
 
 class WasteWater extends Component {

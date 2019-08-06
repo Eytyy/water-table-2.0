@@ -1,7 +1,7 @@
-export { NaturalIcon } from "../../icons/NaturalIcon";
-export { SupplyIcon } from "../../icons/SupplyIcon";
-export { DamIcon } from "../../icons/DamIcon";
-export { CanalIcon } from "../../icons/CanalIcon";
-export { DesalinationIcon } from "../../icons/DesalinationIcon";
-export { TreatmentPlantIcon } from "../../icons/TreatmentPlantIcon";
-export { GroundWaterIcon } from "../../icons/GroundWaterIcon";
+export { NaturalIcon } from "./NaturalIcon";
+export { SupplyIcon } from "./SupplyIcon";
+export { DamIcon } from "./DamIcon";
+export { CanalIcon } from "./CanalIcon";
+export { DesalinationIcon } from "./DesalinationIcon";
+export { TreatmentPlantIcon } from "./TreatmentPlantIcon";
+export { GroundWaterIcon } from "./GroundWaterIcon";

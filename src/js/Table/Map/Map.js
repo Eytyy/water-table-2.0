@@ -13,11 +13,11 @@ import Basins from "./layers/Basins";
 import {
   poolsConfig,
   groundwaterconfig,
-  DamsConfig,
-  WasteWaterConfig,
-  SupplyConfig,
-  DesalinationConfig,
-  CanalConfig
+  damsConfig,
+  wasteWaterConfig,
+  supplyConfig,
+  desalinationConfig,
+  canalConfig
 } from "../../config";
 
 class Map extends Component {
@@ -35,15 +35,15 @@ class Map extends Component {
   getTextBoxContent = () => {
     switch (this.state.activeLayer) {
       case "supply":
-        return SupplyConfig;
+        return supplyConfig;
       case "waste":
-        return WasteWaterConfig;
+        return wasteWaterConfig;
       case "desalination":
-        return DesalinationConfig;
+        return desalinationConfig;
       case "dams":
-        return DamsConfig;
+        return damsConfig;
       case "canal":
-        return CanalConfig;
+        return canalConfig;
       default:
         return poolsConfig;
     }
@@ -88,17 +88,17 @@ class Map extends Component {
           config={groundwaterconfig}
           activeLayer={this.state.activeLayer}
         />
-        <Dams config={DamsConfig} activeLayer={this.state.activeLayer} />
+        <Dams config={damsConfig} activeLayer={this.state.activeLayer} />
         <WasteWater
-          config={WasteWaterConfig}
+          config={wasteWaterConfig}
           activeLayer={this.state.activeLayer}
         />
-        <Supply config={SupplyConfig} activeLayer={this.state.activeLayer} />
+        <Supply config={supplyConfig} activeLayer={this.state.activeLayer} />
         <Desalination
-          config={DesalinationConfig}
+          config={desalinationConfig}
           activeLayer={this.state.activeLayer}
         />
-        <Canal config={CanalConfig} activeLayer={this.state.activeLayer} />
+        <Canal config={canalConfig} activeLayer={this.state.activeLayer} />
         <div className="text-box">
           <div className="text-box__header">
             <i className="text-box__icon">

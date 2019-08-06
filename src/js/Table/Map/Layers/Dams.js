@@ -3,7 +3,7 @@ import React, { Component } from "react";
 import LayerWrapper from "../LayerWrapper";
 import MapLayerContent from "../MapLayerContent";
 
-import DamIcon from "../../../icons/DamIcon";
+import { DamIcon } from "../../../icons/";
 import DamsText from "./DamsText";
 
 class Dams extends Component {

@@ -3,7 +3,7 @@ import React, { Component } from "react";
 import LayerWrapper from "../LayerWrapper";
 import MapLayerContent from "../MapLayerContent";
 
-import DesalinationIcon from "../../../icons/DesalinationIcon";
+import { DesalinationIcon } from "../../../icons/";
 import DesalinationText from "./DesalinationText";
 
 class Desalination extends Component {

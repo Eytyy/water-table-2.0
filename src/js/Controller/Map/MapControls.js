@@ -22,7 +22,7 @@ import {
   desalinationConfig,
   canalConfig,
   supplyConfig,
-  wastewaterConfig,
+  wasteWaterConfig,
   groundwaterconfig
 } from "../../config";
 
@@ -194,7 +194,7 @@ class MapControls extends Component {
           />
           <MapLayer
             layerName="waste"
-            config={wastewaterConfig}
+            config={wasteWaterConfig}
             renderIcon={() => <TreatmentPlantIcon />}
             active={this.state.active}
             activeLayer={this.state.activeLayer}

@@ -3,7 +3,7 @@ import React, { Component } from "react";
 import LayerWrapper from "../LayerWrapper";
 import MapLayerContent from "../MapLayerContent";
 
-import GroundWaterIcon from "../../../icons/GroundWaterIcon";
+import { GroundWaterIcon } from "../../../icons/";
 import GroundWaterText from "./GroundWaterText";
 import Basins from "./Basins";
 

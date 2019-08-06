@@ -3,7 +3,7 @@ import React, { Component } from "react";
 import LayerWrapper from "../LayerWrapper";
 import MapLayerContent from "../MapLayerContent";
 
-import CanalIcon from "../../../icons/CanalIcon";
+import { CanalIcon } from "../../../icons/";
 import CanalText from "./CanalText";
 
 class Canal extends Component {

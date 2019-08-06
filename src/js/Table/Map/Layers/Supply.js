@@ -3,7 +3,7 @@ import React, { Component } from "react";
 import LayerWrapper from "../LayerWrapper";
 import MapLayerContent from "../MapLayerContent";
 
-import SupplyIcon from "../../../icons/SupplyIcon";
+import { SupplyIcon } from "../../../icons/";
 import SupplyText from "./SupplyText";
 
 class Supply extends Component {
