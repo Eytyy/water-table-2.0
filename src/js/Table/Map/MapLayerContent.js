@@ -79,39 +79,39 @@ const MapLayerContent = props => {
       {children && children}
       <div className={`resources resources--${layerName}`}>
         {config.entries.map(({ id, position }) => (
-          <div
-            className={`icon icon--${layerName}`}
-            key={id}
-            style={{
-              width: `${width}px`,
-              height: `${height}px`,
-              position: "absolute",
-              top: position.y,
-              left: position.x,
-              transform: `${
-                active !== id ? "scale(1, 1)" : `scale(${scale}, ${scale})`
-              }`,
-              opacity: getOpacity(id),
-              zIndex: `${active !== id ? "2" : "1"}`
-            }}
-          >
-            {renderIcon()}
-          </div>
+          <>
+            <div
+              className={`icon icon--${layerName}`}
+              key={id}
+              style={{
+                width: `${width}px`,
+                height: `${height}px`,
+                position: "absolute",
+                top: position.y,
+                left: position.x,
+                transform: `${
+                  active !== id ? "scale(1, 1)" : `scale(${scale}, ${scale})`
+                }`,
+                opacity: getOpacity(id),
+                zIndex: `${active !== id ? "2" : "1"}`
+              }}
+            >
+              {renderIcon()}
+            </div>
+            <MapLayerText
+              layerName={layerName}
+              key={`rx-${props.id}`}
+              active={active}
+              id={props.id}
+              position={props.position}
+              iconWidth={width}
+              iconHeight={height}
+              renderText={renderText}
+              entryProps={props}
+            />
+          </>
         ))}
       </div>
-      {config.entries.map(props => (
-        <MapLayerText
-          layerName={layerName}
-          key={`rx-${props.id}`}
-          active={active}
-          id={props.id}
-          position={props.position}
-          iconWidth={width}
-          iconHeight={height}
-          renderText={renderText}
-          entryProps={props}
-        />
-      ))}
     </div>
   );
 };
