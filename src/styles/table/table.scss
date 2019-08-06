@@ -7,6 +7,7 @@
 	height: 1920px;
 	position: relative;
 	overflow: hidden;
+
 	.landing & {
 		width: 100%;
 		background: url('../../images/intro.png') no-repeat center top;
@@ -23,9 +24,11 @@
 		text-align: center;
 		padding: 120px;
 	}
+
 	&__title {
 		font-size: 100px;
 	}
+
 	&__text {
 		font-size: 28px;
 	}
@@ -42,6 +45,7 @@
 .layer {
 	opacity: 0;
 	transition: opacity 200ms linear;
+
 	&--pools {
 		opacity: 0.4;
 	}
@@ -57,9 +61,11 @@
 
 .intro--story__section {
 	margin-bottom: 110px;
+
 	&:last-child {
 		margin-bottom: 0;
 	}
+
 	p {
 		font-size: 28px;
 		margin-bottom: 2em;

@@ -3,12 +3,13 @@
 @import './data-viz';
 
 .controller__sub-title {
-  font-size: 20px;
-  margin-bottom: 20px;
+	font-size: 20px;
+	margin-bottom: 20px;
 }
 
 .controller__section {
 	margin-bottom: 90px;
+
 	&:last-child {
 		margin-bottom: 0;
 	}
@@ -26,6 +27,7 @@
 	font-size: 62px;
 	opacity: 0.2;
 	color: #FFF;
+
 	&--active {
 		opacity: 1;
 	}
@@ -64,6 +66,7 @@ a {
 
 .lang-btn {
 	margin-right: 80px;
+
 	&.active {
 		opacity: 1;
 	}
@@ -89,9 +92,11 @@ a {
 	transform-origin: 50% 50%;
 	transform-box: fill-box;
 	transition: transform 200ms ease-in-out, opacity 200ms linear;
+
 	&.is-initial {
 		opacity: 1;
 	}
+
 	&.is-active {
 		opacity: 1;
 	}

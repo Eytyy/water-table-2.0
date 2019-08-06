@@ -19,8 +19,10 @@
 
 .controller__section--data {
 	display: flex;
+
 	&__item {
 		margin-right: 100px;
+
 		&:last-child {
 			margin-right: 0;
 		}

@@ -1,53 +1,55 @@
-import React, { Component } from 'react';
-import { socket } from '../../../api';
-import data from './data';
+import React, { Component } from "react";
+import { socket } from "../../../api";
+import data from "./data";
 
 class Story extends Component {
-	state = {
-		activeYear: 1960
-	}
+  state = {
+    activeYear: 1960
+  };
 
-	updateActiveYear = (payload) => {
-		this.setState({
-			activeYear: parseInt(payload, 10)
-		})
-	}
-	
-	onIncomingEvents = message => {
-		const { event, payload } = message;
-		switch(event) {
-			case 'yearClicked':
-				this.updateActiveYear(payload);
-				break;
-			default:
-				return;
-		}
-	}
+  updateActiveYear = payload => {
+    this.setState({
+      activeYear: parseInt(payload, 10)
+    });
+  };
 
-	listenToIncomingEvents = () => {
-		socket.on('controller', this.onIncomingEvents);
-	}
+  onIncomingEvents = message => {
+    const { event, payload } = message;
+    switch (event) {
+      case "yearClicked":
+        this.updateActiveYear(payload);
+        break;
+      default:
+        return;
+    }
+  };
 
-	componentDidMount() {
-		this.listenToIncomingEvents();
-	}
-	
-	componentWillUnmount() {
-		socket.off('controller', this.onIncomingEvents);
-	}
+  listenToIncomingEvents = () => {
+    socket.on("controller", this.onIncomingEvents);
+  };
 
-	getContent = () => {
-		return data.find(({ year }) => parseInt(year, 10) === parseInt(this.state.activeYear, 10)).content
-	}
+  componentDidMount() {
+    this.listenToIncomingEvents();
+  }
 
-	render() {
-		return (
-			<div className="story">
-				<h1>{this.state.activeYear}</h1>
-				<p>{this.getContent()}</p>
-			</div>
-		);
-	}
+  componentWillUnmount() {
+    socket.off("controller", this.onIncomingEvents);
+  }
+
+  getContent = () => {
+    return data.find(
+      ({ year }) => parseInt(year, 10) === parseInt(this.state.activeYear, 10)
+    ).content;
+  };
+
+  render() {
+    return (
+      <div className="story">
+        <h1>{this.state.activeYear}</h1>
+        <p>{this.getContent()}</p>
+      </div>
+    );
+  }
 }
 
 export default Story;

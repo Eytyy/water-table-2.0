@@ -1,5 +1,6 @@
 .map-console {
 	display: flex;
+
 	&__controls,
 	&__mini-map {
 		flex: 0 0 50%;
@@ -9,20 +10,23 @@
 
 .map-console__controls {
 	padding: 60px 0 0 60px;
+
 	&__group {
 		display: flex;
 		flex-wrap: wrap;
 	}
+
 	.btn-group {
 		flex: 0 0 120px;
 		text-align: center;
-		margin: 0px 80px 40px  0px;
+		margin: 0px 80px 40px 0px;
 	}
 }
 
 .btn-group {
 	cursor: pointer;
 	opacity: 0.2;
+
 	&.is-active {
 		opacity: 1;
 	}
@@ -35,6 +39,7 @@
 	margin: 0px auto;
 	justify-content: center;
 	align-items: center;
+
 	svg {
 		width: 100%;
 	}
@@ -49,6 +54,7 @@
 .map-console__mini-map {
 	height: 100vh;
 	position: relative;
+
 	svg {
 		position: absolute;
 		top: 0;
