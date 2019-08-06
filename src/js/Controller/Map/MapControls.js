@@ -33,13 +33,9 @@ class MapControls extends Component {
   };
 
   setActiveLayer = layer => {
-    let active;
-    if (layer === "canal") {
-      active = canalConfig.entries[0].id;
-    }
     this.setState({
       activeLayer: this.state.activeLayer === layer ? "natural" : layer,
-      active
+      active: layer === "canal" ? canalConfig.entries[0].id : this.state.active
     });
   };
 
@@ -60,23 +56,18 @@ class MapControls extends Component {
   };
 
   onPoolClick = e => {
-    let id;
-    let target = e.currentTarget;
-    let parent = target.parentNode;
-    if (parent.classList.contains("svg-group")) {
-      id = parent.id;
-    } else {
-      id = target.id;
-    }
+    let active = target.parentNode.classList.contains("svg-group")
+      ? target.parentNode
+      : e.currentTarget.id;
 
     this.setState({
-      active: id
+      active
     });
 
     broadcastEvent({
       source: "controller",
       event: "poolClicked",
-      payload: id
+      payload: active
     });
   };
 
