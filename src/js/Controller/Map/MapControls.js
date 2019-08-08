@@ -56,9 +56,10 @@ class MapControls extends Component {
   };
 
   onPoolClick = e => {
-    let active = target.parentNode.classList.contains("svg-group")
-      ? target.parentNode
-      : e.currentTarget.id;
+    const currentTarget = e.currentTarget;
+    let active = currentTarget.parentNode.classList.contains("svg-group")
+      ? currentTarget.parentNode.id
+      : currentTarget.id;
 
     this.setState({
       active

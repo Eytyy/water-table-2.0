@@ -23,7 +23,6 @@ class MapLayerText extends Component {
     let textWidth = this.textBox.current
       ? this.textBox.current.offsetHeight
       : 402;
-
     const maxScreenWidth = 1080;
     const { orientation, positionCSS } = calculateTextPosition({
       x: position.x + 190,
