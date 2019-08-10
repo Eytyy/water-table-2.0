@@ -17,3 +17,14 @@ export const config = [
   groundwaterconfig,
   poolsConfig
 ];
+
+export const configMap = {
+  naturalConfig,
+  damsConfig,
+  wasteWaterConfig,
+  supplyConfig,
+  desalinationConfig,
+  canalConfig,
+  groundwaterconfig,
+  poolsConfig
+};

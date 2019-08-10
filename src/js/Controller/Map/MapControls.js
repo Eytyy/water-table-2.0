@@ -84,7 +84,12 @@ class MapControls extends Component {
             ))}
           </div>
         </div>
-        <MiniMap activeLayer={activeLayer} active={active} />
+        <MiniMap
+          activeLayer={activeLayer}
+          active={active}
+          onMapClick={this.onMapClick}
+          onPoolClick={this.onPoolClick}
+        />
       </section>
     );
   }
