@@ -1,7 +1,7 @@
 import React from "react";
 import Polygon from "./Polygon";
 
-const PoolsSvg = ({ PoolsConfig, active, activeLayer, onPoolClick }) => {
+const PoolsSvg = ({ entries, active, activeLayer, onClick }) => {
   return (
     <svg
       id="pools"
@@ -12,7 +12,7 @@ const PoolsSvg = ({ PoolsConfig, active, activeLayer, onPoolClick }) => {
       height="1539"
       viewBox="0 0 914 1539"
     >
-      {PoolsConfig.entries.map(({ pool, id }) =>
+      {entries.map(({ pool, id }) =>
         Array.isArray(pool) ? (
           <Polygon
             key={`svg-${id}`}
@@ -21,7 +21,7 @@ const PoolsSvg = ({ PoolsConfig, active, activeLayer, onPoolClick }) => {
             pool={pool}
             id={id}
             group={true}
-            onPoolClick={onPoolClick}
+            onPoolClick={onClick}
           />
         ) : (
           <Polygon
@@ -30,7 +30,7 @@ const PoolsSvg = ({ PoolsConfig, active, activeLayer, onPoolClick }) => {
             active={active}
             points={pool.points}
             id={id}
-            onPoolClick={onPoolClick}
+            onPoolClick={onClick}
           />
         )
       )}
