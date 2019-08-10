@@ -1,4 +1,9 @@
+import { DesalinationIcon } from "../icons";
+
 export const desalination = {
+  id: "desalination",
+  Icon: DesalinationIcon,
+  title: "Water Desalination Stations",
   description:
     "Desalination Plant description adipisicing elit. Sit nemo veniam culpa provident dolore aut aliquid cumque laboriosam quo! Magnam!",
   title: "Water Desalination Stations",

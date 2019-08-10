@@ -1,8 +1,12 @@
+import { TreatmentPlantIcon } from "../icons";
+
 export const wastewater = {
+  id: "waste",
+  title: "Wastewater Treatment Plants",
+  Icon: TreatmentPlantIcon,
   description:
     "waste water plants description adipisicing elit. Sit nemo veniam culpa provident dolore aut aliquid cumque laboriosam quo! Magnam!",
   title: "Waste Water Treatement Plants",
-  icon: "../waste.svg",
   entries: [
     {
       id: "ww1", //

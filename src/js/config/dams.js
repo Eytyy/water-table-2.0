@@ -1,4 +1,9 @@
+import { DamIcon } from "../icons";
+
 export const dams = {
+  id: "dams",
+  title: "Dams",
+  Icon: DamIcon,
   description:
     "Dams description adipisicing elit. Sit nemo veniam culpa provident dolore aut aliquid cumque laboriosam quo! Magnam!",
   title: "Dams",

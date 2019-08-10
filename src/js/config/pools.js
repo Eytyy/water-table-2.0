@@ -1,8 +1,11 @@
+import { NaturalIcon } from "../icons";
+
 export const pools = {
+  id: "surface",
+  title: "Surface Water",
   description:
     "natural resources description adipisicing elit. Sit nemo veniam culpa provident dolore aut aliquid cumque laboriosam quo! Magnam!",
-  title: "Natural Water Resources",
-  icon: "../water_resources.svg",
+  Icon: NaturalIcon,
   entries: [
     {
       id: "taberias",

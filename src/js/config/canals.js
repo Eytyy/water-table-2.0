@@ -1,4 +1,9 @@
+import { CanalIcon } from "../icons";
+
 export const canals = {
+  id: "canals",
+  title: "King Abdullah Canal",
+  Icon: CanalIcon,
   description:
     "King Abdullah Canal adipisicing elit. Sit nemo veniam culpa provident dolore aut aliquid cumque laboriosam quo! Magnam!",
   title: "King Abdullah Canal",

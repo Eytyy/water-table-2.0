@@ -1,4 +1,9 @@
+import { SupplyIcon } from "../icons";
+
 export const supply = {
+  id: "supply",
+  title: "Utilities &amp; Water Supply Projects",
+  Icon: SupplyIcon,
   description:
     "Utilities Water Supply Projects description adipisicing elit. Sit nemo veniam culpa provident dolore aut aliquid cumque laboriosam quo! Magnam!",
   title: "Utilities & Water Supply Projects",

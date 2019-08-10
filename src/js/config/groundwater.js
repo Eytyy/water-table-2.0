@@ -1,4 +1,9 @@
+import { GroundWaterIcon } from "../icons";
+
 export const groundWater = {
+  id: "groundwater",
+  title: "Ground Water",
+  Icon: GroundWaterIcon,
   description:
     "Ground Water description adipisicing elit. Sit nemo veniam culpa provident dolore aut aliquid cumque laboriosam quo! Magnam!",
   title: "Ground Water",
