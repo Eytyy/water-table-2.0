@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { socket } from "../../api";
+import PropTypes from "prop-types";
 
 import Pools from "./layers/Pools/Pools";
 import Dams from "./layers/Dams";
@@ -13,6 +13,10 @@ import Basins from "./layers/Basins";
 import { configMap } from "../../config";
 
 class Map extends Component {
+  static contextTypes = {
+    socket: PropTypes.object
+  };
+
   state = {
     activeLayer: "natural"
   };
@@ -59,7 +63,7 @@ class Map extends Component {
   };
 
   listenToIncomingEvents = () => {
-    socket.on("controller", this.onIncomingEvents);
+    this.context.socket.on("controller", this.onIncomingEvents);
   };
 
   componentDidMount() {
@@ -68,7 +72,7 @@ class Map extends Component {
   }
 
   componentWillUnmount() {
-    socket.off("controller", this.onIncomingEvents);
+    this.context.socket.off("controller", this.onIncomingEvents);
   }
 
   render() {

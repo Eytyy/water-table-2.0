@@ -1,12 +1,15 @@
 import React, { Component } from "react";
-import { broadcastEvent } from "../../api";
+import PropTypes from "prop-types";
 
 import MapControlButton from "./MapControlButton";
-
 import { config } from "../../config";
 import MiniMap from "./MiniMap";
 
 class MapControls extends Component {
+  static contextTypes = {
+    broadcastEvent: PropTypes.func
+  };
+
   state = {
     activeLayer: "surface",
     active: undefined
@@ -22,13 +25,13 @@ class MapControls extends Component {
   onClickLayer = id => {
     this.setActiveLayer(id === "natural" ? "surface" : id);
     if (id === "canals") {
-      broadcastEvent({
+      this.context.broadcastEvent({
         source: "controller",
         event: "mapClicked",
         payload: canalConfig.entries[0].id
       });
     }
-    broadcastEvent({
+    this.context.broadcastEvent({
       source: "controller",
       event: "switchMapView",
       payload: id
@@ -45,7 +48,7 @@ class MapControls extends Component {
       active
     });
 
-    broadcastEvent({
+    this.context.broadcastEvent({
       source: "controller",
       event: "poolClicked",
       payload: active
@@ -59,7 +62,7 @@ class MapControls extends Component {
       active: target
     });
 
-    broadcastEvent({
+    this.context.broadcastEvent({
       source: "controller",
       event: "mapClicked",
       payload: target

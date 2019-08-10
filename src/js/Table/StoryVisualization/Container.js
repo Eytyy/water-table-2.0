@@ -1,11 +1,15 @@
 import React, { Component } from "react";
-import { socket } from "../../api";
+import PropTypes from "prop-types";
 
 import PopulationVisulaization from "./Visualization/PopulationVisulaization";
 import Intro from "./Intro";
 import Story from "./Story/Story";
 
 class Container extends Component {
+  static contextTypes = {
+    socket: PropTypes.object
+  };
+
   state = {
     intro: true
   };
@@ -24,7 +28,7 @@ class Container extends Component {
   };
 
   listenToIncomingEvents = () => {
-    socket.on("controller", this.onIncomingEvents);
+    this.context.socket.on("controller", this.onIncomingEvents);
   };
 
   componentDidMount() {
@@ -32,7 +36,7 @@ class Container extends Component {
   }
 
   componentWillUnmount() {
-    socket.off("controller", this.onIncomingEvents);
+    this.context.socket.off("controller", this.onIncomingEvents);
   }
 
   render() {

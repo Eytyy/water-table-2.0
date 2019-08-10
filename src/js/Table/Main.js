@@ -1,11 +1,16 @@
 import React, { Component } from "react";
 import { Route, withRouter } from "react-router-dom";
+import PropTypes from "prop-types";
+
 import Intro from "./Landing";
 import Story from "./StoryVisualization/Container";
 import Map from "./Map/Map";
-import { socket } from "../api";
 
 class Main extends Component {
+  static contextTypes = {
+    socket: PropTypes.object
+  };
+
   navigate = to => {
     const { history } = this.props;
     history.push(`/table/${to}`);
@@ -33,7 +38,7 @@ class Main extends Component {
   };
 
   listenToIncomingEvents = () => {
-    socket.on("controller", this.onIncomingEvents);
+    this.context.socket.on("controller", this.onIncomingEvents);
   };
 
   componentDidMount() {
@@ -46,7 +51,7 @@ class Main extends Component {
   }
 
   componentWillUnmount() {
-    socket.off("controller", this.onIncomingEvents);
+    this.context.socket.off("controller", this.onIncomingEvents);
   }
 
   render() {

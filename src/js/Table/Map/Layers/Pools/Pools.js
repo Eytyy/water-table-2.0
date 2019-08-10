@@ -1,10 +1,15 @@
 import React, { Component } from "react";
+import PropTypes from "prop-types";
+
 import PoolsSVG from "./PoolsSvg";
 import PoolText from "./PoolText";
-import { socket } from "../../../../api";
 import cutout from "../../../../../cutout.png";
 
 class Pools extends Component {
+  static contextTypes = {
+    socket: PropTypes.object
+  };
+
   canvas = React.createRef();
   ctx;
   pools = [];
@@ -98,10 +103,11 @@ class Pools extends Component {
   };
 
   listenToIncomingEvents = () => {
-    socket.on("controller", this.onIncomingEvent);
+    this.context.socket.on("controller", this.onIncomingEvent);
   };
 
   componentDidMount() {
+    console.log(this.context);
     this.ctx = this.canvas.current.getContext("2d");
     this.fpsInterval = 1000 / this.fps;
     this.then = Date.now();
@@ -120,7 +126,7 @@ class Pools extends Component {
 
   componentWillUnmount() {
     cancelAnimationFrame(this.raf);
-    socket.off("controller", this.onIncomingEvent);
+    this.context.socket.off("controller", this.onIncomingEvent);
     this.raf = null;
   }
 

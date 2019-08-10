@@ -1,12 +1,16 @@
 import React, { Component } from "react";
-import { scaleLinear, format } from "d3";
+import PropTypes from "prop-types";
 
-import { socket } from "../../../api";
+import { scaleLinear, format } from "d3";
 
 import population from "../../../../data/population.1";
 import PopulationCircle from "./PopulationCircle";
 
 class PopulationVisulization extends Component {
+  static contextTypes = {
+    socket: PropTypes.object
+  };
+
   width = 1080;
   height = 1300;
   canvas = React.createRef();
@@ -205,7 +209,7 @@ class PopulationVisulization extends Component {
   };
 
   listenToIncomingEvents = () => {
-    socket.on("controller", message => {
+    this.context.socket.on("controller", message => {
       const { event, payload } = message;
       switch (event) {
         case "yearClicked":

@@ -1,9 +1,13 @@
 import React, { Component } from "react";
-import { broadcastEvent } from "../../api";
+import PropTypes from "prop-types";
 import population from "../../../data/population.1";
 import { format } from "d3";
 
 class VisualizationControls extends Component {
+  static contextTypes = {
+    broadcastEvent: PropTypes.func
+  };
+
   state = {
     activeYear: "1960",
     intro: true
@@ -21,7 +25,7 @@ class VisualizationControls extends Component {
       activeYear: nextYear
     });
 
-    broadcastEvent({
+    this.context.broadcastEvent({
       source: "controller",
       event: "yearClicked",
       payload: nextYear
@@ -33,7 +37,7 @@ class VisualizationControls extends Component {
     this.setState({
       intro
     });
-    broadcastEvent({
+    this.context.broadcastEvent({
       source: "controller",
       event: "toggleIntro",
       payload: intro

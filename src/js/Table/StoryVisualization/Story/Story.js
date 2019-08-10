@@ -1,8 +1,13 @@
 import React, { Component } from "react";
-import { socket } from "../../../api";
+import PropTypes from "prop-types";
+
 import data from "./data";
 
 class Story extends Component {
+  static contextTypes = {
+    socket: PropTypes.object
+  };
+
   state = {
     activeYear: 1960
   };
@@ -25,7 +30,7 @@ class Story extends Component {
   };
 
   listenToIncomingEvents = () => {
-    socket.on("controller", this.onIncomingEvents);
+    this.context.socket.on("controller", this.onIncomingEvents);
   };
 
   componentDidMount() {
@@ -33,7 +38,7 @@ class Story extends Component {
   }
 
   componentWillUnmount() {
-    socket.off("controller", this.onIncomingEvents);
+    this.context.socket.off("controller", this.onIncomingEvents);
   }
 
   getContent = () => {

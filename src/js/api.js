@@ -1,15 +1,38 @@
+import React, { Component } from "react";
+import PropTypes from "prop-types";
 import io from "socket.io-client";
 
-const port = "8080";
-export const socket = io.connect(`localhost:${port}`);
+class API extends Component {
+  port = "8080";
+  socket = io.connect(`localhost:${this.port}`);
 
-socket.on("connect", () => {
-  socket.emit("join", "Water Table Controller: connected");
-});
+  broadcastEvent = ({ source, event, payload }) => {
+    this.socket.emit(source, {
+      event,
+      payload
+    });
+  };
 
-export const broadcastEvent = ({ source, event, payload }) => {
-  socket.emit(source, {
-    event,
-    payload
-  });
-};
+  componentDidMount() {
+    this.socket.on("connect", () => {
+      this.socket.emit("join", "Resource Connected");
+    });
+  }
+
+  static childContextTypes = {
+    broadcastEvent: PropTypes.func,
+    socket: PropTypes.object
+  };
+
+  getChildContext() {
+    return {
+      socket: this.socket,
+      broadcastEvent: this.broadcastEvent
+    };
+  }
+  render() {
+    return <>{this.props.children}</>;
+  }
+}
+
+export default API;
