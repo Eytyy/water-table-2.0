@@ -4,7 +4,6 @@ import { socket } from "../../../../api";
 import PoolsSVG from "./PoolsSvg";
 import PoolText from "./PoolText";
 import cutout from "../../../../../cutout.png";
-import LayerContext from "../../LayerContext";
 import MapLayerDescription from "../../MapLayerDescription";
 
 class Pools extends Component {
@@ -112,9 +111,6 @@ class Pools extends Component {
     this.animate();
     this.listenToIncomingEvents();
   }
-  componentWillReceiveProps(props) {
-    console.log(props);
-  }
 
   componentWillUnmount() {
     cancelAnimationFrame(this.raf);
@@ -123,44 +119,40 @@ class Pools extends Component {
   }
 
   render() {
-    const { config } = this.props;
+    const { config, activeLayer } = this.props;
     return (
-      <LayerContext.Consumer>
-        {activeLayer => (
-          <div
-            className={`layer layer--pools ${
-              activeLayer === "natural" || activeLayer === "surface"
-                ? "layer--is-active"
-                : "layer--is-hidden"
-            }`}
-          >
-            <canvas
-              id="pools"
-              width={this.width}
-              height={this.height}
-              ref={this.canvas}
-            />
-            <img
-              src={cutout}
-              width="auto"
-              height={`${parseInt(this.height, 10) + 1}`}
-              style={{ position: "absolute", top: "0px", left: "0px" }}
-            />
-            <PoolsSVG PoolsConfig={config} activePool={this.state.activePool} />
-            {config.entries.map(({ name, figures, id, pool }) => (
-              <PoolText
-                key={`rx-${id}`}
-                activePool={this.state.activePool}
-                name={name}
-                figures={figures}
-                id={id}
-                points={Array.isArray(pool) ? pool[0].points : pool.points}
-              />
-            ))}
-            <MapLayerDescription {...config} />
-          </div>
-        )}
-      </LayerContext.Consumer>
+      <div
+        className={`layer layer--pools ${
+          activeLayer === "natural" || activeLayer === "surface"
+            ? "layer--is-active"
+            : "layer--is-hidden"
+        }`}
+      >
+        <canvas
+          id="pools"
+          width={this.width}
+          height={this.height}
+          ref={this.canvas}
+        />
+        <img
+          src={cutout}
+          width="auto"
+          height={`${parseInt(this.height, 10) + 1}`}
+          style={{ position: "absolute", top: "0px", left: "0px" }}
+        />
+        <PoolsSVG PoolsConfig={config} activePool={this.state.activePool} />
+        {config.entries.map(({ name, figures, id, pool }) => (
+          <PoolText
+            key={`rx-${id}`}
+            activePool={this.state.activePool}
+            name={name}
+            figures={figures}
+            id={id}
+            points={Array.isArray(pool) ? pool[0].points : pool.points}
+          />
+        ))}
+        <MapLayerDescription {...config} />
+      </div>
     );
   }
 }

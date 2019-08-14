@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 
-import LayerWrapper from "../LayerWrapper";
 import MapLayerContent from "../MapLayerContent";
 
 import { DesalinationIcon } from "../../../icons/";
@@ -8,12 +7,10 @@ import DesalinationText from "./DesalinationText";
 
 class Desalination extends Component {
   render() {
-    const { active, config } = this.props;
     return (
       <MapLayerContent
+        {...this.props}
         layerName="desalination"
-        active={active}
-        config={config}
         renderIcon={() => <DesalinationIcon />}
         renderText={props => <DesalinationText {...props} />}
       />
@@ -21,6 +18,4 @@ class Desalination extends Component {
   }
 }
 
-export default LayerWrapper(Desalination, {
-  pageName: "desalination"
-});
+export default Desalination;

@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 
-import LayerWrapper from "../LayerWrapper";
 import MapLayerContent from "../MapLayerContent";
 
 import { CanalIcon } from "../../../icons/";
@@ -8,12 +7,10 @@ import CanalText from "./CanalText";
 
 class Canal extends Component {
   render() {
-    const { active, config } = this.props;
     return (
       <MapLayerContent
+        {...this.props}
         layerName="canal"
-        active={active}
-        config={config}
         renderIcon={() => <CanalIcon />}
         renderText={props => <CanalText {...props} />}
       />
@@ -21,6 +18,4 @@ class Canal extends Component {
   }
 }
 
-export default LayerWrapper(Canal, {
-  pageName: "canal"
-});
+export default Canal;

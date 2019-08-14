@@ -8,9 +8,8 @@ import Desalination from "./layers/Desalination";
 import Canal from "./layers/Canal";
 import Groundwater from "./layers/Groundwater";
 import Basins from "./layers/Basins";
-
-import { configMap } from "../../config";
 import LayerContext from "./LayerContext";
+import { configMap } from "../../config";
 
 class Map extends Component {
   state = {

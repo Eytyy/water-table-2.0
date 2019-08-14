@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 
-import LayerWrapper from "../LayerWrapper";
 import MapLayerContent from "../MapLayerContent";
 
 import { SupplyIcon } from "../../../icons/";
@@ -8,13 +7,10 @@ import SupplyText from "./SupplyText";
 
 class Supply extends Component {
   render() {
-    const { active, config } = this.props;
-
     return (
       <MapLayerContent
+        {...this.props}
         layerName="supply"
-        active={active}
-        config={config}
         renderIcon={() => <SupplyIcon />}
         renderText={props => <SupplyText {...props} />}
       />
@@ -22,6 +18,4 @@ class Supply extends Component {
   }
 }
 
-export default LayerWrapper(Supply, {
-  pageName: "supply"
-});
+export default Supply;
