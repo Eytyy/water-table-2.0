@@ -10,8 +10,6 @@ class MapLayerText extends Component {
       active,
       id,
       layerName,
-      iconWidth,
-      iconHeight,
       renderText,
       entryProps
     } = this.props;
@@ -27,8 +25,6 @@ class MapLayerText extends Component {
     const { orientation, positionCSS } = calculateTextPosition({
       x: position.x + 190,
       y: position.y + 180,
-      iconWidth,
-      iconHeight,
       margin,
       textHeight,
       textWidth,

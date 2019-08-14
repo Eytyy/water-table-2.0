@@ -1,9 +1,11 @@
 import React from "react";
 import MapLayerText from "./MapLayerText";
 import LayerContext from "./LayerContext";
+import MapLayerDescription from "./MapLayerDescription";
 
 const MapLayerContent = props => {
   const { layerName, active, config, renderIcon, renderText, children } = props;
+  const { Icon } = config;
 
   const getLayerVisibility = activeLayer => {
     if (
@@ -14,16 +16,6 @@ const MapLayerContent = props => {
     }
     return false;
   };
-  // TODO: FIX
-  // const getOpacity = id => {
-  //   if (typeof active !== "undefined" && active !== id) {
-  //     if (active === "natural" && (id === "surface" || id === "ground")) {
-  //       return "1";
-  //     }
-  //     return "0.5";
-  //   }
-  //   return "1";
-  // };
 
   return (
     <LayerContext.Consumer>
@@ -38,10 +30,10 @@ const MapLayerContent = props => {
             {children && children}
             <div className={`resources resources--${layerName}`}>
               {config.entries.map(props => (
-                <div key={props.id}>
+                <div className="resources__item" key={props.id}>
                   <div
                     className={`icon icon--${layerName} ${
-                      active ? "is-active" : null
+                      active === props.id ? "is-active" : ""
                     }`}
                     style={{
                       top: props.position.y,
@@ -56,23 +48,13 @@ const MapLayerContent = props => {
                     active={active}
                     id={props.id}
                     position={props.position}
-                    iconWidth={width}
-                    iconHeight={height}
                     renderText={renderText}
                     entryProps={props}
                   />
                 </div>
               ))}
             </div>
-            <div className="text-box">
-              <div className="text-box__header">
-                <i className="text-box__icon">
-                  <img src={config.icon} alt="" />
-                </i>
-                <span className="text-box__title">{config.title}</span>
-              </div>
-              <div className="body">{config.description}</div>
-            </div>
+            <MapLayerDescription {...config} />
           </div>
         );
       }}

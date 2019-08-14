@@ -1,11 +1,11 @@
 import React, { Component } from "react";
-import PropTypes from "prop-types";
 import { socket } from "../../../../api";
 
 import PoolsSVG from "./PoolsSvg";
 import PoolText from "./PoolText";
 import cutout from "../../../../../cutout.png";
 import LayerContext from "../../LayerContext";
+import MapLayerDescription from "../../MapLayerDescription";
 
 class Pools extends Component {
   canvas = React.createRef();
@@ -112,13 +112,8 @@ class Pools extends Component {
     this.animate();
     this.listenToIncomingEvents();
   }
-
-  componentWillReceiveProps({ activeLayer }) {
-    if (this.props.activeLayer !== activeLayer) {
-      this.setState({
-        activePool: undefined
-      });
-    }
+  componentWillReceiveProps(props) {
+    console.log(props);
   }
 
   componentWillUnmount() {
@@ -162,15 +157,7 @@ class Pools extends Component {
                 points={Array.isArray(pool) ? pool[0].points : pool.points}
               />
             ))}
-            <div className="text-box">
-              <div className="text-box__header">
-                <i className="text-box__icon">
-                  <img src={config.icon} alt="" />
-                </i>
-                <span className="text-box__title">{config.title}</span>
-              </div>
-              <div className="body">{config.description}</div>
-            </div>
+            <MapLayerDescription {...config} />
           </div>
         )}
       </LayerContext.Consumer>

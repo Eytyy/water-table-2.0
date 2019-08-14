@@ -8,7 +8,7 @@ import SupplyText from "./SupplyText";
 
 class Supply extends Component {
   render() {
-    const { activeLayer, active, config } = this.props;
+    const { active, config } = this.props;
 
     return (
       <MapLayerContent

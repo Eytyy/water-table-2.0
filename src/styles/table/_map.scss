@@ -74,8 +74,6 @@
 }
 
 .text-box__icon {
-	width: 44px;
-	height: 44px;
 	display: flex;
 	flex: 0 0 44px;
 	margin-right: 20px;
@@ -269,10 +267,15 @@
 // };
 
 .icon {
+	position: absolute;
 	transform: scale(1, 1);
+	width: 25px;
+	height: 25px;
+	opacity: 0.5;
 
-	.is-active {
+	&.is-active {
 		transform: scale(2, 2);
+		opacity: 1;
 	}
 
 	svg {
