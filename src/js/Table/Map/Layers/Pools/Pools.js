@@ -1,15 +1,13 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
+import { socket } from "../../../../api";
 
 import PoolsSVG from "./PoolsSvg";
 import PoolText from "./PoolText";
 import cutout from "../../../../../cutout.png";
+import LayerContext from "../../LayerContext";
 
 class Pools extends Component {
-  static contextTypes = {
-    socket: PropTypes.object
-  };
-
   canvas = React.createRef();
   ctx;
   pools = [];
@@ -103,11 +101,10 @@ class Pools extends Component {
   };
 
   listenToIncomingEvents = () => {
-    this.context.socket.on("controller", this.onIncomingEvent);
+    socket.on("controller", this.onIncomingEvent);
   };
 
   componentDidMount() {
-    console.log(this.context);
     this.ctx = this.canvas.current.getContext("2d");
     this.fpsInterval = 1000 / this.fps;
     this.then = Date.now();
@@ -126,55 +123,57 @@ class Pools extends Component {
 
   componentWillUnmount() {
     cancelAnimationFrame(this.raf);
-    this.context.socket.off("controller", this.onIncomingEvent);
+    socket.off("controller", this.onIncomingEvent);
     this.raf = null;
   }
 
   render() {
-    const { activeLayer, config } = this.props;
+    const { config } = this.props;
     return (
-      <div
-        className={`layer layer--pools ${
-          activeLayer === "natural" || activeLayer === "surface"
-            ? "layer--is-active"
-            : "layer--is-hidden"
-        }`}
-      >
-        <canvas
-          id="pools"
-          width={this.width}
-          height={this.height}
-          ref={this.canvas}
-        />
-        <img
-          src={cutout}
-          width="auto"
-          height={`${parseInt(this.height, 10) + 1}`}
-          style={{ position: "absolute", top: "0px", left: "0px" }}
-        />
-        <PoolsSVG PoolsConfig={config} activePool={this.state.activePool} />
-        {config.entries.map(({ name, figures, id, pool }) =>
-          Array.isArray(pool) ? (
-            <PoolText
-              key={`rx-${id}`}
-              activePool={this.state.activePool}
-              name={name}
-              figures={figures}
-              id={id}
-              points={pool[0].points}
+      <LayerContext.Consumer>
+        {activeLayer => (
+          <div
+            className={`layer layer--pools ${
+              activeLayer === "natural" || activeLayer === "surface"
+                ? "layer--is-active"
+                : "layer--is-hidden"
+            }`}
+          >
+            <canvas
+              id="pools"
+              width={this.width}
+              height={this.height}
+              ref={this.canvas}
             />
-          ) : (
-            <PoolText
-              key={`rx-${id}`}
-              activePool={this.state.activePool}
-              name={name}
-              figures={figures}
-              id={id}
-              points={pool.points}
+            <img
+              src={cutout}
+              width="auto"
+              height={`${parseInt(this.height, 10) + 1}`}
+              style={{ position: "absolute", top: "0px", left: "0px" }}
             />
-          )
+            <PoolsSVG PoolsConfig={config} activePool={this.state.activePool} />
+            {config.entries.map(({ name, figures, id, pool }) => (
+              <PoolText
+                key={`rx-${id}`}
+                activePool={this.state.activePool}
+                name={name}
+                figures={figures}
+                id={id}
+                points={Array.isArray(pool) ? pool[0].points : pool.points}
+              />
+            ))}
+            <div className="text-box">
+              <div className="text-box__header">
+                <i className="text-box__icon">
+                  <img src={config.icon} alt="" />
+                </i>
+                <span className="text-box__title">{config.title}</span>
+              </div>
+              <div className="body">{config.description}</div>
+            </div>
+          </div>
         )}
-      </div>
+      </LayerContext.Consumer>
     );
   }
 }

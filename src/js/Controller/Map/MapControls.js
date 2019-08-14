@@ -1,15 +1,14 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 
+import { broadcastEvent } from "../../api";
+
 import MapControlButton from "./MapControlButton";
 import { config } from "../../config";
 import MiniMap from "./MiniMap";
+import LayerContext from "./LayerContext";
 
 class MapControls extends Component {
-  static contextTypes = {
-    broadcastEvent: PropTypes.func
-  };
-
   state = {
     activeLayer: "surface",
     active: undefined
@@ -24,14 +23,16 @@ class MapControls extends Component {
 
   onClickLayer = id => {
     this.setActiveLayer(id === "natural" ? "surface" : id);
+
     if (id === "canals") {
-      this.context.broadcastEvent({
+      broadcastEvent({
         source: "controller",
         event: "mapClicked",
         payload: canalConfig.entries[0].id
       });
     }
-    this.context.broadcastEvent({
+
+    broadcastEvent({
       source: "controller",
       event: "switchMapView",
       payload: id
@@ -44,11 +45,9 @@ class MapControls extends Component {
       ? currentTarget.parentNode.id
       : currentTarget.id;
 
-    this.setState({
-      active
-    });
+    this.setState({ active });
 
-    this.context.broadcastEvent({
+    broadcastEvent({
       source: "controller",
       event: "poolClicked",
       payload: active
@@ -58,11 +57,9 @@ class MapControls extends Component {
   onMapClick = e => {
     const target = e.currentTarget.id;
 
-    this.setState({
-      active: target
-    });
+    this.setState({ active: target });
 
-    this.context.broadcastEvent({
+    broadcastEvent({
       source: "controller",
       event: "mapClicked",
       payload: target
@@ -73,27 +70,27 @@ class MapControls extends Component {
   render() {
     const { activeLayer, active } = this.state;
     return (
-      <section className="controller map-console">
-        <div className="map-console__controls">
-          <h1 className="controller__title">WATER MAP &amp; PROJECTS</h1>
-          <div className="map-console__controls__group map-console__controls__group--main">
-            {config.map(layerConfiguration => (
-              <MapControlButton
-                key={layerConfiguration.id}
-                activeLayer={activeLayer}
-                {...layerConfiguration}
-                onClick={this.onClickLayer}
-              />
-            ))}
+      <LayerContext.Provider value={activeLayer}>
+        <section className="controller map-console">
+          <div className="map-console__controls">
+            <h1 className="controller__title">WATER MAP &amp; PROJECTS</h1>
+            <div className="map-console__controls__group map-console__controls__group--main">
+              {config.map(layerConfiguration => (
+                <MapControlButton
+                  key={layerConfiguration.id}
+                  {...layerConfiguration}
+                  onClick={this.onClickLayer}
+                />
+              ))}
+            </div>
           </div>
-        </div>
-        <MiniMap
-          activeLayer={activeLayer}
-          active={active}
-          onMapClick={this.onMapClick}
-          onPoolClick={this.onPoolClick}
-        />
-      </section>
+          <MiniMap
+            active={active}
+            onMapClick={this.onMapClick}
+            onPoolClick={this.onPoolClick}
+          />
+        </section>
+      </LayerContext.Provider>
     );
   }
 }

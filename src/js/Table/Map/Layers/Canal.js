@@ -8,11 +8,10 @@ import CanalText from "./CanalText";
 
 class Canal extends Component {
   render() {
-    const { activeLayer, active, config } = this.props;
+    const { active, config } = this.props;
     return (
       <MapLayerContent
         layerName="canal"
-        activeLayer={activeLayer}
         active={active}
         config={config}
         renderIcon={() => <CanalIcon />}

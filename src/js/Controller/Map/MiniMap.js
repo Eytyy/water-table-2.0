@@ -6,7 +6,7 @@ import { config } from "../../config";
 
 class MiniMap extends Component {
   render() {
-    const { activeLayer, active, onMapClick, onPoolClick } = this.props;
+    const { active, onMapClick, onPoolClick } = this.props;
     return (
       <div className="map-console__mini-map">
         {config.map(layerConfiguration =>
@@ -14,7 +14,6 @@ class MiniMap extends Component {
             <PoolsSVG
               key={layerConfiguration.id}
               {...layerConfiguration}
-              activeLayer={activeLayer}
               active={active}
               onClick={onPoolClick}
             />
@@ -23,7 +22,6 @@ class MiniMap extends Component {
               key={layerConfiguration.id}
               {...layerConfiguration}
               active={active}
-              activeLayer={activeLayer}
               onClick={onMapClick}
             />
           )

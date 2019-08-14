@@ -1,7 +1,8 @@
 import React from "react";
+import LayerContext from "./LayerContext";
 
-const MapControlButton = ({ activeLayer, id, title, Icon, onClick }) => {
-  const isActive = () => {
+const MapControlButton = ({ id, title, Icon, onClick }) => {
+  const isActive = activeLayer => {
     if (activeLayer === id) {
       return true;
     } else if (
@@ -13,17 +14,21 @@ const MapControlButton = ({ activeLayer, id, title, Icon, onClick }) => {
     return false;
   };
   return (
-    <div
-      className={`btn-group ${isActive() ? "is-active" : ""}`}
-      onClick={() => {
-        onClick(id);
-      }}
-    >
-      <i className={`btn-icon icon--${id}`}>
-        <Icon />
-      </i>
-      <span className="btn-label">{title}</span>
-    </div>
+    <LayerContext.Consumer>
+      {activeLayer => (
+        <div
+          className={`btn-group ${isActive(activeLayer) ? "is-active" : ""}`}
+          onClick={() => {
+            onClick(id);
+          }}
+        >
+          <i className={`btn-icon icon--${id}`}>
+            <Icon />
+          </i>
+          <span className="btn-label">{title}</span>
+        </div>
+      )}
+    </LayerContext.Consumer>
   );
 };
 

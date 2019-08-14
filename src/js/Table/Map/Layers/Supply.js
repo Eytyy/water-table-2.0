@@ -13,7 +13,6 @@ class Supply extends Component {
     return (
       <MapLayerContent
         layerName="supply"
-        activeLayer={activeLayer}
         active={active}
         config={config}
         renderIcon={() => <SupplyIcon />}

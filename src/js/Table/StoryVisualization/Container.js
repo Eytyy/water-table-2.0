@@ -5,11 +5,9 @@ import PopulationVisulaization from "./Visualization/PopulationVisulaization";
 import Intro from "./Intro";
 import Story from "./Story/Story";
 
-class Container extends Component {
-  static contextTypes = {
-    socket: PropTypes.object
-  };
+import { socket } from "../../api";
 
+class Container extends Component {
   state = {
     intro: true
   };
@@ -28,7 +26,7 @@ class Container extends Component {
   };
 
   listenToIncomingEvents = () => {
-    this.context.socket.on("controller", this.onIncomingEvents);
+    socket.on("controller", this.onIncomingEvents);
   };
 
   componentDidMount() {
@@ -36,7 +34,7 @@ class Container extends Component {
   }
 
   componentWillUnmount() {
-    this.context.socket.off("controller", this.onIncomingEvents);
+    socket.off("controller", this.onIncomingEvents);
   }
 
   render() {

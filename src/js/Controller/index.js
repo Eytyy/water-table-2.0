@@ -3,13 +3,10 @@ import { BrowserRouter as Router } from "react-router-dom";
 import { render } from "react-dom";
 import Controller from "./Controller";
 import Styles from "../../styles/controller/controller.scss";
-import API from "../api";
 
 render(
   <Router>
-    <API>
-      <Controller />
-    </API>
+    <Controller />
   </Router>,
   document.getElementById("controller")
 );

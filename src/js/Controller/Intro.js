@@ -2,13 +2,11 @@ import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import PropTypes from "prop-types";
 
-class Intro extends Component {
-  static contextTypes = {
-    broadcastEvent: PropTypes.func
-  };
+import { broadcastEvent } from "../api";
 
+class Intro extends Component {
   onLinkClick = to => {
-    this.context.broadcastEvent({
+    broadcastEvent({
       source: "controller",
       event: "navigate",
       payload: to

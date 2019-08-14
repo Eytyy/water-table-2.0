@@ -58,6 +58,7 @@
 }
 
 .text-box {
+	background: #000;
 	position: absolute;
 	bottom: 0;
 	left: 0;
@@ -256,7 +257,24 @@
 	}
 }
 
+// TODO: FIX
+// const getOpacity = id => {
+// 	if (typeof active !== "undefined" && active !== id) {
+// 		if (active === "natural" && (id === "surface" || id === "ground")) {
+// 			return "1";
+// 		}
+// 		return "0.5";
+// 	}
+// 	return "1";
+// };
+
 .icon {
+	transform: scale(1, 1);
+
+	.is-active {
+		transform: scale(2, 2);
+	}
+
 	svg {
 		width: 100%;
 		height: auto;

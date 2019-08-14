@@ -8,11 +8,10 @@ import DesalinationText from "./DesalinationText";
 
 class Desalination extends Component {
   render() {
-    const { activeLayer, active, config } = this.props;
+    const { active, config } = this.props;
     return (
       <MapLayerContent
         layerName="desalination"
-        activeLayer={activeLayer}
         active={active}
         config={config}
         renderIcon={() => <DesalinationIcon />}

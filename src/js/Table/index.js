@@ -7,9 +7,7 @@ import API from "../api";
 
 render(
   <Router>
-    <API>
-      <Main />
-    </API>
+    <Main />
   </Router>,
   document.getElementById("table")
 );

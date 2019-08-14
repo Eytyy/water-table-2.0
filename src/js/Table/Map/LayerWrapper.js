@@ -1,12 +1,9 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
+import { socket } from "../../api";
 
 const LayerWrapper = (WrappedComponent, { pageName }) => {
   class LayerWrapper extends Component {
-    static contextTypes = {
-      socket: PropTypes.object
-    };
-
     state = {
       active: undefined
     };
@@ -29,7 +26,7 @@ const LayerWrapper = (WrappedComponent, { pageName }) => {
     };
 
     listenToIncomingEvents = () => {
-      this.context.socket.on("controller", this.onIncomingEvents);
+      socket.on("controller", this.onIncomingEvents);
     };
 
     componentDidMount() {
@@ -45,7 +42,7 @@ const LayerWrapper = (WrappedComponent, { pageName }) => {
     }
 
     componentWillUnmount() {
-      this.context.socket.off("controller", this.onIncomingEvents);
+      socket.off("controller", this.onIncomingEvents);
     }
 
     render() {

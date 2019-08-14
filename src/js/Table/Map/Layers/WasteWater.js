@@ -13,7 +13,6 @@ class WasteWater extends Component {
     return (
       <MapLayerContent
         layerName="waste"
-        activeLayer={activeLayer}
         active={active}
         config={config}
         renderIcon={() => <TreatmentPlantIcon />}

@@ -8,11 +8,10 @@ import DamsText from "./DamsText";
 
 class Dams extends Component {
   render() {
-    const { activeLayer, active, config } = this.props;
+    const { active, config } = this.props;
     return (
       <MapLayerContent
         layerName="dams"
-        activeLayer={activeLayer}
         active={active}
         config={config}
         renderIcon={() => <DamIcon />}

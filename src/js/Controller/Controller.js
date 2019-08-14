@@ -2,16 +2,12 @@ import React, { Component } from "react";
 import { Route, withRouter, Link } from "react-router-dom";
 import PropTypes from "prop-types";
 
+import { socket, broadcastEvent } from "../api";
 import Intro from "./Intro";
 import MapControls from "./Map/MapControls";
 import VisualizationControls from "./Visualization/VisualizationControls";
 
 class Controller extends Component {
-  static contextTypes = {
-    broadcastEvent: PropTypes.func,
-    socket: PropTypes.object
-  };
-
   state = {
     front: typeof this.props.location.pathname.split("/")[2] === "undefined",
     language: "english"
@@ -25,11 +21,11 @@ class Controller extends Component {
   };
 
   listenToIncomingEvents = () => {
-    this.context.socket.on("from-table", this.onIncomingEvents);
+    socket.on("from-table", this.onIncomingEvents);
   };
 
   onLinkClick = to => {
-    this.context.broadcastEvent({
+    broadcastEvent({
       source: "controller",
       event: "navigate",
       payload: to
@@ -41,7 +37,7 @@ class Controller extends Component {
   }
 
   componentWillUnmount() {
-    this.context.socket.off("from-table", this.onIncomingEvents);
+    socket.off("from-table", this.onIncomingEvents);
   }
 
   componentDidUpdate(prevProps) {
