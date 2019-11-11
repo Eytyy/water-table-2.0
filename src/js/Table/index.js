@@ -1,13 +1,12 @@
 import React from "react";
 import { BrowserRouter as Router } from "react-router-dom";
 import { render } from "react-dom";
-import Main from "./Main";
+import Layout from "./Layout";
 import Styles from "../../styles/table/table.scss";
-import API from "../api";
 
 render(
   <Router>
-    <Main />
+    <Layout />
   </Router>,
   document.getElementById("table")
 );

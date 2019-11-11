@@ -24,6 +24,7 @@ io.on("connection", function(client) {
 });
 
 app.get("/", (req, res) => {
+  console.log("redirecting");
   res.redirect("/table");
 });
 

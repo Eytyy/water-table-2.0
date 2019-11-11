@@ -1,28 +1,35 @@
-import React, { Component } from "react";
-import PropTypes from "prop-types";
+import React, { useState } from "react";
 
 import { broadcastEvent } from "../../api";
-
-import MapControlButton from "./MapControlButton";
 import { config } from "../../config";
-import MiniMap from "./MiniMap";
-import LayerContext from "./LayerContext";
 
-class MapControls extends Component {
-  state = {
+import LayerContext from "./LayerContext";
+import MapControlButton from "./MapControlButton";
+import MiniMap from "./MiniMap";
+
+const MapControls = () => {
+  const [state, setState] = useState({
     activeLayer: "surface",
     active: undefined
+  });
+
+  const setActiveLayer = layer => {
+    setState(({ activeLayer, active }) => ({
+      activeLayer: activeLayer === layer ? "surface" : layer,
+      active: layer === "canal" ? canalConfig.entries[0].id : active
+    }));
   };
 
-  setActiveLayer = layer => {
-    this.setState({
-      activeLayer: this.state.activeLayer === layer ? "surface" : layer,
-      active: layer === "canal" ? canalConfig.entries[0].id : this.state.active
-    });
+  const updateState = changes => {
+    setState(prevState => ({
+      ...prevState,
+      ...changes
+    }));
   };
 
-  onClickLayer = id => {
-    this.setActiveLayer(id === "natural" ? "surface" : id);
+  // @TODO: smelly
+  const onClickLayer = id => {
+    setActiveLayer(id === "natural" ? "surface" : id);
 
     if (id === "canals") {
       broadcastEvent({
@@ -39,13 +46,13 @@ class MapControls extends Component {
     });
   };
 
-  onPoolClick = e => {
+  const onPoolClick = e => {
     const currentTarget = e.currentTarget;
     let active = currentTarget.parentNode.classList.contains("svg-group")
       ? currentTarget.parentNode.id
       : currentTarget.id;
 
-    this.setState({ active });
+    updateState({ active });
 
     broadcastEvent({
       source: "controller",
@@ -54,10 +61,10 @@ class MapControls extends Component {
     });
   };
 
-  onMapClick = e => {
+  const onMapClick = e => {
     const target = e.currentTarget.id;
 
-    this.setState({ active: target });
+    setState({ active: target });
 
     broadcastEvent({
       source: "controller",
@@ -66,33 +73,32 @@ class MapControls extends Component {
     });
   };
 
-  // Put the buttons in a config file and loop over for better readability
-  render() {
-    const { activeLayer, active } = this.state;
-    return (
-      <LayerContext.Provider value={activeLayer}>
-        <section className="controller map-console">
-          <div className="map-console__controls">
-            <h1 className="controller__title">WATER MAP &amp; PROJECTS</h1>
-            <div className="map-console__controls__group map-console__controls__group--main">
-              {config.map(layerConfiguration => (
-                <MapControlButton
-                  key={layerConfiguration.id}
-                  {...layerConfiguration}
-                  onClick={this.onClickLayer}
-                />
-              ))}
-            </div>
+  // @TODO: Put the buttons in a config file and loop over for better readability
+  const { active, activeLayer } = state;
+
+  return (
+    <LayerContext.Provider value={activeLayer}>
+      <section className="controller map-console">
+        <div className="map-console__controls">
+          <h1 className="controller__title">WATER MAP &amp; PROJECTS</h1>
+          <div className="map-console__controls__group map-console__controls__group--main">
+            {config.map(layerConfiguration => (
+              <MapControlButton
+                key={layerConfiguration.id}
+                {...layerConfiguration}
+                onClick={onClickLayer}
+              />
+            ))}
           </div>
-          <MiniMap
-            active={active}
-            onMapClick={this.onMapClick}
-            onPoolClick={this.onPoolClick}
-          />
-        </section>
-      </LayerContext.Provider>
-    );
-  }
-}
+        </div>
+        <MiniMap
+          active={active}
+          onMapClick={onMapClick}
+          onPoolClick={onPoolClick}
+        />
+      </section>
+    </LayerContext.Provider>
+  );
+};
 
 export default MapControls;

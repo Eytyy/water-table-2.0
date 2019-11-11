@@ -1,53 +1,66 @@
-import React, { Component } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { socket } from "../../../../api";
 
 import PoolsSVG from "./PoolsSvg";
 import PoolText from "./PoolText";
 import cutout from "../../../../../cutout.png";
 import MapLayerDescription from "../../MapLayerDescription";
+import WithContext from "../../WithContext";
 
-class Pools extends Component {
-  canvas = React.createRef();
-  ctx;
-  pools = [];
-  width = "1080";
-  height = "1540";
+const Pools = ({ config, activeLayer }) => {
+  const [activePool, setActivePool] = useState(null);
+  const canvas = useRef(null);
+  const raf = useRef(null);
+  const width = "1080";
+  const height = "1540";
+  let ctx;
+  let pools = [];
+  let stop = false;
+  let frameCount = 0;
+  let fps = 15;
+  let fpsInterval;
+  let startTime;
+  let now;
+  let then;
+  let elapsed;
 
-  particles = Array.from({ length: 140000 }, () => [
-    Math.round(Math.random() * (this.width - 1)),
-    Math.round(Math.random() * (this.height - 1))
+  const particles = Array.from({ length: 140000 }, () => [
+    Math.round(Math.random() * (width - 1)),
+    Math.round(Math.random() * (height - 1))
   ]);
 
-  stop = false;
-  frameCount = 0;
-  fps = 15;
-  fpsInterval;
-  startTime;
-  now;
-  then;
-  elapsed;
-  raf = null;
+  useEffect(() => {
+    setup();
+    return function cleanup() {
+      cancelAnimationFrame(raf.current);
+      stopListeningToIncomingEvents();
+      raf.current = null;
+    };
+  }, []);
 
-  state = {
-    activePool: undefined
+  useEffect(() => {
+    setActivePool(null);
+  }, [activeLayer]);
+
+  const setup = () => {
+    ctx = canvas.current.getContext("2d");
+    fpsInterval = 1000 / fps;
+    then = Date.now();
+    startTime = then;
+    animate();
+    startListeningToIncomingEvents();
   };
 
-  updateActivePool = activePool => {
-    this.setState({
-      activePool
-    });
-  };
+  const draw = () => {
+    const ctx = ctx || canvas.current.getContext("2d");
 
-  draw = () => {
-    const ctx = this.ctx || this.canvas.current.getContext("2d");
-
-    ctx.clearRect(0, 0, this.width, this.height);
-    const imageData = ctx.getImageData(0, 0, this.width, this.height);
+    ctx.clearRect(0, 0, width, height);
+    const imageData = ctx.getImageData(0, 0, width, height);
     const data = imageData.data;
 
-    for (let i = 0; i < this.particles.length; i++) {
-      const particle = this.particles[i];
-      const index = 4 * (particle[0] + particle[1] * this.width);
+    for (let i = 0; i < particles.length; i++) {
+      const particle = particles[i];
+      const index = 4 * (particle[0] + particle[1] * width);
       data[index + 0] = 255;
       data[index + 1] = 255;
       data[index + 2] = 255;
@@ -57,104 +70,83 @@ class Pools extends Component {
     ctx.putImageData(imageData, 0, 0);
   };
 
-  animate = () => {
-    this.raf = requestAnimationFrame(this.animate);
+  const animate = () => {
+    raf.current = requestAnimationFrame(animate);
 
-    this.now = Date.now();
-    this.elapsed = this.now - this.then;
+    now = Date.now();
+    elapsed = now - then;
 
-    if (this.elapsed > this.fpsInterval) {
-      this.then = this.now - (this.elapsed % this.fpsInterval);
+    if (elapsed > fpsInterval) {
+      then = now - (elapsed % fpsInterval);
 
-      this.draw();
+      draw();
 
-      for (let i = 0; i < this.particles.length; i++) {
-        const particle = this.particles[i];
+      for (let i = 0; i < particles.length; i++) {
+        const particle = particles[i];
         particle[0] = Math.max(
           0,
-          Math.min(
-            this.width - 1,
-            Math.round(particle[0] + Math.random() * 2 - 1)
-          )
+          Math.min(width - 1, Math.round(particle[0] + Math.random() * 2 - 1))
         );
         particle[1] = Math.max(
           0,
-          Math.min(
-            this.height - 1,
-            Math.round(particle[1] + Math.random() * 2 - 1)
-          )
+          Math.min(height - 1, Math.round(particle[1] + Math.random() * 2 - 1))
         );
       }
     }
   };
 
-  onIncomingEvent = message => {
+  const onIncomingEvents = message => {
     const { event, payload } = message;
     switch (event) {
       case "poolClicked":
-        this.updateActivePool(payload);
+        setActivePool(payload);
         break;
       default:
         return;
     }
   };
 
-  listenToIncomingEvents = () => {
-    socket.on("controller", this.onIncomingEvent);
+  const startListeningToIncomingEvents = () => {
+    socket.on("controller", onIncomingEvents);
   };
 
-  componentDidMount() {
-    this.ctx = this.canvas.current.getContext("2d");
-    this.fpsInterval = 1000 / this.fps;
-    this.then = Date.now();
-    this.startTime = this.then;
-    this.animate();
-    this.listenToIncomingEvents();
-  }
+  const stopListeningToIncomingEvents = () => {
+    socket.off("controller", onIncomingEvents);
+  };
 
-  componentWillUnmount() {
-    cancelAnimationFrame(this.raf);
-    socket.off("controller", this.onIncomingEvent);
-    this.raf = null;
-  }
-
-  render() {
-    const { config, activeLayer } = this.props;
-    return (
-      <div
-        className={`layer layer--pools ${
-          activeLayer === "natural" || activeLayer === "surface"
-            ? "layer--is-active"
-            : "layer--is-hidden"
-        }`}
-      >
-        <canvas
-          id="pools"
-          width={this.width}
-          height={this.height}
-          ref={this.canvas}
+  return (
+    <div
+      className={`layer layer--pools ${
+        activeLayer === "natural" || activeLayer === "surface"
+          ? "layer--is-active"
+          : "layer--is-hidden"
+      }`}
+    >
+      <canvas id="pools" width={width} height={height} ref={canvas} />
+      <img
+        src={cutout}
+        width="auto"
+        height={`${parseInt(height, 10) + 1}`}
+        style={{ position: "absolute", top: "0px", left: "0px" }}
+      />
+      <PoolsSVG
+        PoolsConfig={config}
+        activePool={activePool}
+        activeLayer={activeLayer}
+      />
+      {config.entries.map(({ name, figures, id, pool }) => (
+        <PoolText
+          key={`rx-${id}`}
+          activePool={activePool}
+          name={name}
+          figures={figures}
+          id={id}
+          points={Array.isArray(pool) ? pool[0].points : pool.points}
         />
-        <img
-          src={cutout}
-          width="auto"
-          height={`${parseInt(this.height, 10) + 1}`}
-          style={{ position: "absolute", top: "0px", left: "0px" }}
-        />
-        <PoolsSVG PoolsConfig={config} activePool={this.state.activePool} />
-        {config.entries.map(({ name, figures, id, pool }) => (
-          <PoolText
-            key={`rx-${id}`}
-            activePool={this.state.activePool}
-            name={name}
-            figures={figures}
-            id={id}
-            points={Array.isArray(pool) ? pool[0].points : pool.points}
-          />
-        ))}
-        <MapLayerDescription {...config} />
-      </div>
-    );
-  }
-}
+      ))}
+      <MapLayerDescription {...config} />
+    </div>
+  );
+};
 
-export default Pools;
+export default WithContext(Pools);

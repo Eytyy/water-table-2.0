@@ -1,21 +1,18 @@
-import React, { Component } from "react";
-
-import MapLayerContent from "../MapLayerContent";
+import React from "react";
 
 import { TreatmentPlantIcon } from "../../../icons/";
+import MapLayerContent from "../MapLayerContent";
 import WasteWaterText from "./WasteWaterText";
 
-class WasteWater extends Component {
-  render() {
-    return (
-      <MapLayerContent
-        {...this.props}
-        layerName="waste"
-        renderIcon={() => <TreatmentPlantIcon />}
-        renderText={props => <WasteWaterText {...props} />}
-      />
-    );
-  }
-}
+const WasteWater = props => {
+  return (
+    <MapLayerContent
+      {...props}
+      layerName="waste"
+      renderIcon={() => <TreatmentPlantIcon />}
+      renderText={props => <WasteWaterText {...props} />}
+    />
+  );
+};
 
 export default WasteWater;
