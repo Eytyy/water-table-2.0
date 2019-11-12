@@ -1,266 +1,252 @@
-import React, { Component } from "react";
-import PropTypes from "prop-types";
-
+import React, { useRef, useState, useEffect } from "react";
 import { scaleLinear, format } from "d3";
 import { socket } from "../../../api";
 
 import population from "../../../../data/population.1";
 import PopulationCircle from "./PopulationCircle";
 
-class PopulationVisulization extends Component {
-  width = 1080;
-  height = 1300;
-  canvas = React.createRef();
-  ctx;
-  next_year_population;
-  previous_year_population;
-  reverse = false;
-  population_data = population;
-  nodesRangeCount;
-  rendered = 0;
+const PopulationVisulization = () => {
+  const width = 1080;
+  const height = 1300;
+  const canvas = useRef();
+  const raf = useRef();
 
-  radiusRangeSize;
-  current_radius = 0;
-  next_radius = 0;
+  let ctx;
+  let next_year_population;
+  let previous_year_population;
+  let reverse = false;
+  let population_data = population;
+  let nodesRangeCount;
+  let rendered = 0;
 
-  rf = null;
-  stop = false;
-  frameCount = 0;
-  fps = 10;
-  fpsInterval;
-  startTime;
-  now;
-  then;
-  elapsed;
+  let radiusRangeSize;
+  let current_radius = 0;
+  let next_radius = 0;
 
-  allPopulation = [];
+  let stop = false;
+  let frameCount = 0;
+  let fps = 10;
+  let fpsInterval;
+  let startTime;
+  let now;
+  let then;
+  let elapsed;
 
-  state = {
-    activeYear: 1960
+  let allPopulation = [];
+
+  const [activeYear, setActiveYear] = useState(1960);
+
+  const onIncomingEvents = message => {
+    const { event, payload } = message;
+    switch (event) {
+      case "yearClicked":
+        updateActiveYear(payload);
+        break;
+      default:
+        return;
+    }
   };
 
-  getCurrentPopulation = () => {
-    let index = this.population_data.findIndex(
-      ({ year }) => year === this.next_year_population
+  const startListeningToIncomingEvents = () =>
+    socket.on("controller", onIncomingEvents);
+
+  const stopListeningToIncomingEvents = () =>
+    socket.off("controller", onIncomingEvents);
+
+  useEffect(() => {
+    ctx = canvas.current.getContext("2d");
+    startListeningToIncomingEvents();
+    setNodesRangeCount();
+    setRadiusRangeSize();
+    setupPopulationCircles();
+    rendered = previous_year_population = 0;
+    next_year_population = getNodesRangeCount(population[0].population);
+    drawPopulation();
+    return function cleanup() {
+      stopRunningAnimation();
+      stopListeningToIncomingEvents();
+    };
+  }, []);
+
+  const getCurrentPopulation = () => {
+    let index = population_data.findIndex(
+      ({ year }) => year === next_year_population
     );
 
     return {
-      count: this.population_data[index].population,
+      count: population_data[index].population,
       index
     };
   };
 
-  setNodesRangeCount = () => {
+  const setNodesRangeCount = () => {
     const { population: MinPopulation } = population[0];
     const { population: MaxPopulation } = population[population.length - 1];
 
-    this.nodesRangeCount = scaleLinear()
+    nodesRangeCount = scaleLinear()
       .domain([MinPopulation, MaxPopulation])
       .range([20, 100])
       .clamp(true);
   };
 
-  getNodesRangeCount = num => {
-    return Math.ceil(this.nodesRangeCount(num));
+  const getNodesRangeCount = num => {
+    return Math.ceil(nodesRangeCount(num));
   };
 
-  setRadiusRangeSize = () => {
+  const setRadiusRangeSize = () => {
     const populationLength = population.length;
-    this.radiusRangeSize = scaleLinear()
+    radiusRangeSize = scaleLinear()
       .domain([0, populationLength])
       .range([30, 200])
       .clamp(true);
   };
 
-  getRadius() {
+  const getRadius = () => {
     let r = 0;
-    if (this.reverse) {
-      this.current_radius -= 1;
-      r =
-        this.current_radius <= this.next_radius
-          ? this.next_radius
-          : this.current_radius;
+    if (reverse) {
+      current_radius -= 1;
+      r = current_radius <= next_radius ? next_radius : current_radius;
     } else {
-      this.current_radius += 1;
-      r =
-        this.current_radius >= this.next_radius
-          ? this.next_radius
-          : this.current_radius;
+      current_radius += 1;
+      r = current_radius >= next_radius ? next_radius : current_radius;
     }
-    this.current_radius = Math.ceil(r);
-    return this.current_radius;
-  }
+    current_radius = Math.ceil(r);
+    return current_radius;
+  };
 
-  setupPopulationCircles = () => {
-    const max = this.getNodesRangeCount(
+  const setupPopulationCircles = () => {
+    const max = getNodesRangeCount(
       population[population.length - 1].population
     );
     for (let i = 0; i < max; i++) {
       let obj = new PopulationCircle({
-        width: this.width,
-        height: this.height,
-        ctx: this.ctx
+        width: width,
+        height: height,
+        ctx: ctx
       });
-      this.allPopulation.push(obj);
+      allPopulation.push(obj);
     }
   };
 
-  drawPopulation = () => {
-    const ctx = this.ctx || this.canvas.current.getContext("2d");
-    ctx.clearRect(0, 0, this.width, this.height);
+  const drawPopulation = () => {
+    const ctx = ctx || canvas.current.getContext("2d");
+    ctx.clearRect(0, 0, width, height);
     ctx.fillStyle = "rgba(255, 255, 255, 0.1)";
-    let radius = this.getRadius();
-    for (let i = 0; i < this.rendered; i++) {
-      this.allPopulation[i].update(radius);
+    let radius = getRadius();
+    for (let i = 0; i < rendered; i++) {
+      allPopulation[i].update(radius);
     }
   };
 
-  update = () => {
-    this.raf = requestAnimationFrame(this.update);
-    this.now = Date.now();
-    this.elapsed = this.now - this.then;
+  const update = () => {
+    raf.current = requestAnimationFrame(update);
+    now = Date.now();
+    elapsed = now - then;
 
-    if (this.elapsed > this.fpsInterval) {
-      this.then = this.now - (this.elapsed % this.fpsInterval);
-      this.drawPopulation();
-      if (!this.reverse) {
-        if (this.rendered < this.next_year_population) {
-          this.rendered += 1;
-        } else if (this.current_radius >= this.next_radius) {
-          this.reset();
+    if (elapsed > fpsInterval) {
+      then = now - (elapsed % fpsInterval);
+      drawPopulation();
+      if (!reverse) {
+        if (rendered < next_year_population) {
+          rendered += 1;
+        } else if (current_radius >= next_radius) {
+          reset();
         }
       }
-      if (this.reverse) {
-        if (this.rendered > this.next_year_population) {
-          this.rendered -= 1;
-        } else if (this.current_radius <= this.next_radius) {
-          this.reset();
+      if (reverse) {
+        if (rendered > next_year_population) {
+          rendered -= 1;
+        } else if (current_radius <= next_radius) {
+          reset();
         }
       }
     }
   };
 
-  moveCircles = () => {
-    this.raf = requestAnimationFrame(this.moveCircles);
-    this.now = Date.now();
-    this.elapsed = this.now - this.then;
+  const moveCircles = () => {
+    raf.current = requestAnimationFrame(moveCircles);
+    now = Date.now();
+    elapsed = now - then;
 
-    if (this.elapsed > this.fpsInterval) {
-      this.then = this.now - (this.elapsed % this.fpsInterval);
-      this.ctx.clearRect(0, 0, this.width, this.height);
+    if (elapsed > fpsInterval) {
+      then = now - (elapsed % fpsInterval);
+      ctx.clearRect(0, 0, width, height);
 
-      for (let i = 0; i < this.rendered; i++) {
-        this.allPopulation[i].move();
+      for (let i = 0; i < rendered; i++) {
+        allPopulation[i].move();
       }
     }
   };
 
-  startIdleAnimation = () => {
-    this.fpsInterval = 1000 / this.fps;
-    this.then = Date.now();
-    this.startTime = this.then;
+  const startIdleAnimation = () => {
+    fpsInterval = 1000 / fps;
+    then = Date.now();
+    startTime = then;
 
-    this.moveCircles();
+    moveCircles();
   };
 
-  stopRunningAnimation = () => {
-    cancelAnimationFrame(this.raf);
-    this.raf = null;
+  const stopRunningAnimation = () => {
+    cancelAnimationFrame(raf.current);
+    raf.current = null;
   };
 
-  reset = () => {
-    this.stopRunningAnimation();
-    this.rendered = this.previous_year_population = this.next_year_population;
-    this.startIdleAnimation();
+  const reset = () => {
+    stopRunningAnimation();
+    rendered = previous_year_population = next_year_population;
+    startIdleAnimation();
   };
 
-  updateActiveYear = payload => {
+  const updateActiveYear = payload => {
     // cancel running animation
-    cancelAnimationFrame(this.raf);
-    this.raf = null;
+    cancelAnimationFrame(raf.current);
+    raf.current = null;
 
-    this.setState({
-      activeYear: payload
-    });
+    setActiveYear(payload);
 
     let yearIndex = population.findIndex(
       ({ year }) => year === parseInt(payload, 10)
     );
-    let { population: nextYearPopulation } = this.population_data[yearIndex];
-    let nextRange = this.getNodesRangeCount(nextYearPopulation);
-    this.next_year_population = nextRange;
-    this.reverse = this.previous_year_population > nextRange ? true : false;
-    this.next_radius =
-      this.rendered === 0
-        ? this.radiusRangeSize(yearIndex)
-        : this.reverse
-        ? this.radiusRangeSize(yearIndex - 1)
-        : this.radiusRangeSize(yearIndex + 1);
-    this.rendered = this.previous_year_population;
+    let { population: nextYearPopulation } = population_data[yearIndex];
+    let nextRange = getNodesRangeCount(nextYearPopulation);
+    next_year_population = nextRange;
+    reverse = previous_year_population > nextRange ? true : false;
+    next_radius =
+      rendered === 0
+        ? radiusRangeSize(yearIndex)
+        : reverse
+        ? radiusRangeSize(yearIndex - 1)
+        : radiusRangeSize(yearIndex + 1);
+    rendered = previous_year_population;
 
-    this.fpsInterval = 1000 / this.fps;
-    this.then = Date.now();
-    this.startTime = this.then;
+    fpsInterval = 1000 / fps;
+    then = Date.now();
+    startTime = then;
 
-    this.update();
+    update();
   };
 
-  listenToIncomingEvents = () => {
-    socket.on("controller", message => {
-      const { event, payload } = message;
-      switch (event) {
-        case "yearClicked":
-          this.updateActiveYear(payload);
-          break;
-        default:
-          return;
-      }
-    });
-  };
-
-  componentDidMount() {
-    this.ctx = this.canvas.current.getContext("2d");
-    this.listenToIncomingEvents();
-    this.setNodesRangeCount();
-    this.setRadiusRangeSize();
-    this.setupPopulationCircles();
-    this.rendered = this.previous_year_population = 0;
-    this.next_year_population = this.getNodesRangeCount(
-      population[0].population
-    );
-    this.drawPopulation();
-  }
-
-  componentWillUnmount() {
-    this.stopRunningAnimation();
-  }
-
-  getPopulation = () => {
+  const getPopulation = () => {
     return format(",.0f")(
-      this.population_data.find(
-        ({ year }) => year === parseInt(this.state.activeYear, 10)
-      ).population
+      population_data.find(({ year }) => year === parseInt(activeYear, 10))
+        .population
     ).replace(/,/g, " ");
   };
 
-  render() {
-    return (
-      <div id="population__visualization" className="visualization-wrapper">
-        <canvas
-          className="visualization"
-          width={this.width}
-          height={this.height}
-          ref={this.canvas}
-        />
-        <div className="visualization__content">
-          <h2 className="visualization__content__label">Population</h2>
-          <div className="visualization__content__data">
-            {this.getPopulation()}
-          </div>
-        </div>
+  return (
+    <div id="population__visualization" className="visualization-wrapper">
+      <canvas
+        className="visualization"
+        width={width}
+        height={height}
+        ref={canvas}
+      />
+      <div className="visualization__content">
+        <h2 className="visualization__content__label">Population</h2>
+        <div className="visualization__content__data">{getPopulation()}</div>
       </div>
-    );
-  }
-}
+    </div>
+  );
+};
 
 export default PopulationVisulization;
