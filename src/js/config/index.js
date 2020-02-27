@@ -7,18 +7,7 @@ import { supply as supplyConfig } from "./supply";
 import { desalination as desalinationConfig } from "./desalination";
 import { canals as canalConfig } from "./canals";
 
-export const config = [
-  naturalConfig,
-  damsConfig,
-  wasteWaterConfig,
-  supplyConfig,
-  desalinationConfig,
-  canalConfig,
-  groundwaterconfig,
-  poolsConfig
-];
-
-export const configMap = {
+export const config = {
   naturalConfig,
   damsConfig,
   wasteWaterConfig,

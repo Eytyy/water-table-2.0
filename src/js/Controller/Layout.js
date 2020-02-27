@@ -41,7 +41,6 @@ const Layout = props => {
       payload: to
     });
   };
-  console.log(lang);
 
   return (
     <>

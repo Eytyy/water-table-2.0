@@ -1,8 +1,62 @@
 import React from "react";
+import styled from "styled-components";
+
+const SVG = styled.svg`
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 1655px;
+  .st1 {
+    fill: #202121;
+    stroke: #4e4d4d;
+    stroke-width: 0.8;
+    stroke-miterlimit: 10;
+  }
+
+  .st2 {
+    fill: #262626;
+    stroke: #4e4d4d;
+    stroke-width: 0.8;
+    stroke-miterlimit: 10;
+  }
+
+  .basins__group {
+    opacity: 0.35;
+    transform: translate(89px, -64px);
+  }
+
+  .cls-4 {
+    fill: url(#New_Pattern_Swatch_7);
+  }
+
+  .cls-5 {
+    fill: url(#New_Pattern_Swatch_8);
+  }
+
+  .cls-6 {
+    fill: url(#New_Pattern_Swatch_6);
+  }
+
+  .cls-7 {
+    fill: url(#New_Pattern_Swatch_10);
+  }
+
+  .cls-8 {
+    fill: url(#New_Pattern_Swatch_3);
+  }
+
+  .cls-9 {
+    fill: url(#New_Pattern_Swatch_5);
+  }
+
+  .cls-10 {
+    fill: url(#New_Pattern_Swatch_9);
+  }
+`;
 
 const Basins = () => {
   return (
-    <svg
+    <SVG
       id="Layer_1"
       className="basins"
       data-name="Layer 1"
@@ -100,7 +154,7 @@ const Basins = () => {
 						308.9,367.8 330.9,367.8 338.2,360.4 352.9,360.4 360.3,353.1 375,353.1 389.6,338.4 389.6,331 397,323.7 397,309 404.3,301.7 
 						404.3,287 411.7,279.6 411.7,265 426.4,265 					"
       />
-    </svg>
+    </SVG>
   );
 };
 

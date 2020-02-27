@@ -1,12 +1,15 @@
 import React, { useState, useEffect, useRef } from "react";
+import styled from "styled-components";
+
 import { socket } from "../../../../api";
 
 import PoolsSVG from "./PoolsSvg";
 import PoolText from "./PoolText";
-import cutout from "../../../../../cutout.png";
+import cutout from "../../../../../cutout-new.png";
 import MapLayerDescription from "../../MapLayerDescription";
 import WithContext from "../../WithContext";
 
+const PoolsStyles = styled.div``;
 const Pools = ({ config, activeLayer }) => {
   const [activePool, setActivePool] = useState(null);
   const canvas = useRef(null);
@@ -115,7 +118,7 @@ const Pools = ({ config, activeLayer }) => {
   };
 
   return (
-    <div
+    <PoolsStyles
       className={`layer layer--pools ${
         activeLayer === "natural" || activeLayer === "surface"
           ? "layer--is-active"
@@ -145,7 +148,7 @@ const Pools = ({ config, activeLayer }) => {
         />
       ))}
       <MapLayerDescription {...config} />
-    </div>
+    </PoolsStyles>
   );
 };
 

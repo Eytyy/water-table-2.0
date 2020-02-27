@@ -53,10 +53,10 @@ export const setMinMax = points => {
 };
 
 export const calculatePoolTextPosition = ({
-  xMin,
-  xMax,
-  yMin,
-  yMax,
+  xMin = 0,
+  xMax = 0,
+  yMin = 0,
+  yMax = 0,
   poolWidth,
   margin,
   textHeight,
@@ -72,6 +72,7 @@ export const calculatePoolTextPosition = ({
     orientation.x = "left";
   } else {
     position.left = `${xMin + poolWidth + margin}px`;
+    console.log(xMin);
     orientation.x = "right";
   }
   if (yMin - textHeight < 0) {
@@ -87,32 +88,50 @@ export const calculatePoolTextPosition = ({
   };
 };
 
-export const calculateTextPosition = ({
-  x,
-  y,
-  iconWidth,
-  margin,
-  textHeight,
-  textWidth,
-  maxScreenWidth
-}) => {
+export const calculateTextPosition = props => {
+  const {
+    x,
+    y,
+    iconWidth = 50,
+    margin,
+    textHeight,
+    textWidth,
+    maxScreenWidth,
+    layerNudge,
+    isActive
+  } = props;
+
   let orientation = {};
   let style = {
     position: "absolute"
   };
-  if (x + iconWidth + margin + textWidth > maxScreenWidth) {
-    style.right = `${x - maxScreenWidth + textWidth + margin}px`;
+  if (isActive) {
+    console.log({
+      x,
+      y,
+      margin,
+      textHeight,
+      textWidth,
+      maxScreenWidth,
+      isActive
+    });
+  }
+  if (x + iconWidth + margin + textWidth + layerNudge > maxScreenWidth) {
+    style.right = `${x - (textWidth + margin)}px`;
     orientation.x = "left";
+    console.log("left");
   } else {
-    style.left = `${x + iconWidth + margin}px`;
+    style.left = `${iconWidth + margin}px`;
     orientation.x = "right";
   }
   if (y - textHeight < 0) {
     style.top = `${y}px`;
     orientation.y = "bottom";
+    console.log("bottom");
   } else {
     style.top = `${y - textHeight}px`;
     orientation.y = "top";
+    console.log("top");
   }
   return {
     orientation,

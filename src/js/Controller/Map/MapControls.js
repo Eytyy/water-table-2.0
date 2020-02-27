@@ -13,17 +13,17 @@ const MapControls = () => {
     active: undefined
   });
 
-  const setActiveLayer = layer => {
-    setState(({ activeLayer, active }) => ({
-      activeLayer: activeLayer === layer ? "surface" : layer,
-      active: layer === "canal" ? canalConfig.entries[0].id : active
-    }));
-  };
-
   const updateState = changes => {
     setState(prevState => ({
       ...prevState,
       ...changes
+    }));
+  };
+
+  const setActiveLayer = layer => {
+    setState(({ activeLayer, active }) => ({
+      activeLayer: activeLayer === layer ? "surface" : layer,
+      active: layer === "canal" ? canalConfig.entries[0].id : active
     }));
   };
 
@@ -64,7 +64,7 @@ const MapControls = () => {
   const onMapClick = e => {
     const target = e.currentTarget.id;
 
-    setState({ active: target });
+    updateState({ active: target });
 
     broadcastEvent({
       source: "controller",
@@ -75,17 +75,16 @@ const MapControls = () => {
 
   // @TODO: Put the buttons in a config file and loop over for better readability
   const { active, activeLayer } = state;
-
   return (
     <LayerContext.Provider value={activeLayer}>
       <section className="controller map-console">
         <div className="map-console__controls">
           <h1 className="controller__title">WATER MAP &amp; PROJECTS</h1>
           <div className="map-console__controls__group map-console__controls__group--main">
-            {config.map(layerConfiguration => (
+            {Object.keys(config).map(key => (
               <MapControlButton
-                key={layerConfiguration.id}
-                {...layerConfiguration}
+                key={config[key].id}
+                {...config[key]}
                 onClick={onClickLayer}
               />
             ))}

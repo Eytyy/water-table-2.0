@@ -3,6 +3,31 @@ import MapLayerText from "./MapLayerText";
 import MapLayerDescription from "./MapLayerDescription";
 import { socket } from "../../api";
 import WithContext from "./WithContext";
+import styled from "styled-components";
+
+const Resources = styled.div`
+  position: absolute;
+  top: 155px;
+  left: 130px;
+`;
+
+const ResourceItem = styled.div`
+  position: absolute;
+  top: ${props => `${props.position.y}px`};
+  left: ${props => `${props.position.x}px`};
+  z-index: ${props => (props.active ? "2" : "1")};
+`;
+
+const IconStyle = styled.div`
+  transform: ${props => (props.active ? `scale(2, 2)` : `scale(1, 1)`)};
+  width: 25px;
+  height: 25px;
+  opacity: ${props => (props.active ? 1 : 0.5)};
+  svg {
+    width: 100%;
+    height: auto;
+  }
+`;
 
 const MapLayerContent = ({
   layerName,
@@ -51,21 +76,20 @@ const MapLayerContent = ({
       }`}
     >
       {children && children}
-      <div className={`resources resources--${layerName}`}>
+      <Resources className={`resources resources--${layerName}`}>
         {config.entries.map(props => (
-          <div className="resources__item" key={props.id}>
-            <div
-              className={`icon icon--${layerName} ${
-                active === props.id ? "is-active" : ""
-              }`}
-              style={{
-                top: props.position.y,
-                left: props.position.x,
-                zIndex: `${active !== props.id ? "2" : "1"}`
-              }}
+          <ResourceItem
+            className="resources__item"
+            active={active === props.id}
+            key={props.id}
+            position={props.position}
+          >
+            <IconStyle
+              className={`icon icon--${layerName}`}
+              active={active === props.id}
             >
               {renderIcon()}
-            </div>
+            </IconStyle>
             <MapLayerText
               layerName={layerName}
               active={active}
@@ -74,9 +98,9 @@ const MapLayerContent = ({
               renderText={renderText}
               entryProps={props}
             />
-          </div>
+          </ResourceItem>
         ))}
-      </div>
+      </Resources>
       <MapLayerDescription {...config} />
     </div>
   );

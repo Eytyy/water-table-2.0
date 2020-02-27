@@ -1,9 +1,30 @@
 import React, { useRef, useState, useEffect } from "react";
 import { scaleLinear, format } from "d3";
-import { socket } from "../../../api";
+import styled from "styled-components";
 
+import { socket } from "../../../api";
 import population from "../../../../data/population.1";
 import PopulationCircle from "./PopulationCircle";
+
+const Wrapper = styled.div`
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 1300px;
+
+  .visualization {
+    position: absolute;
+    top: 0;
+    left: 0;
+  }
+
+  .content {
+    position: absolute;
+    left: 60px;
+    top: 60px;
+  }
+`;
 
 const PopulationVisulization = () => {
   const width = 1080;
@@ -234,18 +255,18 @@ const PopulationVisulization = () => {
   };
 
   return (
-    <div id="population__visualization" className="visualization-wrapper">
+    <Wrapper className="visualization-wrapper">
       <canvas
         className="visualization"
         width={width}
         height={height}
         ref={canvas}
       />
-      <div className="visualization__content">
-        <h2 className="visualization__content__label">Population</h2>
-        <div className="visualization__content__data">{getPopulation()}</div>
+      <div className="content">
+        <h2 className="content__label">Population</h2>
+        <div className="content__data">{getPopulation()}</div>
       </div>
-    </div>
+    </Wrapper>
   );
 };
 

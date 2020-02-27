@@ -9,8 +9,8 @@ import Canal from "./layers/Canal";
 import Groundwater from "./layers/Groundwater";
 import Basins from "./layers/Basins";
 import LayerContext from "./LayerContext";
-import { configMap } from "../../config";
-
+import { config } from "../../config";
+console.log(config);
 const Map = () => {
   const [activeLayer, setActiveLayer] = useState("natural");
 
@@ -43,13 +43,13 @@ const Map = () => {
 
   return (
     <LayerContext.Provider value={activeLayer}>
-      <Pools config={configMap.poolsConfig} />
-      <Groundwater config={configMap.groundwaterconfig} />
-      <Dams config={configMap.damsConfig} />
-      <WasteWater config={configMap.wasteWaterConfig} />
-      <Supply config={configMap.supplyConfig} />
-      <Desalination config={configMap.desalinationConfig} />
-      <Canal config={configMap.canalConfig} />
+      <Pools config={config.poolsConfig} />
+      <Groundwater config={config.groundwaterconfig} />
+      <Dams config={config.damsConfig} />
+      <WasteWater config={config.wasteWaterConfig} />
+      <Supply config={config.supplyConfig} />
+      <Desalination config={config.desalinationConfig} />
+      <Canal config={config.canalConfig} />
     </LayerContext.Provider>
   );
 };

@@ -7,18 +7,18 @@ import { config } from "../../config";
 const MiniMap = ({ active, onMapClick, onPoolClick }) => {
   return (
     <div className="map-console__mini-map">
-      {config.map(layerConfiguration =>
-        layerConfiguration.id === "surface" ? (
+      {Object.keys(config).map(key =>
+        config[key].id === "surface" ? (
           <PoolsSVG
-            key={layerConfiguration.id}
-            {...layerConfiguration}
+            key={config[key].id}
+            {...config[key]}
             active={active}
             onClick={onPoolClick}
           />
         ) : (
           <MapLayer
-            key={layerConfiguration.id}
-            {...layerConfiguration}
+            key={config[key].id}
+            {...config[key]}
             active={active}
             onClick={onMapClick}
           />
